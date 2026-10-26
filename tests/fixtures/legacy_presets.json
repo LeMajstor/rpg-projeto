@@ -1,0 +1,188 @@
+[
+  {
+    "id": "lab_a",
+    "name": "A · formação aberta",
+    "background": "122638",
+    "can_escape": true,
+    "allied_slots": [
+      [
+        130,
+        90
+      ],
+      [
+        205,
+        175
+      ],
+      [
+        130,
+        265
+      ],
+      [
+        205,
+        350
+      ]
+    ],
+    "enemies": [
+      {
+        "id": "e1",
+        "type": "mobile",
+        "profile": "predator",
+        "spawn": [
+          620,
+          110
+        ],
+        "speed": 64,
+        "route": [
+          [
+            620,
+            110
+          ],
+          [
+            790,
+            110
+          ],
+          [
+            790,
+            205
+          ],
+          [
+            620,
+            205
+          ]
+        ]
+      },
+      {
+        "id": "e2",
+        "type": "mobile",
+        "profile": "retaliator",
+        "spawn": [
+          690,
+          300
+        ],
+        "speed": 48,
+        "route": [
+          [
+            690,
+            300
+          ],
+          [
+            825,
+            320
+          ],
+          [
+            735,
+            380
+          ],
+          [
+            590,
+            320
+          ]
+        ]
+      },
+      {
+        "id": "e3",
+        "type": "static",
+        "profile": "uniform",
+        "spawn": [
+          840,
+          225
+        ],
+        "speed": 0,
+        "route": []
+      }
+    ]
+  },
+  {
+    "id": "lab_b",
+    "name": "B · formação concentrada",
+    "background": "23243d",
+    "can_escape": false,
+    "allied_slots": [
+      [
+        115,
+        170
+      ],
+      [
+        205,
+        120
+      ],
+      [
+        205,
+        270
+      ],
+      [
+        115,
+        330
+      ]
+    ],
+    "enemies": [
+      {
+        "id": "e1",
+        "type": "mobile",
+        "profile": "focus",
+        "spawn": [
+          625,
+          195
+        ],
+        "speed": 54,
+        "route": [
+          [
+            625,
+            195
+          ],
+          [
+            725,
+            140
+          ],
+          [
+            805,
+            195
+          ],
+          [
+            725,
+            250
+          ]
+        ]
+      },
+      {
+        "id": "e2",
+        "type": "mobile",
+        "profile": "mage_hunter",
+        "spawn": [
+          650,
+          290
+        ],
+        "speed": 60,
+        "route": [
+          [
+            650,
+            290
+          ],
+          [
+            790,
+            290
+          ],
+          [
+            790,
+            350
+          ],
+          [
+            650,
+            350
+          ]
+        ]
+      },
+      {
+        "id": "e3",
+        "type": "static",
+        "profile": "predator",
+        "spawn": [
+          735,
+          80
+        ],
+        "speed": 0,
+        "route": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+town_events_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+EVENTOS/CIDADE/UI: 83 verificações, 0 falhas
+
+depth_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+PROFUNDIDADE/UI: 29 verificações, 0 falhas
+
+render_performance
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+{"area":"vila","camera_queries_max":1,"draw_max_usec":546,"draw_median_usec":496}
+{"area":"entrada_mundo","camera_queries_max":1,"draw_max_usec":1676,"draw_median_usec":1567}
+{"area":"entrada_mundo_noite","camera_queries_max":1,"draw_max_usec":1573,"draw_median_usec":1437}
+{"area":"floresta","camera_queries_max":1,"draw_max_usec":2170,"draw_median_usec":1340}
+{"area":"rampa","camera_queries_max":1,"draw_max_usec":2247,"draw_median_usec":1985}
+{"area":"platô","camera_queries_max":1,"draw_max_usec":2003,"draw_median_usec":1879}
+RENDER: 13 verificações, 0 falhas

@@ -1,0 +1,17 @@
+world_clock_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+RELÓGIO/UI: 59 verificações, 0 falhas
+
+render_performance
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+{"area":"vila","camera_queries_max":1,"draw_max_usec":461,"draw_median_usec":412}
+{"area":"entrada_mundo","camera_queries_max":1,"draw_max_usec":1575,"draw_median_usec":1441}
+{"area":"entrada_mundo_noite","camera_queries_max":1,"draw_max_usec":1432,"draw_median_usec":1324}
+{"area":"floresta","camera_queries_max":1,"draw_max_usec":2115,"draw_median_usec":1327}
+{"area":"rampa","camera_queries_max":1,"draw_max_usec":2269,"draw_median_usec":1996}
+{"area":"platô","camera_queries_max":1,"draw_max_usec":2139,"draw_median_usec":1982}
+RENDER: 13 verificações, 0 falhas

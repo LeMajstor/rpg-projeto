@@ -1,0 +1,38 @@
+[
+	{
+		"area": "vila",
+		"camera_queries_max": 1,
+		"draw_max_usec": 546,
+		"draw_median_usec": 496
+	},
+	{
+		"area": "entrada_mundo",
+		"camera_queries_max": 1,
+		"draw_max_usec": 1676,
+		"draw_median_usec": 1567
+	},
+	{
+		"area": "entrada_mundo_noite",
+		"camera_queries_max": 1,
+		"draw_max_usec": 1573,
+		"draw_median_usec": 1437
+	},
+	{
+		"area": "floresta",
+		"camera_queries_max": 1,
+		"draw_max_usec": 2170,
+		"draw_median_usec": 1340
+	},
+	{
+		"area": "rampa",
+		"camera_queries_max": 1,
+		"draw_max_usec": 2247,
+		"draw_median_usec": 1985
+	},
+	{
+		"area": "platô",
+		"camera_queries_max": 1,
+		"draw_max_usec": 2003,
+		"draw_median_usec": 1879
+	}
+]

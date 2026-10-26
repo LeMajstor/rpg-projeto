@@ -1,0 +1,754 @@
+{
+  "lab_exterior": {
+    "notice": "Laboratório de exploração ampliado: conteúdo, coordenadas e efeitos de teste; não definem aventura ou balanceamento final.",
+    "world_size": [
+      1440,
+      900
+    ],
+    "walkable_bounds": [
+      24,
+      24,
+      1392,
+      852
+    ],
+    "spawn": [
+      210,
+      500
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "obstacles": [
+      {
+        "rect": [
+          300,
+          190,
+          128,
+          270
+        ],
+        "label": "BLOCO A",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          540,
+          360,
+          280,
+          72
+        ],
+        "label": "BLOCO B",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          600,
+          120,
+          150,
+          100
+        ],
+        "label": "BLOCO C",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          350,
+          650,
+          210,
+          26
+        ],
+        "label": "PAREDE",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          350,
+          720,
+          210,
+          26
+        ],
+        "label": "PAREDE",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          610,
+          720,
+          26,
+          120
+        ],
+        "label": "",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          680,
+          650,
+          26,
+          190
+        ],
+        "label": "",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          65,
+          335,
+          55,
+          60
+        ],
+        "label": "",
+        "kind": "tree"
+      },
+      {
+        "rect": [
+          175,
+          250,
+          55,
+          60
+        ],
+        "label": "",
+        "kind": "tree"
+      },
+      {
+        "rect": [
+          470,
+          260,
+          42,
+          40
+        ],
+        "label": "",
+        "kind": "rock"
+      },
+      {
+        "rect": [
+          735,
+          550,
+          55,
+          50
+        ],
+        "label": "",
+        "kind": "rock"
+      },
+      {
+        "rect": [
+          265,
+          790,
+          55,
+          60
+        ],
+        "label": "",
+        "kind": "tree"
+      },
+      {
+        "rect": [
+          1000,
+          680,
+          28,
+          32
+        ],
+        "label": "",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          1000,
+          790,
+          28,
+          60
+        ],
+        "label": "",
+        "kind": "wall"
+      },
+      {
+        "rect": [
+          780,
+          110,
+          120,
+          120
+        ],
+        "label": "CASA DE TESTE",
+        "kind": "house"
+      }
+    ],
+    "regions": [
+      {
+        "rect": [
+          44,
+          44,
+          510,
+          132
+        ],
+        "label": "NPCs / conversas e respostas",
+        "color": "294947"
+      },
+      {
+        "rect": [
+          850,
+          44,
+          540,
+          500
+        ],
+        "label": "ENCONTROS / presets A, B, C, D",
+        "color": "463d3c"
+      },
+      {
+        "rect": [
+          44,
+          570,
+          240,
+          120
+        ],
+        "label": "NPCs / patrulha",
+        "color": "294947"
+      },
+      {
+        "rect": [
+          335,
+          595,
+          390,
+          260
+        ],
+        "label": "COLISÕES / corredores estreitos",
+        "color": "343e48"
+      },
+      {
+        "rect": [
+          840,
+          570,
+          280,
+          280
+        ],
+        "label": "OBJETOS / efeitos de teste",
+        "color": "474436"
+      }
+    ],
+    "encounters": [
+      {
+        "id": "test_map_enemy_01",
+        "position": [
+          945,
+          185
+        ],
+        "interaction_distance": 72,
+        "battle_preset_id": "lab_a",
+        "label": "M1 · A"
+      },
+      {
+        "id": "test_map_enemy_02",
+        "label": "M2 · B · sem fuga",
+        "position": [
+          1230,
+          150
+        ],
+        "battle_preset_id": "lab_b",
+        "interaction_distance": 72
+      },
+      {
+        "id": "test_map_enemy_03",
+        "label": "M3 · C",
+        "position": [
+          1030,
+          375
+        ],
+        "battle_preset_id": "lab_motion",
+        "route": [
+          [
+            1030,
+            375
+          ],
+          [
+            1120,
+            375
+          ],
+          [
+            1120,
+            455
+          ],
+          [
+            1030,
+            455
+          ]
+        ],
+        "speed": 40,
+        "interaction_distance": 72
+      },
+      {
+        "id": "test_map_enemy_04",
+        "label": "M4 · D",
+        "position": [
+          1320,
+          450
+        ],
+        "battle_preset_id": "lab_fullscreen",
+        "interaction_distance": 72
+      },
+      {
+        "id": "test_map_enemy_05",
+        "label": "M5 · A",
+        "position": [
+          1180,
+          620
+        ],
+        "battle_preset_id": "lab_a",
+        "route": [
+          [
+            1180,
+            620
+          ],
+          [
+            1350,
+            620
+          ]
+        ],
+        "speed": 48,
+        "interaction_distance": 72
+      },
+      {
+        "id": "test_map_enemy_06",
+        "label": "M6 · C",
+        "position": [
+          1320,
+          810
+        ],
+        "battle_preset_id": "lab_motion",
+        "interaction_distance": 72
+      }
+    ],
+    "interaction_distance": 64,
+    "npcs": [
+      {
+        "id": "npc_01",
+        "label": "NPC 1",
+        "position": [
+          115,
+          145
+        ],
+        "color": "87cfc1",
+        "dialogue_id": "welcome"
+      },
+      {
+        "id": "npc_02",
+        "label": "NPC 2",
+        "position": [
+          245,
+          145
+        ],
+        "color": "e3c984",
+        "dialogue_id": "choices",
+        "route": [
+          [
+            245,
+            145
+          ],
+          [
+            325,
+            145
+          ]
+        ],
+        "speed": 28
+      },
+      {
+        "id": "npc_03",
+        "label": "NPC 3",
+        "position": [
+          480,
+          145
+        ],
+        "color": "bcafe0",
+        "dialogue_id": "collision"
+      },
+      {
+        "id": "npc_04",
+        "label": "NPC 4",
+        "position": [
+          100,
+          665
+        ],
+        "color": "9ebbe4",
+        "dialogue_id": "patrol",
+        "route": [
+          [
+            100,
+            665
+          ],
+          [
+            240,
+            665
+          ]
+        ],
+        "speed": 32
+      },
+      {
+        "id": "npc_05",
+        "label": "NPC 5",
+        "position": [
+          450,
+          575
+        ],
+        "color": "e1b4ae",
+        "dialogue_id": "objects"
+      }
+    ],
+    "objects": [
+      {
+        "id": "chest_01",
+        "label": "Baú",
+        "object_type": "chest",
+        "position": [
+          900,
+          655
+        ],
+        "dialogue_id": "chest",
+        "repeat_dialogue_id": "chest_repeat"
+      },
+      {
+        "id": "sign_01",
+        "label": "Placa",
+        "object_type": "sign",
+        "position": [
+          1040,
+          655
+        ],
+        "dialogue_id": "sign"
+      },
+      {
+        "id": "door_01",
+        "label": "Porta",
+        "object_type": "door",
+        "position": [
+          1014,
+          751
+        ],
+        "rect": [
+          1000,
+          712,
+          28,
+          78
+        ]
+      },
+      {
+        "id": "lever_01",
+        "label": "Alavanca",
+        "object_type": "lever",
+        "position": [
+          920,
+          751
+        ],
+        "target_id": "door_01"
+      }
+    ],
+    "dialogues": {
+      "welcome": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Este é um NPC de teste. A conversa pausa a fila e as patrulhas do mapa.",
+            "next": "1"
+          },
+          "1": {
+            "text": "Use E, Enter ou o botão Avançar para ler as próximas falas. Ao encerrar, o mapa retoma.",
+            "next": ""
+          }
+        }
+      },
+      "choices": {
+        "start": "question",
+        "nodes": {
+          "question": {
+            "text": "Qual teste você quer conhecer?",
+            "choices": [
+              {
+                "text": "Encontros",
+                "next": "encounters"
+              },
+              {
+                "text": "Fila e colisões",
+                "next": "formation"
+              }
+            ]
+          },
+          "encounters": {
+            "text": "Os seis monstros visíveis usam presets existentes. M2 usa B, que impede fuga.",
+            "next": "end"
+          },
+          "formation": {
+            "text": "Contorne árvores e pedras. Ao sul, os corredores estreitos testam o caminho da fila.",
+            "next": "end"
+          },
+          "end": {
+            "text": "A resposta só muda esta conversa de teste. Não cria missão ou recompensa.",
+            "next": ""
+          }
+        }
+      },
+      "collision": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Paredes, troncos e pedras são sólidos. Os integrantes do grupo não colidem entre si.",
+            "next": "1"
+          },
+          "1": {
+            "text": "Use F3 para ver volumes, rotas e o caminho seguido pela fila.",
+            "next": ""
+          }
+        }
+      },
+      "patrol": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Este NPC segue uma rota programada. Durante a conversa, ele para no ponto exato.",
+            "next": "1"
+          },
+          "1": {
+            "text": "O menu da equipe e o combate também pausam as patrulhas.",
+            "next": ""
+          }
+        }
+      },
+      "objects": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Baú, placa, porta e alavanca ficam na região de objetos.",
+            "next": "1"
+          },
+          "1": {
+            "text": "São apenas efeitos de teste. O baú não adiciona itens e a porta não leva a outro mapa.",
+            "next": ""
+          }
+        }
+      },
+      "chest": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Baú aberto. O sprite mudou e o estado ficará registrado até Reiniciar teste.",
+            "next": "1"
+          },
+          "1": {
+            "text": "Nenhum item foi adicionado: não há inventário novo nesta etapa.",
+            "next": ""
+          }
+        }
+      },
+      "chest_repeat": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "O baú já está aberto nesta sessão. Não há recompensa repetida.",
+            "next": ""
+          }
+        }
+      },
+      "sign": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "PLACA DE TESTE: E interage com o elemento mais próximo que esteja ao alcance e sem parede no caminho.",
+            "next": "1"
+          },
+          "1": {
+            "text": "A alavanca alterna a porta. A porta também pode ser aberta ou fechada diretamente.",
+            "next": ""
+          }
+        }
+      },
+      "door_open": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Porta aberta. A passagem está livre; nenhum mapa foi carregado.",
+            "next": ""
+          }
+        }
+      },
+      "door_closed": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Porta fechada. A passagem voltou a ser sólida.",
+            "next": ""
+          }
+        }
+      },
+      "door_blocked": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Não é possível fechar: há um integrante do grupo na passagem. Afaste a fila e tente novamente.",
+            "next": ""
+          }
+        }
+      }
+    },
+    "id": "lab_exterior",
+    "label": "Laboratório externo",
+    "entries": {
+      "from_house": {
+        "position": [
+          840,
+          310
+        ],
+        "facing": [
+          1,
+          0
+        ],
+        "arrival_transition_id": "house_entrance"
+      }
+    },
+    "transitions": [
+      {
+        "id": "house_entrance",
+        "label": "Entrar na casa",
+        "position": [
+          840,
+          244
+        ],
+        "target_area_id": "test_house",
+        "target_entry_id": "from_lab",
+        "interaction_distance": 64
+      }
+    ],
+    "footer": "E: interagir · casa ao nordeste · B impede fuga · Reiniciar teste restaura todas as áreas"
+  },
+  "test_house": {
+    "id": "test_house",
+    "label": "Casa de teste",
+    "notice": "Interior provisório; sem conteúdo narrativo, descanso ou recompensas.",
+    "world_size": [
+      720,
+      480
+    ],
+    "walkable_bounds": [
+      24,
+      24,
+      672,
+      432
+    ],
+    "spawn": [
+      360,
+      300
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "interaction_distance": 64,
+    "regions": [
+      {
+        "rect": [
+          118,
+          78,
+          484,
+          344
+        ],
+        "label": "CASA DE TESTE / interior",
+        "color": "50483f"
+      }
+    ],
+    "obstacles": [
+      {
+        "rect": [
+          100,
+          60,
+          520,
+          18
+        ],
+        "kind": "wall",
+        "label": ""
+      },
+      {
+        "rect": [
+          100,
+          60,
+          18,
+          380
+        ],
+        "kind": "wall",
+        "label": ""
+      },
+      {
+        "rect": [
+          602,
+          60,
+          18,
+          380
+        ],
+        "kind": "wall",
+        "label": ""
+      },
+      {
+        "rect": [
+          100,
+          422,
+          220,
+          18
+        ],
+        "kind": "wall",
+        "label": ""
+      },
+      {
+        "rect": [
+          400,
+          422,
+          220,
+          18
+        ],
+        "kind": "wall",
+        "label": ""
+      },
+      {
+        "rect": [
+          180,
+          150,
+          140,
+          70
+        ],
+        "kind": "wall",
+        "label": "MESA"
+      },
+      {
+        "rect": [
+          480,
+          130,
+          100,
+          35
+        ],
+        "kind": "wall",
+        "label": "MÓVEL"
+      }
+    ],
+    "encounters": [],
+    "npcs": [],
+    "objects": [],
+    "dialogues": {},
+    "entries": {
+      "from_lab": {
+        "position": [
+          360,
+          300
+        ],
+        "facing": [
+          0,
+          -1
+        ],
+        "arrival_transition_id": "house_exit"
+      }
+    },
+    "transitions": [
+      {
+        "id": "house_exit",
+        "label": "Sair da casa",
+        "position": [
+          360,
+          430
+        ],
+        "target_area_id": "lab_exterior",
+        "target_entry_id": "from_house",
+        "interaction_distance": 64
+      }
+    ],
+    "footer": "E: saída ao sul · Tab: líder · F3: depuração"
+  }
+}

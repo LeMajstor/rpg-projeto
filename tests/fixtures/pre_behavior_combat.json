@@ -1,0 +1,1516 @@
+{
+  "notice": "EXPERIMENTAL: todos os atributos, custos, pesos, coordenadas e durações são dados de teste, não balanceamento aprovado.",
+  "settings": {
+    "fixed_step": 0.008333333333333333,
+    "atb_per_ini": 0.018,
+    "action_duration": 0.8,
+    "impact_fraction": 0.5,
+    "escape_chance": 0.6,
+    "seed": 421,
+    "melee_stop_distance": 44,
+    "melee_impact_hold": 0.15
+  },
+  "default_preset_id": "lab_approach",
+  "legacy_preset_ids": [
+    "lab_a",
+    "lab_b",
+    "lab_motion",
+    "lab_fullscreen",
+    "lab_rhythm"
+  ],
+  "party": [
+    {
+      "id": "p1",
+      "name": "Aliado 1 · protagonista",
+      "short_name": "Aliado 1",
+      "max_hp": 160,
+      "max_mp": 34,
+      "ini": 9,
+      "attack": 13,
+      "color": "6fc8ff",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    },
+    {
+      "id": "p2",
+      "name": "Aliado 2",
+      "short_name": "Aliado 2",
+      "max_hp": 130,
+      "max_mp": 46,
+      "ini": 12,
+      "attack": 10,
+      "color": "b5a2ff",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    },
+    {
+      "id": "p3",
+      "name": "Aliado 3",
+      "short_name": "Aliado 3",
+      "max_hp": 190,
+      "max_mp": 22,
+      "ini": 7,
+      "attack": 17,
+      "color": "ffc379",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    },
+    {
+      "id": "p4",
+      "name": "Aliado 4",
+      "short_name": "Aliado 4",
+      "max_hp": 145,
+      "max_mp": 40,
+      "ini": 10,
+      "attack": 12,
+      "color": "6de0b5",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    }
+  ],
+  "skills": {
+    "attack": {
+      "name": "Atacar",
+      "target": "single",
+      "mp_cost": 0,
+      "power": 4,
+      "effect": "damage",
+      "category": "basic",
+      "delivery": "melee"
+    },
+    "precise": {
+      "name": "Impacto · alvo único",
+      "target": "single",
+      "mp_cost": 4,
+      "power": 22,
+      "effect": "damage",
+      "category": "physical",
+      "delivery": "melee"
+    },
+    "circle": {
+      "name": "Pulso · área circular",
+      "target": "circle",
+      "mp_cost": 7,
+      "power": 14,
+      "radius": 112,
+      "effect": "damage",
+      "category": "magic"
+    },
+    "all": {
+      "name": "Onda · todos os inimigos",
+      "target": "all",
+      "mp_cost": 10,
+      "power": 8,
+      "effect": "damage",
+      "category": "magic",
+      "presentation": "fullscreen"
+    },
+    "enemy_sweep": {
+      "name": "Varredura de teste",
+      "target": "all",
+      "mp_cost": 3,
+      "power": 0,
+      "effect": "damage",
+      "category": "physical",
+      "delivery": "melee"
+    }
+  },
+  "items": {
+    "hp": {
+      "name": "Recuperar HP",
+      "effect": "hp",
+      "amount": 65,
+      "quantity": 6
+    },
+    "mp": {
+      "name": "Recuperar MP",
+      "effect": "mp",
+      "amount": 18,
+      "quantity": 4
+    },
+    "revive": {
+      "name": "Reanimar",
+      "effect": "revive",
+      "amount": 45,
+      "quantity": 3
+    }
+  },
+  "profiles": {
+    "uniform": {
+      "name": "Instintivo · teste",
+      "kind": "uniform"
+    },
+    "predator": {
+      "name": "Predador · teste",
+      "kind": "injured",
+      "strength": 5
+    },
+    "focus": {
+      "name": "Implacável · teste",
+      "kind": "focus",
+      "strength": 4
+    },
+    "retaliator": {
+      "name": "Retaliador · teste",
+      "kind": "retaliate",
+      "strength": 5
+    },
+    "mage_hunter": {
+      "name": "Caçador de Magos · teste",
+      "kind": "max_mp",
+      "strength": 0.08
+    }
+  },
+  "movement_profiles": {
+    "heavy_test": {
+      "speed": 32,
+      "motion": {
+        "kind": "ground",
+        "curve": "smooth",
+        "rhythm": {
+          "pattern": "sequence",
+          "acceleration": 1.2,
+          "deceleration": 1.0,
+          "initial_pause": 0.8,
+          "steps": [
+            {
+              "to": 0.28,
+              "speed_scale": 0.65,
+              "pause": 2.0
+            },
+            {
+              "to": 0.64,
+              "speed_scale": 0.85,
+              "pause": 1.2
+            },
+            {
+              "to": 0.43,
+              "speed_scale": 0.55,
+              "pause": 2.8
+            },
+            {
+              "to": 1.0,
+              "speed_scale": 1.0,
+              "pause": 3.6
+            },
+            {
+              "to": 0.72,
+              "speed_scale": 0.7,
+              "pause": 0.7
+            },
+            {
+              "to": 0.0,
+              "speed_scale": 0.8,
+              "pause": 3.0
+            }
+          ]
+        },
+        "presentation": {
+          "lean": 0.06
+        }
+      }
+    },
+    "agile_test": {
+      "speed": 72,
+      "motion": {
+        "kind": "ground",
+        "curve": "smooth",
+        "rhythm": {
+          "pattern": "ping_pong",
+          "acceleration": 0.35,
+          "deceleration": 0.5,
+          "initial_pause": 0.25,
+          "turn_pause": 1.3,
+          "steps": [
+            {
+              "to": 0.6,
+              "speed_scale": 0.8,
+              "pause": 1.0,
+              "return_speed_scale": 0.65,
+              "return_pause": 1.8
+            },
+            {
+              "to": 1.0,
+              "speed_scale": 1.15,
+              "pause": 1.6,
+              "return_speed_scale": 0.9
+            }
+          ]
+        },
+        "presentation": {
+          "lean": 0.12
+        }
+      }
+    },
+    "flying_test": {
+      "speed": 90,
+      "motion": {
+        "kind": "air",
+        "curve": "smooth",
+        "rhythm": {
+          "pattern": "loop",
+          "acceleration": 1.1,
+          "deceleration": 1.3,
+          "steps": [
+            {
+              "to": 0.18,
+              "speed_scale": 0.65,
+              "end_speed_scale": 0.5
+            },
+            {
+              "to": 0.43,
+              "speed_scale": 0.95,
+              "end_speed_scale": 0.7
+            },
+            {
+              "to": 0.64,
+              "speed_scale": 0.55,
+              "end_speed_scale": 0.35
+            },
+            {
+              "to": 0.82,
+              "speed_scale": 1.05,
+              "end_speed_scale": 0.65
+            },
+            {
+              "to": 1.0,
+              "speed_scale": 0.7,
+              "end_speed_scale": 0.55
+            }
+          ]
+        },
+        "presentation": {
+          "lean": 0.1,
+          "bob_amplitude": 4,
+          "bob_period": 2.4
+        }
+      }
+    }
+  },
+  "enemy_types": {
+    "flying_test": {
+      "name": "Voador",
+      "max_hp": 150,
+      "max_mp": 12,
+      "ini": 8,
+      "attack": 7,
+      "color": "d598f3",
+      "actions": [
+        {
+          "id": "attack",
+          "weight": 4
+        },
+        {
+          "id": "enemy_sweep",
+          "weight": 1
+        }
+      ],
+      "movement_profile": "flying_test"
+    },
+    "agile_test": {
+      "name": "Ágil",
+      "max_hp": 150,
+      "max_mp": 12,
+      "ini": 8,
+      "attack": 7,
+      "color": "f2b36d",
+      "actions": [
+        {
+          "id": "attack",
+          "weight": 4
+        },
+        {
+          "id": "enemy_sweep",
+          "weight": 1
+        }
+      ],
+      "movement_profile": "agile_test"
+    },
+    "heavy_test": {
+      "name": "Pesado",
+      "max_hp": 150,
+      "max_mp": 12,
+      "ini": 8,
+      "attack": 7,
+      "color": "d99c65",
+      "actions": [
+        {
+          "id": "attack",
+          "weight": 4
+        },
+        {
+          "id": "enemy_sweep",
+          "weight": 1
+        }
+      ],
+      "movement_profile": "heavy_test"
+    },
+    "mobile": {
+      "name": "Móvel",
+      "max_hp": 150,
+      "max_mp": 12,
+      "ini": 8,
+      "attack": 7,
+      "color": "ff858c",
+      "actions": [
+        {
+          "id": "attack",
+          "weight": 4
+        },
+        {
+          "id": "enemy_sweep",
+          "weight": 1
+        }
+      ]
+    },
+    "static": {
+      "name": "Estático",
+      "max_hp": 180,
+      "max_mp": 18,
+      "ini": 6,
+      "attack": 9,
+      "color": "e5ac68",
+      "actions": [
+        {
+          "id": "attack",
+          "weight": 2
+        },
+        {
+          "id": "enemy_sweep",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "presets": [
+    {
+      "id": "lab_a",
+      "name": "A · formação aberta",
+      "background": "122638",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "predator",
+          "spawn": [
+            620,
+            110
+          ],
+          "speed": 64,
+          "route": [
+            [
+              620,
+              110
+            ],
+            [
+              790,
+              110
+            ],
+            [
+              790,
+              205
+            ],
+            [
+              620,
+              205
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "mobile",
+          "profile": "retaliator",
+          "spawn": [
+            690,
+            300
+          ],
+          "speed": 48,
+          "route": [
+            [
+              690,
+              300
+            ],
+            [
+              825,
+              320
+            ],
+            [
+              735,
+              380
+            ],
+            [
+              590,
+              320
+            ]
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            225
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "lab_b",
+      "name": "B · formação concentrada",
+      "background": "23243d",
+      "can_escape": false,
+      "allied_slots": [
+        [
+          115,
+          170
+        ],
+        [
+          205,
+          120
+        ],
+        [
+          205,
+          270
+        ],
+        [
+          115,
+          330
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "focus",
+          "spawn": [
+            625,
+            195
+          ],
+          "speed": 54,
+          "route": [
+            [
+              625,
+              195
+            ],
+            [
+              725,
+              140
+            ],
+            [
+              805,
+              195
+            ],
+            [
+              725,
+              250
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "mobile",
+          "profile": "mage_hunter",
+          "spawn": [
+            650,
+            290
+          ],
+          "speed": 60,
+          "route": [
+            [
+              650,
+              290
+            ],
+            [
+              790,
+              290
+            ],
+            [
+              790,
+              350
+            ],
+            [
+              650,
+              350
+            ]
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "predator",
+          "spawn": [
+            735,
+            80
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "lab_motion",
+      "name": "C · terrestre / voo / estático",
+      "background": "182e35",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "predator",
+          "spawn": [
+            545,
+            115
+          ],
+          "speed": 85,
+          "route": [
+            [
+              545,
+              115
+            ],
+            [
+              730,
+              105
+            ],
+            [
+              775,
+              220
+            ],
+            [
+              635,
+              305
+            ],
+            [
+              495,
+              245
+            ]
+          ],
+          "motion": {
+            "kind": "ground",
+            "curve": "smooth",
+            "samples_per_segment": 24
+          }
+        },
+        {
+          "id": "e2",
+          "type": "mobile",
+          "profile": "retaliator",
+          "spawn": [
+            850,
+            220
+          ],
+          "speed": 150,
+          "route": [
+            [
+              850,
+              220
+            ]
+          ],
+          "motion": {
+            "kind": "air",
+            "curve": "ellipse",
+            "center": [
+              625,
+              220
+            ],
+            "radii": [
+              225,
+              150
+            ],
+            "samples": 128
+          }
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            365
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "lab_fullscreen",
+      "name": "D · técnica de tela inteira",
+      "background": "202b40",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "predator",
+          "spawn": [
+            620,
+            110
+          ],
+          "speed": 85,
+          "route": [
+            [
+              620,
+              110
+            ],
+            [
+              790,
+              110
+            ],
+            [
+              790,
+              205
+            ],
+            [
+              620,
+              205
+            ]
+          ],
+          "motion": {
+            "kind": "ground",
+            "curve": "smooth"
+          },
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            760,
+            285
+          ],
+          "speed": 0,
+          "route": [],
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            160
+          ],
+          "speed": 0,
+          "route": [],
+          "move_to_center_for_fullscreen_skill": true,
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lab_rhythm",
+      "name": "E · ritmos de batalha",
+      "background": "182e35",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "heavy_test",
+          "profile": "predator",
+          "spawn": [
+            510,
+            125
+          ],
+          "route": [
+            [
+              510,
+              125
+            ],
+            [
+              580,
+              95
+            ],
+            [
+              655,
+              135
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "agile_test",
+          "profile": "retaliator",
+          "spawn": [
+            510,
+            285
+          ],
+          "route": [
+            [
+              510,
+              285
+            ],
+            [
+              600,
+              325
+            ],
+            [
+              710,
+              290
+            ]
+          ],
+          "motion": {
+            "rhythm": {
+              "turn_pause": 1.5
+            }
+          }
+        },
+        {
+          "id": "e3",
+          "type": "flying_test",
+          "profile": "uniform",
+          "spawn": [
+            860,
+            210
+          ],
+          "route": [
+            [
+              860,
+              210
+            ],
+            [
+              815,
+              85
+            ],
+            [
+              680,
+              110
+            ],
+            [
+              735,
+              190
+            ],
+            [
+              600,
+              235
+            ],
+            [
+              660,
+              345
+            ],
+            [
+              815,
+              370
+            ],
+            [
+              825,
+              285
+            ],
+            [
+              725,
+              250
+            ],
+            [
+              775,
+              170
+            ]
+          ]
+        },
+        {
+          "id": "e4",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            845,
+            340
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "lab_approach",
+      "name": "F · aproximações e voo amplo",
+      "background": "1b293a",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "heavy_test",
+          "profile": "predator",
+          "spawn": [
+            510,
+            125
+          ],
+          "route": [
+            [
+              510,
+              125
+            ],
+            [
+              445,
+              130
+            ],
+            [
+              380,
+              185
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "agile_test",
+          "profile": "retaliator",
+          "spawn": [
+            510,
+            285
+          ],
+          "route": [
+            [
+              510,
+              285
+            ],
+            [
+              450,
+              320
+            ],
+            [
+              355,
+              300
+            ]
+          ],
+          "motion": {
+            "rhythm": {
+              "turn_pause": 1.5
+            }
+          }
+        },
+        {
+          "id": "e3",
+          "type": "flying_test",
+          "profile": "uniform",
+          "spawn": [
+            860,
+            210
+          ],
+          "route": [
+            [
+              860,
+              210
+            ],
+            [
+              780,
+              65
+            ],
+            [
+              490,
+              90
+            ],
+            [
+              310,
+              150
+            ],
+            [
+              285,
+              230
+            ],
+            [
+              390,
+              305
+            ],
+            [
+              620,
+              380
+            ],
+            [
+              835,
+              335
+            ],
+            [
+              800,
+              235
+            ],
+            [
+              605,
+              195
+            ],
+            [
+              465,
+              250
+            ],
+            [
+              380,
+              340
+            ],
+            [
+              550,
+              350
+            ],
+            [
+              735,
+              310
+            ]
+          ]
+        },
+        {
+          "id": "e4",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            845,
+            340
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "exploration_open",
+      "name": "Dungeon · formação aberta",
+      "background": "122638",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "heavy_test",
+          "profile": "predator",
+          "spawn": [
+            620,
+            110
+          ],
+          "route": [
+            [
+              620,
+              110
+            ],
+            [
+              555,
+              130
+            ],
+            [
+              470,
+              185
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "flying_test",
+          "profile": "retaliator",
+          "spawn": [
+            690,
+            300
+          ],
+          "route": [
+            [
+              690,
+              300
+            ],
+            [
+              835,
+              350
+            ],
+            [
+              850,
+              215
+            ],
+            [
+              775,
+              65
+            ],
+            [
+              490,
+              90
+            ],
+            [
+              310,
+              150
+            ],
+            [
+              285,
+              230
+            ],
+            [
+              390,
+              305
+            ],
+            [
+              620,
+              380
+            ],
+            [
+              780,
+              280
+            ],
+            [
+              605,
+              195
+            ],
+            [
+              465,
+              250
+            ],
+            [
+              380,
+              340
+            ],
+            [
+              550,
+              350
+            ]
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            225
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "exploration_clustered",
+      "name": "Dungeon · sem fuga",
+      "background": "23243d",
+      "can_escape": false,
+      "allied_slots": [
+        [
+          115,
+          170
+        ],
+        [
+          205,
+          120
+        ],
+        [
+          205,
+          270
+        ],
+        [
+          115,
+          330
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "agile_test",
+          "profile": "focus",
+          "spawn": [
+            625,
+            195
+          ],
+          "route": [
+            [
+              625,
+              195
+            ],
+            [
+              480,
+              165
+            ],
+            [
+              345,
+              205
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "heavy_test",
+          "profile": "mage_hunter",
+          "spawn": [
+            650,
+            290
+          ],
+          "route": [
+            [
+              650,
+              290
+            ],
+            [
+              580,
+              330
+            ],
+            [
+              455,
+              285
+            ]
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "predator",
+          "spawn": [
+            735,
+            80
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "exploration_motion",
+      "name": "Dungeon · voo amplo",
+      "background": "182e35",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "agile_test",
+          "profile": "predator",
+          "spawn": [
+            545,
+            115
+          ],
+          "route": [
+            [
+              545,
+              115
+            ],
+            [
+              475,
+              140
+            ],
+            [
+              370,
+              210
+            ],
+            [
+              485,
+              255
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "flying_test",
+          "profile": "retaliator",
+          "spawn": [
+            850,
+            220
+          ],
+          "route": [
+            [
+              850,
+              220
+            ],
+            [
+              780,
+              65
+            ],
+            [
+              490,
+              90
+            ],
+            [
+              310,
+              150
+            ],
+            [
+              285,
+              230
+            ],
+            [
+              390,
+              305
+            ],
+            [
+              620,
+              380
+            ],
+            [
+              835,
+              335
+            ],
+            [
+              800,
+              235
+            ],
+            [
+              605,
+              195
+            ],
+            [
+              465,
+              250
+            ],
+            [
+              380,
+              340
+            ],
+            [
+              550,
+              350
+            ],
+            [
+              735,
+              310
+            ]
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            365
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "exploration_fullscreen",
+      "name": "Dungeon · tela inteira",
+      "background": "202b40",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "heavy_test",
+          "profile": "predator",
+          "spawn": [
+            620,
+            110
+          ],
+          "route": [
+            [
+              620,
+              110
+            ],
+            [
+              530,
+              130
+            ],
+            [
+              410,
+              195
+            ]
+          ],
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            760,
+            285
+          ],
+          "speed": 0,
+          "route": [],
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            160
+          ],
+          "speed": 0,
+          "route": [],
+          "move_to_center_for_fullscreen_skill": true,
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

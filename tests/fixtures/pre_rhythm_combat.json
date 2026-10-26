@@ -1,0 +1,600 @@
+{
+  "notice": "EXPERIMENTAL: todos os atributos, custos, pesos, coordenadas e durações são dados de teste, não balanceamento aprovado.",
+  "settings": {
+    "fixed_step": 0.008333333333333333,
+    "atb_per_ini": 0.018,
+    "action_duration": 0.8,
+    "impact_fraction": 0.5,
+    "escape_chance": 0.6,
+    "seed": 421,
+    "melee_stop_distance": 44,
+    "melee_impact_hold": 0.15
+  },
+  "party": [
+    {
+      "id": "p1",
+      "name": "Aliado 1 · protagonista",
+      "short_name": "Aliado 1",
+      "max_hp": 160,
+      "max_mp": 34,
+      "ini": 9,
+      "attack": 13,
+      "color": "6fc8ff",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    },
+    {
+      "id": "p2",
+      "name": "Aliado 2",
+      "short_name": "Aliado 2",
+      "max_hp": 130,
+      "max_mp": 46,
+      "ini": 12,
+      "attack": 10,
+      "color": "b5a2ff",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    },
+    {
+      "id": "p3",
+      "name": "Aliado 3",
+      "short_name": "Aliado 3",
+      "max_hp": 190,
+      "max_mp": 22,
+      "ini": 7,
+      "attack": 17,
+      "color": "ffc379",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    },
+    {
+      "id": "p4",
+      "name": "Aliado 4",
+      "short_name": "Aliado 4",
+      "max_hp": 145,
+      "max_mp": 40,
+      "ini": 10,
+      "attack": 12,
+      "color": "6de0b5",
+      "skills": [
+        "precise",
+        "circle",
+        "all"
+      ],
+      "move_to_center_for_fullscreen_skill": true
+    }
+  ],
+  "skills": {
+    "attack": {
+      "name": "Atacar",
+      "target": "single",
+      "mp_cost": 0,
+      "power": 4,
+      "effect": "damage",
+      "category": "basic",
+      "delivery": "melee"
+    },
+    "precise": {
+      "name": "Impacto · alvo único",
+      "target": "single",
+      "mp_cost": 4,
+      "power": 22,
+      "effect": "damage",
+      "category": "physical",
+      "delivery": "melee"
+    },
+    "circle": {
+      "name": "Pulso · área circular",
+      "target": "circle",
+      "mp_cost": 7,
+      "power": 14,
+      "radius": 112,
+      "effect": "damage",
+      "category": "magic"
+    },
+    "all": {
+      "name": "Onda · todos os inimigos",
+      "target": "all",
+      "mp_cost": 10,
+      "power": 8,
+      "effect": "damage",
+      "category": "magic",
+      "presentation": "fullscreen"
+    },
+    "enemy_sweep": {
+      "name": "Varredura de teste",
+      "target": "all",
+      "mp_cost": 3,
+      "power": 0,
+      "effect": "damage",
+      "category": "physical",
+      "delivery": "melee"
+    }
+  },
+  "items": {
+    "hp": {
+      "name": "Recuperar HP",
+      "effect": "hp",
+      "amount": 65,
+      "quantity": 6
+    },
+    "mp": {
+      "name": "Recuperar MP",
+      "effect": "mp",
+      "amount": 18,
+      "quantity": 4
+    },
+    "revive": {
+      "name": "Reanimar",
+      "effect": "revive",
+      "amount": 45,
+      "quantity": 3
+    }
+  },
+  "profiles": {
+    "uniform": {
+      "name": "Instintivo · teste",
+      "kind": "uniform"
+    },
+    "predator": {
+      "name": "Predador · teste",
+      "kind": "injured",
+      "strength": 5
+    },
+    "focus": {
+      "name": "Implacável · teste",
+      "kind": "focus",
+      "strength": 4
+    },
+    "retaliator": {
+      "name": "Retaliador · teste",
+      "kind": "retaliate",
+      "strength": 5
+    },
+    "mage_hunter": {
+      "name": "Caçador de Magos · teste",
+      "kind": "max_mp",
+      "strength": 0.08
+    }
+  },
+  "enemy_types": {
+    "mobile": {
+      "name": "Móvel",
+      "max_hp": 150,
+      "max_mp": 12,
+      "ini": 8,
+      "attack": 7,
+      "color": "ff858c",
+      "actions": [
+        {
+          "id": "attack",
+          "weight": 4
+        },
+        {
+          "id": "enemy_sweep",
+          "weight": 1
+        }
+      ]
+    },
+    "static": {
+      "name": "Estático",
+      "max_hp": 180,
+      "max_mp": 18,
+      "ini": 6,
+      "attack": 9,
+      "color": "e5ac68",
+      "actions": [
+        {
+          "id": "attack",
+          "weight": 2
+        },
+        {
+          "id": "enemy_sweep",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "presets": [
+    {
+      "id": "lab_a",
+      "name": "A · formação aberta",
+      "background": "122638",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "predator",
+          "spawn": [
+            620,
+            110
+          ],
+          "speed": 64,
+          "route": [
+            [
+              620,
+              110
+            ],
+            [
+              790,
+              110
+            ],
+            [
+              790,
+              205
+            ],
+            [
+              620,
+              205
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "mobile",
+          "profile": "retaliator",
+          "spawn": [
+            690,
+            300
+          ],
+          "speed": 48,
+          "route": [
+            [
+              690,
+              300
+            ],
+            [
+              825,
+              320
+            ],
+            [
+              735,
+              380
+            ],
+            [
+              590,
+              320
+            ]
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            225
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "lab_b",
+      "name": "B · formação concentrada",
+      "background": "23243d",
+      "can_escape": false,
+      "allied_slots": [
+        [
+          115,
+          170
+        ],
+        [
+          205,
+          120
+        ],
+        [
+          205,
+          270
+        ],
+        [
+          115,
+          330
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "focus",
+          "spawn": [
+            625,
+            195
+          ],
+          "speed": 54,
+          "route": [
+            [
+              625,
+              195
+            ],
+            [
+              725,
+              140
+            ],
+            [
+              805,
+              195
+            ],
+            [
+              725,
+              250
+            ]
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "mobile",
+          "profile": "mage_hunter",
+          "spawn": [
+            650,
+            290
+          ],
+          "speed": 60,
+          "route": [
+            [
+              650,
+              290
+            ],
+            [
+              790,
+              290
+            ],
+            [
+              790,
+              350
+            ],
+            [
+              650,
+              350
+            ]
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "predator",
+          "spawn": [
+            735,
+            80
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "lab_motion",
+      "name": "C · terrestre / voo / estático",
+      "background": "182e35",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "predator",
+          "spawn": [
+            545,
+            115
+          ],
+          "speed": 85,
+          "route": [
+            [
+              545,
+              115
+            ],
+            [
+              730,
+              105
+            ],
+            [
+              775,
+              220
+            ],
+            [
+              635,
+              305
+            ],
+            [
+              495,
+              245
+            ]
+          ],
+          "motion": {
+            "kind": "ground",
+            "curve": "smooth",
+            "samples_per_segment": 24
+          }
+        },
+        {
+          "id": "e2",
+          "type": "mobile",
+          "profile": "retaliator",
+          "spawn": [
+            850,
+            220
+          ],
+          "speed": 150,
+          "route": [
+            [
+              850,
+              220
+            ]
+          ],
+          "motion": {
+            "kind": "air",
+            "curve": "ellipse",
+            "center": [
+              625,
+              220
+            ],
+            "radii": [
+              225,
+              150
+            ],
+            "samples": 128
+          }
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            365
+          ],
+          "speed": 0,
+          "route": []
+        }
+      ]
+    },
+    {
+      "id": "lab_fullscreen",
+      "name": "D · técnica de tela inteira",
+      "background": "202b40",
+      "can_escape": true,
+      "allied_slots": [
+        [
+          130,
+          90
+        ],
+        [
+          205,
+          175
+        ],
+        [
+          130,
+          265
+        ],
+        [
+          205,
+          350
+        ]
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "type": "mobile",
+          "profile": "predator",
+          "spawn": [
+            620,
+            110
+          ],
+          "speed": 85,
+          "route": [
+            [
+              620,
+              110
+            ],
+            [
+              790,
+              110
+            ],
+            [
+              790,
+              205
+            ],
+            [
+              620,
+              205
+            ]
+          ],
+          "motion": {
+            "kind": "ground",
+            "curve": "smooth"
+          },
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "e2",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            760,
+            285
+          ],
+          "speed": 0,
+          "route": [],
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "e3",
+          "type": "static",
+          "profile": "uniform",
+          "spawn": [
+            840,
+            160
+          ],
+          "speed": 0,
+          "route": [],
+          "move_to_center_for_fullscreen_skill": true,
+          "actions": [
+            {
+              "id": "all",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+UI: 31 verificações, 0 falhas
+
+run_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_data_and_presets
+PASS _test_atb_and_selection
+PASS _test_wait_active
+PASS _test_routes
+PASS _test_animation_return
+PASS _test_skills_and_costs
+PASS _test_area_at_impact
+PASS _test_items
+PASS _test_escape
+PASS _test_incapacitation_and_results
+PASS _test_weighted_policy
+PASS _test_enemy_decisions
+PASS _test_reproducibility
+PASS _test_long_simulation
+RESULTADO: 14 grupos, 104292 verificações, 0 falhas
+
+exploration_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_cardinal
+PASS _test_collision
+PASS _test_path_following
+PASS _test_history_and_time
+PASS _test_menu_and_leader
+PASS _test_encounter_guards
+PASS _test_victory_return
+PASS _test_escape_return
+PASS _test_defeat
+EXPLORAÇÃO: 9 grupos, 3338 verificações, 0 falhas
+
+motion_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_legacy_presets
+PASS _test_smooth_route
+PASS _test_flight_and_speed
+PASS _test_attack_phases
+PASS _test_moving_melee_target
+PASS _test_exact_route_resume
+PASS _test_wait_and_active
+PASS _test_reset_and_missing_target
+PASS _test_large_step
+MOVIMENTO/MELEE: 9 grupos, 1944 verificações, 0 falhas
+
+motion_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MOVIMENTO/UI: 16 verificações, 0 falhas
+
+exploration_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+INTEGRAÇÃO/UI: 30 verificações, 0 falhas
+
+fullscreen_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TELA INTEIRA/UI: 26 verificações, 0 falhas
+
+fullscreen_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_defaults
+PASS _test_enemy_scheduler
+PASS _test_ally_center_and_effect
+PASS _test_static_and_exception
+PASS _test_mobile_resume
+PASS _test_runtime_override
+PASS _test_persistence
+PASS _test_presentation_independent_of_targets
+PASS _test_melee_preserved
+PASS _test_outcomes_and_large_step
+TELA INTEIRA: 10 grupos, 620 verificações, 0 falhas
+
+interaction_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_data
+PASS _test_reachability
+PASS _test_corridors_and_obstacles
+PASS _test_patrols_and_pause
+PASS _test_dialogues
+PASS _test_choices
+PASS _test_objects
+PASS _test_interaction_guards
+PASS _test_all_encounters
+INTERAÇÕES: 9 grupos, 3597 verificações, 0 falhas
+
+interaction_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+INTERAÇÕES/UI: 36 verificações, 0 falhas
+
+area_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_catalog_and_entries
+PASS _test_round_trip_and_formation
+PASS _test_transition_phases
+PASS _test_persistence_and_patrols
+PASS _test_guards
+PASS _test_invalid_destinations
+PASS _test_revalidate_and_rearm
+PASS _test_battle_in_destination
+PASS _test_reset
+ÁREAS: 9 grupos, 146 verificações, 0 falhas
+
+area_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ÁREAS/UI: 39 verificações, 0 falhas
+
+internal_areas_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+INTERIORES/UI: 50 verificações, 0 falhas
+
+camera_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_scale_reference
+PASS _test_tracking_and_limits
+PASS _test_projection
+PASS _test_views_same_distance
+PASS _test_model_untouched
+CÂMERA: 5 grupos, 106 verificações, 0 falhas
+
+internal_areas_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_distribution
+PASS _test_routes_and_entries
+PASS _test_accessibility
+PASS _test_house_dialogues
+PASS _test_dungeon_objects_and_walk
+PASS _test_all_encounters
+PASS _test_three_area_persistence
+PASS _test_escape_and_reset
+INTERIORES: 8 grupos, 5954 verificações, 0 falhas
+
+depth_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_authoring
+PASS _test_back_and_front
+PASS _test_actual_footprints
+PASS _test_party_curve
+PASS _test_entities_and_ties
+PASS _test_pure_order
+PROFUNDIDADE: 6 grupos, 239 verificações, 0 falhas
+
+depth_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PROFUNDIDADE/UI: 23 verificações, 0 falhas
+
+camera_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CÂMERA/UI: 50 verificações, 0 falhas
+
+world_map_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_topology_and_content
+PASS _test_authoring
+PASS _test_physical_route
+PASS _test_landscape_collision
+PASS _test_street_npcs
+PASS _test_world_has_no_encounters
+PASS _test_four_area_persistence
+PASS _test_reset
+MUNDO/VILA: 8 grupos, 3624 verificações, 0 falhas
+
+world_map_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MUNDO/VILA/UI: 49 verificações, 0 falhas
+
+terrain_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+RELEVO/UI: 84 verificações, 0 falhas
+
+world_clock_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_boundaries
+PASS _test_natural_rate
+PASS _test_manual_and_rest
+PASS _test_signals
+PASS _test_configuration
+RELÓGIO: 5 grupos, 1477 verificações, 0 falhas
+
+terrain_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_solid_regions
+PASS _test_ramp_cliffs
+PASS _test_height_and_followers
+PASS _test_pause_and_leader
+PASS _test_validation
+PASS _test_arrivals_and_sight
+PASS _test_depth
+RELEVO: 7 grupos, 2814 verificações, 0 falhas
+
+world_time_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS _test_classification
+PASS _test_current_areas_paused
+PASS _test_overworld_and_guards
+PASS _test_global_transitions_and_events
+PASS _test_rest_and_battle
+PASS _test_dialogue_query
+TEMPO/ÁREAS: 6 grupos, 68 verificações, 0 falhas
+
+day_lighting_tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ILUMINAÇÃO: 2894 verificações, 0 falhas
+
+world_clock_ui_smoke
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+RELÓGIO/UI: 42 verificações, 0 falhas

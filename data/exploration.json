@@ -1,0 +1,574 @@
+{
+  "notice": "Vila provisória: NPCs nas ruas e na casa; portão leva ao mundo aberto.",
+  "world_size": [
+    1440,
+    900
+  ],
+  "walkable_bounds": [
+    24,
+    24,
+    1392,
+    852
+  ],
+  "spawn": [
+    210,
+    500
+  ],
+  "move_speed": 180,
+  "leader_half_extent": 12,
+  "follower_gap": 34,
+  "obstacles": [
+    {
+      "rect": [
+        300,
+        190,
+        128,
+        270
+      ],
+      "label": "EDIFÍCIO A",
+      "kind": "wall",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        540,
+        360,
+        280,
+        72
+      ],
+      "label": "BLOCO B",
+      "kind": "wall",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        600,
+        120,
+        150,
+        100
+      ],
+      "label": "EDIFÍCIO C",
+      "kind": "wall",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        350,
+        650,
+        210,
+        26
+      ],
+      "label": "PAREDE",
+      "kind": "wall",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        350,
+        720,
+        210,
+        26
+      ],
+      "label": "PAREDE",
+      "kind": "wall",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        610,
+        720,
+        26,
+        120
+      ],
+      "label": "",
+      "kind": "wall",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        680,
+        650,
+        26,
+        190
+      ],
+      "label": "",
+      "kind": "wall",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        82.5,
+        379,
+        20,
+        16
+      ],
+      "label": "",
+      "kind": "tree",
+      "visual_height": 96,
+      "canopy_width": 96
+    },
+    {
+      "rect": [
+        192.5,
+        294,
+        20,
+        16
+      ],
+      "label": "",
+      "kind": "tree",
+      "visual_height": 96,
+      "canopy_width": 96
+    },
+    {
+      "rect": [
+        470,
+        260,
+        42,
+        40
+      ],
+      "label": "",
+      "kind": "rock",
+      "visual_height": 18
+    },
+    {
+      "rect": [
+        735,
+        550,
+        55,
+        50
+      ],
+      "label": "",
+      "kind": "rock",
+      "visual_height": 18
+    },
+    {
+      "rect": [
+        282.5,
+        834,
+        20,
+        16
+      ],
+      "label": "",
+      "kind": "tree",
+      "visual_height": 96,
+      "canopy_width": 96
+    },
+    {
+      "rect": [
+        780,
+        110,
+        120,
+        120
+      ],
+      "label": "CASA DE TESTE",
+      "kind": "house",
+      "visual_height": 48,
+      "night_windows": true
+    },
+    {
+      "rect": [
+        1170,
+        110,
+        26,
+        120
+      ],
+      "label": "",
+      "kind": "wall",
+      "visual_height": 56
+    },
+    {
+      "rect": [
+        1264,
+        110,
+        26,
+        120
+      ],
+      "label": "",
+      "kind": "wall",
+      "visual_height": 56
+    },
+    {
+      "rect": [
+        1000,
+        620,
+        140,
+        110
+      ],
+      "label": "CASA / SEGREDO",
+      "kind": "house",
+      "visual_height": 48,
+      "night_windows": true
+    },
+    {
+      "rect": [
+        876,
+        562,
+        12,
+        12
+      ],
+      "kind": "lamp",
+      "label": "",
+      "visual_height": 72,
+      "night_light": true
+    }
+  ],
+  "regions": [
+    {
+      "rect": [
+        44,
+        44,
+        510,
+        132
+      ],
+      "label": "VILA DE TESTES / ruas e casa",
+      "color": "354840"
+    },
+    {
+      "rect": [
+        880,
+        385,
+        250,
+        195
+      ],
+      "label": "PRAÇA / NPCs de teste",
+      "color": "4b514a"
+    },
+    {
+      "rect": [
+        335,
+        595,
+        390,
+        260
+      ],
+      "label": "COLISÕES / corredores estreitos",
+      "color": "343e48"
+    }
+  ],
+  "encounters": [],
+  "interaction_distance": 64,
+  "npcs": [
+    {
+      "id": "npc_04",
+      "label": "NPC 4",
+      "position": [
+        900,
+        500
+      ],
+      "color": "9ebbe4",
+      "dialogue_id": "patrol",
+      "route": [
+        [
+          900,
+          500
+        ],
+        [
+          1060,
+          500
+        ]
+      ],
+      "speed": 32,
+      "placement_by_period": {
+        "night": {
+          "position": [
+            970,
+            780
+          ]
+        }
+      },
+      "interaction_rules": [
+        {
+          "when": {
+            "flags_set": [
+              "house_secret_discovered"
+            ]
+          },
+          "dialogue_id": "resident_knows"
+        },
+        {
+          "when": {
+            "periods": [
+              "night"
+            ]
+          },
+          "dialogue_id": "resident_night"
+        }
+      ]
+    },
+    {
+      "id": "npc_05",
+      "label": "NPC 5",
+      "position": [
+        1090,
+        290
+      ],
+      "color": "e1b4ae",
+      "dialogue_id": "objects",
+      "dialogue_by_period": {
+        "night": "clock_night"
+      }
+    }
+  ],
+  "objects": [
+    {
+      "id": "secret_stone",
+      "label": "Pedra misteriosa",
+      "object_type": "mysterious_stone",
+      "position": [
+        1177,
+        688
+      ],
+      "rect": [
+        1160,
+        660,
+        34,
+        28
+      ],
+      "visual_height": 22,
+      "solid": true,
+      "interaction_rules": [
+        {
+          "when": {
+            "flags_set": [
+              "house_secret_discovered"
+            ]
+          },
+          "dialogue_id": "stone_known"
+        },
+        {
+          "when": {
+            "periods": [
+              "night"
+            ],
+            "flags_unset": [
+              "house_secret_discovered"
+            ]
+          },
+          "dialogue_id": "stone_discover",
+          "set_flag": "house_secret_discovered"
+        },
+        {
+          "when": {},
+          "dialogue_id": "stone_day"
+        }
+      ]
+    }
+  ],
+  "dialogues": {
+    "patrol": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Este NPC segue uma rota programada. Durante a conversa, ele para no ponto exato.",
+          "next": "1"
+        },
+        "1": {
+          "text": "O menu da equipe e o combate também pausam as patrulhas.",
+          "next": "secret_hint"
+        },
+        "secret_hint": {
+          "text": "À noite, há uma luz estranha junto da segunda casa, ao sul da praça. Durante o dia, a pedra parece comum.",
+          "next": ""
+        }
+      }
+    },
+    "objects": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "O portão da vila leva ao mundo aberto. A mini dungeon fica lá fora, seguindo o caminho até a entrada de pedra.",
+          "next": "1"
+        },
+        "1": {
+          "text": "O baú, a porta e a alavanca continuam na dungeon. Entrar na vila ou na casa não recupera HP e MP.",
+          "next": ""
+        }
+      }
+    },
+    "clock_night": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "É noite: as janelas das duas casas e o poste estão acesos. O relógio permanece pausado na vila; o mapa-múndi preserva e retoma esse horário.",
+          "next": ""
+        }
+      }
+    },
+    "resident_night": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "A luz estranha aparece na pedra ao lado desta casa durante a noite. Você pode examiná-la.",
+          "next": ""
+        }
+      }
+    },
+    "resident_knows": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Você encontrou a inscrição escondida na pedra. A descoberta continua registrada, mesmo quando o dia volta.",
+          "next": ""
+        }
+      }
+    },
+    "stone_day": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Uma pedra comum. À luz do dia, não é possível descobrir o seu segredo.",
+          "next": ""
+        }
+      }
+    },
+    "stone_discover": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "O Segredo da Casa: sob o brilho noturno, uma inscrição escondida fica visível. Descoberta registrada.",
+          "next": ""
+        }
+      }
+    },
+    "stone_known": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Você já descobriu a inscrição escondida. A descoberta permanece registrada; não há nova recompensa.",
+          "next": ""
+        }
+      }
+    }
+  },
+  "id": "lab_exterior",
+  "label": "Vila de testes",
+  "entries": {
+    "from_house": {
+      "position": [
+        840,
+        310
+      ],
+      "facing": [
+        1,
+        0
+      ],
+      "arrival_transition_id": "house_entrance"
+    },
+    "from_world": {
+      "position": [
+        1230,
+        310
+      ],
+      "facing": [
+        1,
+        0
+      ],
+      "arrival_transition_id": "town_exit"
+    },
+    "from_secret_house": {
+      "position": [
+        1070,
+        800
+      ],
+      "facing": [
+        1,
+        0
+      ],
+      "arrival_transition_id": "secret_house_entrance"
+    }
+  },
+  "transitions": [
+    {
+      "id": "house_entrance",
+      "label": "Entrar na casa",
+      "position": [
+        840,
+        244
+      ],
+      "target_area_id": "test_house",
+      "target_entry_id": "from_lab",
+      "interaction_distance": 64
+    },
+    {
+      "id": "town_exit",
+      "label": "Sair da vila / mundo aberto",
+      "position": [
+        1230,
+        244
+      ],
+      "target_area_id": "test_world",
+      "target_entry_id": "from_town",
+      "interaction_distance": 64
+    },
+    {
+      "id": "secret_house_entrance",
+      "label": "Entrar na segunda casa",
+      "position": [
+        1070,
+        744
+      ],
+      "target_area_id": "secret_house",
+      "target_entry_id": "from_town",
+      "interaction_distance": 64
+    }
+  ],
+  "footer": "Casa original: norte · segunda casa/pedra: sul da praça · NPC 4: praça de dia / casa à noite · E: interagir",
+  "terrain": [
+    {
+      "kind": "path",
+      "rect": [
+        180,
+        476,
+        1090,
+        48
+      ]
+    },
+    {
+      "kind": "path",
+      "rect": [
+        816,
+        244,
+        48,
+        360
+      ]
+    },
+    {
+      "kind": "path",
+      "rect": [
+        1206,
+        244,
+        48,
+        360
+      ]
+    },
+    {
+      "kind": "path",
+      "rect": [
+        816,
+        604,
+        48,
+        196
+      ]
+    },
+    {
+      "kind": "path",
+      "rect": [
+        816,
+        776,
+        290,
+        40
+      ]
+    },
+    {
+      "kind": "path",
+      "rect": [
+        1046,
+        744,
+        48,
+        56
+      ]
+    }
+  ],
+  "area_type": "town",
+  "time_advances": false,
+  "lighting_profile": "cycle"
+}

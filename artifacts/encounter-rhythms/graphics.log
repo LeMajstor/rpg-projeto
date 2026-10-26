@@ -1,0 +1,7 @@
+Godot 4.7.2 Standard — macOS / Apple M3 Pro — Compatibility
+exploration_rhythm_tests.gd --visual-captures=res://artifacts/encounter-rhythms
+RITMOS/EXPLORAÇÃO: 2121 verificações, 0 falhas
+Exit code: 0
+internal_areas_ui_smoke.gd --visual-captures=res://artifacts/encounter-rhythms
+INTERIORES/UI: 57 verificações, 0 falhas
+Exit code: 0

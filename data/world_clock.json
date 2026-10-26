@@ -1,0 +1,10 @@
+{
+  "initial_time": [10, 0],
+  "day_duration_seconds": 120,
+  "periods": [
+    {"id": "dawn", "label": "Amanhecer", "start_minute": 300},
+    {"id": "day", "label": "Dia", "start_minute": 420},
+    {"id": "dusk", "label": "Entardecer", "start_minute": 1020},
+    {"id": "night", "label": "Noite", "start_minute": 1140}
+  ]
+}
