@@ -41,9 +41,9 @@ O modelo seleciona ação acessível e filtra aliados vivos. `TargetPolicy` calc
 
 `FullscreenMotion` é selecionado somente pela marca explícita de apresentação da habilidade e consulta a configuração efetiva por participante capturada pelo modelo. Pode mover ao centro comum do campo ou manter Δvisual zero. Alvos/área permanecem calculados pelas funções anteriores; alterações temporárias do participante não mudam uma execução já iniciada. Presets A/B/C permanecem iguais; D demonstra os casos. Ver [TELA_INTEIRA.md](TELA_INTEIRA.md).
 
-O campo desenha formas, barras de HP e orientações. ATB aliado aparece nos cartões; ATB inimigo somente na depuração. Rotas e cruzes lógicas só aparecem com F3. Mira circular converte a escala de desenho para coordenadas lógicas.
+O campo desenha formas, barras de HP e orientações. ATB aliado aparece nos cartões; ATB inimigo somente na depuração. Rotas e cruzes lógicas só aparecem com F3. Mira circular recebe o ID de um alvo central e projeta sua posição lógica/raio para o desenho; a mão acompanha a apresentação visual. `battle_hand.gd` é um desenho vetorial original compartilhado por cards, comandos e campo. O desenho é recortado para não cobrir o menu.
 
-Testes de regras rodam sem renderização. Testes de UI instanciam a cena e acionam os mesmos sinais usados pelos botões. Capturas em `artifacts/` são inspeção visual, não assets do jogo.
+Testes de regras rodam sem renderização. Testes de UI instanciam a cena; o fluxo atual também recebe eventos reais de teclado/joypad simulados pela engine e rejeita cliques de gameplay. `combat_lab.gd` mantém foco por etapa separado do modelo. `BattleModel.target_candidates` centraliza o lado/elegibilidade; `targets_for` resolve o alvo central e `targets_in_radius` faz a consulta geométrica, compartilhada por prévia/impacto. Capturas em `artifacts/` são inspeção visual, não assets do jogo. Ver [INTERFACE_BATALHA.md](INTERFACE_BATALHA.md).
 
 ## Ritmos opcionais da batalha
 

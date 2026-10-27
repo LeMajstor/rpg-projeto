@@ -1,5 +1,9 @@
 # Combate atual — comportamento por semente
 
+**Decisão de escopo — 26/10/2026 (D48):** este modelo de movimentação permanece até a pré-alfa, inclusive. A geometria dos caminhos continua predefinida, com as variações atuais de comportamento por semente. Uma movimentação mais orgânica sem rota fixa fica como possibilidade futura, após esse marco, sem solução escolhida ou implementação autorizada.
+
+**Battle Speed (D50/D51):** padrão 4, escala 1 lento→8 rápido. Ritmos anteriores deslocados uma posição acima (3 → 4, 4 → 5 etc.); nível 6 conserva os tempos originais de referência; ajuste somente de ATB, disponível no menu da exploração e no laboratório. Ver [BATTLE_SPEED.md](BATTLE_SPEED.md).
+
 ## Escopo confirmado e implementado
 
 Esta versão implementa D44–D46 e a autorização posterior de aplicar o conjunto no laboratório independente e em todos os encontros da exploração. Dez opções anteriores são **legadas**, inclusive F e as quatro primeiras versões `exploration_*`. Permanecem para regressão/consulta manual, sem referências pelos encontros jogáveis.
@@ -23,7 +27,7 @@ Não há novas rotas livres, perseguição, navegação procedural, arte definit
 | Atual · lados opostos / `exploration_seeded_sides` | M3/M6: aliados dos dois lados, ágil e voador com caminho adaptado, mais um estático. |
 | Atual · linha superior / `exploration_seeded_fullscreen` | M4: aliados distribuídos na parte superior; pesado e dois estáticos, com as ações/exceções de tela inteira anteriores. |
 
-`data/dungeon.json` referencia somente os quatro presets atuais. Os seis IDs de encontro, posições/patrulhas no mapa, quantidade de participantes, atributos, perfis de alvo, habilidades, cenário e permissão de fuga permanecem. As novas posições de repouso são uma escolha técnica de teste autorizada pela variação de formações; não definem mapas ou formações definitivas da aventura.
+`data/dungeon.json` referencia somente os quatro presets atuais. Os seis IDs de encontro, posições/patrulhas no mapa, quantidade de participantes, HP/MP/dano, perfis de alvo, habilidades, cenário e permissão de fuga permanecem. A INI recebeu a atualização D49 descrita abaixo. As novas posições de repouso são uma escolha técnica de teste autorizada pela variação de formações; não definem mapas ou formações definitivas da aventura.
 
 ## Executar e testar
 
@@ -31,7 +35,7 @@ Não há novas rotas livres, perseguição, navegação procedural, arte definit
 2. Use **Active** e deixe **Pausa desligada**. Observe os terrestres continuando/recuando, as paradas variáveis e o olhar voltado ao grupo.
 3. Abra **F3**: semente, comportamento, etapa, velocidade, sentido atual/planejado, pausa restante, contadores, último sorteio e foco visual. Valores de inversão incluem decisões já planejadas que ainda aguardam a pausa.
 4. Observe o voador: em `pause`, sua coordenada lógica fica parada e a flutuação continua. ATB segue carregando. **Espaço** congela tudo; **Passo +1/60 s** avança dois ticks configurados de 1/120 s, respeitando Wait.
-5. Mantenha a velocidade global em **1×** ao comparar tipos. **0,25×** ajuda a inspecionar frenagem, pausa e retomada. O slider global escala também ATB e ações.
+5. Mantenha a velocidade global em **1×** e **Battle Speed 6** ao comparar os tempos de referência anteriores. **0,25×** ajuda a inspecionar frenagem, pausa e retomada. O slider global escala também ATB e ações.
 6. Para comparar sorteios, escolha uma semente, por exemplo **421**, e clique **Novo teste**. Repita com **733**. Voltar à mesma semente/configuração e repetir os comandos no mesmo tempo reproduz a simulação. Editar o campo só é aplicado ao iniciar novo teste/próxima luta.
 7. Selecione outras opções **Atual · … → Novo teste** para comparar formações. Os modelos anteriores aparecem como **Legado · …**.
 8. Use Atacar/Onda para testar aproximação/impacto/retorno e retomada da pausa/rota. Em Wait, selecionar um aliado pronto congela as decisões; cancelar retoma. Uma ação já iniciada pode concluir ao mudar para Wait, conforme a política anterior.
@@ -45,9 +49,26 @@ godot --path . --scene res://scenes/combat_lab.tscn -- --preset=lab_seeded
 
 A exploração mantém a semente experimental em `settings.seed` de `data/lab.json`, atualmente 421. Não foi acrescentado sorteio automático de semente ou novo painel no mapa. As posições iniciais nunca são sorteadas.
 
+## INI e ritmo de ações — atualização de 26/10/2026
+
+**Confirmado (D49):** variar a INI entre os quatro tipos atuais. Futuramente o atributo será definido por inimigo, sem associação obrigatória à categoria de movimento. **Escolha técnica experimental:** os valores abaixo permitem comparar ritmos; não são balanceamento definitivo nem sorteios de INI.
+
+| Tipo atual | INI | Carga de 0 a 100% |
+| --- | --- | --- |
+| Ágil | 12 | aproximadamente 4,63 s |
+| Voador | 10 | aproximadamente 5,56 s |
+| Pesado | 7 | aproximadamente 7,94 s |
+| Estático | 5 | aproximadamente 11,11 s |
+
+Tempos de simulação com progressão permitida, fora da própria ação, em velocidade 1× e **Battle Speed 6**. O padrão agora é 4, equivalente ao antigo nível 3: cargas aproximadamente 1,67× mais demoradas que a referência original, com os multiplicadores experimentais atuais; tabela em [BATTLE_SPEED.md](BATTLE_SPEED.md). Fórmula experimental preservada: `INI efetiva × 0,018 × segundos × multiplicador Battle Speed`. INI fica nas fichas `enemy_types`, separada de `movement_behaviors`. Laboratório e seis encontros da dungeon compartilham essas fichas. Tipos/presets legados conservam seus valores.
+
+Aliados permanecem com INI 9/12/7/10, respectivamente. Continua uma ação em execução por vez, com barras dos demais avançando quando permitido e atendimento dos inimigos prontos na ordem do preset. As INIs distintas reduzem a sincronização inicial entre tipos; ainda podem ocorrer ataques seguidos ou inimigos iguais carregando juntos. Revisar o atendimento simultâneo não fez parte desta alteração.
+
+Para verificar manualmente: iniciar **Novo teste**, usar **Active**, velocidade **1×**, **Battle Speed 6** para os tempos desta tabela, pausa desligada e abrir **F3**. Observar as cargas diferentes e o Ágil iniciando antes dos outros tipos. Reabrir a exploração para carregar as novas fichas. As suítes `seeded_behavior_tests.gd` e `exploration_rhythm_tests.gd`, executáveis pelos comandos abaixo, verificam carga/ordem reais, independência do movimento, legados e uso das fichas nos seis encontros.
+
 ## Dados e escolhas técnicas experimentais
 
-`movement_behaviors` em `data/lab.json` fornece quatro comportamentos (`heavy`, `agile`, `flying`, `static`). Novos tipos referenciam `movement_behavior`, com `facing_policy: "focus"`. Fichas de atributos/ações foram copiadas dos tipos anteriores; não houve balanceamento de HP/MP/INI/dano/custos.
+`movement_behaviors` em `data/lab.json` fornece quatro comportamentos (`heavy`, `agile`, `flying`, `static`). Novos tipos referenciam `movement_behavior`, com `facing_policy: "focus"`. Na migração original, fichas de atributos/ações foram copiadas dos tipos anteriores. A atualização D49 acima altera somente a INI dos quatro tipos atuais; HP/MP/dano/custos permanecem.
 
 | Campo do comportamento | Uso |
 | --- | --- |

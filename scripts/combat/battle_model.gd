@@ -13,6 +13,9 @@ var enemies: Array = []
 var inventory: Dictionary = {}
 var preset: Dictionary = {}
 var rng = RandomNumberGenerator.new()
+var battle_speed: int = 4:
+	set(value):
+		battle_speed = clampi(value, 1, 8)
 var mode = "Wait"
 var outcome = "idle"
 var selected_id = ""
@@ -25,6 +28,7 @@ var simulation_seed = 421
 
 func _init(definitions: Dictionary) -> void:
 	data = definitions
+	battle_speed = int(data.get("battle_speed", {}).get("default", 4))
 
 func default_preset_index() -> int:
 	for index in range(data["presets"].size()):
@@ -154,6 +158,14 @@ func living(group: Array) -> Array:
 func effective_ini(actor: Dictionary) -> float:
 	return maxf(0.0, float(actor["ini"]) + actor["ini_modifier"])
 
+func atb_rate_multiplier() -> float:
+	# Configuração de ritmo do jogo; não escala rotas, animações ou relógio.
+	var rates: Array = data.get("battle_speed", {}).get("atb_multipliers", [])
+	if rates.size() != 8:
+		return 1.0 # Compatibilidade com fixtures históricas sem configuração.
+	var rate = float(rates[battle_speed - 1])
+	return rate if is_finite(rate) and rate > 0.0 else 1.0
+
 func is_ready(actor: Dictionary) -> bool:
 	return not actor.is_empty() and actor["hp"] > 0 and actor["atb"] >= 1.0 and action.get("actor_id", "") != actor["id"]
 
@@ -178,13 +190,14 @@ func tick(delta: float) -> void:
 	var waiting = is_waiting()
 	if not waiting:
 		simulation_time += delta
+		var atb_multiplier = atb_rate_multiplier()
 		for actor in actors():
 			if actor["hp"] <= 0:
 				actor["atb"] = 0.0
 				continue
 			if action.get("actor_id", "") == actor["id"]:
 				continue
-			actor["atb"] = minf(1.0, actor["atb"] + effective_ini(actor) * float(data["settings"]["atb_per_ini"]) * delta)
+			actor["atb"] = minf(1.0, actor["atb"] + effective_ini(actor) * float(data["settings"]["atb_per_ini"]) * atb_multiplier * delta)
 			if actor["side"] == "enemy":
 				Route.advance(actor["route_state"], delta)
 				actor["logical_position"] = Route.position_at(actor["route_state"], actor["logical_position"])
@@ -243,25 +256,28 @@ func _face_point(actor: Dictionary, origin: Vector2, point: Vector2) -> void:
 	if origin.distance_squared_to(point) > 0.000001:
 		actor["facing"] = origin.direction_to(point)
 
-func targets_for(actor: Dictionary, skill: Dictionary, target_id: String = "", center: Vector2 = Vector2.ZERO) -> Array:
+func target_candidates(actor: Dictionary, skill: Dictionary) -> Array:
+	if actor.is_empty() or skill.is_empty():
+		return []
 	var group = enemies if actor["side"] == "ally" else party
 	if skill.get("effect", "damage") != "damage":
 		group = party if actor["side"] == "ally" else enemies
-	var candidates = []
-	for target in group:
-		var eligible: bool = target["hp"] == 0 if skill.get("effect", "") == "revive" else target["hp"] > 0
-		if not eligible:
-			continue
-		match skill.get("target", "single"):
-			"single":
-				if target["id"] == target_id:
-					candidates.append(target)
-			"circle":
-				if target["logical_position"].distance_to(center) <= float(skill["radius"]):
-					candidates.append(target)
-			"all":
-				candidates.append(target)
-	return candidates
+	return group.filter(func(target): return target["hp"] == 0 if skill.get("effect", "") == "revive" else target["hp"] > 0)
+
+func targets_in_radius(actor: Dictionary, skill: Dictionary, center: Vector2) -> Array:
+	# Consulta geométrica pura; não oferece mira livre como comando.
+	return target_candidates(actor, skill).filter(func(target): return target["logical_position"].distance_to(center) <= float(skill["radius"]))
+
+func targets_for(actor: Dictionary, skill: Dictionary, target_id: String = "", _center: Vector2 = Vector2.ZERO) -> Array:
+	var candidates = target_candidates(actor, skill)
+	if skill.get("target", "single") == "all":
+		return candidates
+	var target = actor_by_id(target_id)
+	if target.is_empty() or not candidates.has(target):
+		return []
+	if skill.get("target", "single") == "circle":
+		return targets_in_radius(actor, skill, target["logical_position"])
+	return [target]
 
 func item_skill(id: String) -> Dictionary:
 	if not data["items"].has(id):
@@ -319,6 +335,8 @@ func _begin_action(actor: Dictionary, skill: Dictionary, target_id: String, cent
 					nearest = distance
 					aim = member["logical_position"]
 					visual_target_id = member["id"]
+	if skill.get("target", "") == "circle" and not target.is_empty():
+		center = target["logical_position"]
 	var melee: bool = skill.get("delivery", "melee" if skill.get("category", "") in ["basic", "physical"] else "gesture") == "melee"
 	var motion: Dictionary
 	if skill.get("presentation", "") == "fullscreen":
@@ -348,6 +366,10 @@ func _advance_action(delta: float) -> void:
 	action["elapsed"] += delta
 	var duration: float = maxf(0.05, float(data["settings"]["action_duration"]))
 	var progress: float = minf(1.0, action["elapsed"] / duration)
+	if action["skill"].get("target", "") == "circle" and not action["applied"]:
+		var central = actor_by_id(action["target_id"])
+		if not central.is_empty():
+			action["center"] = central["logical_position"]
 	var aim: Vector2 = action["center"]
 	var visual_target = actor_by_id(action["visual_target_id"])
 	if not visual_target.is_empty():

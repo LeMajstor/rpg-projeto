@@ -1,0 +1,273 @@
+{
+  "notice": "LABORATÓRIO ISOLADO — fichas, fórmula e parâmetros experimentais; não altera exploração ou combate atual.",
+  "settings": {
+    "seed": 421,
+    "variation_enabled": true,
+    "variation_percent": 10.0,
+    "crit_per_point": 1.0,
+    "critical_mode": "rolled",
+    "item_bonus": 0.0,
+    "buff_bonus": 0.0,
+    "history_limit": 12,
+    "animation_seconds": 0.8,
+    "impact_fraction": 0.5,
+    "melee_stop_distance": 44,
+    "melee_impact_hold": 0.15,
+    "effective_stat_limit": 999
+  },
+  "default_attacker": "ally_1",
+  "default_target": "heavy",
+  "default_weapon": "sword_bronze",
+  "default_action": "basic",
+  "profiles": [
+    {
+      "id": "ally_1",
+      "name": "Aliado 1 · teste",
+      "side": "ally",
+      "color": "6fc8ff",
+      "hp": 999,
+      "mp": 100,
+      "ini": 9,
+      "physical_attack": 100,
+      "physical_defense": 100,
+      "magic_power": 100,
+      "magic_defense": 100,
+      "critical_base": 5,
+      "unarmed_critical_multiplier": 2.0
+    },
+    {
+      "id": "ally_2",
+      "name": "Aliado 2 · teste",
+      "side": "ally",
+      "color": "b5a2ff",
+      "hp": 700,
+      "mp": 180,
+      "ini": 12,
+      "physical_attack": 75,
+      "physical_defense": 80,
+      "magic_power": 150,
+      "magic_defense": 130,
+      "critical_base": 6,
+      "unarmed_critical_multiplier": 2.0
+    },
+    {
+      "id": "ally_3",
+      "name": "Aliado 3 · teste",
+      "side": "ally",
+      "color": "ffc379",
+      "hp": 999,
+      "mp": 60,
+      "ini": 7,
+      "physical_attack": 170,
+      "physical_defense": 150,
+      "magic_power": 55,
+      "magic_defense": 65,
+      "critical_base": 3,
+      "unarmed_critical_multiplier": 2.0
+    },
+    {
+      "id": "ally_4",
+      "name": "Aliado 4 · teste",
+      "side": "ally",
+      "color": "6de0b5",
+      "hp": 850,
+      "mp": 100,
+      "ini": 10,
+      "physical_attack": 110,
+      "physical_defense": 95,
+      "magic_power": 100,
+      "magic_defense": 110,
+      "critical_base": 8,
+      "unarmed_critical_multiplier": 2.0
+    },
+    {
+      "id": "heavy",
+      "name": "Pesado · teste",
+      "side": "enemy",
+      "color": "d99c65",
+      "hp": 999,
+      "mp": 80,
+      "ini": 7,
+      "physical_attack": 130,
+      "physical_defense": 160,
+      "magic_power": 50,
+      "magic_defense": 80,
+      "critical_base": 3,
+      "unarmed_critical_multiplier": 2.0
+    },
+    {
+      "id": "agile",
+      "name": "Ágil · teste",
+      "side": "enemy",
+      "color": "f2b36d",
+      "hp": 700,
+      "mp": 80,
+      "ini": 12,
+      "physical_attack": 110,
+      "physical_defense": 70,
+      "magic_power": 70,
+      "magic_defense": 75,
+      "critical_base": 10,
+      "unarmed_critical_multiplier": 2.0
+    },
+    {
+      "id": "flying",
+      "name": "Voador · teste",
+      "side": "enemy",
+      "color": "d598f3",
+      "hp": 650,
+      "mp": 120,
+      "ini": 10,
+      "physical_attack": 90,
+      "physical_defense": 80,
+      "magic_power": 130,
+      "magic_defense": 120,
+      "critical_base": 6,
+      "unarmed_critical_multiplier": 2.0
+    },
+    {
+      "id": "static",
+      "name": "Estático · teste",
+      "side": "enemy",
+      "color": "e5ac68",
+      "hp": 999,
+      "mp": 100,
+      "ini": 5,
+      "physical_attack": 110,
+      "physical_defense": 180,
+      "magic_power": 90,
+      "magic_defense": 150,
+      "critical_base": 4,
+      "unarmed_critical_multiplier": 2.0
+    }
+  ],
+  "weapons": [
+    {
+      "id": "none",
+      "name": "Sem arma",
+      "attack_bonus": 0,
+      "critical_chance": 0.0,
+      "critical_multiplier": 2.0,
+      "equipped": false
+    },
+    {
+      "id": "sword_bronze",
+      "name": "Espada de Bronze",
+      "attack_bonus": 10,
+      "critical_chance": 5.0,
+      "critical_multiplier": 2.0,
+      "equipped": true
+    },
+    {
+      "id": "sword_iron",
+      "name": "Espada de Ferro",
+      "attack_bonus": 16,
+      "critical_chance": 5.0,
+      "critical_multiplier": 2.0,
+      "equipped": true
+    },
+    {
+      "id": "sword_steel",
+      "name": "Espada de Aço",
+      "attack_bonus": 24,
+      "critical_chance": 5.0,
+      "critical_multiplier": 2.0,
+      "equipped": true
+    },
+    {
+      "id": "sword_mithril",
+      "name": "Espada de Mithril",
+      "attack_bonus": 34,
+      "critical_chance": 5.0,
+      "critical_multiplier": 2.0,
+      "equipped": true
+    },
+    {
+      "id": "sword_adamant",
+      "name": "Espada de Adamantio",
+      "attack_bonus": 48,
+      "critical_chance": 5.0,
+      "critical_multiplier": 2.0,
+      "equipped": true
+    },
+    {
+      "id": "sword_runic",
+      "name": "Espada Rúnica",
+      "attack_bonus": 65,
+      "critical_chance": 5.0,
+      "critical_multiplier": 2.0,
+      "equipped": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "basic",
+      "name": "Ataque físico · teste",
+      "damage_type": "physical",
+      "power": 1.0,
+      "mp_cost": 0,
+      "critical_allowed": true
+    },
+    {
+      "id": "physical_skill",
+      "name": "Técnica física · teste",
+      "damage_type": "physical",
+      "power": 1.8,
+      "mp_cost": 4,
+      "critical_allowed": true
+    },
+    {
+      "id": "magic_skill",
+      "name": "Magia · teste",
+      "damage_type": "magical",
+      "power": 1.5,
+      "mp_cost": 7,
+      "critical_allowed": false
+    }
+  ],
+  "default_armor": "none",
+  "armors": [
+    {
+      "id": "none",
+      "name": "Sem armadura",
+      "defense_bonus": 0,
+      "equipped": false
+    },
+    {
+      "id": "armor_bronze",
+      "name": "Armadura de Bronze",
+      "defense_bonus": 10,
+      "equipped": true
+    },
+    {
+      "id": "armor_iron",
+      "name": "Armadura de Ferro",
+      "defense_bonus": 16,
+      "equipped": true
+    },
+    {
+      "id": "armor_steel",
+      "name": "Armadura de Aço",
+      "defense_bonus": 24,
+      "equipped": true
+    },
+    {
+      "id": "armor_mithril",
+      "name": "Armadura de Mithril",
+      "defense_bonus": 34,
+      "equipped": true
+    },
+    {
+      "id": "armor_adamant",
+      "name": "Armadura de Adamantio",
+      "defense_bonus": 48,
+      "equipped": true
+    },
+    {
+      "id": "armor_runic",
+      "name": "Armadura Rúnica",
+      "defense_bonus": 65,
+      "equipped": true
+    }
+  ]
+}

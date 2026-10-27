@@ -18,12 +18,15 @@ O cenário agora tem **profundidade visual**: árvores, casas e paredes encobrem
 
 O **laboratório de combate continua separado**, iniciando em **Atual · comportamento por semente**: quatro aliados, Wait/Active, Atacar/Habilidades/Itens/Fugir, três formas de alvo, ritmos programados por tipo, IA ponderada e depuração. Ataques melee aproximam o sprite, mostram impacto e retornam à origem. Todos os encontros da exploração usam os ritmos atuais; todos os dez modelos anteriores são referências legadas.
 
+**Battle Speed:** menu da exploração [Tab] e seletor no combate/laboratório, de **1 (mais lento) a 8 (mais rápido)**. Padrão **4**; escala deslocada uma posição acima (antigo 3 → novo 4, antigo 4 → novo 5 etc.). Nível **6** reproduz os tempos originais anteriores ao Battle Speed. Ajusta somente a carga do ATB dos dois lados. Tempos e parâmetros experimentais em [BATTLE_SPEED.md](docs/BATTLE_SPEED.md).
+
 ## Executar
 
 Validado com **Godot 4.7.2 Standard**, sem .NET ou plugins externos.
 
 1. **Exploração:** abra `Executar exploracao.command` no macOS, ou importe `project.godot` no Godot e pressione **F5**.
 2. **Laboratório independente:** abra `Executar laboratorio.command`, ou abra `scenes/combat_lab.tscn` no editor e pressione **F6**.
+3. **Laboratório de danos:** abra `Executar laboratorio de danos.command`, ou abra `scenes/damage_lab.tscn` no editor e pressione **F6**. Fichas e fórmula proporcional experimentais, separados do combate da exploração.
 
 Os lançadores procuram uma instalação local, a variável opcional `GODOT_BIN` e, por último, a cópia temporária usada nesta validação. Essa cópia pode ser removida pelo sistema; instalar o Godot mantém o acesso independente dela.
 
@@ -32,6 +35,7 @@ Se necessário, obtenha a edição Standard no [site oficial do Godot](https://g
 ```sh
 godot --path .
 godot --path . --scene res://scenes/combat_lab.tscn
+godot --path . --scene res://scenes/damage_lab.tscn
 ```
 
 ## Controles da exploração
@@ -72,7 +76,7 @@ Configuração, arquivos e regras reutilizáveis em [EVENTOS_DIA_NOITE.md](docs/
 
 ## Controles do combate
 
-Espere as barras carregarem, clique em um aliado **PRONTO** e escolha um comando. Em **Habilidades**, experimente alvo único, círculo e todos os inimigos. Use **F3** para observar a simulação e deixar aliados prontos imediatamente. **Atual · cantos / sem fuga** mantém o bloqueio para testar essa regra.
+Espere as barras carregarem e use **setas/direcional** para mover a mão pelos cards **PRONTOS**. Confirme para passar aos comandos à direita e depois ao alvo em campo. O card do executor fica destacado; mouse não seleciona ações ou alvos. Em **Habilidades**, experimente alvo único, círculo e todos os inimigos. Use **F3** para observar a simulação e deixar aliados prontos imediatamente. **Atual · cantos / sem fuga** mantém o bloqueio para testar essa regra.
 
 A nova versão já está em **todos os seis encontros da exploração**. O laboratório separado abre em **Atual · comportamento por semente**: terrestres sorteiam continuar ou inverter no mesmo caminho, freando e pausando antes de voltar; voadores também param para pairar; quantidade/duração de pausas variam pela semente. Inimigos mantêm atenção em um aliado e olham para o alvo durante o ataque. As outras quatro opções **Atual · …** têm formações diferentes, incluindo cantos, lados opostos e linha superior. Controles, tabela e dados em [COMBATE_SEMENTE.md](docs/COMBATE_SEMENTE.md).
 
@@ -82,18 +86,34 @@ Para testar habilidades de tela inteira com movimento atual, selecione **Atual �
 
 | Controle | Ação |
 | --- | --- |
-| Cartões / 1–4 | Escolher aliado pronto; durante seleção de item, escolher destinatário. |
+| Setas / direcional / analógico esquerdo | Mover a mão entre cards prontos, comandos, listas e alvos em campo. |
+| Enter / Z / botão sul (A) | Confirmar a etapa atual. |
 | A / H / I / F | Atacar / Habilidades / Itens / Fugir. |
-| Clique no campo ou nos botões de alvo | Escolher alvo; para área, fixar o centro do círculo. |
-| Esc | Cancelar seleção sem gastar ação. |
+| Tab / Start | Opções de combate; cima/baixo escolhe modo/Battle Speed, esquerda/direita ajusta. |
+| Esc / X / botão leste (B) | Voltar uma etapa até os cards, sem gasto antes de confirmar. |
 | F3 | Depuração: ATB inimigo, coordenadas, rotas e decisões. |
 | Espaço | Pausar/retomar manualmente. |
 | Velocidade / Passo | Entre 0,25× e 4× ou avançar 1/60 s. O passo respeita Wait. |
 | F5 na janela do jogo | Novo teste: restaurar recursos e reiniciar o preset escolhido. |
 
-No **laboratório separado**, após vitória/fuga, **Próxima luta · manter HP/MP** inicia o preset escolhido sem restaurar recursos/estoque. **Novo teste/F5** restaura o laboratório; mudar o menu de preset só tem efeito ao iniciar uma luta. No **encontro da exploração**, o retorno é automático e esses controles de reinício ficam desativados. Nenhuma transição recupera recursos automaticamente.
+Áreas exigem selecionar um alvo central: o círculo acompanha sua posição até o impacto e afeta somente o lado válido, **sem fogo amigo**. Veja [Interface de batalha](docs/INTERFACE_BATALHA.md).
+
+No **laboratório separado**, após vitória/fuga, **confirmar** ou **Próxima luta · manter HP/MP** inicia o preset escolhido sem restaurar recursos/estoque. **Novo teste/F5** restaura o laboratório; mudar o menu de preset só tem efeito ao iniciar uma luta. No **encontro da exploração**, o retorno é automático e esses controles de reinício ficam desativados. Nenhuma transição recupera recursos automaticamente.
+
+## Laboratório de danos
+
+Escolha atacante/alvo, arma e ação; ajuste atributos, potência, defesas, variação e críticos. Para informar um valor exato, clique no número ou selecione o campo e comece a digitar; Enter, Tab ou mudar o foco confirmam. Decimais aceitam ponto ou vírgula. **F6/F7/F8/F9** executam **1×/10×/100×/1000×**. À direita, consulte **Resumo**, **Amostras** e **Condições**, com dano calculado e HP removido separados. Cada amostra restaura os recursos iniciais para comparação. **R** reinicia os sorteios da semente atual; **F5** restaura o caso. Tab/setas/Enter ou direcional/botão sul permitem operar sem mouse; ombros do controle percorrem campos. O painel de edição rola ao receber foco. Parâmetros são locais e experimentais; equipamentos/buffs reais e integração ao combate ficam para depois.
+
+No aliado, edite **ATQ F/DEF F**, selecione arma/armadura e consulte **próprio + bônus = total** abaixo da ficha. Há seis materiais de teste (Bronze, Ferro, Aço, Mithril, Adamantio e Rúnica) e opções sem equipamento; as duas armas antigas de controle 2×/3× foram removidas. O caso padrão seleciona a Espada de Bronze, e o multiplicador permanece editável no campo próprio. Os bônus são editáveis; ao trocar lados, equipamentos acompanham o aliado. Monstros mantêm atributos diretos e multiplicador crítico próprio de teste. O limite efetivo provisório é 999, sinalizado quando aplicado.
+
+**Faixas das fichas:** HP, MP, ATQ F, DEF F, MAG e DEF M vão de **0 a 999 nos aliados** e **1 a 9999 nos monstros**; INI/CRI continuam **1 a 99** em ambos. A faixa acompanha o participante ao trocar lados. O limite efetivo de equipamento 999 é apenas do aliado; monstros usam seus valores diretamente. JSON inclui as faixas por categoria.
+
+Para compartilhar um teste, selecione a execução em **Resultado** e use **Exportar JSON [F10]**. O arquivo reúne todas as amostras, resumo, fichas/configurações originais e Seed. Escolha o destino, salve e anexe o `.json` na conversa. A pasta sugerida é `exports/damage-lab/`; erros/caminho salvo aparecem no rodapé. Exportar não recalcula o lote nem avança os sorteios.
 
 ## Documentação atual
+
+- [Referências de estudo do projeto](docs/REFERENCIAS.md).
+- [Laboratório de danos: fórmulas, controles e ações em lotes](docs/LABORATORIO_DANOS.md).
 
 - [Vila, mundo aberto, NPCs nas ruas e acessos da dungeon](docs/VILA_E_MUNDO.md).
 
@@ -121,6 +141,11 @@ Na pasta do projeto, com o executável Godot disponível como `godot`:
 ```sh
 godot --headless --path . --script res://tests/run_tests.gd
 godot --headless --path . --script res://tests/ui_smoke.gd
+godot --headless --path . --script res://tests/damage_lab_tests.gd
+godot --headless --path . --script res://tests/damage_equipment_tests.gd
+godot --headless --path . --script res://tests/damage_enemy_ranges_tests.gd
+godot --headless --path . --script res://tests/damage_export_tests.gd
+godot --headless --path . --script res://tests/damage_lab_ui_smoke.gd
 godot --headless --path . --script res://tests/exploration_tests.gd
 godot --headless --path . --script res://tests/exploration_ui_smoke.gd
 godot --headless --path . --script res://tests/motion_tests.gd

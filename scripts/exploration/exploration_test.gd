@@ -10,6 +10,7 @@ var map_ui: Control
 var map_view
 var combat_ui
 var menu_panel: PanelContainer
+var battle_speed_picker: OptionButton
 var leader_buttons: Array[Button] = []
 var party_labels: Array[Label] = []
 var message_label: Label
@@ -80,7 +81,7 @@ func _build_ui() -> void:
 	var toolbar = HBoxContainer.new()
 	toolbar.add_theme_constant_override("separation", 14)
 	column.add_child(toolbar)
-	_button(toolbar, "Equipe / trocar líder [Tab]", _toggle_menu)
+	_button(toolbar, "Menu / equipe [Tab]", _toggle_menu)
 	interact_button = _button(toolbar, "Interagir [E]", _try_encounter)
 	_button(toolbar, "Reiniciar teste", _restart)
 	leader_label = _label("", 16, Color("efd49b"))
@@ -122,10 +123,10 @@ func _build_ui() -> void:
 	menu_panel = PanelContainer.new()
 	menu_panel.set_anchors_preset(Control.PRESET_CENTER)
 	menu_panel.offset_left = -240
-	menu_panel.offset_top = -180
+	menu_panel.offset_top = -240
 	menu_panel.offset_right = 240
-	menu_panel.offset_bottom = 180
-	menu_panel.custom_minimum_size = Vector2(480, 360)
+	menu_panel.offset_bottom = 240
+	menu_panel.custom_minimum_size = Vector2(480, 480)
 	var menu_style = StyleBoxFlat.new()
 	menu_style.bg_color = Color("182b34")
 	menu_style.set_border_width_all(2)
@@ -142,6 +143,20 @@ func _build_ui() -> void:
 	menu_column.add_child(_label("Os quatro continuam ativos. O mapa pausa neste menu.", 14))
 	for member in session.battle.party:
 		leader_buttons.append(_button(menu_column, member["short_name"], _choose_leader.bind(member["id"])))
+	var battle_settings = HBoxContainer.new()
+	battle_settings.add_theme_constant_override("separation", 12)
+	menu_column.add_child(battle_settings)
+	battle_settings.add_child(_label("Battle Speed", 16))
+	battle_speed_picker = OptionButton.new()
+	battle_speed_picker.focus_mode = Control.FOCUS_NONE
+	for level in range(1, 9):
+		var suffix = " · Mais lento" if level == 1 else (" · Mais rápido" if level == 8 else "")
+		if level == int(session.battle.data.get("battle_speed", {}).get("default", 4)):
+			suffix += " · Padrão"
+		battle_speed_picker.add_item(str(level) + suffix)
+	battle_speed_picker.item_selected.connect(func(index): session.battle.battle_speed = index + 1)
+	battle_settings.add_child(battle_speed_picker)
+	menu_column.add_child(_label("1 mais lento · 8 mais rápido · afeta somente o ATB", 14))
 	_button(menu_column, "Fechar [Tab / Esc]", _toggle_menu)
 	if OS.is_debug_build():
 		clock_panel = ClockDebug.new()
@@ -318,6 +333,7 @@ func _refresh_map() -> void:
 	if map_ui == null:
 		return
 	menu_panel.visible = session.world.menu_open
+	battle_speed_picker.select(session.battle.battle_speed - 1)
 	area_label.text = "Área: %s" % session.world.data.get("label", session.area_id)
 	transition_overlay.visible = session.state == "transition"
 	transition_overlay.color.a = session.transition_alpha

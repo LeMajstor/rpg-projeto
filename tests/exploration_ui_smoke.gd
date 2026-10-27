@@ -104,7 +104,7 @@ func _run() -> void:
 	lab.cards[0]["button"].pressed.emit()
 	lab.command_buttons[1].pressed.emit()
 	lab.action_menu.get_child(2).pressed.emit()
-	lab.action_menu.get_child(0).pressed.emit()
+	lab._confirm_navigation()
 	finish(lab)
 	await process_frame
 	expect(screen.combat_ui == null and screen.map_ui.visible, "Sinal de vitória retorna automaticamente ao mapa")

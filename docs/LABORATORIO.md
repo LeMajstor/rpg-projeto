@@ -12,11 +12,12 @@ O preset D demonstra habilidades de tela inteira com deslocamento configurável 
 
 Consulte o [README](../README.md) para abrir `Executar laboratorio.command` ou executar `scenes/combat_lab.tscn` com F6 no editor. Desde a v0.2, F5 no editor inicia a exploração; F5 dentro da janela do laboratório reinicia o teste. O laboratório continua independente. A integração está em [EXPLORACAO_V02.md](EXPLORACAO_V02.md).
 
-- Clique ou 1–4: selecionar aliado pronto. Cartões mostram HP/MP/INI/ATB.
+- Setas/direcional/analógico: mover a mão pelos cards prontos; Enter/Z ou botão sul confirma o aliado e passa aos comandos à direita. O card escolhido permanece destacado. Cartões mostram HP/MP/INI/ATB.
 - A/H/I/F: Atacar/Habilidades/Itens/Fugir. Sem Defender.
-- Alvo único: clique no inimigo/botão. Item: clique no aliado/cartão/botão. Área: clique no campo para fixar centro. Todos: confirme o botão.
-- Esc cancela sem custo e permite retomar Wait. Só estar pronto não pausa Wait: selecionar um aliado pronto pausa.
+- Após escolher ação, navegar pelos alvos em campo e confirmar. A mão indica inimigo/aliado válido; área acompanha o alvo central até impacto, com prévia de atingidos e sem fogo amigo. Mouse não seleciona nem confirma ações. Ver [INTERFACE_BATALHA.md](INTERFACE_BATALHA.md).
+- Esc/X ou botão leste retorna uma etapa sem custo antes da confirmação: mira → lista → comandos → cards. Wait retoma ao voltar aos cards; só estar pronto não pausa. Tab/Start abre opções de Wait/Active e Battle Speed, ajustáveis pelo teclado/controle.
 - Wait/Active podem ser alterados no menu superior.
+- **Battle Speed** ajusta a carga do ATB: 1 mais lento, 8 mais rápido, padrão 4; a escala anterior foi deslocada uma posição acima (3 → 4, 4 → 5 etc.) e o nível 6 conserva os tempos originais. Também disponível no menu da exploração [Tab], mantendo a escolha entre combates. Detalhes em [BATTLE_SPEED.md](BATTLE_SPEED.md). O slider **Simulação (teste)** continua sendo uma ferramenta distinta que escala todo o combate.
 - Trocar o menu de preset só tem efeito ao iniciar luta. Novo teste restaura dados iniciais; Próxima luta mantém recursos após vitória/fuga.
 
 ## Roteiro de aceite
@@ -25,12 +26,12 @@ Consulte o [README](../README.md) para abrir `Executar laboratorio.command` ou e
 | --- | --- | --- |
 | Seleção | Aguarde vários prontos ou use F3 → Aliados prontos; escolha quarto e depois segundo. | Qualquer pronto selecionável; nenhum aliado age automaticamente. |
 | Saturação | Deixe um pronto aguardando enquanto outro age. | ATB para em 100%, sem segunda carga. |
-| Wait | Selecione pronto, abra Habilidades/mira e observe F3. | ATB/rotas param; Esc retoma. |
+| Wait | Selecione pronto, abra Habilidades/mira e observe F3. | ATB/rotas param; cancelar por etapas até os cards retoma. |
 | Active | Repita em Active. | ATB/rotas continuam; inimigos podem agir durante escolha. |
 | Posição lógica | Ataque e compare lógica/Δvisual no F3. | Só Δvisual muda; âncora aliada fixa, deslocamento volta a zero. |
 | Rota | Observe inimigo antes/durante/depois de ação; use 0,25×/pausa/passo. | Segmento/progresso preservados e retomados exatamente; inclusive na Varredura. |
 | Alvo único | Use Impacto em E1. | Só E1 recebe dano; técnica física também gasta MP. |
-| Área | Use Pulso perto de uma rota em Active. | Prévia espacial; atingidos avaliados no impacto. Quem saiu pode não ser atingido. |
+| Área | Use Pulso em um alvo móvel em Active. | Círculo acompanha o centro; atingidos avaliados no impacto. Quem entra/sai do raio muda o resultado; sem fogo amigo. |
 | Todos | Use Onda e confirme. | Todos os inimigos vivos recebem dano, independentemente da distância. |
 | Itens | Reduza HP no F3; teste HP, MP e reanimação. | Estoque reduz sem gastar MP; cura comum não revive; reanimação não concede ação pronta. |
 | IA | Observe decisões/pesos no F3 e reduza HP de um aliado. | Predador aumenta preferência, preservando outros vivos; incapacitados nunca entram. Outros perfis aparecem nos dois presets. |

@@ -1,7 +1,8 @@
 # Game Design Document (GDD) — RPG digital
 
 **Versão:** 0.2 (laboratório e protótipo integrado de exploração)  
-**Data:** 24/10/2026  
+**Data:** 26/10/2026
+
 **Status:** Godot + GDScript confirmados. Laboratório de combate e protótipo integrado de exploração v0.2 autorizados; detalhes em [LABORATORIO.md](LABORATORIO.md) e [EXPLORACAO_V02.md](EXPLORACAO_V02.md). Plataforma comercial, orçamento e arte definitiva continuam abertos. Testes locais em desktop são uma escolha operacional.
 
 ## 1. Visão e pilares
@@ -159,6 +160,8 @@ As coordenadas e nomes acima são **fictícios**, incluídos apenas para ilustra
 
 ### 5.2 Inimigos
 
+**Horizonte confirmado em 26/10/2026 (D48):** manter o modelo atual de rotas predefinidas, com variações de sentido, ritmo e pausas por comportamento e semente, até a pré-alfa, inclusive. Movimentação mais orgânica sem rota fixa é apenas uma possibilidade para depois desse marco; nenhuma alternativa foi escolhida ou autorizada para implementação.
+
 - Alguns imóveis, outros móveis conforme o tipo e o preset. Chefes podem ficar estáticos.
 - Enquanto a barra ATB enche, um inimigo móvel pode seguir continuamente uma **rota programada em loop no preset**.
 - **Não usar deslocamento aleatório de navegação**: não queremos inimigos terrestres circulando desordenadamente entre os aliados.
@@ -213,7 +216,11 @@ Posição lógica/repouso e progresso exato da rota são preservados. A área de
 - Inimigos seguem ATB, mas suas barras ficam **ocultas** para o jogador.
 - INI não define automaticamente probabilidade de fuga.
 
+**Variação confirmada em 26/10/2026 (D49):** os quatro tipos atuais de inimigo (Ágil, Pesado, Voador e Estático) recebem INIs distintas para testar ritmos de ação no laboratório e encontros integrados. Futuramente a INI será definida por inimigo; a categoria de movimento não impõe uma INI universal. Valores experimentais atuais: Ágil 12, Voador 10, Pesado 7 e Estático 5. Aliados mantêm 9/12/7/10. A fórmula e o atendimento de vários inimigos prontos continuam nas escolhas técnicas anteriores, sem regra nova de desempate.
+
 ### 6.1 Modos de tempo
+
+**Battle Speed confirmado em 26/10/2026 (D50, atualizado por D51):** menu do jogo com níveis 1..8, sendo **1 mais lento e 8 mais rápido**, **padrão 4**. A escala anterior foi deslocada uma posição acima (antigo 3 → novo 4, antigo 4 → novo 5 etc.); o nível **6 mantém os tempos originais anteriores ao Battle Speed**. Escala somente a carga de ATB dos dois lados, preservando INI individual, movimento e animações. Alterar o nível não zera barras. Escolha mantida na sessão entre áreas/batalhas; persistência em disco continua fora do escopo. Multiplicadores experimentais, uso e tempos em [BATTLE_SPEED.md](BATTLE_SPEED.md). Esse ajuste é independente de Wait/Active e do slider de simulação da depuração.
 
 - **Wait/Espera:** pausa progressão do combate e movimentação dos inimigos **durante a seleção de comandos** quando um personagem está pronto. Fora da seleção, o combate avança normalmente.
 - **Active/Ativo:** progressão de ATB e movimento dos inimigos continua enquanto o jogador seleciona comandos.
@@ -249,6 +256,66 @@ Posição lógica/repouso e progresso exato da rota são preservados. A área de
 - Ao chegar a 0 HP, personagem fica incapacitado, não age e sua barra deixa de avançar.
 - Ao vencer, continua incapacitado até recuperação por item, magia apropriada ou descanso. Não volta automaticamente com 1 HP.
 
+### 7.4 Atributos físicos e mágicos
+
+**Confirmado em 26/10/2026 (D54):** aliados e inimigos terão quatro atributos distintos, além de HP, MP e INI:
+
+**Siglas de interface confirmadas (D57):**
+
+| Atributo | Sigla | Função |
+| --- | --- | --- |
+| Vida | HP | Vida atual e máxima. |
+| Recurso para habilidades | MP | Recurso atual e máximo para habilidades físicas especiais e magias. |
+| Iniciativa | INI | Preenchimento do ATB conforme as regras anteriores. |
+| Ataque Físico | ATQ F | Poder ofensivo de golpes e técnicas físicas. |
+| Defesa Física | DEF F | Proteção contra dano físico. |
+| Poder Mágico | MAG | Poder ofensivo das ações mágicas. |
+| Defesa Mágica | DEF M | Proteção contra dano mágico. |
+| Chance-base de crítico | CRI | Chance própria do personagem, conforme D56. |
+
+O rótulo aprovado é **CRI**, sem o sufixo B. A abreviação não muda a distinção entre chance-base, modificadores, chance da arma e multiplicador crítico.
+
+**Escalas vigentes (D59, ampliadas por D69 em 27/10/2026):** aliados: **HP, MP, ATQ F, DEF F, MAG e DEF M em 0..999**; monstros: esses seis atributos em **1..9999**, permitindo grandezas maiores para chefes. **INI e CRI continuam em 1..99 para ambos.** A escala numérica não define sozinha fórmulas, progressão, distribuição inicial nem curvas de conversão. A faixa de INI mantém a escala pequena, sem solicitar reescala do ATB atual; conversão/fórmula definitiva continua pendente. Conversão de CRI confirmada posteriormente em D63: 1 ponto = 1% de chance-base, somado à chance da arma e aos bônus de itens/buffs. Alcance dos modificadores e eventual limitação de valores efetivos continuam por definir. Registro de desenho, sem alterar automaticamente as fichas ou a simulação atuais.
+
+**Dano mínimo confirmado em 26/10/2026 (D55):** dano mínimo de 1 para um ataque que atinge um alvo válido.
+
+**Críticos — origem confirmada em 26/10/2026 (D56):** as armas definem chance de crítico e multiplicador. Cada personagem também possui uma chance-base de crítico. **Esclarecimento confirmado:** o valor-base do personagem influencia somente a chance, nunca o multiplicador. A chance pode ser modificada por itens ou buffs de magia. O multiplicador permanece definido pela arma; não há multiplicador global 2× ou 3× escolhido. D63 confirma a conversão de 1 ponto de CRI em 1% e a soma da chance da arma e dos bônus de itens/buffs em pontos percentuais. Valores por arma/modificador, limites finais, acúmulo e duração continuam pendentes.
+
+**Pendente para o jogo definitivo:** valores das fichas, progressão/modificadores, fórmula e arredondamento de dano, distribuição de variação, chances por arma/bônus e multiplicadores críticos, elegibilidade de ações e casos sem arma. Conversão percentual de CRI e composição aditiva aprovadas em D63. A existência dos atributos não aprova automaticamente as fórmulas do guia de referência de Chrono Trigger.
+
+**D60 — laboratório separado autorizado e implementado em 26/10/2026:** o usuário decidiu experimentar com o que temos e ajustar pelos testes. Duelo manual com fichas de atacante/alvo editáveis e ações **1× / 10× / 100× / 1000×** (D58), resumo, histograma, amostras e histórico com condições. Fórmula proporcional experimental: `potência × ofensiva² / (ofensiva + defesa)`, usando ATQ F/DEF F ou MAG/DEF M; ofensiva zero gera base zero. Aplicar variação, crítico da arma, arredondar e mínimo 1. Parâmetros ajustáveis, incluindo chance-base, arma, item/buff e permissão da ação; números não são balanceamento definitivo.
+
+O laboratório restaura HP/MP antes de cada amostra para comparar resultados, com sequência por semente reproduzível. Essa política pertence ao teste; a persistência de recursos do jogo permanece. **O combate integrado e o laboratório de combate continuam com o cálculo anterior**; não houve migração de fichas, equipamentos ou buffs. Fórmulas, controles, dados e limites em [LABORATORIO_DANOS.md](LABORATORIO_DANOS.md).
+
+**D61 — exportação confirmada e implementada em 26/10/2026:** o laboratório de danos exporta a tabela completa da execução selecionada em JSON, junto de resumo, fichas/configurações originais, fórmula e Seed/posição da sequência. Exportar um resultado do histórico mantém suas condições, sem novo cálculo ou avanço dos sorteios. Arquivo local escolhido pelo usuário; formato em [LABORATORIO_DANOS.md](LABORATORIO_DANOS.md).
+
+**D62 — referência de balanceamento inicial (26/10/2026):** o usuário imagina o cenário exportado do laboratório para os inimigos iniciais, levando aproximadamente **3 a 4 ataques básicos normais para derrotar cada inimigo**. É uma referência de resistência por inimigo para testar; críticos podem reduzir a quantidade de golpes. No exemplo analisado: ATQ F 30, DEF F do alvo 35, HP do alvo 40, potência 1× e variação ±10%, produzindo 12–15 de dano normal. Esses atributos/fichas continuam exemplos experimentais, sem fixar todos os inimigos iniciais nos mesmos números ou definir o balanceamento das fases seguintes. A referência conta golpes individuais, não rodadas de toda a equipe; frequência de ações, quantidade de inimigos e dano recebido ainda precisam ser avaliados em batalha.
+
+**D63 — chance de crítico confirmada (26/10/2026):** manter 1 ponto de CRI = 1% de chance-base; somar chance da arma e bônus de itens/buffs em pontos percentuais. Exemplo: CRI 5 + arma 5% = 10%. CRI e bônus não alteram o multiplicador, que permanece da arma (D56). O laboratório já usa conversão padrão 1%; seu ajuste de conversão serve apenas à experimentação. Limites finais, valores por arma/modificador, duração/acúmulo e integração ao combate continuam pendentes.
+
+### 7.5 Contribuição de armas e armaduras
+
+**D64 confirmado em 26/10/2026:** armas somam um bônus ao ATQ F do personagem; armaduras seguem a mesma lógica, somando bônus à DEF F. Preservar a distinção entre atributo próprio e contribuição do equipamento:
+
+```text
+ATQ F efetivo = ATQ F próprio + bônus da arma + outros modificadores
+DEF F efetiva = DEF F própria + bônus da armadura + outros modificadores
+```
+
+Os valores efetivos entram no cálculo de dano. A potência continua pertencendo à ação; melhorar a arma aumenta o dano de ataques básicos e técnicas físicas que usam ATQ F. Melhorar a armadura reduz o dano físico recebido conforme a fórmula, sem subtrair seu bônus diretamente do dano final. Regras de crítico das armas permanecem conforme D56/D63.
+
+**Pendente:** valores, progressão, limites efetivos, slots/troca de equipamento e efeitos adicionais por item. A sequência de espadas Madeira/Bronze/Ferro/Aço/Mithril/Adamantio/Rúnica e os números apresentados foram exemplos de discussão, sem aprovação de catálogo definitivo, chance/multiplicador crítico ou bônus mágicos. Registro de desenho; implementação experimental de seleção/composição no laboratório autorizada posteriormente em D66. Inventário e equipamentos da aventura permanecem pendentes.
+
+**D65 — escopo de equipamentos confirmado:** armas/armaduras somente nos aliados neste recorte. Monstros comuns continuam com atributos diretos, sem slots ou equipamentos simulados. Equipamento em inimigos humanos/humanoides é uma possibilidade futura, explicitamente adiada para evitar complexidade. As progressões discutidas servem como ponto de partida experimental para testes no laboratório, sem fixar balanceamento definitivo. A interface e integração foram autorizadas e implementadas posteriormente em D66, somente no laboratório; ver `LABORATORIO_DANOS.md`.
+
+**D66 — implementação autorizada e concluída no laboratório de danos:** seletores de arma/armadura só para o aliado, bônus editáveis, atributos próprios separados dos totais, equipamentos associados ao aliado mesmo quando ele vira alvo e condições completas no histórico/JSON. Monstros mantêm atributos diretos e nenhum equipamento. As progressões de exemplo são presets experimentais. Sem arma e monstros usam parâmetros próprios provisórios para o multiplicador crítico; regras finais desse caso continuam pendentes. A soma efetiva do aliado é limitada a 999 neste teste e a interface informa quando isso ocorre. Essa limitação não fixa o tratamento definitivo dos modificadores no jogo. Sem inventário, slots adicionais ou alteração da exploração; roteiro/dados em `LABORATORIO_DANOS.md`.
+
+**D67 — catálogo experimental ajustado:** remover equipamentos de Madeira e deslocar os bônus dos demais uma posição para baixo. Armas e armaduras: Bronze +10, Ferro +16, Aço +24, Mithril +34, Adamantio +48 e Rúnica +65, nos respectivos ATQ F/DEF F. Padrão em Espada de Bronze; opções sem equipamento e controles de crítico permanecem. Valores continuam ponto de partida para testes, sem alterar atributos próprios, fórmulas ou a exploração.
+
+**D68 — preferência para o cenário inicial de estudo (27/10/2026):** o usuário deseja manter o monstro com **30 HP**, preservando a referência de aproximadamente 3–4 ataques básicos normais para derrotá-lo. Não confirma a sugestão anterior de subir a vida para 50 nem fixa todos os inimigos em 30 HP. DEF F e demais números devem ser ajustados/testados junto do ataque esperado do aliado; exemplo recomendado, ainda sem aprovação de valor definitivo, em `LABORATORIO_DANOS.md`.
+
+**D69 — escala dos monstros confirmada e implementada no laboratório (27/10/2026):** HP, MP, ATQ F, DEF F, MAG e DEF M de monstros vão de **1 a 9999**. A ampliação permite testar números de chefes, sem criar conteúdo ou perfil de chefe. Aliados mantêm 0..999 nesses atributos, INI/CRI permanecem 1..99 para ambos e equipamentos continuam somente nos aliados. Validação, edição, troca de lados e exportação respeitam a categoria do participante. O limite de atributos não limita o dano resultante; HP/MP após a ação podem chegar a zero normalmente. Fichas e combate da exploração permanecem com o recorte anterior.
+
 ## 8. Tipos de alvo e área (direção funcional)
 
 Habilidades podem afetar:
@@ -257,7 +324,11 @@ Habilidades podem afetar:
 - **Linha/faixa**, se vier a ser adotada;
 - **Todos** os alvos de um lado (ou outra regra de alvo de cada habilidade).
 
-O posicionamento atual dos **inimigos móveis** importa na seleção das áreas de efeito. Interface exata de mira, geometrias e se há movimento durante confirmação no modo Active não estão fechadas. **Habilidades conjuntas/duplas/de grupo ficam para o futuro.**
+O posicionamento atual dos **inimigos móveis** importa na seleção das áreas de efeito. **D53 confirmado:** habilidade em área exige um alvo central válido; o círculo acompanha sua posição até o impacto, quando os demais atingidos são calculados pelo raio. **Não haverá fogo amigo:** ações ofensivas só afetam o lado adversário, tanto para aliados quanto para inimigos. Em Active, movimentos e prévia continuam durante seleção; Wait mantém sua pausa de seleção. Dimensões, demais geometrias e balanceamento continuam abertos. **Habilidades conjuntas/duplas/de grupo ficam para o futuro.**
+
+### 8.1 Interface de comandos e alvos
+
+**D52 confirmado em 26/10/2026:** combate navegável somente por teclado/controle, sem mouse para selecionar executor, ação ou alvo. A mão percorre os cards inferiores dos aliados prontos; confirmar transfere o foco para os comandos à direita. O card escolhido permanece destacado. Depois de escolher Ataque/Habilidade/Item, a mão aponta ao inimigo ou aliado válido em campo. Áreas mostram raio e demais atingidos. Cancelar retorna uma etapa por vez até os cards, sem custo antes da confirmação. Controles, escolhas técnicas e validação em [INTERFACE_BATALHA.md](INTERFACE_BATALHA.md).
 
 ## 9. IA programática — personalidade dos inimigos
 
@@ -316,6 +387,7 @@ quando_inimigo_esta_pronto:
 - Técnicas/magias de dupla e grupo, exigindo dois ou mais aliados prontos.
 - Combate diretamente no cenário da dungeon em vez de tela separada.
 - Possíveis reações avançadas de IA (medo, fuga, fúria, desespero etc.) conforme a batalha evolui.
+- Possível revisão da movimentação inimiga para reduzir a sensação de percurso repetido e dispensar rotas fixas, somente após a pré-alfa. Sem solução escolhida ou compromisso de adoção; até esse marco permanece o modelo atual (D48).
 
 ## 12. Regras para especificar novos sistemas
 

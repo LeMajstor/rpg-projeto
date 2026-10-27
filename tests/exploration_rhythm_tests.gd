@@ -96,7 +96,7 @@ func _test_catalog_and_preservation() -> void:
 			var old: Dictionary = before["enemies"][actor_index]
 			for key in ["id", "profile", "spawn", "actions", "move_to_center_for_fullscreen_skill"]:
 				expect(enemy.get(key) == old.get(key), "Identidade, alvo, início e apresentação preservados")
-			for key in ["max_hp", "max_mp", "ini", "attack", "actions"]:
+			for key in ["max_hp", "max_mp", "attack", "actions"]:
 				expect(data["enemy_types"][enemy["type"]][key] == original["enemy_types"][old["type"]][key], "Atributos/ações do tipo preservados")
 
 func _test_ui_defaults() -> void:
@@ -128,6 +128,8 @@ func _test_encounter(definition: Dictionary) -> void:
 	var initial: Array = []
 	for enemy in shared.enemies:
 		initial.append(enemy["logical_position"])
+		var entry: Dictionary = shared.preset["enemies"][initial.size() - 1]
+		expect(enemy["ini"] == data["enemy_types"][entry["type"]]["ini"], "Encontro carrega INI atual da ficha do tipo")
 		var state: Dictionary = enemy["route_state"]
 		if state["speed"] > 0:
 			expect(state.has("behavior") and not state["behavior"]["phases"].is_empty(), "Todo inimigo móvel possui o ritmo atual")

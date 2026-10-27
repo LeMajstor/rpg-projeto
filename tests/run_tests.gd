@@ -192,15 +192,16 @@ func _test_area_at_impact() -> void:
 	enemy["logical_position"] = Vector2(600, 200)
 	ready(battle)
 	var health = enemy["hp"]
-	expect(battle.submit("circle", "", Vector2(600, 200)), "Área inicialmente contém alvo")
+	expect(not battle.submit("circle", "", Vector2(600, 200)), "Área exige alvo central, não ponto livre")
+	expect(battle.submit("circle", enemy["id"]), "Área aceita inimigo como centro móvel")
 	finish(battle)
-	expect(enemy["hp"] == health, "Área avalia posição no impacto; inimigo saiu da área")
+	expect(enemy["hp"] < health, "Área acompanha o alvo central até o impacto")
 	battle = fresh()
 	ready(battle)
 	health = battle.enemies[0]["hp"]
-	expect(battle.submit("circle", "", Vector2(680, 155)), "Área válida aceita centro")
+	expect(battle.submit("circle", "e1"), "Área válida aceita alvo central")
 	finish(battle)
-	expect(battle.enemies[0]["hp"] < health, "Inimigo dentro do raio recebe dano")
+	expect(battle.enemies[0]["hp"] < health, "Inimigo central recebe dano")
 
 func _test_items() -> void:
 	var battle = fresh()

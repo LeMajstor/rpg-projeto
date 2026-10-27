@@ -3,18 +3,18 @@
   "label": "Mundo aberto / protótipo",
   "notice": "Colinas e florestas bloqueiam passagem. Teste a rampa ao norte da vila para subir ao platô.",
   "world_size": [
-    1920,
-    1280
+	1920,
+	1280
   ],
   "walkable_bounds": [
-    24,
-    24,
-    1872,
-    1232
+	24,
+	24,
+	1872,
+	1232
   ],
   "spawn": [
-    380,
-    1020
+	380,
+	1020
   ],
   "move_speed": 180,
   "leader_half_extent": 12,
@@ -24,415 +24,415 @@
   "floor_color": "405b42",
   "regions": [],
   "terrain": [
-    {
-      "kind": "forest",
-      "rect": [
-        100,
-        180,
-        450,
-        300
-      ],
-      "label": "FLORESTA"
-    },
-    {
-      "kind": "forest",
-      "rect": [
-        1140,
-        690,
-        450,
-        300
-      ],
-      "label": "BOSQUE"
-    },
-    {
-      "kind": "hill",
-      "rect": [
-        100,
-        500,
-        360,
-        140
-      ],
-      "label": "PLATÔ DE TESTE",
-      "elevation": 48,
-      "cliff_thickness": 8,
-      "ramp": {
-        "rect": [
-          340,
-          640,
-          96,
-          120
-        ]
-      }
-    },
-    {
-      "kind": "hill",
-      "rect": [
-        900,
-        570,
-        200,
-        180
-      ],
-      "label": "COLINA · SEM ACESSO",
-      "elevation": 56
-    },
-    {
-      "kind": "sand",
-      "rect": [
-        1640,
-        24,
-        40,
-        1056
-      ]
-    },
-    {
-      "kind": "sand",
-      "rect": [
-        1060,
-        1040,
-        620,
-        40
-      ]
-    },
-    {
-      "kind": "path",
-      "rect": [
-        352,
-        914,
-        56,
-        134
-      ]
-    },
-    {
-      "kind": "path",
-      "rect": [
-        352,
-        992,
-        476,
-        56
-      ]
-    },
-    {
-      "kind": "path",
-      "rect": [
-        772,
-        452,
-        56,
-        596
-      ]
-    },
-    {
-      "kind": "path",
-      "rect": [
-        772,
-        452,
-        796,
-        56
-      ]
-    },
-    {
-      "kind": "path",
-      "rect": [
-        1512,
-        394,
-        56,
-        114
-      ]
-    },
-    {
-      "kind": "path",
-      "rect": [
-        500,
-        760,
-        60,
-        260
-      ]
-    },
-    {
-      "kind": "path",
-      "rect": [
-        340,
-        760,
-        220,
-        40
-      ]
-    }
+	{
+	  "kind": "forest",
+	  "rect": [
+		100,
+		180,
+		450,
+		300
+	  ],
+	  "label": "FLORESTA"
+	},
+	{
+	  "kind": "forest",
+	  "rect": [
+		1140,
+		690,
+		450,
+		300
+	  ],
+	  "label": "BOSQUE"
+	},
+	{
+	  "kind": "hill",
+	  "rect": [
+		100,
+		500,
+		360,
+		140
+	  ],
+	  "label": "PLATÔ DE TESTE",
+	  "elevation": 48,
+	  "cliff_thickness": 8,
+	  "ramp": {
+		"rect": [
+		  340,
+		  640,
+		  96,
+		  120
+		]
+	  }
+	},
+	{
+	  "kind": "hill",
+	  "rect": [
+		900,
+		570,
+		200,
+		180
+	  ],
+	  "label": "COLINA · SEM ACESSO",
+	  "elevation": 56
+	},
+	{
+	  "kind": "sand",
+	  "rect": [
+		1640,
+		24,
+		40,
+		1056
+	  ]
+	},
+	{
+	  "kind": "sand",
+	  "rect": [
+		1060,
+		1040,
+		620,
+		40
+	  ]
+	},
+	{
+	  "kind": "path",
+	  "rect": [
+		352,
+		914,
+		56,
+		134
+	  ]
+	},
+	{
+	  "kind": "path",
+	  "rect": [
+		352,
+		992,
+		476,
+		56
+	  ]
+	},
+	{
+	  "kind": "path",
+	  "rect": [
+		772,
+		452,
+		56,
+		596
+	  ]
+	},
+	{
+	  "kind": "path",
+	  "rect": [
+		772,
+		452,
+		796,
+		56
+	  ]
+	},
+	{
+	  "kind": "path",
+	  "rect": [
+		1512,
+		394,
+		56,
+		114
+	  ]
+	},
+	{
+	  "kind": "path",
+	  "rect": [
+		500,
+		760,
+		60,
+		260
+	  ]
+	},
+	{
+	  "kind": "path",
+	  "rect": [
+		340,
+		760,
+		220,
+		40
+	  ]
+	}
   ],
   "obstacles": [
-    {
-      "kind": "water",
-      "rect": [
-        1680,
-        24,
-        216,
-        1232
-      ],
-      "visual_height": 0,
-      "ground_only": true,
-      "label": "MAR"
-    },
-    {
-      "kind": "water",
-      "rect": [
-        1100,
-        1080,
-        580,
-        176
-      ],
-      "visual_height": 0,
-      "ground_only": true,
-      "label": ""
-    },
-    {
-      "kind": "mountain",
-      "rect": [
-        700,
-        180,
-        200,
-        100
-      ],
-      "visual_height": 110,
-      "label": "MONTANHAS"
-    },
-    {
-      "kind": "mountain",
-      "rect": [
-        920,
-        140,
-        220,
-        100
-      ],
-      "visual_height": 120,
-      "label": ""
-    },
-    {
-      "kind": "mountain",
-      "rect": [
-        1150,
-        190,
-        180,
-        100
-      ],
-      "visual_height": 100,
-      "label": ""
-    },
-    {
-      "kind": "town_marker",
-      "rect": [
-        260,
-        820,
-        240,
-        80
-      ],
-      "visual_height": 40,
-      "label": "VILA DE TESTES"
-    },
-    {
-      "kind": "dungeon_entrance",
-      "rect": [
-        1480,
-        260,
-        120,
-        120
-      ],
-      "visual_height": 48,
-      "label": "MINI DUNGEON"
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        170,
-        244,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        270,
-        224,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        370,
-        284,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        210,
-        384,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        410,
-        384,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        490,
-        214,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        1200,
-        744,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        1310,
-        784,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        1450,
-        724,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        1220,
-        904,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        1420,
-        924,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    },
-    {
-      "kind": "tree",
-      "rect": [
-        1540,
-        854,
-        20,
-        16
-      ],
-      "visual_height": 96,
-      "canopy_width": 96,
-      "label": ""
-    }
+	{
+	  "kind": "water",
+	  "rect": [
+		1680,
+		24,
+		216,
+		1232
+	  ],
+	  "visual_height": 0,
+	  "ground_only": true,
+	  "label": "MAR"
+	},
+	{
+	  "kind": "water",
+	  "rect": [
+		1100,
+		1080,
+		580,
+		176
+	  ],
+	  "visual_height": 0,
+	  "ground_only": true,
+	  "label": ""
+	},
+	{
+	  "kind": "mountain",
+	  "rect": [
+		700,
+		180,
+		200,
+		100
+	  ],
+	  "visual_height": 110,
+	  "label": "MONTANHAS"
+	},
+	{
+	  "kind": "mountain",
+	  "rect": [
+		920,
+		140,
+		220,
+		100
+	  ],
+	  "visual_height": 120,
+	  "label": ""
+	},
+	{
+	  "kind": "mountain",
+	  "rect": [
+		1150,
+		190,
+		180,
+		100
+	  ],
+	  "visual_height": 100,
+	  "label": ""
+	},
+	{
+	  "kind": "town_marker",
+	  "rect": [
+		260,
+		820,
+		240,
+		80
+	  ],
+	  "visual_height": 40,
+	  "label": "VILA DE TESTES"
+	},
+	{
+	  "kind": "dungeon_entrance",
+	  "rect": [
+		1480,
+		260,
+		120,
+		120
+	  ],
+	  "visual_height": 48,
+	  "label": "MINI DUNGEON"
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		170,
+		244,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		270,
+		224,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		370,
+		284,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		210,
+		384,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		410,
+		384,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		490,
+		214,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		1200,
+		744,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		1310,
+		784,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		1450,
+		724,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		1220,
+		904,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		1420,
+		924,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	},
+	{
+	  "kind": "tree",
+	  "rect": [
+		1540,
+		854,
+		20,
+		16
+	  ],
+	  "visual_height": 96,
+	  "canopy_width": 96,
+	  "label": ""
+	}
   ],
   "npcs": [],
   "encounters": [],
   "objects": [],
   "dialogues": {},
   "entries": {
-    "from_town": {
-      "position": [
-        380,
-        1020
-      ],
-      "facing": [
-        0,
-        1
-      ],
-      "arrival_transition_id": "enter_town"
-    },
-    "from_dungeon": {
-      "position": [
-        1540,
-        480
-      ],
-      "facing": [
-        1,
-        0
-      ],
-      "arrival_transition_id": "dungeon_entrance"
-    }
+	"from_town": {
+	  "position": [
+		380,
+		1020
+	  ],
+	  "facing": [
+		0,
+		1
+	  ],
+	  "arrival_transition_id": "enter_town"
+	},
+	"from_dungeon": {
+	  "position": [
+		1540,
+		480
+	  ],
+	  "facing": [
+		1,
+		0
+	  ],
+	  "arrival_transition_id": "dungeon_entrance"
+	}
   },
   "transitions": [
-    {
-      "id": "enter_town",
-      "label": "Entrar na vila",
-      "position": [
-        380,
-        914
-      ],
-      "interaction_distance": 64,
-      "target_area_id": "lab_exterior",
-      "target_entry_id": "from_world"
-    },
-    {
-      "id": "dungeon_entrance",
-      "label": "Entrar na dungeon",
-      "position": [
-        1540,
-        394
-      ],
-      "interaction_distance": 64,
-      "target_area_id": "test_dungeon",
-      "target_entry_id": "from_exterior"
-    }
+	{
+	  "id": "enter_town",
+	  "label": "Entrar na vila",
+	  "position": [
+		380,
+		914
+	  ],
+	  "interaction_distance": 64,
+	  "target_area_id": "lab_exterior",
+	  "target_entry_id": "from_world"
+	},
+	{
+	  "id": "dungeon_entrance",
+	  "label": "Entrar na dungeon",
+	  "position": [
+		1540,
+		394
+	  ],
+	  "interaction_distance": 64,
+	  "target_area_id": "test_dungeon",
+	  "target_entry_id": "from_exterior"
+	}
   ],
   "footer": "Colinas/florestas: sólidas · rampa ao norte da vila: ↑ subir / ↓ descer · F3: colisão e altura · E: entrar",
   "area_type": "overworld",

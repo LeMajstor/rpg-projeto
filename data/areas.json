@@ -3,14 +3,14 @@
   "initial_area_id": "lab_exterior",
   "transition_duration": 0.36,
   "areas": {
-    "lab_exterior": "res://data/exploration.json",
-    "test_house": "res://data/house.json",
-    "test_dungeon": "res://data/dungeon.json",
-    "test_world": "res://data/world.json",
-    "secret_house": "res://data/secret_house.json"
+	"lab_exterior": "res://data/exploration.json",
+	"test_house": "res://data/house.json",
+	"test_dungeon": "res://data/dungeon.json",
+	"test_world": "res://data/world.json",
+	"secret_house": "res://data/secret_house.json"
   },
   "camera_reference_size": [
-    720,
-    480
+	720,
+	480
   ]
 }

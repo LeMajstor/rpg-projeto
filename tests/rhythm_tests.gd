@@ -209,9 +209,9 @@ func _test_target_geometry() -> void:
 	var bob = Route.presentation_offset(enemy["route_state"])
 	expect(bob.length() > 1.0, "Flutuação visual existe")
 	var skill = {"target": "circle", "effect": "damage", "radius": 0.1}
-	var targets = model.targets_for(model.party[0], skill, "", logical)
+	var targets = model.targets_in_radius(model.party[0], skill, logical)
 	expect(targets.size() == 1 and targets[0]["id"] == enemy["id"], "Mira de área usa posição lógica apesar da flutuação")
-	expect(model.targets_for(model.party[0], skill, "", logical + bob).is_empty(), "Offset visual não desloca geometria de efeito")
+	expect(model.targets_in_radius(model.party[0], skill, logical + bob).is_empty(), "Offset visual não desloca geometria de efeito")
 	var saved: Dictionary = enemy["route_state"].duplicate(true)
 	model._begin_action(enemy, model.data["skills"]["all"], "", Vector2.ZERO, "")
 	while not model.action.is_empty():

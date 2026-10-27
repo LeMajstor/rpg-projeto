@@ -26,7 +26,7 @@ func fresh(seed_value: int = 421, index: int = 10):
 	return model
 
 func _run() -> void:
-	for test in [_test_catalog, _test_seeds, _test_behavior_independence, _test_turns_and_pauses,
+	for test in [_test_catalog, _test_enemy_initiative, _test_seeds, _test_behavior_independence, _test_turns_and_pauses,
 		_test_hover_and_atb, _test_facing, _test_interruptions, _test_formations, _test_invalid]:
 		var before = failures
 		test.call()
@@ -46,6 +46,50 @@ func _test_catalog() -> void:
 	expect(model.default_preset_index() == 10 and model.preset["id"] == "lab_seeded", "Padrão usa nova versão")
 	for enemy in model.enemies:
 		expect(enemy["facing_policy"] == "focus" and enemy["route_state"].has("behavior"), "Até estáticos têm a política visual atual")
+
+func _test_enemy_initiative() -> void:
+	# INI varia nas fichas atuais; movimento não determina a carga de ATB.
+	var model = Battle.new(data.duplicate(true))
+	model.start(model.default_preset_index(), false, 421)
+	model.mode = "Active"
+	var heavy: Dictionary = model.enemies[0]
+	var agile: Dictionary = model.enemies[1]
+	var flying: Dictionary = model.enemies[2]
+	var stationary: Dictionary = model.enemies[3]
+	expect(agile["ini"] > flying["ini"] and flying["ini"] > heavy["ini"] and heavy["ini"] > stationary["ini"], "Tipos atuais têm INIs distintas para comparar ritmos de ação")
+	for step in range(240):
+		model.tick(STEP)
+	expect(agile["atb"] > flying["atb"] and flying["atb"] > heavy["atb"] and heavy["atb"] > stationary["atb"], "Carga real segue INI, mesmo com ritmos de movimento diferentes")
+	var guard = 0
+	while model.action.is_empty() and guard < 2400:
+		model.tick(STEP)
+		guard += 1
+	expect(guard < 2400 and model.action.get("actor_id") == agile["id"], "Ágil fica pronto primeiro apesar de não ser o primeiro do preset")
+	expect(flying["atb"] < 1.0 and heavy["atb"] < 1.0 and stationary["atb"] < 1.0, "Primeira carga não sincroniza os quatro tipos")
+	var initial_order: Array = [agile["id"]]
+	var last_actor: String = agile["id"]
+	guard = 0
+	while initial_order.size() < 4 and guard < 2400:
+		model.tick(STEP)
+		var acting: String = model.action.get("actor_id", "")
+		if not acting.is_empty() and acting != last_actor:
+			if acting not in initial_order:
+				initial_order.append(acting)
+			last_actor = acting
+		guard += 1
+	expect(initial_order == [agile["id"], flying["id"], heavy["id"], stationary["id"]], "Primeira ação de cada tipo respeita sua INI no agendamento real")
+	var equal = Battle.new(data.duplicate(true))
+	equal.start(equal.default_preset_index(), false, 421)
+	equal.mode = "Active"
+	for enemy in equal.enemies:
+		enemy["ini_modifier"] = 9.0 - float(enemy["ini"])
+	for step in range(240):
+		equal.tick(STEP)
+	for enemy in equal.enemies:
+		expect(is_equal_approx(enemy["atb"], equal.enemies[0]["atb"]), "Mesma INI efetiva produz mesma carga em qualquer perfil de movimento")
+	var before: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/pre_behavior_combat.json"))
+	for type_id in before["enemy_types"]:
+		expect(data["enemy_types"][type_id] == before["enemy_types"][type_id], "Fichas dos legados conservam INI e demais valores")
 
 func _test_seeds() -> void:
 	var first = fresh()

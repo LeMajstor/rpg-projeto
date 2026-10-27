@@ -1,20 +1,21 @@
 extends Control
 ## Desenho provisório original. A UI nunca escreve nas posições da simulação.
-signal target_clicked(actor_id: String, point: Vector2)
 
+const Hand = preload("res://scripts/ui/battle_hand.gd")
 const Battle = preload("res://scripts/combat/battle_model.gd")
 const Route = preload("res://scripts/combat/route_motion.gd")
 const WORLD = Battle.BATTLEFIELD_SIZE
 var model
 var debug_visible = false
 var aiming_skill: Dictionary = {}
-var hover_point = Vector2(700, 220)
+var aiming_target_id = ""
 var font: Font = ThemeDB.fallback_font
 var result_hint = "Use os controles do laboratório para continuar."
 
 func _ready() -> void:
 	custom_minimum_size = Vector2(640, 360)
-	mouse_filter = Control.MOUSE_FILTER_STOP
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	clip_contents = true
 
 func _scale_factor() -> float:
 	return minf(size.x / WORLD.x, size.y / WORLD.y)
@@ -28,23 +29,19 @@ func screen_point(world: Vector2) -> Vector2:
 func world_point(local: Vector2) -> Vector2:
 	return (local - _origin()) / _scale_factor()
 
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		hover_point = world_point(event.position).clamp(Vector2.ZERO, WORLD)
-		queue_redraw()
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var point = world_point(event.position)
-		if not Rect2(Vector2.ZERO, WORLD).has_point(point):
-			return
-		var found = ""
-		var best = 40.0
-		if model != null:
-			for actor in model.actors():
-				var distance: float = point.distance_to(actor_visual_position(actor))
-				if distance < best:
-					found = actor["id"]
-					best = distance
-		target_clicked.emit(found, point)
+func preview() -> Dictionary:
+	var source = model.actor_by_id(model.selected_id)
+	var skill = aiming_skill
+	var target_id = aiming_target_id
+	if not model.action.is_empty() and model.action["skill"].get("target", "") == "circle" and not model.action["applied"]:
+		source = model.actor_by_id(model.action["actor_id"])
+		skill = model.action["skill"]
+		target_id = model.action["target_id"]
+	if source.is_empty() or skill.is_empty():
+		return {}
+	var target = model.actor_by_id(target_id)
+	return {"skill": skill, "target": target,
+		"targets": model.targets_for(source, skill, target_id)}
 
 func _draw() -> void:
 	if model == null or model.preset.is_empty():
@@ -71,15 +68,19 @@ func _draw() -> void:
 				draw_line(a, b, color, 1.5)
 			for point in enemy["route_state"]["control_points"]:
 				draw_circle(screen_point(point), 3, color.lightened(0.2))
-	if aiming_skill.get("target", "") == "circle" and not model.selected_id.is_empty():
-		var radius: float = aiming_skill["radius"] * scale
-		draw_circle(screen_point(hover_point), radius, Color(0.5, 0.8, 1, 0.12))
-		draw_arc(screen_point(hover_point), radius, 0, TAU, 80, Color("8bd2ff"), 2.0)
-		var actor = model.actor_by_id(model.selected_id)
-		var count = model.targets_for(actor, aiming_skill, "", hover_point).size()
-		_label(hover_point + Vector2(-65, -aiming_skill["radius"] - 12), "%d alvo(s) agora" % count, Color("c6eaff"), 15)
+	var aim = preview()
+	if not aim.is_empty() and aim["skill"].get("target", "") == "circle" and not aim["target"].is_empty() and not aim["targets"].is_empty():
+		var center: Vector2 = aim["target"]["logical_position"]
+		var radius: float = aim["skill"]["radius"] * scale
+		draw_circle(screen_point(center), radius, Color(0.5, 0.8, 1, 0.12))
+		draw_arc(screen_point(center), radius, 0, TAU, 80, Color("8bd2ff"), 2.0)
+		_label(center + Vector2(-55, -aim["skill"]["radius"] - 12), "%d alvo(s) agora" % aim["targets"].size(), Color("c6eaff"), 15)
 	for actor in model.actors():
 		_draw_actor(actor, scale)
+		if not aim.is_empty() and aim["targets"].has(actor):
+			draw_arc(screen_point(actor_visual_position(actor)), 30 * scale, 0, TAU, 48, Color("9de9ff"), 2.0)
+	if not aim.is_empty() and not aim["target"].is_empty() and not aim["targets"].is_empty():
+		Hand.paint(self, screen_point(actor_visual_position(aim["target"]) + Vector2(-65, 0)), scale)
 	if not model.action.is_empty():
 		_draw_impact(scale)
 		var actor = model.actor_by_id(model.action["actor_id"])

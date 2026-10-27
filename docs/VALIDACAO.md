@@ -1,5 +1,177 @@
 # Validação da entrega
 
+## Escala 1..9999 dos monstros — D69
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. Cinco suítes headless aprovadas: `damage_enemy_ranges_tests` (**1.160 verificações**), `damage_lab_tests` (3.177), `damage_equipment_tests` (66), `damage_export_tests` (2.280) e `damage_lab_ui_smoke` (**97**). UI gráfica: **108 verificações**, incluindo onze capturas, zero falhas nas execuções finais.
+
+Cobertura nova: seis atributos do monstro em 1/1000/9999 como atacante e alvo; recusa de zero, negativos, 10000, frações, NaN/INF sem avançar RNG/histórico; INI/CRI mantidos em 1..99; aliado mantido em 0..999. Testes exercitam defesa 9999 com dano mínimo, ataque/magia 9999 com potência/variação/crítico extremos, dano acima do teto de atributos, HP/MP e restauração das condições em lote, JSON com valores íntegros e metadados de faixas por categoria.
+
+Na interface: digitação de quatro dígitos, teto 9999, mudança das faixas ao inverter lados sem truncar o monstro ou contaminar atributos do aliado, preservação do limite 999 do aliado, execução e exportação com números grandes. Captura `enemy-large-values.png` inspecionada: fichas, recursos, dano e condições legíveis. Logs/capturas em `artifacts/damage-lab-enemy-ranges/`. Sem erros de script nas execuções finais; avisos ambientais já conhecidos do macOS. Controle físico e outras plataformas não testados. Nenhum perfil de chefe, ficha da exploração ou mudança da fórmula foi criado.
+
+Para repetir: `godot --headless --log-file /private/tmp/rpg-enemy-ranges.log --path . --script res://tests/damage_enemy_ranges_tests.gd`; demais suítes com o mesmo comando e seu arquivo. Capturas: `godot --log-file /private/tmp/rpg-enemy-ranges-graphics.log --path . --audio-driver Dummy --resolution 1440x960 --script res://tests/damage_lab_ui_smoke.gd -- --visual-captures=res://artifacts/damage-lab-enemy-ranges`.
+
+## Remoção de Madeira e deslocamento dos bônus — D67
+
+Armas/armaduras de Madeira removidas; seis materiais restantes recebem bônus 10/16/24/34/48/65, de Bronze a Rúnica. Padrão em Espada de Bronze (+10), sem alterar atributos próprios, chance/multiplicador crítico ou fórmulas. Fixtures de comparação usam agora Bronze (+10) e Ferro (+16); soma máxima do preset Rúnico é 999 + 65 = 1064, limitada a 999 como antes.
+
+Quatro suítes headless executadas e aprovadas em Godot 4.7.2/macOS: `damage_lab_tests` (3.177 verificações), `damage_equipment_tests` (66), `damage_export_tests` (2.280) e `damage_lab_ui_smoke` (75), zero falhas. Os testes de equipamentos percorrem os seis materiais nos dois lados e validam histórico/JSON com os novos IDs e bônus. Logs em `artifacts/damage-lab-bronze/`. Sem nova alteração de layout ou teste gráfico nesta mudança de catálogo; aviso ambiental de certificados/consulta de novo arquivo no diálogo macOS permanece sem impedir os testes.
+
+## Simplificação do seletor de armas e rótulos
+
+Removidas do catálogo as duas armas de controle 2×/3× a pedido do usuário. O seletor agora tem Sem arma e as sete espadas; padrão em Madeira (+10 ATQ F), com atributos próprios preservados. Multiplicador permanece editável no controle existente. Rótulos ATQ F/DEF F sem sufixo pr.; composição próprio+bônus=total preservada.
+
+Executadas e aprovadas as quatro suítes de danos: cálculo (3.177 verificações), equipamentos (74), exportação (2.280) e UI headless (75). UI gráfica: 85 verificações, zero falhas. As referências de teste passaram a considerar o bônus da Madeira no caso padrão; a referência de fórmula continua explicitamente em ofensiva efetiva 100. Conferência do catálogo: oito opções, sem IDs das duas armas removidas. Captura `equipment-totals.png` inspecionada, com rótulos e controle de multiplicador. Logs/capturas em `artifacts/damage-lab-equipment-cleanup/`. Sem alteração de fórmula ou da exploração.
+
+## Equipamentos somente nos aliados do laboratório — D66
+
+Godot 4.7.2 Standard/macOS, execução local. **41 suítes headless aprovadas**, mais UI com renderização real em Compatibility na janela 1440×960.
+
+| Suíte | Resultado |
+| --- | --- |
+| `tests/damage_equipment_tests.gd` | 74 verificações, zero falhas. |
+| `tests/damage_lab_tests.gd` | 3.177 verificações, zero falhas. |
+| `tests/damage_export_tests.gd` | 2.280 verificações, zero falhas. |
+| `tests/damage_lab_ui_smoke.gd` | 75 verificações headless, zero falhas. |
+| Mesma suíte gráfica | 85 verificações, incluindo dez capturas, zero falhas. |
+| Demais 37 suítes | Todas aprovadas, incluindo combate e exploração. |
+
+Cobertura nova: sete materiais em ataque/defesa, próprio+bônus=efetivo, edição dos bônus e imutabilidade do catálogo, aumento de dano e redução de dano recebido conforme a fórmula, equipamento acompanhando o aliado ao inverter lados, equipamento local por aliado, opções sem item, ausência de bônus/arma no monstro, origem de chance/multiplicador crítico, parâmetros sem arma, independência de MAG/DEF M e potência, RNG sem avanço durante configuração, soma bruta/limite 999, validação de próprios/bônus inválidos e restauração. Histórico/JSON v2 preservam condições antigas, dono, itens, atributos próprios e totais, inclusive com o aliado como alvo. Testes anteriores do cálculo/exportação continuam aprovados.
+
+A UI foi exercitada por eventos de teclado, clique e controle simulado: seletores, digitação de bônus, campos bloqueados sem equipamento, troca de lados por controle, prévia, lotes e exportação. Capturas `equipment-totals.png`, `equipment-selectors.png` e `equipment-monster-attack.png` inspecionadas em `artifacts/damage-lab-equipment/`, além das sete capturas anteriores atualizadas. Painel de edição rola por foco; condições mostram composição e origem real do crítico. Valores dos presets, limite efetivo e multiplicador próprio 2× são experimentais; nenhuma implementação de inventário ou mudança na exploração.
+
+Logs na mesma pasta: `regression.log`, `equipment.log`, `core.log`, `export.log`, `ui.log` e `graphics.log`. As execuções finais terminaram com código 0, sem erros de script. Avisos ambientais de certificados no headless e consulta de arquivo novo do diálogo macOS não impediram gravação/leitura dos JSONs. Controle físico, exportação do executável e outras plataformas não foram testados.
+
+Para repetir: `godot --headless --log-file /private/tmp/rpg-equipment.log --path . --script res://tests/damage_equipment_tests.gd`, com os mesmos argumentos para as outras suítes. Para as capturas: `godot --log-file /private/tmp/rpg-equipment-graphics.log --path . --audio-driver Dummy --resolution 1440x960 --script res://tests/damage_lab_ui_smoke.gd -- --visual-captures=res://artifacts/damage-lab-equipment`. Dados, limites e roteiro em [LABORATORIO_DANOS.md](LABORATORIO_DANOS.md).
+
+## Exportação JSON das amostras — D61
+
+Executada em **26/10/2026**, Godot 4.7.2/macOS: **três suítes headless aprovadas**, mais renderização real da UI.
+
+| Suíte | Resultado |
+| --- | --- |
+| `tests/damage_export_tests.gd` | 2.280 verificações, zero falhas. |
+| `tests/damage_lab_tests.gd` | 3.177 verificações, zero falhas. |
+| `tests/damage_lab_ui_smoke.gd` | 61 verificações headless, zero falhas. |
+| Mesma suíte gráfica | 68 verificações, incluindo sete capturas, zero falhas. |
+
+Testes gravam e leem JSON de lotes 1/10/100/1000, conferem esquema/fórmula, todas as linhas, totais, índices da sequência, Seed real, Unicode, precisão dos sorteios/dano bruto e estados de 64 bits em texto. Verificam cópias sem mutação do histórico/RNG, condições históricas após edição, resultado vazio, destino vazio e erro de abertura. Integração cobre botão indisponível antes de resultado/durante animação, F10 e controle, atalhos bloqueados ao fundo, cancelamento pelo botão, escolha de pasta/nome e gravação pelo próprio botão de salvar do diálogo, sucesso/caminho e erro de gravação.
+
+Capturas inspecionadas em `artifacts/damage-lab-export/`, incluindo `damage-batch-1000.png` com o botão e `damage-export-dialog.png`. Logs `export.log`, `core.log`, `ui.log` e `graphics.log` na mesma pasta. Sem erros de script; aviso ambiental conhecido de certificados no headless. Controle físico/exportação do executável para outras plataformas não testados. Fórmulas, dados e combate da exploração preservados.
+
+Para repetir: `godot --headless --log-file /private/tmp/rpg-export.log --path . --script res://tests/damage_export_tests.gd`, com os mesmos argumentos para as outras duas suítes. Capturas: `godot --log-file /private/tmp/rpg-export-graphics.log --path . --audio-driver Dummy --resolution 1440x960 --script res://tests/damage_lab_ui_smoke.gd -- --visual-captures=res://artifacts/damage-lab-export`. Uso e esquema em [LABORATORIO_DANOS.md](LABORATORIO_DANOS.md).
+
+## Digitação direta no laboratório de danos
+
+Refinamento solicitado e validado em **26/10/2026**, Godot 4.7.2/macOS. `tests/damage_lab_ui_smoke.gd`: **50 verificações headless** e **56 com renderização real**, zero falhas. Testes novos enviam cliques e caracteres por eventos da engine: clicar no número e substituir o texto; começar a digitar com o SpinBox selecionado sem Enter prévio; confirmar por Enter/Tab ou clique em outro campo; decimal com vírgula; limitar 10000 digitado a 999; executar lote com edição aberta e conferir o valor usado. As verificações anteriores de teclado/controle, fichas, animação, histórico e lotes continuam aprovadas.
+
+O LineEdit interno agora aceita foco por clique, com seleção do texto e confirmação ao perder foco; o SpinBox mantém a navegação por teclado/controle. Capturas em `artifacts/damage-lab-manual/`, logs `ui.log` e `graphics.log`. A simulação interativa de redução por defesa também recebeu entrada numérica manual para ATQ F, DEF F e potência; execução do JavaScript validou atualização do cálculo, valores vazios, limites e restauração do estado. Fórmulas e dados de combate preservados. Controle físico não foi testado.
+
+## Laboratório isolado de danos — D60
+
+Executada em **26/10/2026**, Godot 4.7.2 Standard no macOS/Apple M3 Pro. **39 suítes headless aprovadas**, incluindo as 37 regressões anteriores, mais verificação gráfica em Compatibility na janela 1440×960.
+
+| Suíte / conjunto | Resultado |
+| --- | --- |
+| `tests/damage_lab_tests.gd` | 5 grupos, 3.177 verificações, zero falhas. |
+| `tests/damage_lab_ui_smoke.gd` | 44 verificações headless, zero falhas. |
+| Mesma suíte com renderização real | 50 verificações, incluindo seis capturas, zero falhas. |
+| Demais 37 suítes headless | Todas aprovadas; contagens em `artifacts/damage-lab/regression.log`. |
+| Lançador `Executar laboratorio de danos.command` | Sintaxe zsh e abertura headless da cena aprovadas, código 0. |
+
+Cobertura do cálculo: proporcional física/mágica e independência entre seus atributos; defesa zero, ofensiva zero e 0/0; extremos, monotonicidade, arredondamento e mínimo 1; dano calculado versus HP removido; chance-base, arma, conversão e modificadores; fronteiras 0%/100%, multiplicador somente da arma, permissão da ação, modos de crítico e variação. Lotes 1/10/100/1000, médias/totais/histograma, recursos restaurados por amostra, reprodução pela semente, continuação exata e fluxos de RNG independentes. Validações de faixas/NaN/INF, MP insuficiente, alvo incapacitado, lados opostos, imutabilidade de entradas/histórico, retenção e isolamento da instância/dados do combate.
+
+Cobertura da UI: teclado, eventos simulados de direcional/analógico/botões, edição exata, seleção de fichas/arma/ação, troca de lado válida, animação e bloqueio durante o golpe, lotes, tabela de 1000 amostras e navegação das linhas, reprodução, histórico com condições anteriores, erro sem consumo de RNG, restauração do caso e rolagem por foco até os parâmetros inferiores. O viewport do teste headless é explicitamente 1440×960 para conferir a mesma janela da execução gráfica; a primeira checagem de limites levou a ajustar a inicialização do teste. Não restaram erros de script.
+
+Capturas em `artifacts/damage-lab/`: `damage-single-impact.png`, `damage-batch-1000.png`, `damage-samples.png`, `damage-conditions.png`, `damage-magic-critical.png` e `damage-editor-lower.png`. Inspeção confirmou leitura do impacto, barras, resumo, amostras/condições e campos inferiores; os rótulos de recursos ficam na origem durante a aproximação para evitar sobreposição. Logs finais `regression.log`, `ui-final.log`, `graphics.log` e `launcher.log`. Após o ajuste final da posição da chance de crítico e aviso de prévia, a suíte de UI foi repetida headless/gráfica e passou com as mesmas contagens.
+
+Para repetir, na raiz do projeto (substitua `godot` pelo executável instalado se necessário):
+
+```sh
+godot --headless --log-file /private/tmp/rpg-damage-unit.log --path . --script res://tests/damage_lab_tests.gd
+godot --headless --log-file /private/tmp/rpg-damage-ui.log --path . --script res://tests/damage_lab_ui_smoke.gd
+godot --log-file /private/tmp/rpg-damage-graphics.log --path . --audio-driver Dummy --resolution 1440x960 --script res://tests/damage_lab_ui_smoke.gd -- --visual-captures=res://artifacts/damage-lab
+```
+
+Os avisos headless de certificados do macOS são ambientais; execuções finais terminaram com código 0. Controle físico, exportação e outras plataformas não foram testados. Fórmula, valores e limites são experimentais; não houve migração do dano da exploração, sistema de equipamento/buff real ou save. Roteiro e escolhas em [LABORATORIO_DANOS.md](LABORATORIO_DANOS.md).
+
+## Interface por teclado/controle e área centrada — D52/D53
+
+Executada em **26/10/2026**, Godot 4.7.2 Standard no macOS/Apple M3 Pro. **37 suítes headless aprovadas**, mais inspeção gráfica em Compatibility.
+
+| Suíte / conjunto | Resultado |
+| --- | --- |
+| `tests/centered_area_tests.gd` | 74 verificações, zero falhas. |
+| `tests/battle_navigation_ui_smoke.gd` | 48 verificações, zero falhas. |
+| Mesma suíte com renderização real | 53 verificações, incluindo cinco capturas, zero falhas. |
+| `tests/run_tests.gd` | 14 grupos, 162.488 verificações, zero falhas. |
+| `tests/fullscreen_tests.gd` | 10 grupos, 620 verificações, zero falhas. |
+| `tests/ui_smoke.gd` | 32 verificações, zero falhas. |
+| Demais 32 suítes headless | Todas aprovadas. |
+
+Cobertura nova: eventos de teclado/joypad por `Input.parse_input_event`, mão em cards prontos e comandos, card escolhido persistente, mão no alvo em campo, confirmações/cancelamento por etapa, clique sem efeito, repetição de confirmação bloqueada, direcional/analógico com dead zone e repetição, opções de modo/Battle Speed sem mouse, cura e reanimação, falta de MP, alvo/executor invalidado, foco de campos de texto e Game Over integrado reiniciado por controle. Área exige centro válido, acompanha alvo móvel e avalia entrada/saída do raio no impacto; ausência de fogo amigo verificada dos dois lados, sem alterar âncoras aliadas, custos ou retorno.
+
+Regressões cobrem ritmos/snapshots, melee/tela inteira, seis encontros, HP/MP, fuga, exploração, relógio e eventos. Uma expectativa histórica de tela inteira ainda passava coordenada livre a uma habilidade circular; foi atualizada para fornecer o ID central e conservar a verificação de independência entre apresentação e efeito. A primeira execução dessa suíte registrou a expectativa antiga como falha; a reexecução com o caso atualizado passou integralmente. Os demais testes geométricos agora usam consulta de raio explícita, sem reabrir mira livre como comando.
+
+Logs em `artifacts/battle-navigation/regression.log`, com reexecuções anexadas, e `graphics.log`. Capturas inspecionadas: `navigation-cards.png`, `navigation-commands.png`, `navigation-area-target.png` e `navigation-item-target.png`; a captura de opções também foi gerada. O círculo foi recortado ao campo para não cobrir comandos. Mão vetorial original, sem assets de jogos de referência. Arquitetura e roteiro em [INTERFACE_BATALHA.md](INTERFACE_BATALHA.md).
+
+Os avisos headless de certificados do macOS são ambientais; execuções finais terminaram com código 0. **Controle físico não foi testado:** a suíte de UI utiliza eventos simulados da engine. Não houve teste de exportação/outras plataformas nem mudança nos controles da exploração. Os registros anteriores abaixo são históricos, incluindo o fluxo antigo de clique/mira livre.
+
+## Correção do padrão para 4, mantendo a reescala D51
+
+Executada em **26/10/2026**, Godot 4.7.2 Standard no macOS, headless. `tests/battle_speed_tests.gd`: **111 verificações, zero falhas**. `tests/battle_speed_ui_smoke.gd`: **16 verificações, zero falhas**. Ambas terminaram com código 0 e apenas o aviso ambiental conhecido de certificados.
+
+Verificados padrão 4 no modelo, menu/laboratório e reinício da exploração; escolha mantida entre batalhas, escala deslocada intacta e referência original ainda no nível 6. Os multiplicadores não mudaram: nível 4 usa 0,6× de carga. Tempos atualizados em [BATTLE_SPEED.md](BATTLE_SPEED.md). As escolhas iniciais de padrão 3 registradas abaixo são históricas e foram substituídas por esta correção.
+
+## Reescala de Battle Speed e padrão 3 — D51
+
+Executada em **26/10/2026**, Godot 4.7.2 Standard no macOS, modo headless. Cinco suítes aprovadas:
+
+| Suíte | Resultado |
+| --- | --- |
+| `tests/battle_speed_tests.gd` | 111 verificações, zero falhas. |
+| `tests/battle_speed_ui_smoke.gd` | 16 verificações, zero falhas. |
+| `tests/run_tests.gd` | 14 grupos, 239.479 verificações, zero falhas. |
+| `tests/seeded_behavior_tests.gd` | 14.860 verificações, zero falhas. |
+| `tests/exploration_rhythm_tests.gd` | 2.124 verificações, zero falhas. |
+
+Cobertura adicional explícita: cada antigo nível 1..7 conserva seu multiplicador no novo nível 2..8; padrão 3 no modelo, menu, laboratório e reinício da exploração; referência original no nível 6. Mantidas as verificações de ATB, Wait, carga parcial, rotas, ações e integração. O novo nível 1 usa 0,125× experimental, e o antigo 8 sai da faixa. Tempos atuais em [BATTLE_SPEED.md](BATTLE_SPEED.md).
+
+Logs em `artifacts/battle-speed-rescale/`. As cinco execuções terminaram com código 0; aviso ambiental conhecido de certificados do macOS. Sem nova inspeção gráfica: a alteração é de dados/padrão e os controles existentes foram exercitados pela suíte de UI. A escala inicial D50 e os resultados abaixo são históricos; a referência original agora está em Battle Speed 6.
+
+## Battle Speed 1..8 — D50
+
+Executada em **26/10/2026**, Godot 4.7.2 Standard no macOS/Apple M3 Pro. **35 suítes headless aprovadas**, mais inspeção gráfica com Compatibility.
+
+| Suíte / conjunto | Resultado |
+| --- | --- |
+| `tests/battle_speed_tests.gd` | 104 verificações, zero falhas. |
+| `tests/battle_speed_ui_smoke.gd` | 16 verificações, zero falhas. |
+| Mesma suíte com renderização real | 18 verificações, incluindo duas capturas, zero falhas. |
+| `tests/seeded_behavior_tests.gd` | 14.860 verificações, zero falhas. |
+| `tests/run_tests.gd` | 14 grupos, 126.039 verificações, zero falhas. |
+| Demais 31 suítes headless | Todas aprovadas; contagens em `artifacts/battle-speed/regression.log`. |
+
+Cobertura nova: 1 lento→8 rápido, padrão 4, nível 5 reproduzindo a fórmula anterior nos dois lados, carga parcial/prontidão preservadas ao mudar, Wait e limites, rotas/RNG independentes da escala, melee/tela inteira com duração/efeito/custo/retorno preservados, controles de menu/laboratório sincronizados com o modelo compartilhado, manutenção entre áreas/combates/retorno/reencontro, relógio do mundo independente e reinício global no padrão 4. Os multiplicadores intermediários são experimentais em dados; o padrão 4 usa carga 0,8×, portanto demora 25% mais que o nível 5. Não houve alteração da INI ou do atendimento de múltiplos prontos.
+
+Capturas `battle-speed-lab.png` e `battle-speed-menu.png` inspecionadas: controles legíveis e menu dentro do mapa. A primeira tentativa gráfica no sandbox encerrou antes da inicialização; a execução com acesso à janela do macOS terminou com código 0. As execuções headless emitiram o aviso ambiental conhecido sobre consulta de certificados do macOS, sem falhas de testes. Sem testes de exportação ou persistência em disco.
+
+Comandos e roteiro manual em [BATTLE_SPEED.md](BATTLE_SPEED.md). Os resultados D49 e anteriores abaixo permanecem históricos; seus tempos de referência correspondiam ao nível 5 na escala inicial e agora correspondem a Battle Speed 6 (D51).
+
+## Variação de INI entre tipos atuais — D49
+
+Executada em **26/10/2026**, Godot 4.7.2 Standard no macOS, modo headless.
+
+| Suíte | Resultado |
+| --- | --- |
+| `tests/seeded_behavior_tests.gd` | 14.860 verificações, zero falhas. |
+| `tests/exploration_rhythm_tests.gd` | 2.124 verificações, zero falhas. |
+| `tests/run_tests.gd` | 14 grupos, 104.375 verificações, zero falhas. |
+| `tests/seeded_behavior_ui_smoke.gd` | 34 verificações, zero falhas. |
+
+Novos testes exercitam carga real e ordem da primeira ação de cada tipo no laboratório (Ágil, Voador, Pesado, Estático), carga igual quando INI efetiva é igual apesar de movimentos distintos e preservação integral das fichas legadas. Integração verifica que os seis encontros carregam a INI da ficha atual; comparações dos demais atributos e regras permanecem. INIs experimentais: 12/10/7/5 nessa ordem. Aliados mantêm 9/12/7/10; fórmula de ATB, atendimento de prontos, HP/MP, habilidades e movimentos não foram alterados.
+
+Para repetir: `godot --headless --path . --script res://tests/seeded_behavior_tests.gd` e os mesmos argumentos para as outras três suítes. Roteiro manual em [COMBATE_SEMENTE.md](COMBATE_SEMENTE.md). Sem nova inspeção gráfica nesta alteração de dados. A engine emitiu aviso do ambiente na consulta de certificados do macOS; as quatro execuções terminaram com código 0. A primeira também avisou que não podia gravar o log padrão; as demais usaram logs em `/private/tmp`.
+
 ## Comportamento por semente, atenção visual e formações variadas
 
 Executada em **25/10/2026**, Godot 4.7.2 Standard no macOS/Apple M3 Pro; Compatibility nas inspeções gráficas.

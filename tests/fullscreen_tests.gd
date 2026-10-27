@@ -111,7 +111,7 @@ func _test_ally_center_and_effect() -> void:
 	var enemy = model.enemies[0]
 	var location: Vector2 = actor["logical_position"]
 	var query = {"target":"circle", "radius":1.0, "effect":"damage"}
-	expect(model.targets_for(enemy, query, "", location).has(actor), "Outras consultas de área continuam usando a âncora lógica")
+	expect(model.targets_in_radius(enemy, query, location).has(actor), "Outras consultas de área continuam usando a âncora lógica")
 	finish(model)
 	expect(actor["logical_position"] == origin and actor["visual_offset"] == Vector2.ZERO, "Aliado retorna ao repouso exato")
 	expect(actor["mp"] == actor["max_mp"] - 10 and actor["atb"] == 0, "Custo/ATB permanecem iguais")
@@ -201,7 +201,7 @@ func _test_presentation_independent_of_targets() -> void:
 	test_skill["radius"] = 1.0
 	test_skill["mp_cost"] = 0
 	var center: Vector2 = model.enemies[0]["logical_position"]
-	model._begin_action(actor, test_skill, "", center, "")
+	model._begin_action(actor, test_skill, "e1", center, "")
 	if not impact(model):
 		return
 	expect(actor["logical_position"] + actor["visual_offset"] == model.visual_center(), "Centro de apresentação independe do centro da área")

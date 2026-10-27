@@ -51,7 +51,8 @@ func _run() -> void:
 	lab.model.debug_ready_allies()
 	lab.cards[0]["button"].pressed.emit()
 	lab.command_buttons[0].pressed.emit()
-	lab.board.target_clicked.emit("e2", lab.model.enemies[1]["logical_position"])
+	lab._navigate(Vector2.RIGHT)
+	lab._confirm_navigation()
 	expect(not lab.model.action.is_empty(), "Comando normal inicia ataque melee")
 	lab.pause_button.button_pressed = false
 	var guard = 0

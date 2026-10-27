@@ -3,18 +3,18 @@
   "label": "Mini dungeon / combate e objetos",
   "notice": "Mini dungeon provisória: seis encontros existentes, sem história ou progressão.",
   "world_size": [
-    1120,
-    760
+	1120,
+	760
   ],
   "walkable_bounds": [
-    24,
-    24,
-    1072,
-    712
+	24,
+	24,
+	1072,
+	712
   ],
   "spawn": [
-    160,
-    600
+	160,
+	600
   ],
   "move_speed": 180,
   "leader_half_extent": 12,
@@ -23,431 +23,431 @@
   "background_color": "121b23",
   "floor_color": "2d3942",
   "regions": [
-    {
-      "rect": [
-        82,
-        100,
-        320,
-        265
-      ],
-      "label": "SALA A / encontro M1",
-      "color": "35454e"
-    },
-    {
-      "rect": [
-        470,
-        100,
-        260,
-        130
-      ],
-      "label": "SALA B / M2 · sem fuga",
-      "color": "42444d"
-    },
-    {
-      "rect": [
-        790,
-        100,
-        230,
-        180
-      ],
-      "label": "SALA C / M4",
-      "color": "39464a"
-    },
-    {
-      "rect": [
-        470,
-        320,
-        260,
-        190
-      ],
-      "label": "PATRULHA / M3",
-      "color": "34464c"
-    },
-    {
-      "rect": [
-        470,
-        570,
-        260,
-        120
-      ],
-      "label": "ENCONTRO / M6",
-      "color": "42444d"
-    },
-    {
-      "rect": [
-        790,
-        550,
-        230,
-        140
-      ],
-      "label": "OBJETOS / baú",
-      "color": "46443a"
-    }
+	{
+	  "rect": [
+		82,
+		100,
+		320,
+		265
+	  ],
+	  "label": "SALA A / encontro M1",
+	  "color": "35454e"
+	},
+	{
+	  "rect": [
+		470,
+		100,
+		260,
+		130
+	  ],
+	  "label": "SALA B / M2 · sem fuga",
+	  "color": "42444d"
+	},
+	{
+	  "rect": [
+		790,
+		100,
+		230,
+		180
+	  ],
+	  "label": "SALA C / M4",
+	  "color": "39464a"
+	},
+	{
+	  "rect": [
+		470,
+		320,
+		260,
+		190
+	  ],
+	  "label": "PATRULHA / M3",
+	  "color": "34464c"
+	},
+	{
+	  "rect": [
+		470,
+		570,
+		260,
+		120
+	  ],
+	  "label": "ENCONTRO / M6",
+	  "color": "42444d"
+	},
+	{
+	  "rect": [
+		790,
+		550,
+		230,
+		140
+	  ],
+	  "label": "OBJETOS / baú",
+	  "color": "46443a"
+	}
   ],
   "obstacles": [
-    {
-      "rect": [
-        48,
-        64,
-        1024,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        48,
-        64,
-        18,
-        648
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        1054,
-        64,
-        18,
-        648
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        48,
-        712,
-        80,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        192,
-        712,
-        880,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        430,
-        82,
-        18,
-        218
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        430,
-        378,
-        18,
-        334
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        760,
-        82,
-        18,
-        348
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        760,
-        510,
-        18,
-        202
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        66,
-        400,
-        210,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        350,
-        400,
-        80,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        448,
-        260,
-        220,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        778,
-        350,
-        122,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    },
-    {
-      "rect": [
-        980,
-        350,
-        74,
-        18
-      ],
-      "kind": "wall",
-      "label": "",
-      "visual_height": 32
-    }
+	{
+	  "rect": [
+		48,
+		64,
+		1024,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		48,
+		64,
+		18,
+		648
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		1054,
+		64,
+		18,
+		648
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		48,
+		712,
+		80,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		192,
+		712,
+		880,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		430,
+		82,
+		18,
+		218
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		430,
+		378,
+		18,
+		334
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		760,
+		82,
+		18,
+		348
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		760,
+		510,
+		18,
+		202
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		66,
+		400,
+		210,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		350,
+		400,
+		80,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		448,
+		260,
+		220,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		778,
+		350,
+		122,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	},
+	{
+	  "rect": [
+		980,
+		350,
+		74,
+		18
+	  ],
+	  "kind": "wall",
+	  "label": "",
+	  "visual_height": 32
+	}
   ],
   "encounters": [
-    {
-      "id": "test_map_enemy_01",
-      "position": [
-        200,
-        260
-      ],
-      "interaction_distance": 72,
-      "battle_preset_id": "exploration_seeded_open",
-      "label": "M1 · ritmos / voo"
-    },
-    {
-      "id": "test_map_enemy_02",
-      "label": "M2 · ritmos · sem fuga",
-      "position": [
-        560,
-        190
-      ],
-      "battle_preset_id": "exploration_seeded_corners",
-      "interaction_distance": 72
-    },
-    {
-      "id": "test_map_enemy_03",
-      "label": "M3 · voo amplo",
-      "position": [
-        530,
-        420
-      ],
-      "battle_preset_id": "exploration_seeded_sides",
-      "route": [
-        [
-          530,
-          420
-        ],
-        [
-          650,
-          420
-        ],
-        [
-          650,
-          480
-        ],
-        [
-          530,
-          480
-        ]
-      ],
-      "speed": 40,
-      "interaction_distance": 72
-    },
-    {
-      "id": "test_map_enemy_04",
-      "label": "M4 · tela inteira",
-      "position": [
-        930,
-        190
-      ],
-      "battle_preset_id": "exploration_seeded_fullscreen",
-      "interaction_distance": 72
-    },
-    {
-      "id": "test_map_enemy_05",
-      "label": "M5 · ritmos / voo",
-      "position": [
-        850,
-        530
-      ],
-      "battle_preset_id": "exploration_seeded_open",
-      "route": [
-        [
-          850,
-          530
-        ],
-        [
-          1000,
-          530
-        ]
-      ],
-      "speed": 48,
-      "interaction_distance": 72
-    },
-    {
-      "id": "test_map_enemy_06",
-      "label": "M6 · voo amplo",
-      "position": [
-        560,
-        650
-      ],
-      "battle_preset_id": "exploration_seeded_sides",
-      "interaction_distance": 72
-    }
+	{
+	  "id": "test_map_enemy_01",
+	  "position": [
+		200,
+		260
+	  ],
+	  "interaction_distance": 72,
+	  "battle_preset_id": "exploration_seeded_open",
+	  "label": "M1 · ritmos / voo"
+	},
+	{
+	  "id": "test_map_enemy_02",
+	  "label": "M2 · ritmos · sem fuga",
+	  "position": [
+		560,
+		190
+	  ],
+	  "battle_preset_id": "exploration_seeded_corners",
+	  "interaction_distance": 72
+	},
+	{
+	  "id": "test_map_enemy_03",
+	  "label": "M3 · voo amplo",
+	  "position": [
+		530,
+		420
+	  ],
+	  "battle_preset_id": "exploration_seeded_sides",
+	  "route": [
+		[
+		  530,
+		  420
+		],
+		[
+		  650,
+		  420
+		],
+		[
+		  650,
+		  480
+		],
+		[
+		  530,
+		  480
+		]
+	  ],
+	  "speed": 40,
+	  "interaction_distance": 72
+	},
+	{
+	  "id": "test_map_enemy_04",
+	  "label": "M4 · tela inteira",
+	  "position": [
+		930,
+		190
+	  ],
+	  "battle_preset_id": "exploration_seeded_fullscreen",
+	  "interaction_distance": 72
+	},
+	{
+	  "id": "test_map_enemy_05",
+	  "label": "M5 · ritmos / voo",
+	  "position": [
+		850,
+		530
+	  ],
+	  "battle_preset_id": "exploration_seeded_open",
+	  "route": [
+		[
+		  850,
+		  530
+		],
+		[
+		  1000,
+		  530
+		]
+	  ],
+	  "speed": 48,
+	  "interaction_distance": 72
+	},
+	{
+	  "id": "test_map_enemy_06",
+	  "label": "M6 · voo amplo",
+	  "position": [
+		560,
+		650
+	  ],
+	  "battle_preset_id": "exploration_seeded_sides",
+	  "interaction_distance": 72
+	}
   ],
   "npcs": [],
   "objects": [
-    {
-      "id": "chest_01",
-      "label": "Baú",
-      "object_type": "chest",
-      "position": [
-        930,
-        650
-      ],
-      "dialogue_id": "chest",
-      "repeat_dialogue_id": "chest_repeat"
-    },
-    {
-      "id": "door_01",
-      "label": "Porta",
-      "object_type": "door",
-      "position": [
-        439,
-        339
-      ],
-      "rect": [
-        430,
-        300,
-        18,
-        78
-      ],
-      "visual_height": 32
-    },
-    {
-      "id": "lever_01",
-      "label": "Alavanca",
-      "object_type": "lever",
-      "position": [
-        360,
-        340
-      ],
-      "target_id": "door_01"
-    }
+	{
+	  "id": "chest_01",
+	  "label": "Baú",
+	  "object_type": "chest",
+	  "position": [
+		930,
+		650
+	  ],
+	  "dialogue_id": "chest",
+	  "repeat_dialogue_id": "chest_repeat"
+	},
+	{
+	  "id": "door_01",
+	  "label": "Porta",
+	  "object_type": "door",
+	  "position": [
+		439,
+		339
+	  ],
+	  "rect": [
+		430,
+		300,
+		18,
+		78
+	  ],
+	  "visual_height": 32
+	},
+	{
+	  "id": "lever_01",
+	  "label": "Alavanca",
+	  "object_type": "lever",
+	  "position": [
+		360,
+		340
+	  ],
+	  "target_id": "door_01"
+	}
   ],
   "dialogues": {
-    "chest": {
-      "start": "0",
-      "nodes": {
-        "0": {
-          "text": "Baú aberto. O sprite mudou e o estado ficará registrado até Reiniciar teste.",
-          "next": "1"
-        },
-        "1": {
-          "text": "Nenhum item foi adicionado: não há inventário novo nesta etapa.",
-          "next": ""
-        }
-      }
-    },
-    "chest_repeat": {
-      "start": "0",
-      "nodes": {
-        "0": {
-          "text": "O baú já está aberto nesta sessão. Não há recompensa repetida.",
-          "next": ""
-        }
-      }
-    },
-    "door_open": {
-      "start": "0",
-      "nodes": {
-        "0": {
-          "text": "Porta aberta. A passagem está livre; nenhum mapa foi carregado.",
-          "next": ""
-        }
-      }
-    },
-    "door_closed": {
-      "start": "0",
-      "nodes": {
-        "0": {
-          "text": "Porta fechada. A passagem voltou a ser sólida.",
-          "next": ""
-        }
-      }
-    },
-    "door_blocked": {
-      "start": "0",
-      "nodes": {
-        "0": {
-          "text": "Não é possível fechar: há um integrante do grupo na passagem. Afaste a fila e tente novamente.",
-          "next": ""
-        }
-      }
-    }
+	"chest": {
+	  "start": "0",
+	  "nodes": {
+		"0": {
+		  "text": "Baú aberto. O sprite mudou e o estado ficará registrado até Reiniciar teste.",
+		  "next": "1"
+		},
+		"1": {
+		  "text": "Nenhum item foi adicionado: não há inventário novo nesta etapa.",
+		  "next": ""
+		}
+	  }
+	},
+	"chest_repeat": {
+	  "start": "0",
+	  "nodes": {
+		"0": {
+		  "text": "O baú já está aberto nesta sessão. Não há recompensa repetida.",
+		  "next": ""
+		}
+	  }
+	},
+	"door_open": {
+	  "start": "0",
+	  "nodes": {
+		"0": {
+		  "text": "Porta aberta. A passagem está livre; nenhum mapa foi carregado.",
+		  "next": ""
+		}
+	  }
+	},
+	"door_closed": {
+	  "start": "0",
+	  "nodes": {
+		"0": {
+		  "text": "Porta fechada. A passagem voltou a ser sólida.",
+		  "next": ""
+		}
+	  }
+	},
+	"door_blocked": {
+	  "start": "0",
+	  "nodes": {
+		"0": {
+		  "text": "Não é possível fechar: há um integrante do grupo na passagem. Afaste a fila e tente novamente.",
+		  "next": ""
+		}
+	  }
+	}
   },
   "entries": {
-    "from_exterior": {
-      "position": [
-        160,
-        600
-      ],
-      "facing": [
-        0,
-        -1
-      ],
-      "arrival_transition_id": "dungeon_exit"
-    }
+	"from_exterior": {
+	  "position": [
+		160,
+		600
+	  ],
+	  "facing": [
+		0,
+		-1
+	  ],
+	  "arrival_transition_id": "dungeon_exit"
+	}
   },
   "transitions": [
-    {
-      "id": "dungeon_exit",
-      "label": "Sair da dungeon",
-      "position": [
-        160,
-        720
-      ],
-      "target_area_id": "test_world",
-      "target_entry_id": "from_dungeon",
-      "interaction_distance": 64
-    }
+	{
+	  "id": "dungeon_exit",
+	  "label": "Sair da dungeon",
+	  "position": [
+		160,
+		720
+	  ],
+	  "target_area_id": "test_world",
+	  "target_entry_id": "from_dungeon",
+	  "interaction_distance": 64
+	}
   ],
   "footer": "E: interagir · alavanca abre passagem · saída no sudoeste retorna ao mundo aberto",
   "area_type": "dungeon",

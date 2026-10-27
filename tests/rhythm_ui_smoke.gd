@@ -66,19 +66,21 @@ func _run() -> void:
 	var bob = Route.presentation_offset(flyer["route_state"])
 	expect(lab.board.actor_visual_position(flyer) == flyer["logical_position"] + bob, "Renderização aplica flutuação separada")
 	await capture("rhythm-moving")
-	# Clique na figura provisória flutuante, sem mudar a posição lógica usada pela área.
+	# Cursor acompanha o ID do voador; mouse não confirma ações.
 	lab.model.debug_ready_allies()
 	lab.cards[0]["button"].pressed.emit()
 	lab.command_buttons[0].pressed.emit()
-	var clicked = []
-	lab.board.target_clicked.connect(func(id, _point): clicked.append(id))
 	var input = InputEventMouseButton.new()
 	input.button_index = MOUSE_BUTTON_LEFT
 	input.pressed = true
 	input.position = lab.board.screen_point(lab.board.actor_visual_position(flyer))
-	lab.board._gui_input(input)
-	expect(clicked.size() == 1 and clicked[0] == flyer["id"], "Seleção por clique acompanha apresentação visual")
-	expect(not lab.model.action.is_empty() and lab.model.action["target_id"] == flyer["id"], "Fluxo normal inicia melee contra voador novo")
+	lab._input(input)
+	expect(lab.model.action.is_empty() and lab.board.mouse_filter == Control.MOUSE_FILTER_IGNORE, "Clique não seleciona nem confirma alvo")
+	while lab.target_focus_id != flyer["id"]:
+		lab._navigate(Vector2.RIGHT)
+	expect(lab.board.preview()["target"]["id"] == flyer["id"], "Mão seleciona ID do voador independentemente da flutuação")
+	lab._confirm_navigation()
+	expect(not lab.model.action.is_empty() and lab.model.action["target_id"] == flyer["id"], "Fluxo por navegação inicia melee contra voador")
 	var guard = 0
 	while not lab.model.action.is_empty() and guard < 120:
 		lab._step()
