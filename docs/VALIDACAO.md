@@ -1,5 +1,23 @@
 # Validação da entrega
 
+## Presets persistentes de fichas — D72
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. **44 suítes headless aprovadas**, incluindo combate, exploração e as sete suítes de danos. Testes novos: `damage_presets_tests` (**37 verificações**) e `damage_presets_ui_smoke` (**28 headless**, **32 gráficas** incluindo quatro capturas), zero falhas. A suíte anterior da interface de danos mantém suas 97 verificações headless aprovadas.
+
+Cobertura: referências protegidas; carga independente por categoria; atributos próprios + equipamentos sem duplicar bônus; faixas do aliado/monstro; salvar cópia com nome, atualizar revisão e reler em outra instância; duplicação de nome, Unicode, cancelamento e erro de gravação. Arquivos pessoais inválidos são preservados, referências continuam disponíveis e novas gravações são bloqueadas. Releitura antes de escrever preserva alterações sequenciais de outra instância. Histórico/JSON preservam a revisão e os valores anteriores; aplicar presets não avança RNG nem altera ação/parâmetros globais. Inversão de papéis, restauração do caso e fechamento/reabertura mantêm a biblioteca pessoal.
+
+Interface exercitada por teclado e controle simulado: seletores, diálogo modal, Enter para salvar, atualização de personalizado e marca de alteração. Atalhos de lote não atravessam o diálogo. Capturas `presets-reference.png`, `presets-save-dialog.png`, `presets-custom.png` e `presets-reopened.png` inspecionadas em `artifacts/damage-lab-presets/`; campos, nomes e botões legíveis. Testes usam arquivos temporários exclusivos, sem tocar os presets pessoais ou as exportações do usuário.
+
+Logs `regression.log`, `presets.log`, `presets-ui.log` e `graphics.log` na mesma pasta. Execuções finais sem erros de script e com código 0; aviso ambiental conhecido de certificados do macOS no headless. Controle físico e outras plataformas não testados. Persistência é exclusiva dos presets do laboratório, não um salvamento da aventura. As fichas fornecidas continuam experimentais.
+
+Para repetir, na raiz do projeto:
+
+```sh
+godot --headless --log-file /private/tmp/rpg-presets.log --path . --script res://tests/damage_presets_tests.gd
+godot --headless --log-file /private/tmp/rpg-presets-ui.log --path . --script res://tests/damage_presets_ui_smoke.gd
+godot --log-file /private/tmp/rpg-presets-graphics.log --path . --audio-driver Dummy --resolution 1440x960 --script res://tests/damage_presets_ui_smoke.gd -- --visual-captures=res://artifacts/damage-lab-presets
+```
+
 ## Escala 1..9999 dos monstros — D69
 
 Executada em **27/10/2026**, Godot 4.7.2/macOS. Cinco suítes headless aprovadas: `damage_enemy_ranges_tests` (**1.160 verificações**), `damage_lab_tests` (3.177), `damage_equipment_tests` (66), `damage_export_tests` (2.280) e `damage_lab_ui_smoke` (**97**). UI gráfica: **108 verificações**, incluindo onze capturas, zero falhas nas execuções finais.

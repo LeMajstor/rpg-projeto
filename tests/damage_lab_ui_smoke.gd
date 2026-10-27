@@ -99,6 +99,7 @@ func _run() -> void:
 	root.size = Vector2i(1440, 960)
 	var production = FileAccess.get_file_as_string("res://data/lab.json")
 	screen = load("res://scenes/damage_lab.tscn").instantiate()
+	screen.preset_storage_path = "/private/tmp/rpg-damage-ui-presets-%d.json" % OS.get_process_id()
 	root.add_child(screen)
 	await process_frame
 	screen.set_process(false)

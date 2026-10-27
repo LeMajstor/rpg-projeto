@@ -108,6 +108,8 @@ No aliado, edite **ATQ F/DEF F**, selecione arma/armadura e consulte **próprio 
 
 **Faixas das fichas:** HP, MP, ATQ F, DEF F, MAG e DEF M vão de **0 a 999 nos aliados** e **1 a 9999 nos monstros**; INI/CRI continuam **1 a 99** em ambos. A faixa acompanha o participante ao trocar lados. O limite efetivo de equipamento 999 é apenas do aliado; monstros usam seus valores diretamente. JSON inclui as faixas por categoria.
 
+**Presets de fichas:** no topo do painel, escolha **Aliado inicial · Bronze** e **Monstro inicial · 30 HP** para carregar os testes estudados. Edite e use **Salvar como…** para criar um personalizado; **Atualizar** grava alterações do personalizado selecionado. Referências são protegidas. Os salvos reaparecem ao reabrir; Restaurar caso não os apaga. Ação/variação/Seed continuam independentes, e equipamentos acompanham o aliado ao inverter os lados. O JSON de amostras registra preset, revisão e valores efetivamente usados.
+
 Para compartilhar um teste, selecione a execução em **Resultado** e use **Exportar JSON [F10]**. O arquivo reúne todas as amostras, resumo, fichas/configurações originais e Seed. Escolha o destino, salve e anexe o `.json` na conversa. A pasta sugerida é `exports/damage-lab/`; erros/caminho salvo aparecem no rodapé. Exportar não recalcula o lote nem avança os sorteios.
 
 ## Documentação atual
@@ -144,6 +146,8 @@ godot --headless --path . --script res://tests/ui_smoke.gd
 godot --headless --path . --script res://tests/damage_lab_tests.gd
 godot --headless --path . --script res://tests/damage_equipment_tests.gd
 godot --headless --path . --script res://tests/damage_enemy_ranges_tests.gd
+godot --headless --path . --script res://tests/damage_presets_tests.gd
+godot --headless --path . --script res://tests/damage_presets_ui_smoke.gd
 godot --headless --path . --script res://tests/damage_export_tests.gd
 godot --headless --path . --script res://tests/damage_lab_ui_smoke.gd
 godot --headless --path . --script res://tests/exploration_tests.gd

@@ -1,6 +1,7 @@
 extends RefCounted
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
 const Equipment = preload("res://scripts/damage/damage_equipment.gd")
+const Presets = preload("res://scripts/damage/damage_presets.gd")
 var data: Dictionary
 var attacker: Dictionary
 var target: Dictionary
@@ -18,6 +19,8 @@ var sequence_position = 0
 var rng_state: Dictionary = {}
 var history: Array[Dictionary] = []
 var run_number = 0
+var selected_presets: Dictionary = {}
+var preset_baselines: Dictionary = {}
 
 func _init(definitions: Dictionary) -> void:
 	data = definitions.duplicate(true)
@@ -30,6 +33,8 @@ func definition(collection: String, id: String) -> Dictionary:
 	return {}
 
 func reset_case() -> void:
+	selected_presets.clear()
+	preset_baselines.clear()
 	loadouts.clear()
 	attacker = definition("profiles", data["default_attacker"])
 	target = definition("profiles", data["default_target"])
@@ -44,6 +49,8 @@ func choose_profile(role: String, id: String) -> void:
 	var selected = definition("profiles", id)
 	if selected.is_empty():
 		return
+	selected_presets.erase(selected["side"])
+	preset_baselines.erase(selected["side"])
 	if role == "attacker":
 		attacker = selected
 	else:
@@ -51,6 +58,8 @@ func choose_profile(role: String, id: String) -> void:
 	if attacker["side"] == target["side"]:
 		for profile in data["profiles"]:
 			if profile["side"] != selected["side"]:
+				selected_presets.erase(profile["side"])
+				preset_baselines.erase(profile["side"])
 				if role == "attacker":
 					target = profile.duplicate(true)
 				else:
@@ -77,6 +86,33 @@ func _loadout() -> Dictionary:
 		loadouts[id] = {"weapon": definition("weapons", data["default_weapon"]), "armor": definition("armors", data["default_armor"])}
 	return loadouts[id]
 
+func preset_payload(side: String) -> Dictionary:
+	if side not in ["ally", "enemy"]:
+		return {}
+	var payload = {"side": side, "actor": (ally() if side == "ally" else enemy()).duplicate(true)}
+	if side == "ally":
+		payload["equipment"] = _loadout().duplicate(true)
+	return payload
+
+func apply_preset(preset: Dictionary) -> String:
+	var error = Presets.validate_entry(preset, data)
+	if not error.is_empty():
+		return error
+	var side: String = preset["side"]
+	var role = ally_role() if side == "ally" else ("target" if ally_role() == "attacker" else "attacker")
+	if role == "attacker":
+		attacker = preset["actor"].duplicate(true)
+	else:
+		target = preset["actor"].duplicate(true)
+	if side == "ally":
+		loadouts[ally()["id"]] = preset["equipment"].duplicate(true)
+	selected_presets[side] = {"id": preset["id"], "name": preset["name"], "revision": int(preset.get("revision", 1)), "source": preset.get("source", "reference")}
+	preset_baselines[side] = preset_payload(side)
+	return ""
+
+func preset_modified(side: String) -> bool:
+	return preset_baselines.has(side) and preset_baselines[side] != preset_payload(side)
+
 func set_seed(value: int) -> void:
 	if seed_value != value:
 		seed_value = value
@@ -100,6 +136,11 @@ func configuration() -> Dictionary:
 	if attacker["side"] == "ally":
 		config["weapon"] = weapon.duplicate(true)
 	config["critical_source"] = Calculator.critical_source(config)
+	config["presets"] = {}
+	for side in selected_presets:
+		var role = ally_role() if side == "ally" else ("target" if ally_role() == "attacker" else "attacker")
+		config["presets"][role] = selected_presets[side].duplicate(true)
+		config["presets"][role]["modified"] = preset_modified(side)
 	return config
 
 func run(count: int) -> Dictionary:

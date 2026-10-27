@@ -2,11 +2,22 @@ extends Control
 const Model = preload("res://scripts/damage/damage_lab_model.gd")
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
 const Export = preload("res://scripts/damage/damage_export.gd")
+const PresetLibrary = preload("res://scripts/damage/damage_presets.gd")
 const Field = preload("res://scripts/ui/damage_field.gd")
 const Histogram = preload("res://scripts/ui/damage_histogram.gd")
 const ATTRIBUTES = [["HP", "hp"], ["MP", "mp"], ["INI", "ini"], ["ATQ F", "physical_attack"], ["DEF F", "physical_defense"], ["MAG", "magic_power"], ["DEF M", "magic_defense"], ["CRI", "critical_base"]]
 const CRITICAL_MODES = ["rolled", "off", "forced"]
 var model
+var preset_library
+var preset_storage_path = PresetLibrary.DEFAULT_PATH
+var preset_pickers: Dictionary = {}
+var preset_save_buttons: Dictionary = {}
+var preset_update_buttons: Dictionary = {}
+var preset_status: Dictionary = {}
+var preset_dialog: ConfirmationDialog
+var preset_name_edit: LineEdit
+var preset_error: Label
+var pending_preset: Dictionary = {}
 var field
 var histogram
 var profile_pickers: Dictionary = {}
@@ -58,9 +69,13 @@ var repeat_timer = 0.0
 
 func _ready() -> void:
 	model = Model.new(JSON.parse_string(FileAccess.get_file_as_string("res://data/damage_lab.json")))
+	preset_library = PresetLibrary.new(model.data, JSON.parse_string(FileAccess.get_file_as_string("res://data/damage_lab_presets.json")), preset_storage_path)
 	_build_ui()
+	_rebuild_preset_lists()
 	_sync_controls()
 	_preview()
+	if not preset_library.load_error.is_empty():
+		notice.text = preset_library.load_error
 	seed_edit.grab_focus()
 	Input.joy_connection_changed.connect(func(_id, connected):
 		if not connected: _reset_hold())
@@ -135,6 +150,42 @@ func _build_ui() -> void:
 	editor_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	body.add_child(editor_scroll)
 	editor_scroll.add_child(editor)
+	var presets_row = HBoxContainer.new()
+	presets_row.add_theme_constant_override("separation", 10)
+	editor.add_child(presets_row)
+	for side in ["ally", "enemy"]:
+		var box = _panel(presets_row, "PRESET DO ALIADO" if side == "ally" else "PRESET DO MONSTRO")
+		var picker = _select(box, ["Ficha atual / manual"], _choose_preset.bind(side))
+		picker.fit_to_longest_item = false
+		picker.clip_text = true
+		picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		preset_pickers[side] = picker
+		var buttons = HBoxContainer.new()
+		box.add_child(buttons)
+		preset_save_buttons[side] = _button(buttons, "Salvar como…", _request_preset_save.bind(side))
+		preset_update_buttons[side] = _button(buttons, "Atualizar", _update_preset.bind(side))
+		preset_status[side] = _label("Ficha atual", 12, Color("b9d8e7"))
+		box.add_child(preset_status[side])
+	preset_dialog = ConfirmationDialog.new()
+	preset_dialog.title = "Salvar preset"
+	preset_dialog.exclusive = true
+	preset_dialog.dialog_hide_on_ok = false
+	preset_dialog.get_ok_button().text = "Salvar preset"
+	preset_dialog.get_cancel_button().text = "Cancelar"
+	var name_box = VBoxContainer.new()
+	name_box.add_child(_label("Nome do preset (até 80 caracteres)", 14))
+	preset_name_edit = LineEdit.new()
+	preset_name_edit.max_length = 80
+	preset_name_edit.select_all_on_focus = true
+	preset_name_edit.text_submitted.connect(func(_value): preset_dialog.get_ok_button().pressed.emit())
+	name_box.add_child(preset_name_edit)
+	preset_error = _label("", 13, Color("edcf91"))
+	preset_error.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	name_box.add_child(preset_error)
+	preset_dialog.add_child(name_box)
+	preset_dialog.confirmed.connect(_confirm_preset_save)
+	preset_dialog.canceled.connect(_cancel_preset_save)
+	add_child(preset_dialog)
 	editor.add_child(_label("PRÓXIMO TESTE · aliado: próprios · monstro: diretos", 16, Color("f1d995")))
 	var profiles = HBoxContainer.new()
 	profiles.add_theme_constant_override("separation", 10)
@@ -411,6 +462,103 @@ func _sync_controls() -> void:
 	critical_mode.select(CRITICAL_MODES.find(model.settings["critical_mode"]))
 	syncing = false
 	_sync_equipment_enabled()
+	_refresh_preset_controls()
+
+func _rebuild_preset_lists() -> void:
+	for side in ["ally", "enemy"]:
+		var picker: OptionButton = preset_pickers[side]
+		picker.clear()
+		picker.add_item("Ficha atual / manual")
+		picker.set_item_metadata(0, "")
+		for preset in preset_library.entries(side):
+			picker.add_item(("Referência · " if preset["source"] == "reference" else "") + preset["name"])
+			picker.set_item_metadata(picker.item_count - 1, preset["id"])
+
+func _refresh_preset_controls() -> void:
+	for side in ["ally", "enemy"]:
+		var selected: Dictionary = model.selected_presets.get(side, {})
+		var picker: OptionButton = preset_pickers[side]
+		picker.select(0)
+		for index in range(1, picker.item_count):
+			if picker.get_item_metadata(index) == selected.get("id", ""):
+				picker.select(index)
+		picker.tooltip_text = selected.get("name", "A ficha atual pode ser salva como preset.")
+		var modified: bool = model.preset_modified(side)
+		preset_status[side].text = ("Personalizado" if selected.get("source") == "custom" else "Referência protegida") + (" · alterado" if modified else "") if not selected.is_empty() else "Ficha atual / manual"
+		preset_update_buttons[side].disabled = busy or not modified or not preset_library.is_custom(selected.get("id", "")) or not preset_library.load_error.is_empty()
+		preset_save_buttons[side].disabled = busy or not preset_library.load_error.is_empty()
+		preset_save_buttons[side].tooltip_text = preset_library.load_error
+
+func _choose_preset(index: int, side: String) -> void:
+	if syncing or busy:
+		return
+	_commit_edit()
+	var id: String = preset_pickers[side].get_item_metadata(index)
+	if id.is_empty():
+		model.selected_presets.erase(side)
+		model.preset_baselines.erase(side)
+		_refresh_preset_controls()
+		return
+	var entry: Dictionary = preset_library.get_entry(id)
+	var error: String = model.apply_preset(entry)
+	if not error.is_empty():
+		notice.text = error
+		return
+	_sync_controls()
+	_preview()
+	notice.text = "Preset carregado: %s. Ação, parâmetros e sequência preservados." % entry["name"]
+
+func _request_preset_save(side: String) -> void:
+	if busy or export_dialog.visible or preset_dialog.visible:
+		return
+	_commit_edit()
+	_reset_hold()
+	pending_preset = model.preset_payload(side)
+	preset_error.text = ""
+	var selected: Dictionary = model.selected_presets.get(side, {})
+	preset_name_edit.text = "Cópia de " + selected["name"] if not selected.is_empty() else ("Aliado personalizado" if side == "ally" else "Monstro personalizado")
+	preset_dialog.title = "Salvar preset do aliado" if side == "ally" else "Salvar preset do monstro"
+	preset_dialog.popup_centered(Vector2i(500, 190))
+	preset_name_edit.grab_focus.call_deferred()
+
+func _confirm_preset_save() -> void:
+	if pending_preset.is_empty():
+		return
+	var result: Dictionary = preset_library.create(preset_name_edit.text, pending_preset)
+	if not result["error"].is_empty():
+		preset_error.text = result["error"]
+		return
+	var side: String = pending_preset["side"]
+	model.apply_preset(result["preset"])
+	pending_preset = {}
+	preset_dialog.hide()
+	_rebuild_preset_lists()
+	_sync_controls()
+	_preview()
+	notice.text = "Preset salvo: %s. Disponível nas próximas sessões." % result["preset"]["name"]
+	preset_save_buttons[side].grab_focus()
+
+func _cancel_preset_save() -> void:
+	var side: String = pending_preset.get("side", "ally")
+	pending_preset = {}
+	preset_dialog.hide()
+	preset_save_buttons[side].grab_focus()
+
+func _update_preset(side: String) -> void:
+	if busy or export_dialog.visible or preset_dialog.visible:
+		return
+	_commit_edit()
+	var selected: Dictionary = model.selected_presets.get(side, {})
+	var result: Dictionary = preset_library.update(selected.get("id", ""), model.preset_payload(side))
+	if not result["error"].is_empty():
+		notice.text = result["error"]
+		_refresh_preset_controls()
+		return
+	model.apply_preset(result["preset"])
+	_rebuild_preset_lists()
+	_sync_controls()
+	_preview()
+	notice.text = "Preset atualizado: %s · revisão %d." % [result["preset"]["name"], result["preset"]["revision"]]
 
 func _sync_equipment_enabled() -> void:
 	weapon_bonus.editable = not busy and model.weapon.get("equipped", true)
@@ -440,6 +588,7 @@ func _preview() -> void:
 		return
 	var config: Dictionary = model.configuration()
 	_refresh_composition(config)
+	_refresh_preset_controls()
 	field.preview(config)
 	field_caption.text = "PRÉVIA DO PRÓXIMO TESTE"
 	if not model.history.is_empty():
@@ -514,9 +663,10 @@ func _set_busy(value: bool) -> void:
 			control.disabled = value
 	export_button.disabled = value or last_result.is_empty()
 	_sync_equipment_enabled()
+	_refresh_preset_controls()
 
 func _request_export() -> void:
-	if busy or last_result.is_empty() or export_dialog.visible:
+	if busy or last_result.is_empty() or export_dialog.visible or preset_dialog.visible:
 		return
 	_commit_edit()
 	_reset_hold()
@@ -583,6 +733,9 @@ func _show_result(result: Dictionary) -> void:
 	lines.append("EXECUÇÃO #%d · %d× · semente %d · início %d" % [result["run_number"], result["count"], result["seed"], result["sequence_start"] + 1])
 	for role in ["attacker", "target"]:
 		lines.append("\n%s: %s" % ["ATACANTE" if role == "attacker" else "ALVO", config[role]["name"]])
+		if config.get("presets", {}).has(role):
+			var preset: Dictionary = config["presets"][role]
+			lines.append("Preset: %s · revisão %d%s" % [preset["name"], preset["revision"], " · alterado para este teste" if preset["modified"] else ""])
 		var stats: Array[String] = []
 		for attr in ATTRIBUTES:
 			stats.append("%s %d" % [attr[0], config[role][attr[1]]])
@@ -710,7 +863,7 @@ func _notification(what: int) -> void:
 		_reset_hold()
 
 func _input(event: InputEvent) -> void:
-	if export_dialog != null and export_dialog.visible:
+	if (export_dialog != null and export_dialog.visible) or (preset_dialog != null and preset_dialog.visible):
 		return # O diálogo recebe teclado/controle sem alterar o caso ao fundo.
 	if event is InputEventJoypadMotion and event.axis in [JOY_AXIS_LEFT_X, JOY_AXIS_LEFT_Y]:
 		joy_axis[0 if event.axis == JOY_AXIS_LEFT_X else 1] = event.axis_value

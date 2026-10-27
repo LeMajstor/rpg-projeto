@@ -32,6 +32,7 @@ RPG digital de fantasia medieval, magia, raças e classes, inspirado na sensaç�
 ### 2.3 Companheiros e equipe
 - Companheiros são personagens fixos, recrutados gradualmente conforme a história.
 - Equipe ativa tem **até quatro** membros; estes são os quatro que participam das batalhas.
+- **D70 (27/10/2026):** no início da aventura, o protagonista estará sozinho. Com apenas um integrante ativo, chegar a 0 HP significa derrota de toda a equipe e Game Over pela regra geral. Essa definição da aventura não altera automaticamente a equipe de quatro do protótipo atual.
 - Os mesmos integrantes aparecem em fila na exploração: líder de exploração à frente; os demais atrás.
 - Personagens fora da equipe ativa permanecem na reserva e **somente podem substituir ativos num local especial de reunião**, ainda sem identidade narrativa, aparência ou nome aprovado. A referência conceitual é o Fim dos Tempos de Chrono Trigger, sem copiá-lo.
 - O protagonista pode futuramente deixar de ser obrigatório em um segmento final da história; **fora do escopo da primeira versão**.
@@ -315,6 +316,12 @@ Os valores efetivos entram no cálculo de dano. A potência continua pertencendo
 **D68 — preferência para o cenário inicial de estudo (27/10/2026):** o usuário deseja manter o monstro com **30 HP**, preservando a referência de aproximadamente 3–4 ataques básicos normais para derrotá-lo. Não confirma a sugestão anterior de subir a vida para 50 nem fixa todos os inimigos em 30 HP. DEF F e demais números devem ser ajustados/testados junto do ataque esperado do aliado; exemplo recomendado, ainda sem aprovação de valor definitivo, em `LABORATORIO_DANOS.md`.
 
 **D69 — escala dos monstros confirmada e implementada no laboratório (27/10/2026):** HP, MP, ATQ F, DEF F, MAG e DEF M de monstros vão de **1 a 9999**. A ampliação permite testar números de chefes, sem criar conteúdo ou perfil de chefe. Aliados mantêm 0..999 nesses atributos, INI/CRI permanecem 1..99 para ambos e equipamentos continuam somente nos aliados. Validação, edição, troca de lados e exportação respeitam a categoria do participante. O limite de atributos não limita o dano resultante; HP/MP após a ação podem chegar a zero normalmente. Fichas e combate da exploração permanecem com o recorte anterior.
+
+**D70 — resistência inicial do aliado:** com armadura de Bronze, o usuário deseja aproximadamente **4–5 golpes para o personagem cair**. A referência de estudo considera golpes físicos normais dos inimigos iniciais; críticos podem antecipar a derrota. O início é solo, portanto a queda do protagonista é Game Over. HP e atributos concretos do aliado/inimigo continuam para balanceamento; exemplo recomendado em `LABORATORIO_DANOS.md`, sem aprovação automática de números ou mudança de presets.
+
+**D71 — necessidade de presets de teste (27/10/2026):** o usuário solicitou presets reutilizáveis de aliados e inimigos no laboratório de danos para evitar redigitação das fichas. Proposta autorizada e implementada posteriormente em D72; seleção/gravação e persistência descritas em `LABORATORIO_DANOS.md`. Esses presets pertencem ao teste e não definem atributos definitivos da aventura.
+
+**D72 — presets de fichas autorizados e implementados (27/10/2026):** seletores independentes de aliado/monstro, dois presets iniciais de referência protegidos, Salvar como com nome e Atualizar para personalizados alterados. Presets guardam atributos próprios/diretos e equipamentos completos somente do aliado; totais são recalculados ao carregar. Personalizados persistem em arquivo local separado. Aplicar/gravar não avança RNG, não troca ação/parâmetros globais e não altera histórico. O JSON de amostras identifica preset, revisão e alterações daquela execução. São ferramentas de laboratório; não constituem save ou balanceamento definitivo da aventura.
 
 ## 8. Tipos de alvo e área (direção funcional)
 

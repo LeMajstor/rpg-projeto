@@ -59,6 +59,60 @@ O primeiro exemplo usa ATQ F 30, DEF F do alvo 35, HP do alvo 40 e potência 1×
 
 **Atualização D68 (27/10/2026):** o usuário prefere o monstro com **30 HP** no cenário de estudo, mantendo a meta de 3–4 golpes normais. O teste sugerido com 50 HP não foi adotado. **Recomendação para experimentar, sem valor de DEF F confirmado:** aliado com ATQ F próprio 20 + Bronze 10 = total 30, ataque básico 1×, variação ±10%, monstro HP 30 e DEF F 60. Base `900 / (30 + 60) = 10`; dano normal 9–11, dois golpes 18–22, três 27–33 e quatro 36–44. Assim, são necessários 3 ou 4 golpes normais. Críticos podem reduzir a contagem. Nenhum preset/código foi alterado por essa recomendação.
 
+## Resistência do aliado no início — D70
+
+**Confirmado em 27/10/2026:** o personagem começa sozinho na aventura. O usuário deseja que, usando armadura de Bronze, sejam necessários aproximadamente **4–5 golpes para cair**. Referência para golpes físicos normais, com críticos podendo encurtar a contagem. Como único integrante ativo, 0 HP causa Game Over pela regra de derrota do grupo.
+
+Para testar a defesa, usar **Trocar lados**: o monstro passa a atacante e a armadura acompanha o aliado alvo. **Exemplo recomendado, sem números iniciais definitivos aprovados:** aliado com HP 40, DEF F própria 20 + Bronze 10 = total 30; monstro com ATQ F direta 23, ataque básico 1×, variação ±10%. Base `23² / (23 + 30) ≈ 9,98`; dano normal 9–11. Três golpes somam 27–33, quatro 36–44 e cinco 45–55: derrota em 4 ou 5 golpes normais.
+
+Esse cenário pode manter o monstro com HP 30 e DEF F 60 da comparação ofensiva: aliado com ATQ F próprio 20 + espada Bronze 10 causa 9–11 nele, exigindo 3–4 golpes normais. São referências de dano por ação; frequência ATB, chance de crítico e vários inimigos ainda precisam ser avaliados em batalha. Os lotes restauram HP/MP por amostra e não simulam automaticamente a sequência completa de morte/Game Over. Não foram alterados presets, composição da equipe de teste ou combate da exploração por este registro.
+
+## Presets de fichas — D71/D72
+
+**Autorizado e implementado em 27/10/2026.** No topo do painel de edição há seletores independentes **Preset do aliado** e **Preset do monstro**. Carregar preenche a ficha daquela categoria e recalcula os totais; a outra ficha permanece. Os presets acompanham o participante quando os lados são invertidos. Os seletores de ficha manual anteriores permanecem disponíveis; usá-los remove a associação ao preset da categoria substituída.
+
+### Referências iniciais fornecidas
+
+Presets em `data/damage_lab_presets.json`, protegidos contra atualização pela interface. Os valores completam os exemplos estudados e são **referências experimentais**, não balanceamento definitivo da aventura.
+
+| Campo próprio/direto | Aliado inicial · Bronze | Monstro inicial · 30 HP |
+| --- | ---: | ---: |
+| HP | 40 | 30 |
+| MP | 100 | 80 |
+| INI | 9 | 7 |
+| ATQ F | 20 | 23 |
+| DEF F | 20 | 60 |
+| MAG | 100 | 50 |
+| DEF M | 100 | 80 |
+| CRI | 5 | 3 |
+| Multiplicador próprio sem arma (teste) | 2× | 2× |
+
+O aliado usa espada e armadura Bronze (+10 cada), com chance da arma 5% e crítico 2×. Totais físicos 30/30. O monstro não possui equipamentos. MP/MAG/DEF M e demais campos mantêm os valores das fichas provisórias existentes, sem aprovar números iniciais da aventura.
+
+Com ataque básico 1×, variação ±10% e críticos desligados, as duas referências produzem 9–11 de dano normal em ambos os sentidos: monstro com 30 HP cai em 3–4 golpes, aliado com 40 HP em 4–5. Ação, potência, custos, variação, modo de crítico, modificadores e Seed continuam nos controles globais; carregar preset não muda esses campos nem reinicia os sorteios. Use Reiniciar sequência para comparar os mesmos sorteios.
+
+### Salvar como e Atualizar
+
+- **Salvar como…** captura a ficha atual da categoria e solicita um nome de até 80 caracteres. Cria uma cópia personalizada e a seleciona. Nome vazio ou repetido na mesma categoria é recusado; aliado e monstro podem compartilhar um nome.
+- **Atualizar** grava alterações no personalizado selecionado, mantendo ID/nome e aumentando a revisão. Só fica habilitado para personalizado alterado. Referências protegidas podem ser copiadas com Salvar como.
+- Alterar campos, arma ou armadura marca o preset como **alterado**, sem sobrescrever o arquivo automaticamente. A opção Ficha atual/manual mantém os campos e remove a associação ao preset.
+- O preset aliado guarda atributos próprios e todos os valores da arma/armadura, incluindo bônus, chance/multiplicador e parâmetro próprio sem arma. O monstro guarda atributos diretos e crítico próprio, sem equipamento. Não salvar totais como próprios: a composição é refeita ao aplicar.
+- Salvar/carregar/atualizar não executa ações, não consome RNG e não reescreve resultados anteriores. Durante a animação, os controles ficam bloqueados; o diálogo de nome recebe o teclado sem acionar atalhos de lote ao fundo. Enter confirma o nome; Cancelar não grava.
+
+### Persistência e integridade
+
+Personalizados em **`user://damage_lab_presets.json`**, na pasta de dados do aplicativo Godot, separados dos presets fornecidos e das exportações de amostras. Formato `rpg.damage_lab.presets`, versão 1; somente personalizados são gravados nesse arquivo. Eles reaparecem nos seletores ao reabrir o laboratório. A seleção atual, edições não salvas, controles globais, sequência e histórico continuam locais à sessão.
+
+Restaurar caso volta às fichas/equipamentos iniciais e à sequência, preservando o histórico em memória e os presets pessoais em disco. Não há autosave da ficha atual nem carregamento automático do último preset usado. Para reutilizar, selecione o personalizado salvo.
+
+A biblioteca valida categoria, faixas D59/D69, revisão, ficha de origem, equipamentos do catálogo e ausência de itens em monstros. Relê os personalizados antes de gravar para preservar entradas já salvas por outra janela; grava via arquivo temporário e substituição. Nome duplicado, dados inválidos ou falha de escrita não são confirmados como sucesso. Se o arquivo pessoal estiver inválido/incompatível, preservá-lo e mostrar erro, mantendo as referências disponíveis e bloqueando gravação; corrigir/restaurar esse arquivo e reabrir o laboratório. Não substituir dados corrompidos por uma biblioteca vazia.
+
+### Histórico e JSON de amostras
+
+Cada execução identifica por papel o preset usado: ID, nome, revisão, origem (referência/personalizado) e marca de edição. Esses metadados ficam em **`conditions.presets`** no JSON v2 e na aba Condições. Os valores efetivos/itens completos continuam no snapshot. Atualizar o personalizado posteriormente não altera a revisão ou os valores de execuções anteriores. Não há importação de relatórios de amostras ou salvamento de casos completos nessa etapa.
+
+Biblioteca e persistência em `scripts/damage/damage_presets.gd`; captura/aplicação e metadados em `damage_lab_model.gd`. Testes em `tests/damage_presets_tests.gd` e `tests/damage_presets_ui_smoke.gd`, com arquivos temporários exclusivos para não tocar presets reais do usuário.
+
 ## Duelo e edição
 
 - Um atacante e um alvo, sem ATB ou IA. Quatro fichas aliadas e quatro inimigas de teste: Pesado, Ágil, Voador e Estático. Qualquer lado pode atacar o outro; escolher duas fichas do mesmo lado ajusta a outra seleção para um perfil do lado oposto. Sem fogo amigo.
@@ -66,7 +120,7 @@ O primeiro exemplo usa ATQ F 30, DEF F do alvo 35, HP do alvo 40 e potência 1×
 - **Refinamento solicitado em 26/10/2026:** digitação direta em todos os campos numéricos. Clicar no número seleciona o texto; selecionar o campo pelo teclado e começar a digitar também substitui o valor. Enter, Tab, clique em outro campo ou execução confirmam a edição, respeitando os limites existentes. Decimais aceitam ponto ou vírgula; setas/controle continuam disponíveis.
 - Seletores de arma e ação; chance/multiplicador da arma, potência/custo de MP, permissão de crítico, variação e modificadores ajustáveis. Trocar lados mantém a ação e move o equipamento junto do aliado; o monstro usa seu próprio crítico de teste.
 - **1×** mostra aproximação/impacto/retorno físico ou projétil mágico provisório; rótulos de recursos ficam na posição de origem. Lotes **10×, 100× e 1000×** calculam imediatamente e mostram o estado da última amostra, sem enfileirar animações.
-- Toda edição é local à sessão. Arma/armadura são seleções do simulador; não há inventário da aventura, sistema de buffs real, persistência da sessão ou sincronização de fichas com a exploração.
+- Edições são locais à sessão até Salvar como/Atualizar um preset pessoal. Arma/armadura são seleções do simulador; não há inventário da aventura, sistema de buffs real, salvamento completo da sessão ou sincronização de fichas com a exploração.
 
 ## Fórmula proporcional v1 — experimento
 
@@ -110,7 +164,7 @@ Resumo com mínimo, máximo, média, médias normal/crítica, totais de dano/HP 
 
 Há dois RNGs independentes, derivados da semente: variação e crítico. Cada ação avança ambos uma vez, inclusive nos modos fixos. Alterar a permissão de crítico não muda a sequência da variação. Ações e lotes sucessivos continuam a sequência; 10× + 10× equivalem às primeiras 20 amostras de uma execução maior iniciada na mesma semente. **Reiniciar sequência** volta ao primeiro sorteio sem mudar as fichas; alterar a semente também reinicia. A mesma configuração, semente e posição na sequência reproduzem o resultado na engine validada.
 
-Histórico guarda até **12 execuções** com cópias das condições e estados de RNG. Editar o próximo caso não reescreve resultados anteriores. Consultar o histórico não aplica suas fichas ao próximo teste nem altera a sequência atual. **Restaurar caso** volta aos presets e semente iniciais, mantendo o histórico. Fechar o laboratório descarta a sessão.
+Histórico guarda até **12 execuções** com cópias das condições e estados de RNG. Editar o próximo caso não reescreve resultados anteriores. Consultar o histórico não aplica suas fichas ao próximo teste nem altera a sequência atual. **Restaurar caso** volta aos presets e semente iniciais, mantendo o histórico. Fechar o laboratório descarta a sessão; presets pessoais explicitamente salvos continuam em disco.
 
 ## Exportar amostras em JSON — D61
 
@@ -128,7 +182,7 @@ Formato legível, UTF-8, com números sem arredondamento de apresentação e boo
 | `exported_at_utc` / `engine_version` | Data UTC da exportação e versão da engine. |
 | `formula` | Identificador `proportional_v1`, status experimental, fórmulas, ordem de cálculo, composição da chance, política de recursos por amostra e `attribute_ranges` com faixas por categoria/atributo. |
 | `run` | Número da execução, Seed, primeiro/último índice global e estados dos dois RNGs antes/depois. Estados inteiros de 64 bits são **strings** para preservar os bits em leitores JSON/JavaScript. |
-| `conditions` | Atacante/alvo efetivos, fichas próprias, equipamentos somente do aliado, composição de atributos, origem de crítico, ação e parâmetros originais. A Seed registrada é a usada na execução. |
+| `conditions` | Atacante/alvo efetivos, fichas próprias, equipamentos somente do aliado, composição de atributos, origem de crítico, presets selecionados com revisão/marca de edição, ação e parâmetros originais. A Seed registrada é a usada na execução. |
 | `summary` | Quantidade, mínimo/máximo/média, totais de dano e HP removido, frequência/contagem de críticos, médias por tipo, chance configurada e histograma. |
 | `samples` | Todas as amostras, com índice local e global (`sequence_index`), atributos usados na base, sorteios/fatores, crítico/multiplicador, dano bruto/final, HP removido e HP/MP antes/depois. |
 
