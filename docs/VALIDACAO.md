@@ -1,5 +1,217 @@
 # Validação da entrega
 
+## Quatro lotes do Monstro #1 — contato/distância, 28/10/2026
+
+Executados pelo modelo real do laboratório **4×1000 ataques**, usando os presets pessoais atuais, semente421 reiniciada em cada caso e mesmos sorteios verificados. Contato contra #1/#2 e distância contra #1/#2. Ataques24/24, potência1×, variação±10%, CRI3%/2×, EVA5%/12%. Arquivo pessoal preservado.
+
+Médias recebidas: contato **7,197/8,783**; distância **7,560/8,094**. Normais7–8/9–11 e7–9/8–10. Defesas efetivas55/35 em contato e50/40 em distância; seleção e composição corretas. Conferência independente das **4000 amostras sem divergências**, incluindo sorteios, dano, crítico/esquiva e HP/MP. Acertos normais para cair5–6/4 em contato e5–6/4–5 em distância; estimativas de resistência acumulada calculadas separadamente, sem ATB.
+
+Conclusão: especializações das proteções funcionam, com #1 ainda mais resistente nos dois modos pelas bases/HP; #2 melhora contra disparos em relação ao contato. Valores iniciais coerentes para manter, sem concluir justiça temporal de batalha a partir desses lotes. Nenhum ajuste de atributos. Quatro JSONsv4, scripts reproduzíveis, log e análise em `artifacts/monstro-quatro-cenarios-2026-10-28/`.
+
+## ATQ D/DEF D e proteções com duas defesas — D94
+
+Executada em **28/10/2026**, Godot4.7.2/macOS. **Dezesseis suítes headless aprovadas**, zero falhas nas execuções finais:
+
+| Suíte | Verificações |
+| --- | ---: |
+| `damage_distance_tests` | 73 |
+| `damage_distance_ui_smoke` | 22 |
+| `damage_lab_tests` | 3.201 |
+| `damage_equipment_scales_tests` | 512 |
+| `damage_equipment_scales_ui_smoke` | 48 |
+| `damage_equipment_exclusivity_tests` | 73 |
+| `damage_equipment_exclusivity_ui_smoke` | 15 |
+| `damage_equipment_tests` | 66 |
+| `damage_export_tests` | 2.280 |
+| `damage_evasion_tests` | 4.093 |
+| `damage_presets_tests` | 88 |
+| `damage_enemy_ranges_tests` | 1.208 |
+| `damage_lab_ui_smoke` | 116 |
+| `damage_presets_ui_smoke` | 53 |
+| `damage_ally_02_tests` | 46 |
+| `damage_ally_02_ui_smoke` | 28 |
+
+Cobertura nova: pares independentes ATQ F/DEF F, ATQ D/DEF D e MAG/DEF M; arma determina modo automático do aliado, monstro contato por padrão, overrides físicos e magia independente. Arco não soma ATQ F; espada não soma ATQ D. Todos os estágios de metal/traje têm prioridades opostas;36 combinações verificam também DEF D. Bases45/30 e bônus iniciais5/10 compõem DEF D50/40. Valores inválidos, zero/zero, limites com soma bruta, modo canônico, compatibilidade legada, persistência de bônus editados, histórico imutável, campos/teclado, novo seletor e JSONv4 por amostra aprovados. O teste de clique da UI geral agora revela o campo antes de clicar, compatível com a ficha mais alta.
+
+Execução gráfica específica: **25 verificações e três capturas**, zero falhas. `first-defenses.png`, `bow-and-dual-armor.png` e `ranged-source-picker.png` inspecionadas em `artifacts/damage-lab-distance/`: atributos, duas composições de defesa, bônus de arco e modo da ação legíveis. Nenhuma animação nova foi criada.
+
+Compatibilidade real: `verify_existing.gd` na mesma pasta reabriu **os três presets pessoais** e reproduziu **4000 amostras dos relatórios19–22** com seus sorteios originais. **24.024 verificações, zero falhas**, comparando dano, HP removido, crítico, esquiva e HP/MP finais. Atributos antigos, bônus existentes, revisões e arquivos pessoais/relatórios foram preservados; campos ausentes foram completados somente em memória. #1 revisão2 agora mostra próprios ATQ F/D23/10 e DEF F/D45/45, efetivos33/10 e55/50; #2 revisão1 mostra20/20 e30/30, efetivos20/30 e35/40.
+
+Logs finais na pasta das capturas. Avisos ambientais conhecidos de certificados/consulta ao destino temporário no headless, sem erros de script nas execuções finais. Controle físico e outras plataformas não testados.
+
+Para repetir na raiz:
+
+```sh
+godot --headless --path . --script res://tests/damage_distance_tests.gd --log-file /private/tmp/rpg-distance-tests.log
+godot --headless --path . --script res://tests/damage_distance_ui_smoke.gd --log-file /private/tmp/rpg-distance-ui.log
+godot --path . --script res://tests/damage_distance_ui_smoke.gd --log-file /private/tmp/rpg-distance-graphics.log -- --visual-captures=res://artifacts/damage-lab-distance
+godot --headless --path . --script res://artifacts/damage-lab-distance/verify_existing.gd --log-file /private/tmp/rpg-distance-existing.log
+```
+
+## Relatórios19–22 — ofensiva e defesa iniciais, 28/10/2026
+
+Analisados os quatro JSONs mais recentes,1000 amostras cada, semente421 com trechos consecutivos dos três RNGs. #1 revisão2 com ATQ33/DEF55/HP40/EVA5; #2 revisão1 com ATQ30/DEF35/HP36/EVA12. Presets sem edição local, ambos no equipamento inicial.
+
+Médias ofensivas15,700 e14,143: #1 **11,01% acima no lote**, contra14,36% esperados pela configuração. Mais críticos e menos esquivas do alvo favoreceram #2 nesse trecho. Médias recebidas7,260 e8,914, normais7–8 e9–11; esquivas4,5% e11,9%, coerentes com5% e12% configurados. Acertos normais para cair5–6 (quase sempre6) para #1 e4 para #2.
+
+Cálculo independente conferiu **4000 amostras sem divergências**, incluindo dano, HP/MP, composição, contagens, resumos, histogramas e continuidade RNG. Estudo e script reproduzível em `artifacts/analise-lotes-019-022-2026-10-28/`. Não houve teste de equipamentos superiores nesses JSONs nem alteração de presets nesta análise. Recomendação de manter as fichas iniciais e comparar os demais estágios em teste posterior.
+
+## Escalas de arcos e trajes leves — D92
+
+Executada em **28/10/2026**, Godot 4.7.2/macOS. **Quatorze suítes headless aprovadas**, zero falhas nas execuções finais:
+
+| Suíte | Verificações |
+| --- | ---: |
+| `damage_equipment_scales_tests` | 512 |
+| `damage_equipment_scales_ui_smoke` | 48 |
+| `damage_equipment_exclusivity_tests` | 73 |
+| `damage_equipment_exclusivity_ui_smoke` | 15 |
+| `damage_lab_tests` | 3.185 |
+| `damage_equipment_tests` | 66 |
+| `damage_export_tests` | 2.280 |
+| `damage_evasion_tests` | 4.093 |
+| `damage_presets_tests` | 82 |
+| `damage_enemy_ranges_tests` | 1.162 |
+| `damage_lab_ui_smoke` | 112 |
+| `damage_presets_ui_smoke` | 53 |
+| `damage_ally_02_tests` | 44 |
+| `damage_ally_02_ui_smoke` | 26 |
+
+Cobertura específica: seis arcos e seis trajes com as curvas aprovadas; crítico+12p.p./1,6× e EVA+5 constantes; todos os estágios recusados para primeiro aliado, mesmo ao remover metadados; **36 combinações** válidas com composição e atributos próprios separados, RNG sem avanço por troca, lote, JSON/dono, gravação e reabertura de cada par. Inversão mantém equipamento no aliado alvo e histórico anterior imutável. IDs originais continuam válidos; nomes antigos são atualizados em cópia sem perder bônus personalizados ou revisão. Arquivo e catálogo não são modificados pela leitura.
+
+UI: seis opções em ordem por slot, índices filtrados por ID, seleção de cada estágio, teclado, próprios/totais, crítico/EVA, salvar/carga de equipamento superior, alternância para primeiro aliado sem expor itens do segundo, inversão, exportação e reabertura. Execução gráfica específica com **51 verificações e três capturas**, zero falhas. Capturas finais `stage-1-equipment.png`, `stage-6-equipment.png`, `stage-6-reopened.png` em `artifacts/damage-lab-equipment-scales/`, inspecionadas visualmente.
+
+Biblioteca pessoal real reaberta: **três presets válidos**, primeiro com ATQ próprio23/revisão2 e segundo com20/revisão1, seus equipamentos iniciais e Monstro #1 preservados. Comparação integral confirmou que somente nomes de exibição são resolvidos em memória pelo catálogo; atributos, bônus, IDs e revisões preservados. Arquivo comparado antes/depois e mantido integralmente. Nenhuma migração com escrita no arquivo pessoal foi necessária.
+
+Logs na pasta das capturas. Avisos ambientais conhecidos de certificados/consulta ao destino temporário no headless; nenhum erro de script nas execuções finais. Outras plataformas e controle físico não testados.
+
+Para repetir, na raiz do projeto:
+
+```sh
+godot --headless --path . --script res://tests/damage_equipment_scales_tests.gd --log-file /private/tmp/rpg-scales-model.log
+godot --headless --path . --script res://tests/damage_equipment_scales_ui_smoke.gd --log-file /private/tmp/rpg-scales-ui.log
+godot --path . --script res://tests/damage_equipment_scales_ui_smoke.gd --log-file /private/tmp/rpg-scales-graphics.log -- --visual-captures=res://artifacts/damage-lab-equipment-scales
+```
+
+## Conferência dos relatórios após D88 — 27/10/2026
+
+Analisados os dois JSONs mais recentes: execuções10 e11, semente421,1000 ações cada. Preset #1 revisão2 corretamente carregado com ATQ próprio23/total33; #2 revisão1 com20/30; ambos sem edição local. Mesmo alvo/ação/configuração, usando trechos consecutivos dos três RNGs.
+
+Médias observadas **15,674 contra13,841**, vantagem de **13,24%** para #1; teóricas **15,919 contra13,920 (+14,36%)**. Normal13–16 contra12–14, crítico27–33 contra19–23. Comparação por cálculo independente das **2000 amostras** concluída sem divergências, inclusive HP/MP, resumos e estados RNG. Resultado consistente com a direção aproximada15%; recomendação de manter os valores, sem modificar presets nesta análise. Estudo e script reproduzível em `artifacts/balanceamento-aliados-pos-ajuste-2026-10-27/`.
+
+## Atualização dos presets — D88
+
+Executada em **27/10/2026**, Godot4.7.2/macOS. Primeiro ensaio em cópia temporária, depois atualização real por `damage_presets.gd.update`, ambos concluídos com **zero falhas** na execução final. Biblioteca reaberta e comparada integralmente com o estado anterior: somente ATQ próprio20→23 e revisão1→2 do Aliado #1; Aliado #2 e Monstro #1 e todos os demais campos preservados. Backup anterior em `/private/tmp/rpg-presets-before-attack23-54345.json`.
+
+A calculadora validou os presets recarregados, ATQ efetivo33/30 e extremos normais13–16/12–14 e críticos27–33/19–23 contra Monstro #1 (DEF40). Executados **1000 ataques com cada aliado** após recarga, sem erro. Logs `preset-preview.log` e `preset-aplicado.log` em `artifacts/balanceamento-aliados-2026-10-27/`. Média esperada14,36% maior para #1 vem do cálculo teórico previamente conferido, e não da promessa de porcentagem exata em todo lote. Nenhum código de jogo ou fórmula foi alterado nesta atualização.
+
+## Equipamentos obrigatórios e exclusividade nos dois sentidos — D86
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. **Doze suítes headless aprovadas**, sem falhas: `damage_equipment_exclusivity_tests` (**73 verificações**), `damage_equipment_exclusivity_ui_smoke` (**15**), `damage_lab_tests` (3.185), `damage_equipment_tests` (66), `damage_export_tests` (2.280), `damage_evasion_tests` (4.093), `damage_presets_tests` (82), `damage_enemy_ranges_tests` (1.162), `damage_lab_ui_smoke` (112), `damage_presets_ui_smoke` (53), `damage_ally_02_tests` (44) e `damage_ally_02_ui_smoke` (26).
+
+Cobertura: primeiro aliado somente espadas/metal; segundo somente arco/couro; nenhum seletor oferece `none`. Modelo recusa slots vazios, itens desligados e categorias trocadas, preservando o conjunto anterior. Salvamento/carga recusam equipamento ausente/desligado; calculadora exige os dois itens com aliado atacante ou alvo. Presets legados com `none` recebem defaults compatíveis para cada personagem em cópia, incluindo leitura da biblioteca sem regravar o arquivo original. Defaults por personagem e restauração mantêm os dois slots completos. Cobertura anterior de identidade, cópias, RNG, histórico, bônus, EVA e exportação permanece aprovada.
+
+Execução gráfica específica com **18 verificações e três capturas**, zero falhas. Capturas inspecionadas em `artifacts/damage-lab-mandatory-equipment/`. Biblioteca pessoal real reaberta pelo modelo: **Aliado #1, Monstro #1 e Aliado #2** válidos; conferidos os seis pares de espadas/metal para #1 e somente arco/couro para #2. Arquivo original comparado antes/depois e preservado integralmente. Logs na mesma pasta. Avisos ambientais conhecidos de certificados/consulta ao destino temporário no headless; nenhum erro de script. Outras plataformas e controle físico não testados.
+
+Para repetir:
+
+```sh
+godot --headless --path . --script res://tests/damage_equipment_exclusivity_tests.gd --log-file /private/tmp/rpg-mandatory-exclusivity.log
+godot --headless --path . --script res://tests/damage_equipment_exclusivity_ui_smoke.gd --log-file /private/tmp/rpg-mandatory-ui.log
+godot --path . --script res://tests/damage_equipment_exclusivity_ui_smoke.gd --log-file /private/tmp/rpg-mandatory-graphics.log -- --visual-captures=res://artifacts/damage-lab-mandatory-equipment
+```
+
+## Exclusividade do arco composto/couro — D85
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. **Doze suítes headless aprovadas**, sem falhas: `damage_equipment_exclusivity_tests` (**30 verificações**), `damage_equipment_exclusivity_ui_smoke` (**13**), `damage_lab_tests` (3.185), `damage_equipment_tests` (66), `damage_export_tests` (2.280), `damage_evasion_tests` (4.093), `damage_presets_tests` (80), `damage_enemy_ranges_tests` (1.162), `damage_lab_ui_smoke` (111), `damage_presets_ui_smoke` (53), `damage_ally_02_tests` (44) e `damage_ally_02_ui_smoke` (25).
+
+Cobertura nova: arco/couro recusados para primeiro aliado e permitidos para segundo; nome não concede acesso; remover restrição da cópia de item não contorna catálogo; bloqueio em seleção por ID, setter do modelo, salvamento/carga e calculadora, inclusive como alvo e arma ofensiva isolada. Falha não altera ficha, arquivo, histórico ou RNG. Identidade/dono corretos no JSON, equipamentos não vazam entre personagens, cópia com nome novo mantém personagem, Atualizar não troca identidade, identidade desconhecida é recusada, presets anteriores compatíveis e equipamentos comuns preservados.
+
+UI específica: menus filtrados por identidade, restauração por ID depois de filtrar, alternância entre primeiro/segundo aliado, cópia e reabertura, inversão dos papéis e lote válido. Execução gráfica com **16 verificações e três capturas**, sem falhas ou erros de script na execução final. `ally1-restricted.png`, `ally2-exclusive.png` e `ally2-copy.png` inspecionadas em `artifacts/damage-lab-exclusivity/`. Logs guardados na mesma pasta. Avisos ambientais conhecidos de certificados/consulta ao destino inexistente no headless; controle físico e outras plataformas não testados.
+
+Migração real executada e verificada: Aliado #1 identificado como `ally_1` com Bronze; Aliado #2 como `ally_2` com arco/couro; Monstro #1 preservado. Três presets mantidos sem alteração de atributos, bônus, IDs ou revisões. Somente metadados de identidade e restrição foram acrescentados; reabertura validou os itens de ambos. Registro em `migration.log`.
+
+Para repetir:
+
+```sh
+godot --headless --path . --script res://tests/damage_equipment_exclusivity_tests.gd --log-file /private/tmp/rpg-exclusive-model.log
+godot --headless --path . --script res://tests/damage_equipment_exclusivity_ui_smoke.gd --log-file /private/tmp/rpg-exclusive-ui.log
+godot --path . --script res://tests/damage_equipment_exclusivity_ui_smoke.gd --log-file /private/tmp/rpg-exclusive-graphics.log -- --visual-captures=res://artifacts/damage-lab-exclusivity
+```
+
+## Aliado #2, arco composto e EVA do couro — D84
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. **Dez suítes headless aprovadas**, sem falhas: `damage_ally_02_tests` (**44 verificações**), `damage_ally_02_ui_smoke` (**25**), `damage_lab_tests` (3.185), `damage_equipment_tests` (66), `damage_export_tests` (2.280), `damage_evasion_tests` (4.093), `damage_presets_tests` (80), `damage_enemy_ranges_tests` (1.162), `damage_lab_ui_smoke` (111) e `damage_presets_ui_smoke` (53).
+
+Cobertura nova: salvar/reabrir todos os atributos e arco/couro do catálogo; ATQ30/DEF35, CRI7+12=19% e 1,6×, EVA própria7 + armadura5 = efetiva12; extremos de dano normal12–14/crítico19–23 e recebido9–11; RNG reproduzível; sorteio contra EVA total; troca/remoção de armadura e inversão sem alterar base; limite100 com soma bruta preservada; atualizar bônus e reabrir sem duplicação; histórico/JSON próprios/bônus/efetivos; rejeição de valores negativos/fracionários/não finitos/acima do limite ou bônus sem armadura; armaduras antigas sem o campo recebem zero em memória sem sobrescrita na leitura.
+
+Interface: teclado edita bônus de EVA e Carregar recupera a ficha completa; seletores mostram arco/couro, chance/multiplicador e composição; inversão mantém couro no aliado alvo; Sem armadura bloqueia o bônus; atualização/reabertura preserva os campos; exportação descreve a EVA efetiva. Execução gráfica específica com **28 verificações e três capturas**, sem falhas. `ally02-loaded.png`, `ally02-equipment.png` e `ally02-target-conditions.png` inspecionadas em `artifacts/damage-lab-ally02/`, com campos e totais legíveis. Logs na mesma pasta. Avisos ambientais conhecidos de certificados macOS/consulta ao destino ainda inexistente no diálogo não impediram os testes; nenhum erro de script nas execuções finais. Controle físico e outras plataformas não validados.
+
+Instalação real executada por `damage_presets.gd`: **Aliado #2** adicionado uma vez à biblioteca pessoal, depois reaberto e validado com os totais esperados. Os dois presets anteriores foram comparados após normalização e preservados, com nomes/IDs/revisões/valores mantidos; armaduras antigas recebem somente o novo bônus zero compatível. Biblioteca final contém **Aliado #1, Monstro #1 e Aliado #2**. Sem autoimportação da definição ao iniciar ou alteração de fichas da exploração. Instalação documentada em `install.log`; testes usam arquivos temporários exclusivos.
+
+Para repetir os testes, na raiz do projeto:
+
+```sh
+godot --headless --path . --script res://tests/damage_ally_02_tests.gd --log-file /private/tmp/rpg-ally02-model.log
+godot --headless --path . --script res://tests/damage_ally_02_ui_smoke.gd --log-file /private/tmp/rpg-ally02-ui.log
+godot --path . --script res://tests/damage_ally_02_ui_smoke.gd --log-file /private/tmp/rpg-ally02-graphics.log -- --visual-captures=res://artifacts/damage-lab-ally02
+```
+
+## Biblioteca vazia e gerenciamento de presets — D77
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. Oito suítes headless aprovadas: `damage_presets_tests` (**79 verificações**), `damage_presets_ui_smoke` (**53**), `damage_lab_ui_smoke` (**111**), `damage_lab_tests` (3.185), `damage_equipment_tests` (66), `damage_export_tests` (2.280), `damage_evasion_tests` (4.093) e `damage_enemy_ranges_tests` (1.162). Sem falhas nas execuções finais.
+
+Cobertura nova: biblioteca inicialmente vazia sem referências; apenas duas fichas manuais; Salvar e Carregar/Atualizar/Excluir em categorias independentes; carga de todos os nove atributos com valores distintos, zeros e limites; HP 99999; restauração dos IDs, bônus e críticos dos equipamentos; multiplicador próprio do monstro; recarregar o mesmo preset após edição/digitação pendente e perda de foco; troca de lados sem truncamento ou duplicação de bônus; persistência e reabertura. Nome salvo identifica participante e preset. Exclusão relê disco, conserva registros novos de outra instância e a categoria oposta; é persistente, preserva ficha atual/histórico/RNG, permite excluir todos e depois salvar novamente. Arquivo inválido é preservado e bloqueia escrita/exclusão. Erros de nome, carga inválida e gravação não confirmam sucesso.
+
+Execução gráfica específica de presets: **58 verificações**, incluindo **cinco capturas**, zero falhas. Capturas `presets-empty.png`, `presets-save-dialog.png`, `presets-saved.png`, `presets-deleted.png` e `presets-restarted.png` inspecionadas em `artifacts/damage-lab-presets-reset/`: controles legíveis, listas inicialmente vazias, dados/equipamentos completos após carregar e exclusão voltando à ficha manual. A suíte gráfica geral também passou com 125 verificações na reorganização do layout. Rolagem por foco é reaplicada após o layout estabilizar, validada na suíte headless geral. Logs na mesma pasta; avisos ambientais conhecidos de certificados/consulta ao destino inexistente no macOS, sem erros de script nas execuções finais. Controle físico e outras plataformas não validados.
+
+Limpeza pontual autorizada: catálogo de referências removido do projeto e três presets do arquivo pessoal efetivamente excluídos. Novos presets não são apagados ao iniciar. Testes usam arquivos temporários próprios e não escrevem na biblioteca real.
+
+Para repetir na raiz do projeto:
+
+```sh
+godot --headless --path . --script res://tests/damage_presets_tests.gd --log-file /private/tmp/rpg-presets-reset-model.log
+godot --headless --path . --script res://tests/damage_presets_ui_smoke.gd --log-file /private/tmp/rpg-presets-reset-ui.log
+godot --path . --script res://tests/damage_presets_ui_smoke.gd --log-file /private/tmp/rpg-presets-reset-graphics.log -- --visual-captures=res://artifacts/damage-lab-presets-reset
+```
+
+## HP dos inimigos até 99.999 — D76
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. Seis suítes headless aprovadas: `damage_enemy_ranges_tests` (**1.162 verificações**), `damage_presets_tests` (**38**), `damage_lab_tests` (3.185), `damage_export_tests` (2.280), `damage_evasion_tests` (4.093) e `damage_lab_ui_smoke` (**111**). Execução gráfica com **125 verificações/14 capturas**, zero falhas nas execuções finais.
+
+Cobertura: HP inicial de monstro em 1/9999/10000/99999, como atacante e alvo; recusa de zero, negativos, 100000, frações e NaN/INF sem consumir histórico/RNG; dano mínimo e HP restante 99998; edição com cinco dígitos e limite na digitação; inversão sem truncamento; salvar/reabrir preset com 99999; histórico/JSON e metadados da faixa íntegros. Demais atributos continuam nas faixas anteriores, inclusive HP do aliado até 999.
+
+Captura `artifacts/damage-lab-hp99999/enemy-large-values.png` inspecionada: HP 99999 no editor, HUD e condições, sem corte do texto. Logs e capturas guardados nessa pasta. Avisos ambientais conhecidos de certificados e consulta ao destino inexistente no diálogo macOS; nenhum erro de script nas execuções finais. Para repetir: `godot --headless --path . --script res://tests/damage_enemy_ranges_tests.gd --log-file /private/tmp/rpg-hp99999.log`; trocar o arquivo para as demais suítes. Capturas: `godot --path . --script res://tests/damage_lab_ui_smoke.gd --log-file /private/tmp/rpg-hp99999-graphics.log -- --visual-captures=res://artifacts/damage-lab-hp99999`.
+
+## EVA no laboratório de danos — D75
+
+Executada em **27/10/2026**, Godot 4.7.2/macOS. Oito suítes headless passaram, sem falhas:
+
+| Suíte | Verificações |
+| --- | ---: |
+| `damage_evasion_tests` | 4.093 |
+| `damage_lab_tests` | 3.185 |
+| `damage_export_tests` | 2.280 |
+| `damage_equipment_tests` | 66 |
+| `damage_enemy_ranges_tests` | 1.160 |
+| `damage_presets_tests` | 37 |
+| `damage_lab_ui_smoke` | 111 |
+| `damage_presets_ui_smoke` | 28 |
+
+Cobertura nova: EVA 0/100 e fronteira percentual; elegibilidade de física/magia; esquiva anterior ao crítico inclusive forçado; dano/HP removido zero com MP consumido; mínimo 1 nos acertos; alvo aliado/monstro e inversão; médias sem esquivas, lote sem acertos e histograma com três categorias; sorteios independentes reproduzíveis/contínuos, JSON v3 e estados RNG sem perda; recusa de valores inválidos sem alterar histórico/RNG; salvar/atualizar/reabrir EVA em presets e migração de presets antigos para zero sem sobrescrita na leitura. Os campos de item/buff de CRI não modificam EVA. Testes usam arquivos temporários exclusivos.
+
+Execução gráfica com **125 verificações**, incluindo **14 capturas**, sem falhas. Capturas `evasion-all.png`, `evasion-single.png` e `evasion-mixed.png` inspecionadas em `artifacts/damage-lab-evasion/`: EVA nas duas fichas, aviso Esquivou!, HP preservado/MP consumido, resumo legível e cores distintas no histograma. Logs headless e gráfico guardados na mesma pasta. Avisos ambientais conhecidos de certificados do macOS e consulta a destino ainda inexistente no diálogo não impediram os testes; nenhum erro de script nas execuções finais. Controle físico e outras plataformas não validados.
+
+Para repetir na raiz do projeto (use o caminho do executável se `godot` não estiver no PATH):
+
+```sh
+godot --headless --path . --script res://tests/damage_evasion_tests.gd --log-file /private/tmp/rpg-evasion-tests.log
+godot --headless --path . --script res://tests/damage_lab_ui_smoke.gd --log-file /private/tmp/rpg-evasion-ui.log
+godot --path . --script res://tests/damage_lab_ui_smoke.gd --log-file /private/tmp/rpg-evasion-graphics.log -- --visual-captures=res://artifacts/damage-lab-evasion
+```
+
+EVA permanece exclusiva do laboratório; dados e implementação do combate integrado não foram alterados. Conversão/limites, números das fichas e permissões são experimentais; equipamentos, itens e buffs de EVA continuam adiados.
+
 ## Presets persistentes de fichas — D72
 
 Executada em **27/10/2026**, Godot 4.7.2/macOS. **44 suítes headless aprovadas**, incluindo combate, exploração e as sete suítes de danos. Testes novos: `damage_presets_tests` (**37 verificações**) e `damage_presets_ui_smoke` (**28 headless**, **32 gráficas** incluindo quatro capturas), zero falhas. A suíte anterior da interface de danos mantém suas 97 verificações headless aprovadas.

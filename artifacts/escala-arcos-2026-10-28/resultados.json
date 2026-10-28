@@ -1,0 +1,60 @@
+{
+  "status": "proposta P08B, sem implementação",
+  "assumptions": "ATQ próprios23/20, crítico10%/19%, multiplicadores2/1.6, DEF do alvo40/EVA3%, variação±10%, arredondamento; sem níveis/ATB. Escolha do bônus inteiro cujo dano médio fica mais próximo da média da espada/1.15.",
+  "rows": [
+    {
+      "stage": 1,
+      "sword_bonus": 10,
+      "bow_bonus_proposed": 10,
+      "bow_effective_attack": 30,
+      "expected_mean_ally1": 15.919223140495868,
+      "expected_mean_ally2": 13.920308333333335,
+      "ally1_advantage_percent": 14.359702093494331
+    },
+    {
+      "stage": 2,
+      "sword_bonus": 16,
+      "bow_bonus_proposed": 15,
+      "bow_effective_attack": 35,
+      "expected_mean_ally1": 20.551643819855364,
+      "expected_mean_ally2": 17.66309375,
+      "ally1_advantage_percent": 16.353590773730463
+    },
+    {
+      "stage": 3,
+      "sword_bonus": 24,
+      "bow_bonus_proposed": 22,
+      "bow_effective_attack": 42,
+      "expected_mean_ally1": 27.093781801720233,
+      "expected_mean_ally2": 23.24695112670068,
+      "ally1_advantage_percent": 16.54767824844443
+    },
+    {
+      "stage": 4,
+      "sword_bonus": 34,
+      "bow_bonus_proposed": 31,
+      "bow_effective_attack": 51,
+      "expected_mean_ally1": 35.73875284702986,
+      "expected_mean_ally2": 30.87678868944637,
+      "ally1_advantage_percent": 15.746340095417043
+    },
+    {
+      "stage": 5,
+      "sword_bonus": 48,
+      "bow_bonus_proposed": 44,
+      "bow_effective_attack": 64,
+      "expected_mean_ally1": 48.45801348938703,
+      "expected_mean_ally2": 42.56281376953125,
+      "ally1_advantage_percent": 13.850587397198533
+    },
+    {
+      "stage": 6,
+      "sword_bonus": 65,
+      "bow_bonus_proposed": 58,
+      "bow_effective_attack": 78,
+      "expected_mean_ally1": 64.55350000000003,
+      "expected_mean_ally2": 55.71705409886589,
+      "ally1_advantage_percent": 15.859499472916339
+    }
+  ]
+}

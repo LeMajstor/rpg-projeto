@@ -14,99 +14,127 @@ func new_screen(path: String) -> void:
 	await process_frame
 	screen.set_process(false)
 
+func save_preset(side: String, name: String) -> String:
+	screen._request_preset_save(side)
+	screen.preset_name_edit.text = name
+	screen.preset_dialog.get_ok_button().pressed.emit()
+	return screen.model.selected_presets.get(side, {}).get("id", "")
+
 func _run() -> void:
 	root.size = Vector2i(1440, 960)
 	var path = "/private/tmp/rpg-damage-presets-ui-%d.json" % OS.get_process_id()
 	var export_path = "/private/tmp/rpg-damage-presets-report-%d.json" % OS.get_process_id()
 	await new_screen(path)
-	expect(screen.preset_pickers["ally"].item_count == 2 and screen.preset_pickers["enemy"].item_count == 2, "Cada categoria tem ficha manual e referência inicial")
-	expect(screen.preset_update_buttons["ally"].disabled and screen.preset_update_buttons["enemy"].disabled and not FileAccess.file_exists(path), "Estado manual não atualiza referência nem cria arquivo")
-	var enemy_before: Dictionary = screen.model.enemy().duplicate(true)
-	var settings: Dictionary = screen.model.settings.duplicate(true)
-	var action: Dictionary = screen.model.action.duplicate(true)
-	screen.preset_pickers["ally"].grab_focus()
-	pad(JOY_BUTTON_DPAD_RIGHT)
-	expect(screen.model.ally()["hp"] == 40 and screen.model.ally()["physical_attack"] == 20 and screen.model.enemy() == enemy_before, "Controle carrega somente a ficha aliada")
-	expect(screen.model.weapon["id"] == "sword_bronze" and screen.model.armor["id"] == "armor_bronze" and "20 + 10 = 30" in screen.composition_labels["attacker"].text, "Referência recompõe totais e equipamentos")
-	screen.preset_pickers["enemy"].grab_focus()
-	key(KEY_RIGHT)
-	expect(screen.model.enemy()["hp"] == 30 and screen.model.enemy()["physical_attack"] == 23 and screen.model.enemy()["physical_defense"] == 60, "Teclado carrega referência inicial completa do monstro")
-	expect(screen.model.settings == settings and screen.model.action == action and screen.model.sequence_position == 0, "Seleção de presets mantém controles globais e sequência")
-	expect(screen.preset_update_buttons["ally"].disabled and "protegida" in screen.preset_status["ally"].text, "Referências fornecidas ficam protegidas")
-	key(KEY_F9)
-	expect(screen.last_result["snapshot"]["presets"]["attacker"]["name"] == "Aliado inicial · Bronze" and screen.last_result["snapshot"]["presets"]["target"]["name"] == "Monstro inicial · 30 HP", "Histórico identifica os dois presets usados")
-	await capture("presets-reference")
+	expect(screen.preset_pickers["ally"].item_count == 1 and screen.preset_pickers["enemy"].item_count == 1 and not FileAccess.file_exists(path), "Listas começam vazias sem referências e sem criar arquivo pessoal")
+	for side in ["ally", "enemy"]:
+		expect(screen.preset_update_buttons[side].disabled and screen.preset_delete_buttons[side].disabled and screen.preset_load_buttons[side].disabled and not screen.preset_save_buttons[side].disabled, "Ficha manual permite salvar; carregar/atualizar/excluir indisponíveis")
+	await capture("presets-empty")
+	var own = {"hp": 47, "mp": 0, "ini": 17, "physical_attack": 23, "physical_defense": 28, "magic_power": 367, "magic_defense": 999, "critical_base": 8, "evasion_base": 19}
+	var monster = {"hp": 99999, "mp": 1, "ini": 99, "physical_attack": 302, "physical_defense": 204, "magic_power": 9999, "magic_defense": 405, "critical_base": 16, "evasion_base": 7}
+	for stat in own:
+		screen.profile_edits["attacker"][stat].value = own[stat]
+		screen.profile_edits["target"][stat].value = monster[stat]
+	choose_id(screen.weapon_picker, screen.model.data["weapons"], "sword_steel")
+	choose_id(screen.armor_picker, screen.model.data["armors"], "armor_mithril")
+	screen.weapon_bonus.value = 17
+	screen.armor_bonus.value = 12
+	screen.weapon_chance.value = 7.5
+	screen.weapon_multiplier.value = 3.1
+	screen.enemy_multiplier.value = 2.5
+	key(KEY_F7)
 	var historical: Dictionary = screen.last_result.duplicate(true)
 	var rng: Dictionary = screen.model.rng_state.duplicate()
+	var settings: Dictionary = screen.model.settings.duplicate(true)
+	var action: Dictionary = screen.model.action.duplicate(true)
 	var number: int = screen.model.run_number
-	screen.profile_edits["attacker"]["hp"].value = 45
-	expect("alterado" in screen.preset_status["ally"].text and screen.preset_update_buttons["ally"].disabled, "Edição marca referência alterada e exige salvar cópia")
-	screen.preset_save_buttons["ally"].grab_focus()
-	key(KEY_ENTER)
+	# Salvar deve confirmar a digitação pendente, mesmo sem Enter.
+	screen.profile_edits["attacker"]["hp"].grab_focus()
+	type_text("47")
+	screen._request_preset_save("ally")
 	await process_frame
-	await process_frame
-	expect(screen.preset_dialog.visible and screen.preset_name_edit.has_focus(), "Salvar como abre nome por teclado")
+	expect(screen.preset_dialog.visible and screen.preset_name_edit.has_focus(), "Salvar abre diálogo de nome e captura ficha atual")
 	key(KEY_F9)
 	expect(screen.model.run_number == number, "Diálogo de nome bloqueia execução ao fundo")
 	screen.preset_name_edit.text = ""
 	screen.preset_dialog.get_ok_button().pressed.emit()
-	expect(screen.preset_dialog.visible and not screen.preset_error.text.is_empty() and not FileAccess.file_exists(path), "Nome vazio mantém diálogo aberto sem criar preset")
+	expect(screen.preset_dialog.visible and not screen.preset_error.text.is_empty() and not FileAccess.file_exists(path), "Nome vazio não salva")
 	await capture("presets-save-dialog", screen.preset_dialog)
-	screen.preset_name_edit.text = "Meu aliado · defesa"
+	screen.preset_name_edit.text = "Aliado de estudo"
 	screen.preset_name_edit.text_submitted.emit(screen.preset_name_edit.text)
-	expect(not screen.preset_dialog.visible and FileAccess.file_exists(path), "Confirmar nome grava arquivo pessoal")
 	var ally_id: String = screen.model.selected_presets["ally"]["id"]
-	expect(screen.model.selected_presets["ally"]["source"] == "custom" and not screen.model.preset_modified("ally") and screen.preset_update_buttons["ally"].disabled, "Novo personalizado fica selecionado e sincronizado")
-	expect(screen.model.rng_state == rng and screen.last_result == historical, "Salvar não muda sorteios ou execução anterior")
-	screen.profile_edits["attacker"]["hp"].value = 55
-	expect(not screen.preset_update_buttons["ally"].disabled and "alterado" in screen.preset_status["ally"].text, "Atualizar só é habilitado após editar personalizado")
-	screen.preset_update_buttons["ally"].grab_focus()
+	expect(not ally_id.is_empty() and not screen.preset_dialog.visible and screen.model.ally()["hp"] == 47, "Confirmação salva ficha com digitação pendente")
+	expect(screen.model.ally()["name"] == "Aliado de estudo" and screen.profile_labels["attacker"].text == "Aliado de estudo", "Nome salvo identifica ficha e duelo")
+	expect(not screen.preset_load_buttons["ally"].disabled and not screen.preset_delete_buttons["ally"].disabled and screen.preset_update_buttons["ally"].disabled, "Preset salvo pode carregar/excluir; atualizar só após edição")
+	var enemy_id = save_preset("enemy", "Monstro de estudo")
+	expect(not enemy_id.is_empty() and screen.model.rng_state == rng and screen.model.run_number == number and screen.last_result == historical, "Salvar fichas mantém RNG e resultados anteriores")
+	# Recarga explícita do mesmo preset; nenhum valor deve ficar preso ao texto anterior.
+	for stat in own:
+		screen.profile_edits["attacker"][stat].value = 1
+	screen.weapon_bonus.value = 99
+	screen.armor_bonus.value = 99
+	screen.profile_edits["attacker"]["hp"].grab_focus()
+	type_text("333")
+	screen._reload_preset("ally")
+	for stat in own:
+		expect(screen.model.ally()[stat] == own[stat] and screen.profile_edits["attacker"][stat].value == own[stat], "Carregar restaura atributo e editor: " + stat)
+	key(KEY_TAB)
+	expect(screen.model.ally()["hp"] == 47 and screen.profile_edits["attacker"]["hp"].get_line_edit().text == "47", "Texto pendente não sobrescreve dados após carregar e perder foco")
+	expect(screen.model.weapon["id"] == "sword_steel" and screen.model.armor["id"] == "armor_mithril" and screen.weapon_bonus.value == 17 and screen.armor_bonus.value == 12 and screen.weapon_chance.value == 7.5 and screen.weapon_multiplier.value == 3.1, "Carregar restaura seleções, bônus e crítico dos equipamentos")
+	expect("23 + 17 = 40" in screen.composition_labels["attacker"].text and screen.model.settings == settings and screen.model.action == action and screen.model.rng_state == rng, "Carregar recalcula total sem duplicar bônus e preserva controles/RNG")
+	screen.model.swap_roles()
+	screen._sync_controls()
+	screen._preview()
+	screen.profile_edits["attacker"]["hp"].value = 2
+	screen.enemy_multiplier.value = 9
+	screen.preset_load_buttons["enemy"].grab_focus()
 	pad(JOY_BUTTON_A)
-	expect(screen.model.selected_presets["ally"]["revision"] == 2 and screen.preset_update_buttons["ally"].disabled, "Controle atualiza personalizado com revisão nova")
-	var disk = JSON.parse_string(FileAccess.get_file_as_string(path))
-	expect(disk["presets"].size() == 1 and disk["presets"][0]["actor"]["hp"] == 55, "Atualização persiste sem duplicar entrada")
-	var unchanged = FileAccess.get_file_as_string(path)
-	screen._request_preset_save("enemy")
-	screen.preset_dialog.get_cancel_button().pressed.emit()
-	expect(FileAccess.get_file_as_string(path) == unchanged and screen.pending_preset.is_empty(), "Cancelar preserva biblioteca e limpa captura")
-	screen._request_preset_save("enemy")
-	screen.preset_name_edit.text = "Meu monstro · inicial"
-	screen.preset_dialog.get_ok_button().pressed.emit()
-	var enemy_id: String = screen.model.selected_presets["enemy"]["id"]
-	expect(screen.model.selected_presets["enemy"]["source"] == "custom" and screen.model.rng_state == rng, "Monstro personalizado é salvo independente do aliado e sem sorteios")
-	unchanged = FileAccess.get_file_as_string(path)
-	screen._request_preset_save("ally")
-	screen.preset_name_edit.text = "Meu aliado · defesa"
-	screen.preset_dialog.get_ok_button().pressed.emit()
-	expect(screen.preset_dialog.visible and "Já existe" in screen.preset_error.text and FileAccess.get_file_as_string(path) == unchanged, "Nome duplicado não sobrescreve preset")
-	screen.preset_dialog.get_cancel_button().pressed.emit()
-	for control in screen.focus_controls:
-		if control is Button and control.text == "Trocar lados":
-			control.grab_focus()
-			pad(JOY_BUTTON_A)
-			break
-	expect(screen.model.ally_role() == "target" and screen.preset_pickers["ally"].get_item_metadata(screen.preset_pickers["ally"].selected) == ally_id, "Presets permanecem nas categorias após inverter lados")
-	screen.profile_edits["attacker"]["hp"].value = 9000
-	choose_preset("enemy", enemy_id)
-	expect(screen.model.attacker["hp"] == 30 and screen.model.target["hp"] == 55 and screen.model.armor["id"] == "armor_bronze", "Carregar monstro restaura só seu lado e preserva equipamento do aliado alvo")
+	for stat in monster:
+		expect(screen.model.enemy()[stat] == monster[stat] and screen.profile_edits["attacker"][stat].value == monster[stat], "Monstro carrega todos os valores após trocar lados: " + stat)
+	expect(screen.enemy_multiplier.value == 2.5 and screen.model.ally()["mp"] == 0 and screen.model.weapon["attack_bonus"] == 17, "Crítico próprio do monstro e equipamento do aliado alvo são preservados")
+	screen.profile_edits["target"]["hp"].value = 55
+	screen.preset_update_buttons["ally"].grab_focus()
+	key(KEY_ENTER)
+	expect(screen.model.selected_presets["ally"]["revision"] == 2 and screen.preset_update_buttons["ally"].disabled, "Atualizar persiste revisão nova sem duplicação")
 	key(KEY_F7)
-	expect("Meu aliado · defesa" in screen.conditions.text and "revisão 2" in screen.conditions.text, "Condições exibem preset/revisão de cada participante")
-	await capture("presets-custom")
-	screen.profile_edits["target"]["hp"].value = 65
+	var result: Dictionary = screen.last_result.duplicate(true)
 	screen._request_export()
 	screen._save_export(export_path)
 	var report = JSON.parse_string(FileAccess.get_file_as_string(export_path))
-	expect(report["conditions"]["presets"]["target"]["id"] == ally_id and report["conditions"]["presets"]["target"]["revision"] == 2 and report["conditions"]["target"]["hp"] == 55, "JSON mantém valores e revisão da execução, não da edição posterior")
-	key(KEY_F5)
-	expect(screen.model.selected_presets.is_empty() and FileAccess.get_file_as_string(path) == unchanged, "Restaurar caso não apaga os dois presets pessoais")
+	expect(report["conditions"]["target"]["hp"] == 55 and report["conditions"]["attacker"]["hp"] == 99999 and report["conditions"]["presets"]["target"]["revision"] == 2, "Exportação conserva fichas e revisão carregadas")
+	await capture("presets-saved")
+	var unchanged = FileAccess.get_file_as_string(path)
+	screen._request_preset_save("ally")
+	screen.preset_name_edit.text = "Aliado de estudo"
+	screen.preset_dialog.get_ok_button().pressed.emit()
+	expect(screen.preset_dialog.visible and "Já existe" in screen.preset_error.text and FileAccess.get_file_as_string(path) == unchanged, "Nome duplicado não sobrescreve")
+	screen.preset_dialog.get_cancel_button().pressed.emit()
+	expect(FileAccess.get_file_as_string(path) == unchanged, "Cancelar preserva presets")
+	# Exclusão é persistente, sem apagar a ficha em edição ou o histórico.
+	var before: Dictionary = screen.model.ally().duplicate(true)
+	var before_rng: Dictionary = screen.model.rng_state.duplicate()
+	screen.preset_delete_buttons["ally"].grab_focus()
+	pad(JOY_BUTTON_A)
+	expect(screen.preset_pickers["ally"].item_count == 1 and not screen.model.selected_presets.has("ally") and screen.model.ally() == before, "Excluir remove preset do aliado e mantém ficha atual")
+	expect(screen.preset_pickers["enemy"].item_count == 2 and screen.model.rng_state == before_rng and screen.last_result == result, "Excluir não modifica outra categoria, RNG ou histórico")
+	expect(screen.preset_delete_buttons["ally"].disabled and screen.preset_load_buttons["ally"].disabled, "Exclusão volta ao estado manual")
+	await capture("presets-deleted")
 	screen.queue_free()
 	await process_frame
 	await new_screen(path)
-	expect(screen.preset_pickers["ally"].item_count == 3 and screen.preset_pickers["enemy"].item_count == 3, "Reabrir mostra referências e personalizados de ambas as categorias")
-	choose_preset("ally", ally_id)
+	expect(screen.preset_pickers["ally"].item_count == 1 and screen.preset_pickers["enemy"].item_count == 2, "Exclusão permanece ao reabrir")
 	choose_preset("enemy", enemy_id)
-	expect(screen.model.ally()["hp"] == 55 and screen.model.enemy()["hp"] == 30 and screen.model.configuration()["attacker"]["physical_attack"] == 30, "Reabertura carrega próprios e recalcula total sem duplicação")
-	await capture("presets-reopened")
+	for stat in monster:
+		expect(screen.model.enemy()[stat] == monster[stat], "Reabertura carrega campo do monstro: " + stat)
+	key(KEY_F6)
+	unchanged = FileAccess.get_file_as_string(path)
+	screen._delete_preset("enemy")
+	expect(screen.busy and FileAccess.get_file_as_string(path) == unchanged, "Exclusão bloqueada durante animação")
+	finish()
+	screen._delete_preset("enemy")
+	expect(screen.preset_pickers["enemy"].item_count == 1 and screen.preset_library.custom.is_empty(), "Excluir último preset deixa biblioteca vazia")
+	var new_id = save_preset("ally", "Novo aliado")
+	expect(not new_id.is_empty() and screen.preset_library.entries("ally").size() == 1, "Salvar continua disponível após excluir todos")
+	await capture("presets-restarted")
 	screen.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(path)

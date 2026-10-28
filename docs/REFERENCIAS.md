@@ -12,3 +12,10 @@ Referências externas não são requisitos nem decisões de implementação. Qua
 - **Limite:** registrar este guia não aprova copiar suas fórmulas, valores, habilidades ou conteúdo, nem autoriza implementar os atributos/fórmulas discutidos anteriormente. O combate atual permanece com as regras experimentais existentes. Técnicas conjuntas continuam futuras/fora do escopo.
 
 Foi guardado o link com identificação da fonte; o texto integral do guia não foi incorporado ao projeto.
+
+## PixelLab — geração de sprites
+
+- **Link:** [PixelLab](https://www.pixellab.ai/).
+- **Registrado em:** 27/10/2026, por solicitação expressa do usuário.
+- **Uso futuro pretendido:** fonte/ferramenta para gerar sprites do projeto.
+- **Status:** referência guardada para avaliação e uso futuro; adoção, estilo visual e fluxo de produção ainda não definidos.

@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+Aliado #1: Espada de Bronze / Armadura de Bronze; ATQ próprio 23.0; revisão 2.0
+Aliado #2: Arco Composto de Madeira / Traje de Couro; ATQ próprio 20.0; revisão 1.0
+BIBLIOTECA REAL: 3 presets reabertos; apenas nomes de exibição atualizados em memória; arquivo e valores/revisões preservados.

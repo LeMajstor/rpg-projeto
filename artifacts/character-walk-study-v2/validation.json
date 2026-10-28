@@ -1,0 +1,20 @@
+{
+  "frames": 8,
+  "frame_size": [
+    96,
+    112
+  ],
+  "preview_size": [
+    288,
+    336
+  ],
+  "duration_ms_per_frame": 100,
+  "cycle_ms": 800,
+  "loop": "infinite",
+  "sheet_grid": [
+    4,
+    2
+  ],
+  "visual_review": "near arm swings backward, vertical, forward, vertical across key frames 1/3/5/7; opposite far arm; contact sheet inspected",
+  "integration_into_game": false
+}

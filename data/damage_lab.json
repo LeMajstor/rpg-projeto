@@ -22,7 +22,7 @@
   "profiles": [
     {
       "id": "ally_1",
-      "name": "Aliado 1 · teste",
+      "name": "Aliado · manual",
       "side": "ally",
       "color": "6fc8ff",
       "hp": 999,
@@ -33,56 +33,15 @@
       "magic_power": 100,
       "magic_defense": 100,
       "critical_base": 5,
-      "unarmed_critical_multiplier": 2.0
-    },
-    {
-      "id": "ally_2",
-      "name": "Aliado 2 · teste",
-      "side": "ally",
-      "color": "b5a2ff",
-      "hp": 700,
-      "mp": 180,
-      "ini": 12,
-      "physical_attack": 75,
-      "physical_defense": 80,
-      "magic_power": 150,
-      "magic_defense": 130,
-      "critical_base": 6,
-      "unarmed_critical_multiplier": 2.0
-    },
-    {
-      "id": "ally_3",
-      "name": "Aliado 3 · teste",
-      "side": "ally",
-      "color": "ffc379",
-      "hp": 999,
-      "mp": 60,
-      "ini": 7,
-      "physical_attack": 170,
-      "physical_defense": 150,
-      "magic_power": 55,
-      "magic_defense": 65,
-      "critical_base": 3,
-      "unarmed_critical_multiplier": 2.0
-    },
-    {
-      "id": "ally_4",
-      "name": "Aliado 4 · teste",
-      "side": "ally",
-      "color": "6de0b5",
-      "hp": 850,
-      "mp": 100,
-      "ini": 10,
-      "physical_attack": 110,
-      "physical_defense": 95,
-      "magic_power": 100,
-      "magic_defense": 110,
-      "critical_base": 8,
-      "unarmed_critical_multiplier": 2.0
+      "unarmed_critical_multiplier": 2.0,
+      "evasion_base": 0,
+      "character_id": "ally_1",
+      "ranged_attack": 10,
+      "ranged_defense": 100
     },
     {
       "id": "heavy",
-      "name": "Pesado · teste",
+      "name": "Monstro · manual",
       "side": "enemy",
       "color": "d99c65",
       "hp": 999,
@@ -93,70 +52,24 @@
       "magic_power": 50,
       "magic_defense": 80,
       "critical_base": 3,
-      "unarmed_critical_multiplier": 2.0
-    },
-    {
-      "id": "agile",
-      "name": "Ágil · teste",
-      "side": "enemy",
-      "color": "f2b36d",
-      "hp": 700,
-      "mp": 80,
-      "ini": 12,
-      "physical_attack": 110,
-      "physical_defense": 70,
-      "magic_power": 70,
-      "magic_defense": 75,
-      "critical_base": 10,
-      "unarmed_critical_multiplier": 2.0
-    },
-    {
-      "id": "flying",
-      "name": "Voador · teste",
-      "side": "enemy",
-      "color": "d598f3",
-      "hp": 650,
-      "mp": 120,
-      "ini": 10,
-      "physical_attack": 90,
-      "physical_defense": 80,
-      "magic_power": 130,
-      "magic_defense": 120,
-      "critical_base": 6,
-      "unarmed_critical_multiplier": 2.0
-    },
-    {
-      "id": "static",
-      "name": "Estático · teste",
-      "side": "enemy",
-      "color": "e5ac68",
-      "hp": 999,
-      "mp": 100,
-      "ini": 5,
-      "physical_attack": 110,
-      "physical_defense": 180,
-      "magic_power": 90,
-      "magic_defense": 150,
-      "critical_base": 4,
-      "unarmed_critical_multiplier": 2.0
+      "unarmed_critical_multiplier": 2.0,
+      "evasion_base": 0,
+      "ranged_attack": 130,
+      "ranged_defense": 160
     }
   ],
   "weapons": [
-    {
-      "id": "none",
-      "name": "Sem arma",
-      "attack_bonus": 0,
-      "critical_chance": 0.0,
-      "critical_multiplier": 2.0,
-      "equipped": false
-    },
     {
       "id": "sword_bronze",
       "name": "Espada de Bronze",
       "attack_bonus": 10,
       "critical_chance": 5.0,
       "critical_multiplier": 2.0,
-      "equipped": true
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "attack_mode": "melee"
     },
     {
       "id": "sword_iron",
@@ -164,7 +77,11 @@
       "attack_bonus": 16,
       "critical_chance": 5.0,
       "critical_multiplier": 2.0,
-      "equipped": true
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "attack_mode": "melee"
     },
     {
       "id": "sword_steel",
@@ -172,7 +89,11 @@
       "attack_bonus": 24,
       "critical_chance": 5.0,
       "critical_multiplier": 2.0,
-      "equipped": true
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "attack_mode": "melee"
     },
     {
       "id": "sword_mithril",
@@ -180,7 +101,11 @@
       "attack_bonus": 34,
       "critical_chance": 5.0,
       "critical_multiplier": 2.0,
-      "equipped": true
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "attack_mode": "melee"
     },
     {
       "id": "sword_adamant",
@@ -188,7 +113,11 @@
       "attack_bonus": 48,
       "critical_chance": 5.0,
       "critical_multiplier": 2.0,
-      "equipped": true
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "attack_mode": "melee"
     },
     {
       "id": "sword_runic",
@@ -196,7 +125,83 @@
       "attack_bonus": 65,
       "critical_chance": 5.0,
       "critical_multiplier": 2.0,
-      "equipped": true
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "attack_mode": "melee"
+    },
+    {
+      "id": "compound_bow",
+      "name": "Arco Composto de Madeira",
+      "attack_bonus": 10,
+      "critical_chance": 12.0,
+      "critical_multiplier": 1.6,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "attack_mode": "ranged"
+    },
+    {
+      "id": "bow_oak",
+      "name": "Arco de Carvalho",
+      "attack_bonus": 15,
+      "critical_chance": 12.0,
+      "critical_multiplier": 1.6,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "attack_mode": "ranged"
+    },
+    {
+      "id": "bow_ash",
+      "name": "Arco de Freixo",
+      "attack_bonus": 22,
+      "critical_chance": 12.0,
+      "critical_multiplier": 1.6,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "attack_mode": "ranged"
+    },
+    {
+      "id": "bow_yew",
+      "name": "Arco de Teixo",
+      "attack_bonus": 31,
+      "critical_chance": 12.0,
+      "critical_multiplier": 1.6,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "attack_mode": "ranged"
+    },
+    {
+      "id": "bow_ancient",
+      "name": "Arco de Madeira Ancestral",
+      "attack_bonus": 44,
+      "critical_chance": 12.0,
+      "critical_multiplier": 1.6,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "attack_mode": "ranged"
+    },
+    {
+      "id": "bow_runic",
+      "name": "Arco de Madeira Rúnica",
+      "attack_bonus": 58,
+      "critical_chance": 12.0,
+      "critical_multiplier": 1.6,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "attack_mode": "ranged"
     }
   ],
   "actions": [
@@ -206,7 +211,9 @@
       "damage_type": "physical",
       "power": 1.0,
       "mp_cost": 0,
-      "critical_allowed": true
+      "critical_allowed": true,
+      "evasion_allowed": true,
+      "physical_mode": "weapon"
     },
     {
       "id": "physical_skill",
@@ -214,7 +221,9 @@
       "damage_type": "physical",
       "power": 1.8,
       "mp_cost": 4,
-      "critical_allowed": true
+      "critical_allowed": true,
+      "evasion_allowed": true,
+      "physical_mode": "weapon"
     },
     {
       "id": "magic_skill",
@@ -222,52 +231,158 @@
       "damage_type": "magical",
       "power": 1.5,
       "mp_cost": 7,
-      "critical_allowed": false
+      "critical_allowed": false,
+      "evasion_allowed": false
     }
   ],
-  "default_armor": "none",
+  "default_armor": "armor_bronze",
   "armors": [
-    {
-      "id": "none",
-      "name": "Sem armadura",
-      "defense_bonus": 0,
-      "equipped": false
-    },
     {
       "id": "armor_bronze",
       "name": "Armadura de Bronze",
       "defense_bonus": 10,
-      "equipped": true
+      "equipped": true,
+      "evasion_bonus": 0,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "ranged_defense_bonus": 5
     },
     {
       "id": "armor_iron",
       "name": "Armadura de Ferro",
       "defense_bonus": 16,
-      "equipped": true
+      "equipped": true,
+      "evasion_bonus": 0,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "ranged_defense_bonus": 8
     },
     {
       "id": "armor_steel",
       "name": "Armadura de Aço",
       "defense_bonus": 24,
-      "equipped": true
+      "equipped": true,
+      "evasion_bonus": 0,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "ranged_defense_bonus": 12
     },
     {
       "id": "armor_mithril",
       "name": "Armadura de Mithril",
       "defense_bonus": 34,
-      "equipped": true
+      "equipped": true,
+      "evasion_bonus": 0,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "ranged_defense_bonus": 17
     },
     {
       "id": "armor_adamant",
       "name": "Armadura de Adamantio",
       "defense_bonus": 48,
-      "equipped": true
+      "equipped": true,
+      "evasion_bonus": 0,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "ranged_defense_bonus": 24
     },
     {
       "id": "armor_runic",
       "name": "Armadura Rúnica",
       "defense_bonus": 65,
-      "equipped": true
+      "equipped": true,
+      "evasion_bonus": 0,
+      "allowed_character_ids": [
+        "ally_1"
+      ],
+      "ranged_defense_bonus": 33
+    },
+    {
+      "id": "leather_set",
+      "name": "Traje de Couro",
+      "defense_bonus": 5,
+      "evasion_bonus": 5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "ranged_defense_bonus": 10
+    },
+    {
+      "id": "leather_reinforced",
+      "name": "Traje Reforçado",
+      "defense_bonus": 8,
+      "evasion_bonus": 5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "ranged_defense_bonus": 16
+    },
+    {
+      "id": "leather_hunting",
+      "name": "Traje de Caça",
+      "defense_bonus": 12,
+      "evasion_bonus": 5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "ranged_defense_bonus": 24
+    },
+    {
+      "id": "leather_scout",
+      "name": "Traje do Batedor",
+      "defense_bonus": 17,
+      "evasion_bonus": 5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "ranged_defense_bonus": 34
+    },
+    {
+      "id": "leather_ranger",
+      "name": "Traje do Patrulheiro",
+      "defense_bonus": 24,
+      "evasion_bonus": 5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "ranged_defense_bonus": 48
+    },
+    {
+      "id": "leather_runic",
+      "name": "Traje Rúnico",
+      "defense_bonus": 33,
+      "evasion_bonus": 5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "ranged_defense_bonus": 65
+    }
+  ],
+  "characters": [
+    {
+      "id": "ally_1",
+      "name": "Aliado #1",
+      "default_weapon": "sword_bronze",
+      "default_armor": "armor_bronze",
+      "legacy_ranged_attack": 10
+    },
+    {
+      "id": "ally_2",
+      "name": "Aliado #2",
+      "default_weapon": "compound_bow",
+      "default_armor": "leather_set"
     }
   ]
 }

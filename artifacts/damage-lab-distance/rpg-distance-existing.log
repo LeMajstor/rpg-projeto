@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+Aliado #1 revisão 2.0: próprios F/D 23.0/10.0; defesas F/D 45.0/45.0; efetivos F/D 33/10 e 55/50
+Aliado #2 revisão 1.0: próprios F/D 20.0/20.0; defesas F/D 30.0/30.0; efetivos F/D 20/30 e 35/40
+COMPATIBILIDADE REAL: 3 presets e 4000 amostras anteriores; 24024 verificações, 0 falhas; arquivos preservados.

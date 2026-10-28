@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+monstro-contato-aliado-1-1000x.json: média 7.197, esquivas 44, críticos 21
+monstro-contato-aliado-2-1000x.json: média 8.783, esquivas 123, críticos 21
+monstro-distancia-aliado-1-1000x.json: média 7.56, esquivas 44, críticos 21
+monstro-distancia-aliado-2-1000x.json: média 8.094, esquivas 123, críticos 21
+QUATRO LOTES: 4000 ataques reais na calculadora Godot, 0 falhas; sorteios pareados e presets preservados.

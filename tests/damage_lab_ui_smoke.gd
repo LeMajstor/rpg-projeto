@@ -74,11 +74,12 @@ func choose(picker: OptionButton, index: int) -> void:
 	picker.select(index)
 	picker.item_selected.emit(index)
 
-func choose_id(picker: OptionButton, entries: Array, id: String) -> void:
-	for index in range(entries.size()):
-		if entries[index]["id"] == id:
+func choose_id(picker: OptionButton, _entries: Array, id: String) -> void:
+	for index in range(picker.item_count):
+		if picker.get_item_metadata(index) == id:
 			choose(picker, index)
 			return
+	expect(false, "Equipamento ausente do seletor: " + id)
 
 func finish() -> void:
 	for tick in range(60):
@@ -110,9 +111,10 @@ func _run() -> void:
 	for role in ["attacker", "target"]:
 		for key in screen.profile_edits[role]:
 			var spin: SpinBox = screen.profile_edits[role][key]
+			var evasion: bool = key == "evasion_base"
 			var small: bool = key in ["ini", "critical_base"]
 			var monster: bool = role == "target"
-			expect(spin.min_value == (1 if small or monster else 0) and spin.max_value == (99 if small else 9999 if monster else 999), "Editor respeita faixa de cada atributo por lado")
+			expect(spin.min_value == (0 if evasion else 1 if small or monster else 0) and spin.max_value == (100 if evasion else 99 if small else 99999 if monster and key == "hp" else 9999 if monster else 999), "Editor respeita faixa de cada atributo por lado")
 	var attack: SpinBox = screen.profile_edits["attacker"]["physical_attack"]
 	attack.grab_focus()
 	key(KEY_RIGHT)
@@ -138,9 +140,13 @@ func _run() -> void:
 	type_text("426")
 	key(KEY_TAB)
 	expect(screen.model.attacker["physical_attack"] == 426, "Começar a digitar edita sem exigir Enter antes e Tab confirma")
+	screen.weapon_chance.grab_focus()
+	await process_frame
+	await process_frame
+	await process_frame
 	click(screen.weapon_chance.get_line_edit().get_global_rect().get_center())
 	type_text("8,5")
-	click(defense.get_line_edit().get_global_rect().get_center())
+	click(screen.weapon_multiplier.get_line_edit().get_global_rect().get_center())
 	expect(is_equal_approx(screen.model.weapon["critical_chance"], 8.5), "Clique em outro campo confirma decimal com vírgula")
 	attack.grab_focus()
 	type_text("10000")
@@ -237,13 +243,17 @@ func _run() -> void:
 	screen.profile_edits["attacker"]["mp"].value = 0
 	key(KEY_F7)
 	expect("MP insuficiente" in screen.notice.text and screen.model.rng_state == state and screen.model.history.size() == history_count, "Lote inválido não consome RNG nem cria histórico parcial")
-	choose(screen.profile_pickers["attacker"], 4)
-	expect(screen.model.attacker["side"] != screen.model.target["side"], "Escolha de inimigo ajusta alvo para um aliado")
+	screen.model.swap_roles()
+	screen._sync_controls()
+	screen._preview()
+	expect(screen.model.attacker["side"] != screen.model.target["side"], "Troca de lados mantém atacante e alvo opostos")
 	screen.conversion_edit.grab_focus()
 	await process_frame
 	await process_frame
 	axis(0.8)
 	axis(0.0)
+	await process_frame
+	await process_frame
 	expect(is_equal_approx(screen.model.settings["crit_per_point"], 1.1), "Analógico ajusta conversão de CRI e retorna ao repouso")
 	var parent = screen.conversion_edit.get_parent()
 	while not parent is ScrollContainer:
@@ -297,52 +307,92 @@ func _run() -> void:
 	screen._request_export()
 	screen._save_export(export_path)
 	exported = JSON.parse_string(FileAccess.get_file_as_string(export_path))
-	expect(exported["version"] == 2 and exported["conditions"]["base_stats"]["target"]["physical_defense"] == 20 and exported["conditions"]["composition"]["target"]["effective"]["physical_defense"] == 36, "JSON exporta próprios e totais do aliado alvo")
+	expect(exported["version"] == 4 and exported["conditions"]["base_stats"]["target"]["physical_defense"] == 20 and exported["conditions"]["composition"]["target"]["effective"]["physical_defense"] == 36, "JSON exporta próprios e totais do aliado alvo")
 	expect(exported["conditions"]["equipment"]["target"]["armor"]["id"] == "armor_iron" and not exported["conditions"]["equipment"].has("attacker"), "JSON identifica os itens somente no aliado")
 	DirAccess.remove_absolute(export_path)
 	screen.profile_edits["target"]["physical_defense"].grab_focus()
 	await process_frame
 	await capture("equipment-monster-attack")
-	choose_id(screen.weapon_picker, screen.model.data["weapons"], "none")
-	choose_id(screen.armor_picker, screen.model.data["armors"], "none")
-	expect(not screen.weapon_bonus.editable and not screen.armor_bonus.editable and not screen.weapon_chance.editable, "Sem equipamento não permite bônus fictícios de item")
-	screen.weapon_bonus.grab_focus()
-	key(KEY_RIGHT)
-	expect(screen.weapon_bonus.value == 0 and screen.model.configuration()["target"]["physical_defense"] == 20, "Setas não alteram campos sem equipamento")
+	expect(not screen.model.choose_equipment("weapon", "none").is_empty() and not screen.model.choose_equipment("armor", "none").is_empty(), "Não permite remover arma ou armadura")
+	expect(screen.weapon_bonus.editable and screen.armor_bonus.editable and screen.weapon_chance.editable, "Equipamentos obrigatórios mantêm bônus editáveis")
+	expect(screen.model.weapon["id"] == "sword_bronze" and screen.model.armor["id"] == "armor_iron", "Tentativa de remoção preserva os dois itens")
 	choose_id(screen.weapon_picker, screen.model.data["weapons"], "sword_runic")
 	screen.profile_edits["target"]["physical_attack"].value = 999
 	expect("1064 → 999" in screen.composition_labels["target"].text, "Prévia sinaliza limite experimental sem esconder soma")
 	screen._reset_case()
-	expect(screen.model.armor["id"] == "none" and screen.weapon_bonus.value == 10, "Restaurar caso também restaura equipamentos")
+	expect(screen.model.armor["id"] == "armor_bronze" and screen.weapon_bonus.value == 10, "Restaurar caso também restaura equipamentos")
 	for stat in ["hp", "mp", "physical_attack", "physical_defense", "magic_power", "magic_defense"]:
 		screen.profile_edits["target"][stat].value = 9999
 		expect(screen.model.target[stat] == 9999, "Monstro alvo aceita quatro dígitos: " + stat)
 	var enemy_hp: SpinBox = screen.profile_edits["target"]["hp"]
 	enemy_hp.grab_focus()
-	type_text("10000")
+	type_text("100000")
 	key(KEY_ENTER)
-	expect(screen.model.target["hp"] == 9999, "Digitação limita HP de monstro a 9999")
+	expect(screen.model.target["hp"] == 99999, "Digitação limita HP de monstro a 99999")
 	for control in screen.focus_controls:
 		if control is Button and control.text == "Trocar lados":
 			control.pressed.emit()
 			break
 	for stat in ["hp", "mp", "physical_attack", "physical_defense", "magic_power", "magic_defense"]:
-		expect(screen.profile_edits["attacker"][stat].max_value == 9999 and screen.profile_edits["attacker"][stat].value == 9999 and screen.model.attacker[stat] == 9999, "Trocar lados preserva monstro 9999: " + stat)
+		expect(screen.profile_edits["attacker"][stat].max_value == (99999 if stat == "hp" else 9999) and screen.profile_edits["attacker"][stat].value == (99999 if stat == "hp" else 9999) and screen.model.attacker[stat] == (99999 if stat == "hp" else 9999), "Trocar lados preserva HP 99999/demais 9999: " + stat)
 		expect(screen.profile_edits["target"][stat].max_value == 999 and screen.profile_edits["target"][stat].min_value == 0, "Trocar lados restaura faixa do aliado: " + stat)
 	screen.profile_edits["target"]["physical_attack"].grab_focus()
 	type_text("1000")
 	key(KEY_ENTER)
 	expect(screen.model.target["physical_attack"] == 999 and screen.model.attacker["physical_attack"] == 9999, "Aliado continua limitado a 999 sem truncar o monstro")
 	key(KEY_F7)
-	expect(screen.last_result["snapshot"]["attacker"]["hp"] == 9999 and screen.last_result["snapshot"]["attacker"]["physical_attack"] == 9999, "Lote usa atributos grandes do atacante")
+	expect(screen.last_result["snapshot"]["attacker"]["hp"] == 99999 and screen.last_result["snapshot"]["attacker"]["physical_attack"] == 9999, "Lote usa atributos grandes do atacante")
 	screen._request_export()
 	screen._save_export(export_path)
 	exported = JSON.parse_string(FileAccess.get_file_as_string(export_path))
-	expect(exported["conditions"]["attacker"]["hp"] == 9999 and exported["conditions"]["base_stats"]["attacker"]["magic_power"] == 9999, "Interface exporta quatro dígitos sem truncar")
+	expect(exported["conditions"]["attacker"]["hp"] == 99999 and exported["conditions"]["base_stats"]["attacker"]["magic_power"] == 9999, "Interface exporta HP com cinco dígitos sem truncar")
 	DirAccess.remove_absolute(export_path)
 	screen.profile_edits["attacker"]["hp"].grab_focus()
 	await process_frame
 	await capture("enemy-large-values")
+	screen._reset_case()
+	screen.result_tabs.current_tab = 0
+	screen.profile_edits["target"]["evasion_base"].value = 100
+	choose(screen.critical_mode, 2)
+	key(KEY_F9)
+	expect(screen.last_result["evasion_count"] == 1000 and screen.last_result["total"] == 0 and screen.last_result["critical_count"] == 0, "EVA 100 evita o lote mesmo com crítico forçado")
+	expect("Esquivas: 1000" in screen.summary.text and "ESQUIVOU" in screen.calculation.text and screen.samples_tree.get_root().get_first_child().get_text(3) == "Esquiva", "Resumo, cálculo e amostras mostram esquiva")
+	expect(screen.field.result["evaded"] and screen.histogram.result["histogram"][0]["evaded"] == 1000, "Duelo e histograma recebem classificação de esquiva")
+	screen.profile_edits["target"]["evasion_base"].grab_focus()
+	await process_frame
+	await capture("evasion-all")
+	choose(screen.action_picker, 1)
+	key(KEY_F6)
+	finish()
+	expect(screen.last_result["samples"][0]["mp_after"] == 96 and screen.last_result["samples"][0]["hp_removed"] == 0, "Esquiva visual de técnica preserva HP e consome MP")
+	await capture("evasion-single")
+	choose(screen.action_picker, 2)
+	key(KEY_F7)
+	expect(not screen.evasion_allowed.button_pressed and screen.last_result["evasion_count"] == 0, "Magia por padrão não permite esquiva")
+	screen.evasion_allowed.button_pressed = true
+	key(KEY_F7)
+	expect(screen.last_result["evasion_count"] == 10, "Controle de permissão permite comparar esquiva em magia")
+	choose(screen.action_picker, 0)
+	screen.profile_edits["target"]["evasion_base"].value = 25
+	choose(screen.critical_mode, 0)
+	key(KEY_R)
+	key(KEY_F9)
+	expect(screen.last_result["evasion_count"] > 0 and screen.last_result["hit_count"] > 0, "EVA intermediária produz lote misto")
+	var evasion_history: Dictionary = screen.last_result.duplicate(true)
+	screen._request_export()
+	screen._save_export(export_path)
+	exported = JSON.parse_string(FileAccess.get_file_as_string(export_path))
+	expect(exported["version"] == 4 and exported["conditions"]["target"]["evasion_base"] == 25 and exported["summary"]["evasion_count"] == screen.last_result["evasion_count"], "Interface exporta EVA, condições e resumo completos")
+	DirAccess.remove_absolute(export_path)
+	screen.profile_edits["target"]["evasion_base"].grab_focus()
+	await process_frame
+	await capture("evasion-mixed")
+	screen.profile_edits["target"]["evasion_base"].value = 0
+	expect(evasion_history["snapshot"]["target"]["evasion_base"] == 25 and screen.last_result["samples"] == evasion_history["samples"], "Editar EVA não muda condições nem resultados do histórico")
+	screen.model.swap_roles()
+	screen._sync_controls()
+	expect(screen.profile_edits["target"]["evasion_base"].min_value == 0 and screen.profile_edits["target"]["evasion_base"].max_value == 100, "EVA do aliado também aceita zero a cem após inverter lados")
+	expect(FileAccess.get_file_as_string("res://data/lab.json") == production, "Esquiva permanece isolada do combate atual")
 	screen.queue_free()
 	await process_frame
 	print("LAB DANOS/UI: %d verificações, %d falhas" % [checks, failures])

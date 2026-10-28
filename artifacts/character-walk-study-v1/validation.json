@@ -1,0 +1,29 @@
+{
+  "frames": 8,
+  "frame_size": [
+    96,
+    112
+  ],
+  "preview_size": [
+    288,
+    336
+  ],
+  "duration_ms_per_frame": 100,
+  "cycle_ms": 800,
+  "loop": "infinite",
+  "sheet_grid": [
+    4,
+    2
+  ],
+  "source_grid": [
+    4,
+    2
+  ],
+  "source_size": [
+    1536,
+    1024
+  ],
+  "background": "transparent",
+  "alpha_gif_threshold_percent": 90,
+  "integration_into_game": false
+}

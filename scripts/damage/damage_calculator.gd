@@ -1,11 +1,16 @@
 extends RefCounted
 ## Fórmula experimental pura, independente do BattleModel e da renderização.
+const Equipment = preload("res://scripts/damage/damage_equipment.gd")
 const ALLOWED_COUNTS = [1, 10, 100, 1000]
-const STATS = ["hp", "mp", "ini", "physical_attack", "physical_defense", "magic_power", "magic_defense", "critical_base"]
+const STATS = ["hp", "mp", "ini", "physical_attack", "physical_defense", "ranged_attack", "ranged_defense", "magic_power", "magic_defense", "critical_base", "evasion_base"]
 
 static func stat_bounds(side: String, stat: String) -> Vector2i:
+	if stat == "evasion_base":
+		return Vector2i(0, 100) # Faixa percentual experimental do laboratório.
 	if stat in ["ini", "critical_base"]:
 		return Vector2i(1, 99)
+	if side == "enemy" and stat == "hp":
+		return Vector2i(1, 99999)
 	return Vector2i(1, 9999) if side == "enemy" else Vector2i(0, 999)
 
 static func attribute_ranges() -> Dictionary:
@@ -41,22 +46,39 @@ static func validate(config: Dictionary) -> String:
 			var value = config["base_stats"][role].get(stat)
 			if not _number(value, bounds.x, bounds.y) or float(value) != floorf(float(value)):
 				return "Atributo próprio fora da faixa: " + stat
+	for role in ["attacker", "target"]:
+		if config[role]["side"] == "ally" and not config.get("equipment", {}).get(role) is Dictionary:
+			return "Aliados precisam de arma e armadura equipadas."
 	for role in config.get("equipment", {}):
 		if config[role]["side"] != "ally":
 			return "Monstros não usam equipamentos."
 		var equipment: Dictionary = config["equipment"][role]
-		for bonus in [equipment["weapon"].get("attack_bonus"), equipment["armor"].get("defense_bonus")]:
+		for category in ["weapon", "armor"]:
+			if not equipment.get(category) is Dictionary or not Equipment.can_equip(config[role], equipment[category], category):
+				return "Equipamento exclusivo ou inválido para este personagem."
+		if equipment["weapon"].get("attack_mode") != Equipment.attack_mode(equipment["weapon"]):
+			return "Modalidade da arma inválida."
+		var eva_bonus = equipment["armor"].get("evasion_bonus", 0)
+		if not _number(eva_bonus, 0, 100) or float(eva_bonus) != floorf(float(eva_bonus)) or (not equipment["armor"].get("equipped", false) and eva_bonus != 0):
+			return "Bônus de EVA da armadura inválido."
+		for bonus in [equipment["weapon"].get("attack_bonus"), equipment["armor"].get("defense_bonus"), equipment["armor"].get("ranged_defense_bonus")]:
 			if not _number(bonus, 0, 999) or float(bonus) != floorf(float(bonus)):
 				return "Bônus de equipamento fora da faixa."
 	if not config.get("action") is Dictionary or not config.get("settings") is Dictionary:
 		return "Ação ou configuração ausente."
 	var action = config.get("action", {})
+	if not action.get("evasion_allowed") is bool:
+		return "Permissão de esquiva inválida."
 	if action.get("damage_type", "") not in ["physical", "magical"] or not _number(action.get("power"), 0, 10) or not _number(action.get("mp_cost"), 0, 999):
 		return "Ação inválida."
+	if action.get("physical_mode", "weapon") not in ["weapon", "melee", "ranged"]:
+		return "Modalidade física inválida."
 	if config["attacker"]["mp"] < action["mp_cost"]:
 		return "MP insuficiente para esta ação."
 	if config["attacker"]["side"] == "ally":
 		var weapon = config.get("weapon", {})
+		if not Equipment.can_equip(config["attacker"], weapon, "weapon"):
+			return "Arma exclusiva ou inválida para este personagem."
 		if not _number(weapon.get("critical_chance"), 0, 100) or not _number(weapon.get("critical_multiplier"), 1, 10):
 			return "Arma de teste inválida."
 	if not _number(config["attacker"].get("unarmed_critical_multiplier", 2.0), 1, 10):
@@ -71,13 +93,21 @@ static func validate(config: Dictionary) -> String:
 		return "Modo de crítico inválido."
 	return ""
 
+static func damage_stats(config: Dictionary) -> Dictionary:
+	if config["action"]["damage_type"] == "magical":
+		return {"mode": "magical", "attack_stat": "magic_power", "defense_stat": "magic_defense", "attack_label": "MAG", "defense_label": "DEF M"}
+	var mode: String = config["action"].get("physical_mode", "weapon")
+	if mode == "weapon":
+		mode = Equipment.attack_mode(config.get("weapon", {})) if config["attacker"]["side"] == "ally" else "melee"
+	return {"mode": mode, "attack_stat": "ranged_attack" if mode == "ranged" else "physical_attack", "defense_stat": "ranged_defense" if mode == "ranged" else "physical_defense", "attack_label": "ATQ D" if mode == "ranged" else "ATQ F", "defense_label": "DEF D" if mode == "ranged" else "DEF F"}
+
 static func base_damage(config: Dictionary) -> Dictionary:
-	var physical: bool = config["action"]["damage_type"] == "physical"
-	var attack: float = config["attacker"]["physical_attack" if physical else "magic_power"]
-	var defense: float = config["target"]["physical_defense" if physical else "magic_defense"]
+	var source = damage_stats(config)
+	var attack: float = config["attacker"][source["attack_stat"]]
+	var defense: float = config["target"][source["defense_stat"]]
 	var power: float = config["action"]["power"]
 	var ratio = attack / (attack + defense) if attack > 0 else 0.0
-	return {"attack": attack, "defense": defense, "power": power,
+	return {"mode": source["mode"], "attack_stat": source["attack_stat"], "defense_stat": source["defense_stat"], "attack": attack, "defense": defense, "power": power,
 		"ratio": ratio, "unprotected": attack * power, "base": attack * power * ratio}
 
 static func critical_source(config: Dictionary) -> Dictionary:
@@ -91,23 +121,29 @@ static func critical_chance(config: Dictionary) -> float:
 	var settings: Dictionary = config["settings"]
 	return clampf(float(config["attacker"]["critical_base"]) * settings["crit_per_point"] + critical_source(config)["chance_bonus"] + settings["item_bonus"] + settings["buff_bonus"], 0.0, 100.0)
 
-static func sample(config: Dictionary, variation_roll: float, critical_roll: float) -> Dictionary:
+static func evasion_chance(config: Dictionary) -> float:
+	return float(config["target"]["evasion_base"]) if config["action"].get("evasion_allowed", false) else 0.0
+
+static func sample(config: Dictionary, variation_roll: float, critical_roll: float, evasion_roll: float = 1.0) -> Dictionary:
 	var base = base_damage(config)
+	var evade_chance = evasion_chance(config)
+	var evaded = evade_chance >= 100.0 or (evade_chance > 0.0 and evasion_roll * 100.0 < evade_chance)
 	var settings: Dictionary = config["settings"]
 	var span = float(settings["variation_percent"]) / 100.0 if settings.get("variation_enabled", false) else 0.0
 	var factor = lerpf(1.0 - span, 1.0 + span, clampf(variation_roll, 0.0, 1.0))
 	var chance = critical_chance(config)
 	var critical = false
-	if config["action"].get("critical_allowed", false):
+	if not evaded and config["action"].get("critical_allowed", false):
 		match settings["critical_mode"]:
 			"forced": critical = true
 			"rolled": critical = chance >= 100.0 or (chance > 0.0 and critical_roll * 100.0 < chance)
 	var multiplier = float(critical_source(config)["multiplier"]) if critical else 1.0
-	var varied: float = base["base"] * factor
+	var varied: float = 0.0 if evaded else base["base"] * factor
 	var raw: float = varied * multiplier
-	var damage = maxi(1, roundi(raw))
+	var damage = 0 if evaded else maxi(1, roundi(raw))
 	var removed = mini(damage, int(config["target"]["hp"]))
 	return {"base": base, "variation_roll": variation_roll, "variation_factor": factor,
+		"evasion_roll": evasion_roll, "evasion_chance": evade_chance, "evaded": evaded,
 		"critical_roll": critical_roll, "chance": chance, "critical": critical,
 		"critical_multiplier": multiplier, "varied": varied, "raw": raw,
 		"damage": damage, "hp_removed": removed,
@@ -122,45 +158,55 @@ static func run_batch(config: Dictionary, count: int, random_seed: int, rng_stat
 		return {"error": "Quantidade permitida: 1, 10, 100 ou 1000."}
 	var variance_rng = RandomNumberGenerator.new()
 	var critical_rng = RandomNumberGenerator.new()
+	var evasion_rng = RandomNumberGenerator.new()
 	variance_rng.seed = random_seed ^ 0x5a4f3d2c
 	critical_rng.seed = random_seed ^ 0x27d4eb2d
+	evasion_rng.seed = random_seed ^ 0x6c8e9cf5
 	if not rng_state.is_empty():
 		variance_rng.state = rng_state["variance"]
 		critical_rng.state = rng_state["critical"]
-	var before = {"variance": variance_rng.state, "critical": critical_rng.state}
+		evasion_rng.state = rng_state["evasion"]
+	var before = {"variance": variance_rng.state, "critical": critical_rng.state, "evasion": evasion_rng.state}
 	var samples: Array[Dictionary] = []
 	var total = 0
 	var removed_total = 0
 	var critical_total = 0
 	var critical_count = 0
+	var evasion_count = 0
 	var minimum = 2147483647
 	var maximum = 0
 	for index in range(count):
-		# Fluxos independentes e um sorteio de cada por amostra, inclusive nos modos fixos.
-		var result = sample(config, variance_rng.randf(), critical_rng.randf())
+		# Um sorteio por fluxo/amostra, inclusive em esquiva e modos fixos.
+		var result = sample(config, variance_rng.randf(), critical_rng.randf(), evasion_rng.randf())
 		result["index"] = index + 1
 		samples.append(result)
 		total += result["damage"]
 		removed_total += result["hp_removed"]
 		minimum = mini(minimum, result["damage"])
 		maximum = maxi(maximum, result["damage"])
+		if result["evaded"]:
+			evasion_count += 1
 		if result["critical"]:
 			critical_count += 1
 			critical_total += result["damage"]
-	var normal_count = count - critical_count
+	var hit_count = count - evasion_count
+	var normal_count = hit_count - critical_count
 	var buckets: Array[Dictionary] = []
 	var width = maxi(1, ceili(float(maximum - minimum + 1) / 12.0))
 	for low in range(minimum, maximum + 1, width):
-		buckets.append({"from": low, "to": mini(maximum, low + width - 1), "normal": 0, "critical": 0, "count": 0})
+		buckets.append({"from": low, "to": mini(maximum, low + width - 1), "normal": 0, "critical": 0, "evaded": 0, "count": 0})
 	for result in samples:
 		var bucket: Dictionary = buckets[int((result["damage"] - minimum) / width)]
 		bucket["count"] += 1
-		bucket["critical" if result["critical"] else "normal"] += 1
+		bucket["evaded" if result["evaded"] else "critical" if result["critical"] else "normal"] += 1
 	return {"error": "", "snapshot": config.duplicate(true), "count": count, "seed": random_seed,
-		"rng_before": before, "rng_after": {"variance": variance_rng.state, "critical": critical_rng.state},
+		"rng_before": before, "rng_after": {"variance": variance_rng.state, "critical": critical_rng.state, "evasion": evasion_rng.state},
 		"samples": samples, "minimum": minimum, "maximum": maximum, "mean": float(total) / count,
 		"total": total, "hp_removed_total": removed_total, "critical_count": critical_count,
 		"critical_frequency": float(critical_count) * 100.0 / count,
+		"evasion_count": evasion_count, "evasion_frequency": float(evasion_count) * 100.0 / count,
+		"evasion_chance": evasion_chance(config), "hit_count": hit_count, "normal_count": normal_count,
+		"critical_hit_frequency": float(critical_count) * 100.0 / hit_count if hit_count else 0.0,
 		"normal_mean": float(total - critical_total) / normal_count if normal_count else 0.0,
 		"critical_mean": float(critical_total) / critical_count if critical_count else 0.0,
 		"chance": critical_chance(config), "histogram": buckets}

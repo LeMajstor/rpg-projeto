@@ -1,22 +1,56 @@
 extends RefCounted
-## Biblioteca de fichas: referências imutáveis e personalizados persistidos em arquivo separado.
+## Biblioteca inicialmente vazia; fichas salvas pelo usuário em arquivo local.
+const Equipment = preload("res://scripts/damage/damage_equipment.gd")
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
 const FORMAT = "rpg.damage_lab.presets"
 const VERSION = 1
 const DEFAULT_PATH = "user://damage_lab_presets.json"
 var definitions: Dictionary
-var references: Array[Dictionary] = []
 var custom: Array[Dictionary] = []
 var storage_path: String
 var load_error = ""
 
-func _init(catalog: Dictionary, supplied: Dictionary, path: String = DEFAULT_PATH) -> void:
+func _init(catalog: Dictionary, path: String = DEFAULT_PATH) -> void:
 	definitions = catalog.duplicate(true)
 	storage_path = path
-	for preset in supplied.get("presets", []):
-		if validate_entry(preset, definitions).is_empty():
-			references.append(preset.duplicate(true))
 	load_custom()
+
+static func upgraded_entry(value: Variant) -> Variant:
+	# Presets v1 anteriores à EVA continuam válidos; não regrava o arquivo ao ler.
+	if not value is Dictionary:
+		return value
+	var entry: Dictionary = value.duplicate(true)
+	if entry.get("actor") is Dictionary and not entry["actor"].has("evasion_base"):
+		entry["actor"]["evasion_base"] = 0
+	if entry.get("actor") is Dictionary and entry["actor"].get("side") == "ally" and not entry["actor"].has("character_id"):
+		entry["actor"]["character_id"] = entry["actor"].get("id", "")
+	if entry.get("actor") is Dictionary:
+		entry["actor"] = Equipment.upgraded_actor(entry["actor"])
+	var equipment = entry.get("equipment", {})
+	# Compatibilidade explícita com a antiga opção "none": carregar já equipado.
+	if entry.get("actor") is Dictionary and entry["actor"].get("side") == "ally" and equipment is Dictionary:
+		for category in ["weapon", "armor"]:
+			if equipment.get(category) is Dictionary and equipment[category].get("id") == "none":
+				equipment[category] = Equipment.default_item(entry["actor"], category)
+	if equipment is Dictionary and equipment.get("armor") is Dictionary and not equipment["armor"].has("evasion_bonus"):
+		equipment["armor"]["evasion_bonus"] = 0
+	if equipment is Dictionary:
+		for category in ["weapon", "armor"]:
+			var item = equipment.get(category)
+			if item is Dictionary and item.get("id") is String:
+				var original = Equipment.catalog_item(category, item["id"])
+				var field = "attack_mode" if category == "weapon" else "ranged_defense_bonus"
+				if not item.has(field) and original.has(field):
+					item[field] = original[field]
+	# IDs estáveis preservam presets antigos; só o nome de exibição acompanha o catálogo.
+	if equipment is Dictionary:
+		for category in ["weapon", "armor"]:
+			var item = equipment.get(category)
+			if item is Dictionary and item.get("id") is String and item.get("name") is String:
+				var current_name = Equipment.catalog_name(category, item["id"])
+				if not current_name.is_empty():
+					item["name"] = current_name
+	return entry
 
 static func _number(value: Variant, low: float, high: float, whole: bool = false) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and value >= low and value <= high and (not whole or float(value) == floorf(float(value)))
@@ -42,6 +76,8 @@ static func validate_entry(value: Variant, catalog: Dictionary) -> String:
 	var profile = _known(catalog["profiles"], actor.get("id"))
 	if profile.is_empty() or actor.get("side") != value["side"] or profile["side"] != value["side"]:
 		return "Ficha não corresponde à categoria do preset."
+	if value["side"] == "ally" and _known(catalog["characters"], Equipment.character_id(actor)).is_empty():
+		return "Personagem do preset inválido."
 	if not actor.get("name") is String or not actor.get("color") is String or not Color.html_is_valid(actor["color"]):
 		return "Apresentação da ficha inválida."
 	for stat in Calculator.STATS:
@@ -56,19 +92,27 @@ static func validate_entry(value: Variant, catalog: Dictionary) -> String:
 		return "Equipamento do aliado ausente."
 	for category in ["weapon", "armor"]:
 		var item = value["equipment"].get(category)
-		if not item is Dictionary:
-			return "Equipamento do aliado inválido."
+		if not item is Dictionary or item.get("equipped") != true:
+			return "Aliados precisam de arma e armadura equipadas."
 		var original = _known(catalog["weapons" if category == "weapon" else "armors"], item.get("id"))
 		if original.is_empty() or item.get("equipped") != original["equipped"] or not item.get("name") is String:
 			return "Equipamento não pertence ao catálogo atual."
+		if not Equipment.can_equip(actor, original, category):
+			return "Equipamento exclusivo de outro personagem: " + original["name"]
 		var bonus = "attack_bonus" if category == "weapon" else "defense_bonus"
-		if not _number(item.get(bonus), 0, 999, true) or (not item["equipped"] and item[bonus] != 0):
+		if not _number(item.get(bonus), 0, 999, true):
 			return "Bônus de equipamento inválido."
+		if category == "armor":
+			if not _number(item.get("ranged_defense_bonus"), 0, 999, true):
+				return "Bônus de DEF D inválido."
+			var eva = item.get("evasion_bonus", 0)
+			if not _number(eva, 0, 100, true):
+				return "Bônus de EVA da armadura inválido."
 		if category == "weapon":
+			if item.get("attack_mode") != original.get("attack_mode"):
+				return "Modalidade da arma inválida."
 			if not _number(item.get("critical_chance"), 0, 100) or not _number(item.get("critical_multiplier"), 1, 10):
 				return "Crítico da arma inválido."
-			if not item["equipped"] and item["critical_chance"] != 0:
-				return "Sem arma não fornece chance de equipamento."
 	return ""
 
 func load_custom() -> String:
@@ -93,10 +137,8 @@ func load_custom() -> String:
 	var loaded: Array[Dictionary] = []
 	var ids: Dictionary = {}
 	var names: Dictionary = {}
-	for preset in references:
-		ids[preset["id"]] = true
-		names[preset["side"] + ":" + preset["name"].strip_edges().to_lower()] = true
-	for preset in data["presets"]:
+	for original in data["presets"]:
+		var preset = upgraded_entry(original)
 		var error = validate_entry(preset, definitions)
 		if error.is_empty() and not preset["id"].begins_with("user_"):
 			error = "Identificador de preset personalizado inválido."
@@ -115,13 +157,11 @@ func load_custom() -> String:
 
 func entries(side: String) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
-	for source in ["reference", "custom"]:
-		var group = references if source == "reference" else custom
-		for preset in group:
-			if preset["side"] == side:
-				var entry: Dictionary = preset.duplicate(true)
-				entry["source"] = source
-				result.append(entry)
+	for preset in custom:
+		if preset["side"] == side:
+			var entry: Dictionary = preset.duplicate(true)
+			entry["source"] = "custom"
+			result.append(entry)
 	return result
 
 func get_entry(id: String) -> Dictionary:
@@ -168,6 +208,8 @@ func create(name: String, payload: Dictionary) -> Dictionary:
 	while not get_entry(preset["id"]).is_empty():
 		preset["id"] += "_1"
 	preset["name"] = name
+	if preset.get("actor") is Dictionary:
+		preset["actor"]["name"] = name
 	preset["revision"] = 1
 	error = validate_entry(preset, definitions)
 	if not error.is_empty():
@@ -182,13 +224,17 @@ func update(id: String, payload: Dictionary) -> Dictionary:
 	if not error.is_empty():
 		return {"error": error}
 	if not is_custom(id):
-		return {"error": "Presets de referência são protegidos. Use Salvar como para criar sua cópia."}
+		return {"error": "Preset não encontrado. Selecione um preset salvo."}
 	var previous = get_entry(id)
 	if payload.get("side") != previous["side"]:
 		return {"error": "Não é possível mudar a categoria do preset."}
+	if Equipment.character_id(payload.get("actor", {})) != Equipment.character_id(previous["actor"]):
+		return {"error": "Não é possível mudar o personagem de um preset ao atualizar."}
 	var preset = payload.duplicate(true)
 	preset["id"] = id
 	preset["name"] = previous["name"]
+	if preset.get("actor") is Dictionary:
+		preset["actor"]["name"] = previous["name"]
 	preset["revision"] = int(previous.get("revision", 1)) + 1
 	error = validate_entry(preset, definitions)
 	if not error.is_empty():
@@ -199,3 +245,15 @@ func update(id: String, payload: Dictionary) -> Dictionary:
 			candidate[index] = preset
 	error = _persist(candidate)
 	return {"error": error, "preset": get_entry(id) if error.is_empty() else {}}
+
+func remove(id: String) -> String:
+	var error = load_custom()
+	if not error.is_empty():
+		return error
+	if not is_custom(id):
+		return "Preset não encontrado. Selecione um preset salvo."
+	var candidate: Array[Dictionary] = []
+	for preset in custom:
+		if preset["id"] != id:
+			candidate.append(preset.duplicate(true))
+	return _persist(candidate)

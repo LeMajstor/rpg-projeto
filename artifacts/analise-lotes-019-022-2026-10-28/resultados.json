@@ -1,0 +1,157 @@
+{
+  "verified_samples": 4000,
+  "rows": [
+    {
+      "file": "exports/damage-lab/danos-execucao-019-seed-421-1000x.json",
+      "run": 19,
+      "direction": "ally_to_monster",
+      "ally": "ally_1",
+      "preset_revision": 2,
+      "modified": false,
+      "equipment_ids": [
+        "sword_bronze",
+        "armor_bronze"
+      ],
+      "normal_range": [
+        13,
+        16
+      ],
+      "critical_range": [
+        27,
+        33
+      ],
+      "normal_mean": 14.957906712172925,
+      "critical_count": 85,
+      "critical_hit_percent": 8.817427385892117,
+      "configured_critical_percent": 10.0,
+      "evaded_count": 36,
+      "configured_evasion_percent": 3.0,
+      "observed_mean": 15.7,
+      "expected_mean": 15.919223140495866,
+      "normal_hits_to_defeat_target": {
+        "3": 0.5680485421315163,
+        "4": 0.43195145786848355
+      },
+      "expected_attempts_to_defeat_target": 3.3063696340058306,
+      "sequence": [
+        12001,
+        13000
+      ]
+    },
+    {
+      "file": "exports/damage-lab/danos-execucao-020-seed-421-1000x.json",
+      "run": 20,
+      "direction": "ally_to_monster",
+      "ally": "ally_2",
+      "preset_revision": 1,
+      "modified": false,
+      "equipment_ids": [
+        "compound_bow",
+        "leather_set"
+      ],
+      "normal_range": [
+        12,
+        14
+      ],
+      "critical_range": [
+        19,
+        23
+      ],
+      "normal_mean": 12.858064516129032,
+      "critical_count": 204,
+      "critical_hit_percent": 20.83758937691522,
+      "configured_critical_percent": 19.0,
+      "evaded_count": 21,
+      "configured_evasion_percent": 3.0,
+      "observed_mean": 14.143,
+      "expected_mean": 13.920308333333335,
+      "normal_hits_to_defeat_target": {
+        "4": 0.9999999999999999
+      },
+      "expected_attempts_to_defeat_target": 3.6902673067457763,
+      "sequence": [
+        13001,
+        14000
+      ]
+    },
+    {
+      "file": "exports/damage-lab/danos-execucao-021-seed-421-1000x.json",
+      "run": 21,
+      "direction": "monster_to_ally",
+      "ally": "ally_1",
+      "preset_revision": 2,
+      "modified": false,
+      "equipment_ids": [
+        "sword_bronze",
+        "armor_bronze"
+      ],
+      "normal_range": [
+        7,
+        8
+      ],
+      "critical_range": [
+        13,
+        16
+      ],
+      "normal_mean": 7.362554112554113,
+      "critical_count": 31,
+      "critical_hit_percent": 3.2460732984293195,
+      "configured_critical_percent": 3.0,
+      "evaded_count": 45,
+      "configured_evasion_percent": 5,
+      "observed_mean": 7.26,
+      "expected_mean": 7.194926432291667,
+      "normal_hits_to_defeat_target": {
+        "5": 0.005780251218708351,
+        "6": 0.9942197487812918
+      },
+      "expected_attempts_to_defeat_target": 6.155371703873537,
+      "sequence": [
+        14001,
+        15000
+      ]
+    },
+    {
+      "file": "exports/damage-lab/danos-execucao-022-seed-421-1000x.json",
+      "run": 22,
+      "direction": "monster_to_ally",
+      "ally": "ally_2",
+      "preset_revision": 1,
+      "modified": false,
+      "equipment_ids": [
+        "compound_bow",
+        "leather_set"
+      ],
+      "normal_range": [
+        9,
+        11
+      ],
+      "critical_range": [
+        18,
+        21
+      ],
+      "normal_mean": 9.78,
+      "critical_count": 31,
+      "critical_hit_percent": 3.5187287173666286,
+      "configured_critical_percent": 3.0,
+      "evaded_count": 119,
+      "configured_evasion_percent": 12,
+      "observed_mean": 8.914,
+      "expected_mean": 8.843843402777779,
+      "normal_hits_to_defeat_target": {
+        "4": 1.0000000000000002
+      },
+      "expected_attempts_to_defeat_target": 4.445196590909091,
+      "sequence": [
+        15001,
+        16000
+      ]
+    }
+  ],
+  "outgoing_observed_ally1_advantage_percent": 11.008979707275678,
+  "outgoing_expected_ally1_advantage_percent": 14.359702093494331,
+  "incoming_observed_extra_damage_ally2_percent": 22.78236914600551,
+  "rng_segments_consecutive": true,
+  "higher_equipment_tiers_present": false,
+  "note": "Tentativas médias são estimativas matemáticas com dano acumulado sem cura/ATB; o laboratório restaura HP/MP por amostra. Presets preservados."
+}

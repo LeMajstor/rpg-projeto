@@ -1,0 +1,48 @@
+{
+  "name": "Aliado #2",
+  "side": "ally",
+  "actor": {
+    "id": "ally_1",
+    "name": "Aliado #2",
+    "side": "ally",
+    "color": "6fc8ff",
+    "hp": 36,
+    "mp": 14,
+    "ini": 11,
+    "physical_attack": 20,
+    "physical_defense": 30,
+    "magic_power": 20,
+    "magic_defense": 21,
+    "critical_base": 7,
+    "unarmed_critical_multiplier": 2.0,
+    "evasion_base": 7,
+    "character_id": "ally_2",
+    "ranged_attack": 20,
+    "ranged_defense": 30
+  },
+  "equipment": {
+    "weapon": {
+      "id": "compound_bow",
+      "name": "Arco Composto de Madeira",
+      "attack_bonus": 10,
+      "critical_chance": 12.0,
+      "critical_multiplier": 1.6,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "attack_mode": "ranged"
+    },
+    "armor": {
+      "id": "leather_set",
+      "name": "Traje de Couro",
+      "defense_bonus": 5,
+      "evasion_bonus": 5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_2"
+      ],
+      "ranged_defense_bonus": 10
+    }
+  }
+}

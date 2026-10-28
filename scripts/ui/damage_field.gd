@@ -71,10 +71,10 @@ func _draw() -> void:
 		var t = clampf(progress / motion["impact"], 0, 1)
 		draw_circle(origin.lerp(target_point, t) + Vector2(0, -20 * sin(PI * t)), 8, Color("9bd8ff"))
 	if impact:
-		var text = "%d%s" % [result["damage"], "  CRÍTICO" if result["critical"] else ""]
+		var text = "Esquivou!" if result["evaded"] else "%d%s" % [result["damage"], "  CRÍTICO" if result["critical"] else ""]
 		var text_width = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x
-		_text(Vector2(clampf(target_point.x - text_width * 0.5, 10, size.x - text_width - 10), target_point.y - 50), text, Color("ffe29b") if result["critical"] else Color("ffa6a0"), 22)
-		if active:
+		_text(Vector2(clampf(target_point.x - text_width * 0.5, 10, size.x - text_width - 10), target_point.y - 50), text, Color("91c8ff") if result["evaded"] else Color("ffe29b") if result["critical"] else Color("ffa6a0"), 22)
+		if active and not result["evaded"]:
 			draw_arc(target_point, 31 + 9 * sin(progress * PI), 0, TAU, 40, Color("ffe29b"), 2)
 	_text(Vector2(18, 24), "GOLPE MANUAL" if active else "DUELO DE TESTE · CADA AMOSTRA RESTAURA HP/MP", Color("b4ccdf"), 12)
 

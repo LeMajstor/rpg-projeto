@@ -1,0 +1,78 @@
+{
+  "status": "trajes apenas propostos, sem implementação",
+  "assumptions": "DEF própria30, EVA própria7, monstro ATQ24/potência1/variação±10%, sem crítico nas faixas de dano normal.",
+  "rows": [
+    {
+      "stage": 1,
+      "metal_defense_bonus": 10,
+      "light_defense_bonus_proposed": 5,
+      "ally2_total_defense": 35,
+      "armor_evasion_bonus_proposed": 5,
+      "ally2_total_evasion": 12,
+      "normal_damage_received_from_attack24": [
+        9,
+        11
+      ]
+    },
+    {
+      "stage": 2,
+      "metal_defense_bonus": 16,
+      "light_defense_bonus_proposed": 8,
+      "ally2_total_defense": 38,
+      "armor_evasion_bonus_proposed": 5,
+      "ally2_total_evasion": 12,
+      "normal_damage_received_from_attack24": [
+        8,
+        10
+      ]
+    },
+    {
+      "stage": 3,
+      "metal_defense_bonus": 24,
+      "light_defense_bonus_proposed": 12,
+      "ally2_total_defense": 42,
+      "armor_evasion_bonus_proposed": 5,
+      "ally2_total_evasion": 12,
+      "normal_damage_received_from_attack24": [
+        8,
+        10
+      ]
+    },
+    {
+      "stage": 4,
+      "metal_defense_bonus": 34,
+      "light_defense_bonus_proposed": 17,
+      "ally2_total_defense": 47,
+      "armor_evasion_bonus_proposed": 5,
+      "ally2_total_evasion": 12,
+      "normal_damage_received_from_attack24": [
+        7,
+        9
+      ]
+    },
+    {
+      "stage": 5,
+      "metal_defense_bonus": 48,
+      "light_defense_bonus_proposed": 24,
+      "ally2_total_defense": 54,
+      "armor_evasion_bonus_proposed": 5,
+      "ally2_total_evasion": 12,
+      "normal_damage_received_from_attack24": [
+        7,
+        8
+      ]
+    },
+    {
+      "stage": 6,
+      "metal_defense_bonus": 65,
+      "light_defense_bonus_proposed": 33,
+      "ally2_total_defense": 63,
+      "armor_evasion_bonus_proposed": 5,
+      "ally2_total_evasion": 12,
+      "normal_damage_received_from_attack24": [
+        6,
+        7
+      ]
+    }
+  ]
+}

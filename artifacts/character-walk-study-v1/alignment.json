@@ -1,0 +1,154 @@
+[
+  {
+    "frame": 1,
+    "translation": [
+      26,
+      3
+    ],
+    "alpha90_bounds": [
+      280,
+      470,
+      90,
+      27
+    ],
+    "head130_bounds": [
+      179,
+      103,
+      140,
+      27
+    ]
+  },
+  {
+    "frame": 2,
+    "translation": [
+      38,
+      1
+    ],
+    "alpha90_bounds": [
+      249,
+      467,
+      78,
+      32
+    ],
+    "head130_bounds": [
+      178,
+      98,
+      129,
+      32
+    ]
+  },
+  {
+    "frame": 3,
+    "translation": [
+      82,
+      1
+    ],
+    "alpha90_bounds": [
+      244,
+      467,
+      44,
+      32
+    ],
+    "head130_bounds": [
+      181,
+      98,
+      84,
+      32
+    ]
+  },
+  {
+    "frame": 4,
+    "translation": [
+      92,
+      2
+    ],
+    "alpha90_bounds": [
+      281,
+      476,
+      33,
+      22
+    ],
+    "head130_bounds": [
+      179,
+      108,
+      74,
+      22
+    ]
+  },
+  {
+    "frame": 5,
+    "translation": [
+      25,
+      26
+    ],
+    "alpha90_bounds": [
+      291,
+      460,
+      80,
+      14
+    ],
+    "head130_bounds": [
+      180,
+      116,
+      141,
+      14
+    ]
+  },
+  {
+    "frame": 6,
+    "translation": [
+      36,
+      23
+    ],
+    "alpha90_bounds": [
+      230,
+      469,
+      80,
+      8
+    ],
+    "head130_bounds": [
+      181,
+      122,
+      129,
+      8
+    ]
+  },
+  {
+    "frame": 7,
+    "translation": [
+      74,
+      24
+    ],
+    "alpha90_bounds": [
+      240,
+      464,
+      48,
+      12
+    ],
+    "head130_bounds": [
+      181,
+      118,
+      92,
+      12
+    ]
+  },
+  {
+    "frame": 8,
+    "translation": [
+      89,
+      26
+    ],
+    "alpha90_bounds": [
+      302,
+      471,
+      24,
+      3
+    ],
+    "head130_bounds": [
+      182,
+      127,
+      76,
+      3
+    ]
+  }
+]

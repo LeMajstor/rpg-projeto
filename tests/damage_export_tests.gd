@@ -29,10 +29,10 @@ func _run() -> void:
 		var json = JSON.new()
 		expect(json.parse(FileAccess.get_file_as_string(saved["path"])) == OK, "Arquivo pode ser analisado por leitor JSON")
 		var data: Dictionary = json.data
-		expect(data["format"] == Export.FORMAT and data["version"] == 2 and data["formula"]["id"] == "proportional_v1", "Formato e fórmula são identificados e versionados")
+		expect(data["format"] == Export.FORMAT and data["version"] == 4 and data["formula"]["id"] == "proportional_v1", "Formato e fórmula são identificados e versionados")
 		expect(data["samples"].size() == count and data["summary"]["count"] == count, "Todas as amostras são exportadas")
 		expect(data["run"]["seed"] == 733 and data["conditions"]["settings"]["seed"] == 733, "Seed real da execução prevalece sobre o padrão inicial")
-		expect(data["conditions"]["target"]["name"] == "Pesado · teste", "Acentos e nomes são preservados")
+		expect(data["conditions"]["target"]["name"] == "Monstro · manual", "Acentos e nomes são preservados")
 		var total = 0
 		var removed = 0
 		var criticals = 0

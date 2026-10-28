@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+Aliado #1 / weapon: ["sword_bronze", "sword_iron", "sword_steel", "sword_mithril", "sword_adamant", "sword_runic"]
+Aliado #1 / armor: ["armor_bronze", "armor_iron", "armor_steel", "armor_mithril", "armor_adamant", "armor_runic"]
+Aliado #2 / weapon: ["compound_bow"]
+Aliado #2 / armor: ["leather_set"]
+BIBLIOTECA REAL: 3 presets válidos, arquivo preservado.

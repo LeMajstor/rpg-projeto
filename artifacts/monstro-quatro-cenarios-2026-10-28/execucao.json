@@ -1,0 +1,41 @@
+{
+	"cases": [
+		{
+			"ally": "ally_1",
+			"critical_count": 21,
+			"evasion_count": 44,
+			"file": "monstro-contato-aliado-1-1000x.json",
+			"mean": 7.197,
+			"mode": "melee"
+		},
+		{
+			"ally": "ally_2",
+			"critical_count": 21,
+			"evasion_count": 123,
+			"file": "monstro-contato-aliado-2-1000x.json",
+			"mean": 8.783,
+			"mode": "melee"
+		},
+		{
+			"ally": "ally_1",
+			"critical_count": 21,
+			"evasion_count": 44,
+			"file": "monstro-distancia-aliado-1-1000x.json",
+			"mean": 7.56,
+			"mode": "ranged"
+		},
+		{
+			"ally": "ally_2",
+			"critical_count": 21,
+			"evasion_count": 123,
+			"file": "monstro-distancia-aliado-2-1000x.json",
+			"mean": 8.094,
+			"mode": "ranged"
+		}
+	],
+	"count_per_case": 1000,
+	"failures": 0,
+	"paired_rolls": true,
+	"personal_presets_unchanged": true,
+	"seed": 421
+}

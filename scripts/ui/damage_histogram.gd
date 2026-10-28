@@ -22,9 +22,11 @@ func _draw() -> void:
 		var bin: Dictionary = bins[index]
 		var normal_height: float = float(bin["normal"]) / peak * height
 		var critical_height: float = float(bin["critical"]) / peak * height
+		var evaded_height: float = float(bin["evaded"]) / peak * height
 		var x = origin.x + index * step + 2
 		draw_rect(Rect2(Vector2(x, origin.y + height - normal_height), Vector2(maxf(1, step - 4), normal_height)), Color("65cbb0"))
 		draw_rect(Rect2(Vector2(x, origin.y + height - normal_height - critical_height), Vector2(maxf(1, step - 4), critical_height)), Color("edc776"))
+		draw_rect(Rect2(Vector2(x, origin.y + height - normal_height - critical_height - evaded_height), Vector2(maxf(1, step - 4), evaded_height)), Color("91c8ff"))
 	var minimum = str(result["minimum"])
 	var maximum = str(result["maximum"])
 	draw_string(font, Vector2(origin.x, size.y - 8), minimum, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("bdcee0"))
@@ -32,6 +34,6 @@ func _draw() -> void:
 		var label_width = font.get_string_size(maximum, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
 		draw_string(font, Vector2(origin.x + width - label_width, size.y - 8), maximum, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("bdcee0"))
 	draw_string(font, Vector2(1, 16), str(peak), HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("bdcee0"))
-	var label = "Dano calculado · verde: normal · amarelo: crítico"
+	var label = "Dano · verde: normal · amarelo: crítico · azul: esquiva"
 	var label_width = font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
 	draw_string(font, Vector2(maxf(origin.x + 25, (size.x - label_width) * 0.5), size.y - 8), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("bdcee0"))

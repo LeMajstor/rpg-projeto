@@ -1,0 +1,90 @@
+{
+  "verified_samples": 2000,
+  "conditions_equal_except_allies": true,
+  "runs_are_consecutive_rng_segments": true,
+  "allies": {
+    "ally_1": {
+      "file": "exports/damage-lab/danos-execucao-010-seed-421-1000x.json",
+      "exported_at_utc": "2026-10-27T20:44:36Z",
+      "revision": 2,
+      "preset_modified": false,
+      "own_attack": 23.0,
+      "effective_attack": 33,
+      "normal_range": [
+        13,
+        16
+      ],
+      "critical_range": [
+        27,
+        33
+      ],
+      "normal_mean": 14.913990825688073,
+      "critical_mean": 29.98876404494382,
+      "observed_mean": 15.674,
+      "expected_mean": 15.919223140495868,
+      "critical_count": 89,
+      "critical_hit_percent": 9.261186264308012,
+      "configured_critical_percent": 10.0,
+      "evaded_count": 39,
+      "observed_evasion_percent": 3.9,
+      "configured_evasion_percent": 3.0,
+      "sample_mean_standard_error": 0.17105842564745236,
+      "seed": 421,
+      "sequence": [
+        9001,
+        10000
+      ]
+    },
+    "ally_2": {
+      "file": "exports/damage-lab/danos-execucao-011-seed-421-1000x.json",
+      "exported_at_utc": "2026-10-27T20:44:44Z",
+      "revision": 1,
+      "preset_modified": false,
+      "own_attack": 20.0,
+      "effective_attack": 30,
+      "normal_range": [
+        12,
+        14
+      ],
+      "critical_range": [
+        19,
+        23
+      ],
+      "normal_mean": 12.915723270440251,
+      "critical_mean": 20.417142857142856,
+      "observed_mean": 13.841,
+      "expected_mean": 13.920308333333335,
+      "critical_count": 175,
+      "critical_hit_percent": 18.04123711340206,
+      "configured_critical_percent": 19.0,
+      "evaded_count": 30,
+      "observed_evasion_percent": 3.0,
+      "configured_evasion_percent": 3.0,
+      "sample_mean_standard_error": 0.12142678231536676,
+      "seed": 421,
+      "sequence": [
+        10001,
+        11000
+      ]
+    }
+  },
+  "observed_advantage_percent": 13.243262770031073,
+  "expected_advantage_percent": 14.359702093494331,
+  "paired_checks": {
+    "ally_2": {
+      "means_with_same_draws": {
+        "ally_2": 13.841,
+        "ally_1": 15.902
+      },
+      "ally1_advantage_percent": 14.890542590853272
+    },
+    "ally_1": {
+      "means_with_same_draws": {
+        "ally_2": 13.816,
+        "ally_1": 15.674
+      },
+      "ally1_advantage_percent": 13.448176027793846
+    }
+  },
+  "note": "Médias por tentativa incluem críticos/esquivas; dano por tempo/ATB não medido. Nenhum preset modificado."
+}

@@ -1,0 +1,194 @@
+{
+  "status": "estudo e propostas; presets preservados",
+  "verified_samples": 2000,
+  "observed": {
+    "ally_1": {
+      "source": "exports/damage-lab/danos-execucao-005-seed-112-1000x.json",
+      "exported_at_utc": "2026-10-27T20:33:16Z",
+      "seed": 112,
+      "count": 1000,
+      "mean": 13.785,
+      "normal_mean": 12.902522935779816,
+      "normal_range": [
+        12,
+        14
+      ],
+      "critical_mean": 25.857142857142858,
+      "critical_range": [
+        23,
+        28
+      ],
+      "critical_count": 98,
+      "critical_percent_on_hits": 10.103092783505154,
+      "evaded_count": 30
+    },
+    "ally_2": {
+      "source": "exports/damage-lab/danos-execucao-004-seed-111-1000x.json",
+      "exported_at_utc": "2026-10-27T20:33:01Z",
+      "seed": 111,
+      "count": 1000,
+      "mean": 13.794,
+      "normal_mean": 12.914680050188206,
+      "normal_range": [
+        12,
+        14
+      ],
+      "critical_mean": 20.594117647058823,
+      "critical_range": [
+        19,
+        23
+      ],
+      "critical_count": 170,
+      "critical_percent_on_hits": 17.580144777662877,
+      "evaded_count": 33
+    }
+  },
+  "options": [
+    {
+      "name": "Aliado #1 atual",
+      "attack_effective": 30,
+      "critical_chance": 10.0,
+      "critical_multiplier": 2.0,
+      "normal_range": [
+        12,
+        14
+      ],
+      "critical_range": [
+        23,
+        28
+      ],
+      "expected_mean_per_attempt": 13.745708333333335,
+      "paired_mean_exported_draws": 13.785,
+      "expected_attempts_to_defeat_hp45": 3.834020618556702,
+      "normal_hits_to_defeat_hp45": {
+        "4": 0.9999999999999999
+      },
+      "normal_hits_to_defeat_hp40": {
+        "3": 0.26967592592592676,
+        "4": 0.7303240740740732
+      }
+    },
+    {
+      "name": "Aliado #2 atual",
+      "attack_effective": 30,
+      "critical_chance": 19.0,
+      "critical_multiplier": 1.6,
+      "normal_range": [
+        12,
+        14
+      ],
+      "critical_range": [
+        19,
+        23
+      ],
+      "expected_mean_per_attempt": 13.920308333333335,
+      "paired_mean_exported_draws": 13.794,
+      "expected_attempts_to_defeat_hp45": 3.6902673067457763,
+      "normal_hits_to_defeat_hp45": {
+        "4": 0.9999999999999999
+      },
+      "normal_hits_to_defeat_hp40": {
+        "3": 0.26967592592592676,
+        "4": 0.7303240740740732
+      }
+    },
+    {
+      "name": "Proposta: ATQ próprio 19",
+      "attack_effective": 29,
+      "critical_chance": 10.0,
+      "critical_multiplier": 2.0,
+      "normal_range": [
+        11,
+        13
+      ],
+      "critical_range": [
+        22,
+        27
+      ],
+      "expected_mean_per_attempt": 12.975191736028538,
+      "paired_mean_exported_draws": 12.997,
+      "expected_attempts_to_defeat_hp45": 3.837038056791717,
+      "normal_hits_to_defeat_hp45": {
+        "4": 0.9977580786349638,
+        "5": 0.002241921365036219
+      },
+      "normal_hits_to_defeat_hp40": {
+        "4": 1.0
+      }
+    },
+    {
+      "name": "Comparação: ATQ próprio 18",
+      "attack_effective": 28,
+      "critical_chance": 10.0,
+      "critical_multiplier": 2.0,
+      "normal_range": [
+        10,
+        13
+      ],
+      "critical_range": [
+        21,
+        25
+      ],
+      "expected_mean_per_attempt": 12.308854591836736,
+      "paired_mean_exported_draws": 12.324,
+      "expected_attempts_to_defeat_hp45": 3.962780178651012,
+      "normal_hits_to_defeat_hp45": {
+        "4": 0.8799929166079278,
+        "5": 0.12000708339207203
+      },
+      "normal_hits_to_defeat_hp40": {
+        "4": 0.9999999999999999
+      }
+    },
+    {
+      "name": "Alternativa: espada 1,6×",
+      "attack_effective": 30,
+      "critical_chance": 10.0,
+      "critical_multiplier": 1.6,
+      "normal_range": [
+        12,
+        14
+      ],
+      "critical_range": [
+        19,
+        23
+      ],
+      "expected_mean_per_attempt": 13.248583333333334,
+      "paired_mean_exported_draws": 13.276,
+      "expected_attempts_to_defeat_hp45": 3.8767871205612834,
+      "normal_hits_to_defeat_hp45": {
+        "4": 0.9999999999999999
+      },
+      "normal_hits_to_defeat_hp40": {
+        "3": 0.26967592592592676,
+        "4": 0.7303240740740732
+      }
+    },
+    {
+      "name": "P07 revisada: Aliado #1 ATQ próprio 23",
+      "attack_effective": 33,
+      "critical_chance": 10.0,
+      "critical_multiplier": 2.0,
+      "normal_range": [
+        13,
+        16
+      ],
+      "critical_range": [
+        27,
+        33
+      ],
+      "expected_mean_per_attempt": 15.919223140495868,
+      "paired_mean_exported_draws": 15.968,
+      "expected_attempts_to_defeat_hp45": 3.3063696340058306,
+      "normal_hits_to_defeat_hp45": {
+        "3": 0.5680485421315163,
+        "4": 0.43195145786848355
+      },
+      "normal_hits_to_defeat_hp40": {
+        "3": 0.9999847592038885,
+        "4": 1.5240796111451993e-05
+      }
+    }
+  ],
+  "assumptions": "Variação uniforme ±10%, arredondamento ao inteiro mais próximo, alvo DEF40/EVA3/HP45; ataques independentes, dano acumulado sem cura/ATB. Médias por tentativa incluem críticos e esquivas. Propostas usam também os sorteios originais para comparação pareada."
+}

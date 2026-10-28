@@ -4,13 +4,29 @@
 
 ## Confirmado
 
-- Atributos D54 e siglas D57: HP, MP, INI, ATQ F, DEF F, MAG, DEF M e CRI.
-- Escalas vigentes (D59/D69): **HP, MP, ATQ F, DEF F, MAG e DEF M: aliados 0..999, monstros 1..9999**. **INI e CRI: 1..99 para ambos**. Ampliação dos monstros confirmada em 27/10/2026 para permitir grandezas maiores, inclusive chefes; não define valores por inimigo.
+- Atributos D54 e siglas D57: HP, MP, INI, ATQ F, DEF F, MAG, DEF M e CRI; EVA acrescentada por D74/D75, com base fixa, sem crescimento natural por nível.
+- Escalas vigentes (D59/D69/D76): **HP, MP, ATQ F, DEF F, MAG e DEF M: aliados 0..999**; **HP dos monstros 1..99999**; **MP, ATQ F, DEF F, MAG e DEF M dos monstros 1..9999**. **INI e CRI: 1..99 para ambos**. Ampliação dos monstros confirmada em 27/10/2026 para permitir grandezas maiores, inclusive chefes; não define valores por inimigo.
 - Dano mínimo de 1 para um ataque que atinge alvo válido (D55).
 - **D64:** armas somam bônus ao ATQ F próprio, armaduras à DEF F própria. D66 implementa campos próprios do aliado, bônus de arma/armadura e totais efetivos separados; monstros mantêm atributos diretos. Potência pertence à ação. Valores de itens e limites efetivos ainda a definir; ver seção 7.5 do `GDD.md`.
 - Arma define chance e multiplicador de crítico; CRI do personagem influencia somente a chance, modificável por itens ou buffs mágicos (D56). **D63 confirmado:** 1 ponto de CRI = 1% de chance-base, somado à chance da arma e aos bônus de itens/buffs em pontos percentuais. Valores por arma/modificador e limites finais continuam pendentes.
 - **D58, 26/10/2026:** oferecer ações em lotes de **10×, 100× e 1000×**, exibindo os resultados para comparação.
 - Guia de Chrono Trigger guardado somente como referência, em [REFERENCIAS.md](REFERENCIAS.md).
+
+**D76 — HP dos inimigos (27/10/2026):** ampliado para **1..99999**. O campo aceita cinco dígitos como atacante e alvo, preservados em presets, histórico e JSON. O limite inicial mínimo continua 1; HP após dano pode chegar a zero. Permite estudar chefes acima de 10 mil HP, sem criar um chefe nem alterar fichas/presets iniciais. Demais faixas permanecem iguais.
+
+## Esquiva — D74/D75
+
+**Autorizada e implementada em 27/10/2026 somente neste laboratório.** As fichas de aliado e monstro têm **EVA**, a chance-base própria de esquiva. Nenhum crescimento por nível é aplicado. D84 posteriormente acrescenta o bônus de EVA de armadura para o couro; itens/buffs de EVA continuam **para depois**; os campos Item CRI/Buff CRI anteriores modificam somente o crítico.
+
+**Escolhas experimentais para testar, sem fixar o jogo definitivo:** EVA inteira de **0 a 100**, com **1 EVA = 1%**; fichas e referências começam em zero para preservar as comparações anteriores. A opção **Esta ação permite esquiva** controla a elegibilidade: inicialmente ligada no ataque básico/técnica física e desligada na magia, podendo ser alterada para comparação.
+
+Quando a ação permite, sortear a EVA **do alvo** antes de aplicar crítico e dano. Se esquivar, o dano e HP removido são **zero**, não ocorre crítico (inclusive no modo forçado) e o mínimo 1 não se aplica. A ação e seu custo de MP são consumidos normalmente. Se acertar, a fórmula anterior permanece com mínimo 1. O duelo mostra **Esquivou!**, sem alterar a posição lógica ou criar uma nova animação de deslocamento.
+
+Resumo e Amostras distinguem **Esquiva / Normal / Crítico**. A média por ação inclui as esquivas com zero; médias normal/crítica incluem somente golpes que acertaram. O resumo mostra frequência de críticos entre os acertos, permitindo comparar com a chance configurada; o JSON também conserva a frequência por tentativa. Sem acertos, essas médias/frequências são zero, sem divisão por zero. O histograma representa esquivas em azul, normais em verde e críticos em amarelo.
+
+EVA é salva/carregada/atualizada nos presets e acompanha o participante ao inverter os lados. Presets pessoais antigos sem `evasion_base` recebem zero em memória; a leitura não regrava o arquivo. Histórico e **JSON v3** guardam EVA, permissão da ação, chance, sorteio, resultado, contagens e estado exato do novo RNG independente. Exportações v1/v2 já existentes não são modificadas.
+
+Para verificar: EVA do alvo em **0** → nenhum golpe evitado; **100** → todos evitados em ação elegível; **25** e lote 1000× → mistura reproduzível de esquivas/acertos. Troque para magia para conferir que ignora a EVA até ligar sua permissão. Inverta os lados para testar a EVA do aliado; técnica física esquivada preserva HP mas ainda gasta MP. Esses números são casos de teste, não fichas definitivas.
 
 ## Equipamentos dos aliados — D64/D65/D66
 
@@ -18,7 +34,7 @@
 
 Na ficha do aliado, **ATQ F** e **DEF F** são os atributos próprios editáveis. Abaixo deles, a composição mostra `próprio + bônus = total`. O total entra na fórmula; a potência continua da ação. No monstro, ATQ F/DEF F são valores diretos. MAG, DEF M, HP/MP, INI e CRI não recebem bônus desses equipamentos.
 
-A seção **Arma do aliado** identifica seu dono e se ele é atacante ou alvo. Permite escolher arma e editar bônus de ATQ F, chance e multiplicador de crítico. **Armadura do aliado** permite escolher armadura e editar bônus de DEF F. Sem arma/armadura, os bônus correspondentes são zero e ficam bloqueados para edição. Digitação, setas e controle continuam disponíveis nos campos editáveis; o painel rola por foco.
+A seção **Arma do aliado** identifica seu dono e se ele é atacante ou alvo. Permite escolher arma e editar bônus de ATQ F, chance e multiplicador de crítico. **Armadura do aliado** permite escolher armadura e editar bônus de DEF F e, após D84, de EVA. D86 exige arma e armadura equipadas; não há opções Sem arma/Sem armadura. Digitação, setas e controle continuam disponíveis nos campos editáveis; o painel rola por foco.
 
 | Material de teste | Bônus da espada em ATQ F | Bônus da armadura em DEF F |
 | --- | ---: | ---: |
@@ -29,15 +45,15 @@ A seção **Arma do aliado** identifica seu dono e se ele é atacante ou alvo. P
 | Adamantio | 48 | 48 |
 | Rúnica | 65 | 65 |
 
-Os seis presets de espada começam com chance **5%** e multiplicador **2×**, editáveis. Esses valores mantêm a referência de crítico existente e **não aprovam uma progressão de crítico por material nem um multiplicador global**. Por solicitação do usuário, as opções antigas Arma de teste · 2× e Arma de teste · 3× foram removidas: o multiplicador já é editável no campo próprio. O caso padrão agora seleciona Espada de Bronze (+10 ATQ F) e começa sem armadura; atributos próprios permanecem iguais. Há também as opções Sem arma e Sem armadura. Catálogo independente em `data/damage_lab.json`.
+Os seis presets de espada começam com chance **5%** e multiplicador **2×**, editáveis. Esses valores mantêm a referência de crítico existente e **não aprovam uma progressão de crítico por material nem um multiplicador global**. Por solicitação do usuário, as opções antigas Arma de teste · 2× e Arma de teste · 3× foram removidas: o multiplicador já é editável no campo próprio. Após D86, o caso padrão seleciona Espada de Bronze (+10 ATQ F) e Armadura de Bronze (+10 DEF F); atributos próprios permanecem iguais. Catálogo independente em `data/damage_lab.json`.
 
 Cada aliado guarda seu equipamento local na sessão. Ao trocar lados, arma e armadura acompanham o aliado: arma contribui ao atacar, armadura ao receber dano. Selecionar outra ficha recarrega seus atributos originais, como antes, mas permite retornar ao equipamento editado daquele aliado. **Restaurar caso** limpa os equipamentos locais e volta aos padrões; histórico anterior permanece imutável.
 
-### Limites e críticos sem equipamento — parâmetros experimentais
+### Limites e crítico dos monstros — parâmetros experimentais
 
-Atributos próprios do aliado e bônus editáveis permanecem inteiros 0..999. Monstros usam os seis atributos grandes diretamente em **1..9999**, sem limite de equipamento do aliado. INI/CRI permanecem 1..99 em ambos. A soma efetiva do aliado neste laboratório é limitada a **999**, configurada em `effective_stat_limit`. Se a soma exceder, a prévia informa, por exemplo, `999 + 65 = 1064 → 999 (limite de teste)`. JSON mantém o total bruto, o efetivo e o limite aplicado. O limite definitivo dos modificadores do jogo continua pendente.
+Atributos próprios do aliado e bônus editáveis permanecem inteiros 0..999. Monstros usam **HP em 1..99999 (D76)** e os demais cinco atributos grandes diretamente em **1..9999**, sem limite de equipamento do aliado. INI/CRI permanecem 1..99 em ambos. A soma efetiva do aliado neste laboratório é limitada a **999**, configurada em `effective_stat_limit`. Se a soma exceder, a prévia informa, por exemplo, `999 + 65 = 1064 → 999 (limite de teste)`. JSON mantém o total bruto, o efetivo e o limite aplicado. O limite definitivo dos modificadores do jogo continua pendente.
 
-Monstros não recebem a arma do aliado: usam CRI próprio, sem bônus de chance de arma, e um **multiplicador próprio de teste**, inicialmente 2× e editável em Crítico próprio do monstro. O aliado Sem arma usa seu CRI próprio e multiplicador de teste do perfil, também inicialmente 2×, editável no campo de multiplicador. Itens/buffs numéricos da simulação continuam modificadores de chance do atacante. Esse tratamento permite testar sem inventar equipamentos para monstros; a regra final de crítico sem arma ainda não foi escolhida.
+Monstros não recebem a arma do aliado: usam CRI próprio, sem bônus de chance de arma, e um **multiplicador próprio de teste**, inicialmente 2× e editável em Crítico próprio do monstro. O aliado sempre usa o crítico da arma equipada (D86). Itens/buffs numéricos da simulação continuam modificadores de chance do atacante. Esse tratamento permite testar sem inventar equipamentos para monstros.
 
 ### Comparação e exportação
 
@@ -67,56 +83,105 @@ Para testar a defesa, usar **Trocar lados**: o monstro passa a atacante e a arma
 
 Esse cenário pode manter o monstro com HP 30 e DEF F 60 da comparação ofensiva: aliado com ATQ F próprio 20 + espada Bronze 10 causa 9–11 nele, exigindo 3–4 golpes normais. São referências de dano por ação; frequência ATB, chance de crítico e vários inimigos ainda precisam ser avaliados em batalha. Os lotes restauram HP/MP por amostra e não simulam automaticamente a sequência completa de morte/Game Over. Não foram alterados presets, composição da equipe de teste ou combate da exploração por este registro.
 
-## Presets de fichas — D71/D72
+## Estudo dos dois JSONs e nova referência — D78, 27/10/2026
 
-**Autorizado e implementado em 27/10/2026.** No topo do painel de edição há seletores independentes **Preset do aliado** e **Preset do monstro**. Carregar preenche a ficha daquela categoria e recalcula os totais; a outra ficha permanece. Os presets acompanham o participante quando os lados são invertidos. Os seletores de ficha manual anteriores permanecem disponíveis; usá-los remove a associação ao preset da categoria substituída.
+**Meta solicitada:** no primeiro nível, monstros iniciais caem em 3–4 golpes e protagonista em 5–6. Atualiza a referência anterior de 4–5 recebidos de D70. Comparar inicialmente acertos normais; críticos podem encurtar e esquivas podem acrescentar tentativas. Os lotes restauram HP por amostra e não medem uma luta com ATB.
 
-### Referências iniciais fornecidas
+Fontes, escolhidas pelo horário interno de exportação: `exports/damage-lab/danos-execucao-003-seed-232-1000x.json` (aliado → monstro) e `danos-execucao-014-seed-214-1000x.json` (monstro → aliado). O primeiro nome está desatualizado: o conteúdo registra execução **12, semente 214**, não execução 3/semente 232. O segundo registra execução 14/semente 214. Conferência independente das 2000 amostras: dano, esquiva/crítico, HP/MP e resumos coerentes com as condições.
 
-Presets em `data/damage_lab_presets.json`, protegidos contra atualização pela interface. Os valores completam os exemplos estudados e são **referências experimentais**, não balanceamento definitivo da aventura.
+| Direção | ATQ efetivo / DEF alvo | HP do alvo | Dano normal | Crítico | Esquivas observadas |
+| --- | --- | ---: | --- | --- | --- |
+| Aliado → monstro | 52 / 40 | 40 | 26–32 (894 acertos) | 53–65 (88) | 18/1000 |
+| Monstro → aliado | 35 / 55 | 50 | 12–15 (917 acertos) | 25–30 (36) | 47/1000 |
 
-| Campo próprio/direto | Aliado inicial · Bronze | Monstro inicial · 30 HP |
+Aliado: ATQ próprio 42 + Bronze 10 = 52; DEF própria 45 + Bronze 10 = 55; HP 50, CRI 5 + arma 5% = 10%, EVA 5. Monstro: ATQ 35, DEF 40, HP 40, CRI 3%, EVA 3. Críticos 2× e variação ±10%. Atualmente o monstro cai em dois acertos normais ou um crítico; o aliado cai quase sempre em quatro acertos normais (cinco são possíveis com danos baixos).
+
+**Recomendações para teste, sem aprovação de valores nem alteração de código/dados:**
+
+| Campo | Experimento A: ajustar HP | Experimento B: preservar HP e reduzir ATQ |
 | --- | ---: | ---: |
-| HP | 40 | 30 |
-| MP | 100 | 80 |
-| INI | 9 | 7 |
-| ATQ F | 20 | 23 |
-| DEF F | 20 | 60 |
-| MAG | 100 | 50 |
-| DEF M | 100 | 80 |
-| CRI | 5 | 3 |
-| Multiplicador próprio sem arma (teste) | 2× | 2× |
+| HP do aliado | 70 | 50 |
+| ATQ próprio do aliado | 42 (+10 = 52) | 20 (+10 = 30) |
+| DEF própria do aliado | 45 (+10 = 55) | 45 (+10 = 55) |
+| HP do monstro | 90 | 40 |
+| ATQ do monstro | 35 | 29 |
+| DEF do monstro | 40 | 40 |
+| Dano normal aliado → monstro | 26–32: 3–4 acertos | 12–14: 3–4 acertos |
+| Dano normal monstro → aliado | 12–15: 5–6 acertos | 9–11: 5–6 acertos |
 
-O aliado usa espada e armadura Bronze (+10 cada), com chance da arma 5% e crítico 2×. Totais físicos 30/30. O monstro não possui equipamentos. MP/MAG/DEF M e demais campos mantêm os valores das fichas provisórias existentes, sem aprovar números iniciais da aventura.
+Ambos mantêm armas, fórmula, variação, crítico e EVA do caso atual. A altera apenas dois HP; B mantém HP do caso atual e altera apenas os dois ataques. Esses exemplos usam 40 HP do monstro do JSON atual; não tornam esse valor definitivo nem substituem automaticamente a preferência histórica de 30 HP registrada em D68.
 
-Com ataque básico 1×, variação ±10% e críticos desligados, as duas referências produzem 9–11 de dano normal em ambos os sentidos: monstro com 30 HP cai em 3–4 golpes, aliado com 40 HP em 4–5. Ação, potência, custos, variação, modo de crítico, modificadores e Seed continuam nos controles globais; carregar preset não muda esses campos nem reinicia os sorteios. Use Reiniciar sequência para comparar os mesmos sorteios.
+Cálculo de referência: `base = ATQ efetivo² / (ATQ efetivo + DEF efetiva do alvo)`, potência 1×. Considerar o arredondamento: para o monstro cair em 3–4 acertos normais, dois danos máximos precisam ficar abaixo do HP e quatro mínimos precisam alcançá-lo; conferir ainda se três golpes conseguem alcançar o HP para haver variação. Para o aliado cair em 5–6, quatro máximos devem ficar abaixo do HP e seis mínimos devem alcançá-lo; conferir a possibilidade de morte no quinto. Crítico/esquiva não podem garantir essas mesmas contagens em toda tentativa.
 
-### Salvar como e Atualizar
+Distribuições teóricas adicionais, calculadas pela variação uniforme e chances configuradas, acumulando dano e sem cura/ATB: A exige em média **3,51 tentativas** contra o monstro e **5,91** contra o aliado; B, **3,57** e **5,51**. São estimativas matemáticas, não novas execuções do laboratório nem validação de uma batalha real. Estudo detalhado em `artifacts/balanceamento-inicial-2026-10-27/analise.md`.
 
-- **Salvar como…** captura a ficha atual da categoria e solicita um nome de até 80 caracteres. Cria uma cópia personalizada e a seleciona. Nome vazio ou repetido na mesma categoria é recusado; aliado e monstro podem compartilhar um nome.
-- **Atualizar** grava alterações no personalizado selecionado, mantendo ID/nome e aumentando a revisão. Só fica habilitado para personalizado alterado. Referências protegidas podem ser copiadas com Salvar como.
-- Alterar campos, arma ou armadura marca o preset como **alterado**, sem sobrescrever o arquivo automaticamente. A opção Ficha atual/manual mantém os campos e remove a associação ao preset.
-- O preset aliado guarda atributos próprios e todos os valores da arma/armadura, incluindo bônus, chance/multiplicador e parâmetro próprio sem arma. O monstro guarda atributos diretos e crítico próprio, sem equipamento. Não salvar totais como próprios: a composição é refeita ao aplicar.
-- Salvar/carregar/atualizar não executa ações, não consome RNG e não reescreve resultados anteriores. Durante a animação, os controles ficam bloqueados; o diálogo de nome recebe o teclado sem acionar atalhos de lote ao fundo. Enter confirma o nome; Cancelar não grava.
+## Ajuste de direção após o estudo — D79
 
-### Persistência e integridade
+**Confirmado em 27/10/2026:** aliado inicial com **40 HP**, monstros iniciais com **35–45 HP**, dano normal causado pelo aliado aproximadamente em **9–15**. Após esclarecer o conflito numérico, o usuário confirmou que essa faixa vale para o aliado atacar; os inimigos causam menos para manter **5–6 acertos normais até a queda do aliado**. A meta ofensiva continua **3–4 acertos**. A faixa 35–45 substitui a preferência de 30 HP de D68 para este estudo. Propostas anteriores de aumentar HP do aliado para 70/monstro para 90 não seguem esta direção.
 
-Personalizados em **`user://damage_lab_presets.json`**, na pasta de dados do aplicativo Godot, separados dos presets fornecidos e das exportações de amostras. Formato `rpg.damage_lab.presets`, versão 1; somente personalizados são gravados nesse arquivo. Eles reaparecem nos seletores ao reabrir o laboratório. A seleção atual, edições não salvas, controles globais, sequência e histórico continuam locais à sessão.
+**Exemplo recomendado para experimentar, sem aprovação dos ATQ/DEF:** manter potência básica 1×, variação ±10% e bônus Bronze +10:
 
-Restaurar caso volta às fichas/equipamentos iniciais e à sequência, preservando o histórico em memória e os presets pessoais em disco. Não há autosave da ficha atual nem carregamento automático do último preset usado. Para reutilizar, selecione o personalizado salvo.
+| Campo | Aliado | Monstro inicial |
+| --- | ---: | ---: |
+| HP | 40 (confirmado) | 35–45 (confirmado); 40 como exemplo central |
+| ATQ F próprio/direto | 20 + arma 10 = total 30 | 24 |
+| DEF F própria/direta | 45 + armadura 10 = total 55 | 40 |
 
-A biblioteca valida categoria, faixas D59/D69, revisão, ficha de origem, equipamentos do catálogo e ausência de itens em monstros. Relê os personalizados antes de gravar para preservar entradas já salvas por outra janela; grava via arquivo temporário e substituição. Nome duplicado, dados inválidos ou falha de escrita não são confirmados como sucesso. Se o arquivo pessoal estiver inválido/incompatível, preservá-lo e mostrar erro, mantendo as referências disponíveis e bloqueando gravação; corrigir/restaurar esse arquivo e reabrir o laboratório. Não substituir dados corrompidos por uma biblioteca vazia.
+Cálculo: aliado `30²/(30+40) ≈ 12,86`, arredondando com variação para **12–14** de dano normal, dentro da referência 9–15. Monstro de 35 HP cai em três acertos; de 40 HP, em três ou quatro; de 45 HP, em quatro. Todos os HP inteiros da faixa 35–45 respeitam três a quatro acertos normais neste exemplo.
 
-### Histórico e JSON de amostras
+Monstro `24²/(24+55) ≈ 7,29`, arredondando para **7–8** de dano normal recebido. Quatro golpes somam no máximo 32; cinco somam 35–40; seis somam no mínimo 42. Portanto, aliado de 40 HP cai em **cinco ou seis acertos normais**. Se o dano recebido fosse pelo menos 9 por acerto, cinco já somariam pelo menos 45; não seria possível manter a possibilidade de seis com 40 HP.
 
-Cada execução identifica por papel o preset usado: ID, nome, revisão, origem (referência/personalizado) e marca de edição. Esses metadados ficam em **`conditions.presets`** no JSON v2 e na aba Condições. Os valores efetivos/itens completos continuam no snapshot. Atualizar o personalizado posteriormente não altera a revisão ou os valores de execuções anteriores. Não há importação de relatórios de amostras ou salvamento de casos completos nessa etapa.
+Verificação por cálculo independente em Python, incluindo extremos/arredondamento e todos os HP inteiros 35–45. Não é nova execução da calculadora Godot ou validação de luta com ATB. Se usado crítico 2× do exemplo anterior, as faixas seriam 23–28 causados e 13–16 recebidos, podendo encurtar a sequência; esquivas podem alongar o número de tentativas. Valores de ATQ/DEF, chance/multiplicador, demais atributos e ritmo ainda precisam de teste. Nenhuma ficha, preset ou fórmula foi alterada por este registro.
 
-Biblioteca e persistência em `scripts/damage/damage_presets.gd`; captura/aplicação e metadados em `damage_lab_model.gd`. Testes em `tests/damage_presets_tests.gd` e `tests/damage_presets_ui_smoke.gd`, com arquivos temporários exclusivos para não tocar presets reais do usuário.
+**D80 — referência para progressão (27/10/2026):** o preset pessoal **Aliado #1** está sendo montado como ficha inicial do personagem no nível 1. O estudo atual de dano/resistência calibra esse ponto de partida, mantendo próprios e bônus de Bronze separados. Os valores continuam em teste. Decidir futuramente ganhos/curvas por nível, XP, nível máximo e CRI; INI/EVA permanecem sem crescimento natural por nível. O laboratório continua manual, sem sistema de níveis/progressão implementado.
+
+## Aliado #2 e EVA do couro — D84
+
+**Autorizado e implementado em 27/10/2026:** preset **Aliado #2** gravado na biblioteca pessoal preservando Aliado #1 e Monstro #1. Ficha própria HP36/MP14/INI11/ATQ20/DEF30/MAG20/DEF M21/CRI7/EVA7; **Arco composto** (+10 ATQ F, +12 p.p. CRI, crítico 1,6×) e **Conjunto de couro** (+5 DEF F, +5 EVA). Totais **ATQ30/DEF35, CRI19%, EVA12%**. Referência experimental de nível 1; detalhes em [ALIADO_02.md](ALIADO_02.md).
+
+Catálogo inclui arco/couro como itens próprios. A definição em `data/damage_lab_ally_02.json` foi usada para instalação pontual e testes; não recria o preset automaticamente ao iniciar. Continua possível salvar, carregar, atualizar e excluir normalmente. Reabrir o laboratório para carregar o catálogo e selecionar **Aliado #2**.
+
+EVA na ficha do aliado representa o atributo próprio. A armadura tem campo **EVA +** (inteiro 0..100, experimental). A armadura é obrigatória após D86. A composição mostra `EVA: 7 + 5 = 12%`. Os sorteios usam o total do alvo; a base não muda ao editar o bônus do couro ou trocar os lados. EVA efetiva limitada a 100%, com soma bruta preservada. Exemplo de teste: 99 + 5 = 104 → 100%. Monstros continuam sem equipamento e com EVA direta.
+
+Presets v1 anteriores sem `armor.evasion_bonus` recebem zero em memória, sem regravar ao ler. JSON v3 ganha dados aditivos de composição de EVA (`base_stats`, `equipment`, `composition`) e `formula.evasion_stats`; `attacker`/`target` registram os valores efetivos usados na ação. Histórico e exportação mantêm as condições originais após trocar equipamento. Esta etapa implementa o bônus de armadura solicitado; itens/buffs reais de EVA continuam fora do recorte.
+
+Testes específicos: `damage_ally_02_tests.gd` e `damage_ally_02_ui_smoke.gd`; cobertura de composição, limites, recusa de troca/remoção incompatível, recarga/persistência, JSON, condições, semente, arco 1,6× e presets anteriores. Sem novas animações, regras de alcance/munição, progressão por nível ou integração ao combate da exploração.
+
+## Equipamentos exclusivos e obrigatórios — D85/D86
+
+**Confirmado e implementado em 27/10/2026:** arco composto e conjunto de couro são exclusivos do **Aliado #2**. Os seletores apresentam somente equipamentos compatíveis com o personagem carregado. Carregar preset recompõe os menus e seleciona itens por ID, preservando nomes, números e bônus. O nome da ficha tem tooltip indicando seu personagem de origem.
+
+Identidade de personagem (`character_id`) é separada do modelo reutilizável `actor.id` e do ID/nome do preset. Primeiro aliado usa `ally_1`; segundo, `ally_2`. Salvar cópia mantém a identidade, mesmo com nome novo; renomear não concede itens e Atualizar não troca o personagem de origem. A restrição canônica vem de `allowed_character_ids` no catálogo, não de metadados removíveis da cópia do item. Modelo, salvamento/carga e calculadora rejeitam equipamentos incompatíveis antes de consumir RNG ou registrar execução.
+
+A biblioteca local foi migrada uma vez para registrar as identidades explícitas dos dois aliados, mantendo os três presets, atributos, equipamentos e revisões. Presets antigos sem identidade explícita usam o ID do modelo como compatibilidade; a migração do segundo aliado instalado é explícita, sem inferir permissão por nome ou arma. JSON passa a incluir a identidade nos atores e `equipment.owner_id` identifica o personagem, distinguindo o segundo aliado do modelo compartilhado. Histórico anterior não é reescrito.
+
+**D86:** espadas e armaduras de metal são exclusivas do Aliado #1. O Aliado #2 vê somente arco composto e couro. Ambos os slots são obrigatórios: não há Sem arma/Sem armadura. O modelo preserva o item anterior ao recusar remoção ou troca incompatível, e salvamento/carga/execução validam o conjunto. Os padrões por personagem ficam em `characters` no catálogo: espada/armadura de Bronze para #1 e arco/couro para #2. Presets legados com `id: none` recebem esses padrões em memória ao carregar, sem regravar a biblioteca; equipamento ausente/desligado/incompatível é recusado. Loadouts são separados por personagem, evitando vazamento ao alternar presets. Sem mudança de números, ações, níveis ou combate integrado. Reabrir o laboratório para carregar a regra atualizada.
+
+## Presets de fichas — D71/D72, revisão D77
+
+**Revisado em 27/10/2026 a pedido do usuário:** todos os presets anteriores foram excluídos, incluindo as duas referências fornecidas e os três personalizados locais existentes. O catálogo `data/damage_lab_presets.json` foi removido. O seletor antigo com oito fichas de exemplo foi retirado; `data/damage_lab.json` mantém somente uma ficha manual de aliado e uma de monstro para iniciar a edição. Os números dessas fichas continuam provisórios, sem novo balanceamento.
+
+A biblioteca começa **vazia**. Isso é uma limpeza pontual: novos presets criados pelo usuário permanecem entre sessões e não são apagados ao abrir o laboratório. No topo existem seletores separados **Preset do aliado** e **Preset do monstro**, inicialmente em **Ficha atual / manual**.
+
+- **Salvar…:** confirma o número que estiver sendo digitado, captura a ficha daquela categoria e solicita um nome de até 80 caracteres. Cria um novo preset e o seleciona. Nome vazio ou repetido na mesma categoria é recusado; aliado e monstro podem ter nomes iguais. O nome identifica também o participante salvo no editor/duelo.
+- **Carregar:** restaura o preset selecionado, inclusive se ele já estiver selecionado e tiver sido editado. Selecionar outro preset também o carrega. O carregamento relê o arquivo local e preenche todos os valores antes de atualizar a apresentação; texto pendente anterior não sobrescreve os dados carregados.
+- **Atualizar:** grava alterações no preset selecionado, mantendo ID/nome e aumentando a revisão. Só fica habilitado após editar uma ficha salva.
+- **Excluir:** remove definitivamente o preset selecionado do arquivo e da lista daquela categoria. A ficha atual permanece disponível para edição ou novo salvamento; histórico e execuções anteriores são preservados. A outra categoria permanece intacta. Excluir o último preset deixa a lista vazia e Salvar continua disponível.
+
+São salvos os **nove atributos próprios/diretos**, incluindo **EVA**, **HP de monstro até 99999** e **multiplicador crítico próprio**. Para o aliado, guardar também arma/armadura, IDs, bônus editados de ATQ F/DEF F/EVA, chance e multiplicador da arma. Não salvar atributos efetivos como se fossem próprios: ao carregar, recalcular os totais sem somar bônus duas vezes. O monstro continua sem equipamentos. Presets acompanham o participante ao inverter os lados; carregar aliado/inimigo altera somente aquela categoria, independentemente de estar como atacante ou alvo.
+
+Ação, potência/custo, permissões de crítico/esquiva, modo de crítico, variação, modificadores globais e semente continuam **fora** do preset de ficha. Salvar/carregar/atualizar/excluir não consomem sorteios nem modificam resultados anteriores. Durante a animação ou diálogo de salvar/exportar, essas operações ficam bloqueadas. **Restaurar caso** volta às duas fichas manuais/equipamentos iniciais e reinicia a sequência, preservando os presets pessoais e o histórico.
+
+Persistência em **`user://damage_lab_presets.json`**, formato `rpg.damage_lab.presets`, versão 1, separado das exportações de amostras. Gravação por arquivo temporário e substituição; releitura antes de criar/atualizar/excluir preserva alterações sequenciais feitas por outra instância. JSON inválido é preservado e operações de escrita/exclusão ficam bloqueadas, com erro exibido. Presets antigos sem EVA continuam recebendo zero em memória se carregados, sem regravar na leitura. Não há autosave de edições nem carregamento automático do último preset.
+
+Histórico/Condições e `conditions.presets` no JSON v3 guardam ID, nome, revisão, origem personalizada e marca de alteração por participante. Atualizar ou excluir um preset posteriormente não altera os dados de uma execução anterior. Não há importação de relatórios ou salvamento da aventura.
+
+Implementação em `scripts/damage/damage_presets.gd`, `damage_lab_model.gd` e `scripts/ui/damage_lab.gd`. Testes em `tests/damage_presets_tests.gd` e `tests/damage_presets_ui_smoke.gd`, com arquivos temporários exclusivos. Cobrem todos os campos, zeros, limites, digitação pendente, recarregamento do mesmo preset, equipamentos, troca de lados, persistência/reabertura, exclusão e erros de leitura/gravação.
 
 ## Duelo e edição
 
-- Um atacante e um alvo, sem ATB ou IA. Quatro fichas aliadas e quatro inimigas de teste: Pesado, Ágil, Voador e Estático. Qualquer lado pode atacar o outro; escolher duas fichas do mesmo lado ajusta a outra seleção para um perfil do lado oposto. Sem fogo amigo.
-- Todos os atributos das duas fichas são editáveis nas faixas D59/D69, atualizadas ao selecionar ou inverter o participante: seis atributos 0..999 no aliado e 1..9999 no monstro, INI/CRI 1..99 em ambos. HP e MP representam os recursos iniciais/máximos da amostra. HP zero pode ser editado no aliado, mas impede executar; no monstro, mínimo inicial 1. HP/MP após a ação podem chegar a zero. MP insuficiente impede executar, sem consumir sorteios ou gerar resultado parcial. INI é informativa.
+- Um atacante e um alvo, sem ATB ou IA. Após D77, uma ficha manual de aliado e uma de monstro, com presets criados pelo usuário; Trocar lados inverte os papéis. Sem fogo amigo.
+- Todos os atributos das duas fichas são editáveis nas faixas D59/D69/D76, atualizadas ao selecionar ou inverter o participante: seis atributos 0..999 no aliado; HP 1..99999 e os outros cinco 1..9999 no monstro; INI/CRI 1..99 e EVA experimental 0..100 em ambos. HP e MP representam os recursos iniciais/máximos da amostra. HP zero pode ser editado no aliado, mas impede executar; no monstro, mínimo inicial 1. HP/MP após a ação podem chegar a zero. MP insuficiente impede executar, sem consumir sorteios ou gerar resultado parcial. INI é informativa.
 - **Refinamento solicitado em 26/10/2026:** digitação direta em todos os campos numéricos. Clicar no número seleciona o texto; selecionar o campo pelo teclado e começar a digitar também substitui o valor. Enter, Tab, clique em outro campo ou execução confirmam a edição, respeitando os limites existentes. Decimais aceitam ponto ou vírgula; setas/controle continuam disponíveis.
 - Seletores de arma e ação; chance/multiplicador da arma, potência/custo de MP, permissão de crítico, variação e modificadores ajustáveis. Trocar lados mantém a ação e move o equipamento junto do aliado; o monstro usa seu próprio crítico de teste.
 - **1×** mostra aproximação/impacto/retorno físico ou projétil mágico provisório; rótulos de recursos ficam na posição de origem. Lotes **10×, 100× e 1000×** calculam imediatamente e mostram o estado da última amostra, sem enfileirar animações.
@@ -133,7 +198,8 @@ Potência é um **coeficiente**: 1,0× é a referência, 1,8× multiplica a base
 
 Ordem experimental implementada:
 
-1. Calcular base proporcional com os atributos correspondentes.
+0. Se a ação permitir, verificar esquiva com EVA do alvo: se esquivar, dano zero, sem crítico, consumindo ação/MP; encerrar a resolução do golpe.
+1. Nos acertos, calcular base proporcional com os atributos correspondentes.
 2. Se ligada, sortear variação uniforme entre `1 − faixa/100` e `1 + faixa/100`; padrão **±10%**, editável de 0 a 100%.
 3. Determinar crítico pela permissão da ação e pelo modo **sorteado / desligado / forçado**. O modo forçado ainda respeita a permissão da ação.
 4. Multiplicar o dano variado pelo multiplicador da arma em caso de crítico; caso contrário, por 1.
@@ -160,9 +226,9 @@ As ações iniciais são ataque físico **1× / 0 MP**, técnica física **1,8×
 
 Cada amostra começa com **os mesmos HP/MP e condições**. Isso permite coletar 1000 ataques mesmo que um só golpe derrote o alvo ou gaste todo o MP. Não é uma simulação de 1000 turnos consecutivos de batalha.
 
-Resumo com mínimo, máximo, média, médias normal/crítica, totais de dano/HP removido, quantidade e frequência observada de críticos e chance configurada. Histograma com até 12 intervalos, distinguindo danos normais e críticos. Aba **Amostras** exibe todas as ações e permite selecionar cada uma para decompor o cálculo. Aba **Condições** registra as fichas, arma, ação, modificadores, semente e início da sequência daquele resultado.
+Resumo com mínimo, máximo, média, médias normal/crítica, totais de dano/HP removido, quantidade e frequência observada de críticos e chance configurada. Histograma com até 12 intervalos, distinguindo esquivas, danos normais e críticos. Aba **Amostras** exibe todas as ações e permite selecionar cada uma para decompor o cálculo. Aba **Condições** registra as fichas, arma, ação, modificadores, semente e início da sequência daquele resultado.
 
-Há dois RNGs independentes, derivados da semente: variação e crítico. Cada ação avança ambos uma vez, inclusive nos modos fixos. Alterar a permissão de crítico não muda a sequência da variação. Ações e lotes sucessivos continuam a sequência; 10× + 10× equivalem às primeiras 20 amostras de uma execução maior iniciada na mesma semente. **Reiniciar sequência** volta ao primeiro sorteio sem mudar as fichas; alterar a semente também reinicia. A mesma configuração, semente e posição na sequência reproduzem o resultado na engine validada.
+Há três RNGs independentes, derivados da semente: variação, crítico e esquiva. Cada ação avança cada fluxo uma vez, inclusive nos modos fixos, em esquivas e em ações sem permissão de esquiva. Alterar a permissão de crítico não muda a sequência da variação. Ações e lotes sucessivos continuam a sequência; 10× + 10× equivalem às primeiras 20 amostras de uma execução maior iniciada na mesma semente. **Reiniciar sequência** volta ao primeiro sorteio sem mudar as fichas; alterar a semente também reinicia. A mesma configuração, semente e posição na sequência reproduzem o resultado na engine validada.
 
 Histórico guarda até **12 execuções** com cópias das condições e estados de RNG. Editar o próximo caso não reescreve resultados anteriores. Consultar o histórico não aplica suas fichas ao próximo teste nem altera a sequência atual. **Restaurar caso** volta aos presets e semente iniciais, mantendo o histórico. Fechar o laboratório descarta a sessão; presets pessoais explicitamente salvos continuam em disco.
 
@@ -174,17 +240,17 @@ A pasta inicial é `exports/damage-lab/`, na raiz do projeto, criada ao abrir a 
 
 O arquivo contém **todas as linhas daquela execução**, mesmo que só parte esteja visível na tabela. Exportar um resultado antigo usa sua cópia de condições e sorteios, mesmo depois de editar o próximo caso. Não executa novas ações, não muda o histórico nem avança o RNG. Exporta uma execução por arquivo; para comparar casos, selecione e exporte cada resultado desejado. Anexe o `.json` na conversa para análise.
 
-Formato legível, UTF-8, com números sem arredondamento de apresentação e booleanos de crítico. Versão 2 acrescenta composição/equipamentos, preservando arquivos v1 anteriores:
+Formato legível, UTF-8, com números sem arredondamento de apresentação e booleanos de crítico/esquiva. A versão atual é **3**, com EVA e seu RNG/estatísticas; versão 2 acrescentou composição/equipamentos. Arquivos v1/v2 anteriores são preservados:
 
 | Campo | Conteúdo |
 | --- | --- |
-| `format` / `version` | Identificador `rpg.damage_lab.samples`, versão 2. |
+| `format` / `version` | Identificador `rpg.damage_lab.samples`, versão 3. |
 | `exported_at_utc` / `engine_version` | Data UTC da exportação e versão da engine. |
 | `formula` | Identificador `proportional_v1`, status experimental, fórmulas, ordem de cálculo, composição da chance, política de recursos por amostra e `attribute_ranges` com faixas por categoria/atributo. |
-| `run` | Número da execução, Seed, primeiro/último índice global e estados dos dois RNGs antes/depois. Estados inteiros de 64 bits são **strings** para preservar os bits em leitores JSON/JavaScript. |
+| `run` | Número da execução, Seed, primeiro/último índice global e estados dos três RNGs antes/depois. Estados inteiros de 64 bits são **strings** para preservar os bits em leitores JSON/JavaScript. |
 | `conditions` | Atacante/alvo efetivos, fichas próprias, equipamentos somente do aliado, composição de atributos, origem de crítico, presets selecionados com revisão/marca de edição, ação e parâmetros originais. A Seed registrada é a usada na execução. |
-| `summary` | Quantidade, mínimo/máximo/média, totais de dano e HP removido, frequência/contagem de críticos, médias por tipo, chance configurada e histograma. |
-| `samples` | Todas as amostras, com índice local e global (`sequence_index`), atributos usados na base, sorteios/fatores, crítico/multiplicador, dano bruto/final, HP removido e HP/MP antes/depois. |
+| `summary` | Quantidade, mínimo/máximo/média, totais de dano e HP removido, frequência/contagem de críticos e esquivas, acertos, médias por tipo, chances configuradas e histograma. |
+| `samples` | Todas as amostras, com índice local e global (`sequence_index`), atributos usados na base, sorteios/fatores, esquiva/chance, crítico/multiplicador, dano bruto/final, HP removido e HP/MP antes/depois. |
 
 Falhas ao abrir/gravar o destino são mostradas no rodapé, sem informar sucesso nem alterar o resultado. Esta ferramenta exporta relatórios; não implementa importação, salvamento da aventura ou garantia de replay entre versões diferentes da engine.
 
@@ -214,8 +280,28 @@ Para comparar: desative variação e crítico, coloque ofensiva e defesa em 100 
 
 - Validar sensações e balancear curvas, números, distribuição de variação, arredondamento e ordem das operações após experimentar.
 - Definir valores/limites dos modificadores e armas, acúmulo/duração dos bônus, elegibilidade por ação e casos sem arma. Conversão de CRI e soma das contribuições confirmadas em D63.
-- Progressão, equipamentos, itens reais, buffs/duração, resistências, elementos, acerto/esquiva, cura e demais variáveis futuras não fazem parte deste recorte.
+- Progressão, equipamentos, itens reais, buffs/duração, resistências, elementos, precisão adicional, itens/buffs de EVA, cura e demais variáveis futuras não fazem parte deste recorte.
 - Definir limites efetivos definitivos, crítico sem arma e valores por equipamento; escolhas atuais da composição são provisórias.
 - Integrar o modelo aprovado ao combate da exploração em etapa posterior; INI/ATB e Battle Speed permanecem com as regras atuais.
 
 Arquitetura: calculadora pura em `scripts/damage/damage_calculator.gd`; estado/histórico em `damage_lab_model.gd`; interface e visual separados em `scripts/ui/damage_*`. Testes `tests/damage_lab_tests.gd` e `tests/damage_lab_ui_smoke.gd`; comandos/resultados em [VALIDACAO.md](VALIDACAO.md).
+
+## Ajuste ofensivo aplicado — D87/D88, 27/10/2026
+
+O usuário definiu #1 cerca de15% acima de #2 em dano médio por ataque e autorizou aplicar a proposta: **ATQ próprio do Aliado #1 de20→23**, espada+10 e total33; preset pessoal atualizado para revisão2. Aliado #2 e Monstro #1 preservados. Contra Monstro #1 (DEF40/EVA3%), média teórica por tentativa15,919 contra13,920 (+14,36%); normal13–16/crítico27–33 para #1, mantendo3–4 acertos normais contra monstros35–45HP. Máximo16 faz parte da proposta adotada, ampliando levemente a referência inicial aproximada9–15. INI/ATB são comparação separada. Somente o preset pessoal foi alterado; catálogo manual e combate integrado permanecem como estavam.
+
+Gravação feita pela biblioteca existente, depois reaberta e comparada com a anterior; somente o ATQ próprio e a revisão do primeiro mudaram. Ambos os aliados passaram por1000 ações após recarga, com extremos de dano confirmados na calculadora. Reabrir o laboratório, selecionar **Aliado #1** e usar **Carregar** para atualizar uma ficha já aberta.
+
+## Escalas do Aliado #2 — D92, 28/10/2026
+
+Adicionados seis arcos de madeira com ATQ+10/15/22/31/44/58 e seis trajes leves com DEF+5/8/12/17/24/33, somente para Aliado #2. Cada arco mantém CRI+12p.p./1,6× e cada traje EVA+5. Primeiro arco/couro conservam IDs e valores, com nomes Arco Composto de Madeira/Traje de Couro; a carga resolve nomes atuais em memória por ID sem sobrescrever bônus editados, revisões ou arquivo pessoal. Os seletores mostram seis estágios, sem opção vazia. Primeiro e último pares dão ATQ30/DEF35 e ATQ78/DEF63 com a ficha atual do segundo, sempre EVA12. Salvar/Carregar/Atualizar/Excluir, troca de lados e exportação continuam funcionando. Espadas/metal e presets iniciais permanecem com os mesmos números. Sem progressão por nível, obtenção, inventário ou alteração do combate integrado. Tabela e testes em `ESCALA_ARCOS_E_TRAJES.md`; reabrir o laboratório para carregar o catálogo atualizado.
+
+## ATQ D e DEF D — D94, 28/10/2026
+
+Implementados no laboratório os pares de contato ATQ F/DEF F, disparo físico ATQ D/DEF D e magia MAG/DEF M. Espada soma ATQ F; arco soma ATQ D. Proteções mantêm bônus DEF F e ganham DEF D espelhado: metal+5/8/12/17/24/33; trajes+10/16/24/34/48/65. DEF D+ é editável separadamente e EVA continua independente. DEF D própria45/30 para os aliados, conforme escolha do usuário; ATQ D10/20 adotado para o teste. Com os equipamentos iniciais, primeiro tem33/10 ATQ F/D e55/50 DEF F/D; segundo20/30 e35/40. O arco usa DEF D40 do Monstro #1 para preservar o dano inicial.
+
+Seletor físico: da arma (contato para monstro), corpo a corpo ou distância. Magia ignora o seletor e usa MAG/DEF M. Prévia e histórico indicam o par efetivamente usado. Valores de distância usam0..999 nos aliados e1..9999 nos monstros; limites, soma bruta, bônus, composição e atributos próprios continuam separados. Presets antigos recebem campos ausentes e modo da arma por ID em cópia; não são regravados automaticamente. Novos relatórios são JSONv4 e incluem fonte do dano por amostra. Três RNGs, custos, EVA, crítico, movimento visual provisório e combate integrado permanecem com o comportamento anterior. Especificação e testes em `ATQ_DISTANCIA.md` e `VALIDACAO.md`. Reabrir o laboratório e carregar os presets para usar a versão atual.
+
+## Direção futura da EVA — D95, 28/10/2026
+
+Usuário revisa a regra de ausência de crescimento natural: EVA poderá receber+1 a cada10 ou15 níveis (intervalo ainda por escolher), além de modificadores de equipamentos/magias e aumentos permanentes de+1 por itens especiais raros encontrados na campanha. Não há progressão por nível nem esses itens/efeitos implementados no laboratório. Presets e valores atuais permanecem; o campo EVA própria continua editável para testes. A composição atual própria+equipamento não perde ou ganha valores automaticamente por este registro. INI não foi alterada.

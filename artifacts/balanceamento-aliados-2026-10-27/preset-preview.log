@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+Aliado #1: revisão 2.0, ATQ próprio 23.0, total 33, normal 13–16, crítico 27–33
+Aliado #2: revisão 1.0, ATQ próprio 20.0, total 30, normal 12–14, crítico 19–23
+AJUSTE ATQ23: CÓPIA DE TESTE, 0 falhas; demais presets e campos preservados.

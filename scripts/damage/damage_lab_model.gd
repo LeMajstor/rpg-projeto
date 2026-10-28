@@ -8,10 +8,14 @@ var target: Dictionary
 var loadouts: Dictionary = {}
 var weapon: Dictionary:
 	get: return _loadout()["weapon"]
-	set(value): _loadout()["weapon"] = value.duplicate(true)
+	set(value):
+		if Equipment.can_equip(ally(), value, "weapon"):
+			_loadout()["weapon"] = value.duplicate(true)
 var armor: Dictionary:
 	get: return _loadout()["armor"]
-	set(value): _loadout()["armor"] = value.duplicate(true)
+	set(value):
+		if Equipment.can_equip(ally(), value, "armor"):
+			_loadout()["armor"] = value.duplicate(true)
 var action: Dictionary
 var settings: Dictionary
 var seed_value = 421
@@ -81,10 +85,19 @@ func enemy() -> Dictionary:
 	return attacker if attacker["side"] == "enemy" else target
 
 func _loadout() -> Dictionary:
-	var id: String = ally()["id"]
+	var id: String = Equipment.character_id(ally())
 	if not loadouts.has(id):
-		loadouts[id] = {"weapon": definition("weapons", data["default_weapon"]), "armor": definition("armors", data["default_armor"])}
+		loadouts[id] = {"weapon": Equipment.default_item(ally(), "weapon"), "armor": Equipment.default_item(ally(), "armor")}
 	return loadouts[id]
+
+func choose_equipment(category: String, id: String) -> String:
+	if category not in ["weapon", "armor"]:
+		return "Categoria de equipamento inválida."
+	var item = definition("weapons" if category == "weapon" else "armors", id)
+	if not Equipment.can_equip(ally(), item, category):
+		return "Equipamento indisponível para este personagem."
+	_loadout()[category] = item
+	return ""
 
 func preset_payload(side: String) -> Dictionary:
 	if side not in ["ally", "enemy"]:
@@ -95,6 +108,7 @@ func preset_payload(side: String) -> Dictionary:
 	return payload
 
 func apply_preset(preset: Dictionary) -> String:
+	preset = Presets.upgraded_entry(preset)
 	var error = Presets.validate_entry(preset, data)
 	if not error.is_empty():
 		return error
@@ -105,8 +119,8 @@ func apply_preset(preset: Dictionary) -> String:
 	else:
 		target = preset["actor"].duplicate(true)
 	if side == "ally":
-		loadouts[ally()["id"]] = preset["equipment"].duplicate(true)
-	selected_presets[side] = {"id": preset["id"], "name": preset["name"], "revision": int(preset.get("revision", 1)), "source": preset.get("source", "reference")}
+		loadouts[Equipment.character_id(ally())] = preset["equipment"].duplicate(true)
+	selected_presets[side] = {"id": preset["id"], "name": preset["name"], "revision": int(preset.get("revision", 1)), "source": preset.get("source", "custom")}
 	preset_baselines[side] = preset_payload(side)
 	return ""
 
@@ -131,11 +145,12 @@ func configuration() -> Dictionary:
 		var resolved = Equipment.resolve(actor, weapon, armor, int(settings["effective_stat_limit"]))
 		config[role] = resolved["actor"]
 		if actor["side"] == "ally":
-			config["equipment"][role] = {"owner_id": actor["id"], "weapon": weapon.duplicate(true), "armor": armor.duplicate(true)}
+			config["equipment"][role] = {"owner_id": Equipment.character_id(actor), "weapon": weapon.duplicate(true), "armor": armor.duplicate(true)}
 			config["composition"][role] = resolved["composition"]
 	if attacker["side"] == "ally":
 		config["weapon"] = weapon.duplicate(true)
 	config["critical_source"] = Calculator.critical_source(config)
+	config["damage_stats"] = Calculator.damage_stats(config)
 	config["presets"] = {}
 	for side in selected_presets:
 		var role = ally_role() if side == "ally" else ("target" if ally_role() == "attacker" else "attacker")

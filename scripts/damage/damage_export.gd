@@ -1,9 +1,9 @@
 extends RefCounted
 ## Relatório de uma execução já calculada; não sorteia nem consulta as fichas atuais.
 const FORMAT = "rpg.damage_lab.samples"
-const VERSION = 2
+const VERSION = 4
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
-const SUMMARY_KEYS = ["count", "minimum", "maximum", "mean", "total", "hp_removed_total", "critical_count", "critical_frequency", "normal_mean", "critical_mean", "chance", "histogram"]
+const SUMMARY_KEYS = ["count", "minimum", "maximum", "mean", "total", "hp_removed_total", "critical_count", "critical_frequency", "normal_mean", "critical_mean", "chance", "histogram", "evasion_count", "evasion_frequency", "evasion_chance", "hit_count", "normal_count", "critical_hit_frequency"]
 
 static func document(result: Dictionary) -> Dictionary:
 	if not result.get("error", "").is_empty() or result.get("samples", []).is_empty():
@@ -24,8 +24,12 @@ static func document(result: Dictionary) -> Dictionary:
 		"formula": {
 			"id": "proportional_v1", "status": "experimental",
 			"physical": "power * physical_attack^2 / (physical_attack + physical_defense)",
+			"ranged": "power * ranged_attack^2 / (ranged_attack + ranged_defense)",
+			"attack_selection": "physical_mode: weapon uses equipped weapon mode for ally, melee for enemy; explicit melee/ranged override; magical always MAG/DEF M",
 			"magical": "power * magic_power^2 / (magic_power + magic_defense)",
-			"zero_offense_base": 0, "order": ["base", "variation", "critical_multiplier", "round_nearest", "minimum_1"],
+			"zero_offense_base": 0, "order": ["evasion_check", "on_hit_only", "base", "variation", "critical_multiplier", "round_nearest", "minimum_1"],
+			"evasion_stats": "ally: clamp(own evasion_base + equipped armor.evasion_bonus, 0, 100); enemy: direct; missing armor bonus is zero",
+			"evasion": "effective target.evasion_base percent when action.evasion_allowed; evaded: zero damage, no critical, action MP still spent",
 			"critical_chance_percent": "clamp(critical_base * crit_per_point + critical_source.chance_bonus + item_bonus + buff_bonus, 0, 100)",
 			"physical_stats": "ally: clamp(own stat + equipped bonus, 0, effective_stat_limit); enemy: direct stats",
 			"attribute_ranges": Calculator.attribute_ranges(),
@@ -44,7 +48,7 @@ static func document(result: Dictionary) -> Dictionary:
 	}
 
 static func _rng_text(state: Dictionary) -> Dictionary:
-	return {"variance": str(state["variance"]), "critical": str(state["critical"])}
+	return {"variance": str(state["variance"]), "critical": str(state["critical"]), "evasion": str(state["evasion"])}
 
 static func save(path: String, result: Dictionary) -> Dictionary:
 	var payload = document(result)

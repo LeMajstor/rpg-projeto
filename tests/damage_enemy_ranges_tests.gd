@@ -2,7 +2,7 @@ extends SceneTree
 const Model = preload("res://scripts/damage/damage_lab_model.gd")
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
 const Export = preload("res://scripts/damage/damage_export.gd")
-const LARGE_STATS = ["hp", "mp", "physical_attack", "physical_defense", "magic_power", "magic_defense"]
+const LARGE_STATS = ["hp", "mp", "physical_attack", "physical_defense", "ranged_attack", "ranged_defense", "magic_power", "magic_defense"]
 var checks = 0
 var failures = 0
 var definitions: Dictionary
@@ -25,11 +25,13 @@ func _run() -> void:
 		var role = "attacker" if attacking else "target"
 		for stat in LARGE_STATS:
 			var original = model.enemy()[stat]
-			for endpoint in [1, 1000, 9999]:
+			var cap = 99999 if stat == "hp" else 9999
+			var endpoints = [1, 9999, 10000, 99999] if stat == "hp" else [1, 1000, 9999]
+			for endpoint in endpoints:
 				model.enemy()[stat] = endpoint
 				var result = model.run(1)
 				expect(result["error"].is_empty() and result["snapshot"][role][stat] == endpoint, "Monstro aceita faixa ampliada nos dois papéis: " + stat)
-			for invalid in [0, -1, 10000, 1.5, INF, NAN]:
+			for invalid in [0, -1, cap + 1, 1.5, INF, NAN]:
 				model.enemy()[stat] = invalid
 				var rng = model.rng_state.duplicate()
 				var number = model.run_number
@@ -55,9 +57,10 @@ func _run() -> void:
 	model.attacker["physical_attack"] = 20
 	for stat in LARGE_STATS:
 		model.enemy()[stat] = 9999
+	model.enemy()["hp"] = 99999
 	var defender = model.run(1000)
-	expect(defender["snapshot"]["target"]["physical_defense"] == 9999 and defender["snapshot"]["target"]["hp"] == 9999, "Monstro alvo não sofre limite de equipamento 999")
-	expect(defender["minimum"] == 1 and defender["maximum"] == 1 and defender["samples"][0]["hp_after"] == 9998, "Defesa 9999 respeita dano mínimo e HP de quatro dígitos")
+	expect(defender["snapshot"]["target"]["physical_defense"] == 9999 and defender["snapshot"]["target"]["hp"] == 99999, "Monstro alvo não sofre limite de equipamento 999")
+	expect(defender["minimum"] == 1 and defender["maximum"] == 1 and defender["samples"][0]["hp_after"] == 99998, "Defesa 9999 respeita dano mínimo e HP de cinco dígitos")
 	model.swap_roles()
 	model.action["damage_type"] = "magical"
 	model.action["mp_cost"] = 999
@@ -74,7 +77,7 @@ func _run() -> void:
 	expect(Export.save(path, attacker)["error"].is_empty(), "Exporta lote com atributos grandes")
 	var exported = JSON.parse_string(FileAccess.get_file_as_string(path))
 	for stat in LARGE_STATS:
-		expect(exported["conditions"]["attacker"][stat] == 9999 and exported["formula"]["attribute_ranges"]["enemy"][stat] == [1.0, 9999.0], "JSON preserva valores e documenta faixas por lado: " + stat)
+		expect(exported["conditions"]["attacker"][stat] == (99999 if stat == "hp" else 9999) and exported["formula"]["attribute_ranges"]["enemy"][stat] == [1.0, 99999.0 if stat == "hp" else 9999.0], "JSON preserva valores e documenta faixas por lado: " + stat)
 	expect(exported["formula"]["attribute_ranges"]["ally"]["hp"] == [0.0, 999.0] and exported["formula"]["attribute_ranges"]["enemy"]["ini"] == [1.0, 99.0], "JSON distingue aliados de monstros e INI/CRI")
 	DirAccess.remove_absolute(path)
 	print("FAIXAS/MONSTROS: %d verificações, %d falhas" % [checks, failures])
