@@ -9,6 +9,9 @@ func _ready() -> void:
 func _draw() -> void:
 	if result.is_empty():
 		return
+	if result.get("result_type") == "affliction":
+		_draw_outcomes()
+		return
 	var bins: Array = result["histogram"]
 	var peak = 1
 	for bin in bins:
@@ -37,3 +40,14 @@ func _draw() -> void:
 	var label = "Dano · verde: normal · amarelo: crítico · azul: esquiva"
 	var label_width = font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
 	draw_string(font, Vector2(maxf(origin.x + 25, (size.x - label_width) * 0.5), size.y - 8), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("bdcee0"))
+
+func _draw_outcomes() -> void:
+	var bins: Array = result["histogram"]
+	var colors = [Color("91c8ff"), Color("edc776"), Color("65cbb0")]
+	var width = size.x / 3.0
+	var height = maxf(1, size.y - 48)
+	for index in range(bins.size()):
+		var bar_height = float(bins[index]["count"]) / result["count"] * height
+		draw_rect(Rect2(Vector2(index * width + 20, 22 + height - bar_height), Vector2(width - 40, bar_height)), colors[index])
+		var title = "%s · %d" % [bins[index]["label"], bins[index]["count"]]
+		draw_string(font, Vector2(index * width + 12, size.y - 6), title, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, colors[index])

@@ -1,0 +1,1676 @@
+{
+	"seeds": [
+		733,
+		112,
+		2026,
+		31415
+	],
+	"rows": [
+		{
+			"case_index": 1.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 475,
+			"resisted_count": 494,
+			"evasion_count": 31,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "9e9741b123ab4e4d0fb8b616b1960c4d34cce7da219a1c229132b7f2358699b0",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 1.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 494,
+			"resisted_count": 476,
+			"evasion_count": 30,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "66eaa900becae8df895154181b821b6b109bd8f252a0183548f3b0b2b71db523",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 1.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 508,
+			"resisted_count": 460,
+			"evasion_count": 32,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "223eb14351f6d80689dabe3f7f6e0596420c85c75245c4a7baf648957b771f74",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 1.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 484,
+			"resisted_count": 489,
+			"evasion_count": 27,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "21a00c323100b6b825ce5438f37b1a5263de7015dfd536ef2882a98ef8dac250",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 2.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 475,
+			"resisted_count": 494,
+			"evasion_count": 31,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "b317670c265a0e83a2fc5779cff05c17a2804110dd1883a5d14d8f8e2ab35dbc",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 2.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 494,
+			"resisted_count": 476,
+			"evasion_count": 30,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "f37f50e1c074f6fe96f6018cbbd2c5208d31655bb66d3f31594514529b27a54b",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 2.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 508,
+			"resisted_count": 460,
+			"evasion_count": 32,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "f7def664022d0df75ce2e07685ac29b09cad87686d68772d1b68f29b42709dbd",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 2.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 484,
+			"resisted_count": 489,
+			"evasion_count": 27,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "e34351f34ba1b8679c124be0e68f397dc2d000053b513ceab2b71d054b03bc55",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 3.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 550,
+			"resisted_count": 419,
+			"evasion_count": 31,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "c86f924b904c2ba659e233fa828a27e31485a76580ae9e7e785039db2dc59720",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 3.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 407,
+			"evasion_count": 30,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "0793c101db2dda2e69acef30a4a8dad17d6a551fb7ce57130c84b4218a6526bc",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 3.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 405,
+			"evasion_count": 32,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "37215bd214751baef4bf148e7a708bd950de492e9e4129fa1662c2024a2af423",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 3.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 551,
+			"resisted_count": 422,
+			"evasion_count": 27,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "5c20a7820164e7e3aa2b58dab95fade2573052198be8a7c3a436e8548d249669",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 4.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 550,
+			"resisted_count": 419,
+			"evasion_count": 31,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "c74dcfbea2ac869c44ea76c700d647c61b3fc0a6a7a9aa910c0a1e47e9f95290",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 4.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 407,
+			"evasion_count": 30,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "f83184dbe86a9f08b57f33bcad420bc9258f0bce530fc49dfbd1e46e25b8dc80",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 4.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 405,
+			"evasion_count": 32,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "cea7921982652473b0189dd6a52e7d43a4c052d1a68ef965201cedc0444c3a29",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 4.0,
+			"attacker": "Aliado #1",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 551,
+			"resisted_count": 422,
+			"evasion_count": 27,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "57ff0316c889ba0f9c7e76c4747d85b61d6c6b6085937b3f5706fc29641582b0",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 5.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "poison",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 460,
+			"resisted_count": 485,
+			"evasion_count": 55,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "2ee9225fdd5d213c34475bfa34d6c00e3ef91ffafe1c917c37ab86c36d0842d3",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 5.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "poison",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 486,
+			"resisted_count": 463,
+			"evasion_count": 51,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "e218b95976d8e6167dd7904e7f33eec9edf60129dba0645abaa0027399b5ed12",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 5.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "poison",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 501,
+			"resisted_count": 448,
+			"evasion_count": 51,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "1274e1e80a511de4ea92a031ae1f1ab527405292d17861279b3223ee7893b222",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 5.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "poison",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 479,
+			"resisted_count": 475,
+			"evasion_count": 46,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "9174e29c0727c4445629871249d17872f48d160e6bad3bb1706e37d24f42cd7e",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 6.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "slow",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 460,
+			"resisted_count": 485,
+			"evasion_count": 55,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "ba3af00ac34b068bc278f61b6326a38c58e0226bab75660af238b95ba9770ec5",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 6.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "slow",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 486,
+			"resisted_count": 463,
+			"evasion_count": 51,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "2218ab0309834d0e5ad975f29269b3411eb9130f8f6893cd5f61634ac9ecd3a0",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 6.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "slow",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 501,
+			"resisted_count": 448,
+			"evasion_count": 51,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "6233db3d66d42af1b521f0f756c962ce50643bf8ad99e851dd6364263711b0be",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 6.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "slow",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 479,
+			"resisted_count": 475,
+			"evasion_count": 46,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"samples_sha256": "0895fb02d9c4577f407a39923f6a95898a5f21aa4cee14ea1ca765a08f1fb9ba",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 7.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "confusion",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 523,
+			"resisted_count": 422,
+			"evasion_count": 55,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "6d22d79f541a2504d28df61e18820883e90e0ae2c2722a721a09b25c3712a2b9",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 7.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "confusion",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 535,
+			"resisted_count": 414,
+			"evasion_count": 51,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "8b813efcf4b6c552541b5c4687ecda09210a8b1fb032cacf03683baf8b5a77f6",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 7.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "confusion",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 541,
+			"resisted_count": 408,
+			"evasion_count": 51,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "d5eeb2463fcdab6ec3554d7dd305b6544235f579d16ee365dda145894ddb5344",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 7.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "confusion",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 528,
+			"resisted_count": 426,
+			"evasion_count": 46,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "5cd63f486f52e40caa9b075e432472dc95a97327b6e5631778166ce5648cd40b",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 8.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "fear",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 523,
+			"resisted_count": 422,
+			"evasion_count": 55,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "ea088e92c3c494ab84811ac30dc6530c2b5b8f470b9dcbfb2db1b22724bcee52",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 8.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "fear",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 535,
+			"resisted_count": 414,
+			"evasion_count": 51,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "164c8cddfe4833fd23e4c288f1fd371083b2024d7c57ac49304b469e70f6f034",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 8.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "fear",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 541,
+			"resisted_count": 408,
+			"evasion_count": 51,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "7d87ec1c7b20691620bb9edf60bd260cba610277850b7a548815257fe2704393",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 8.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #1",
+			"action_id": "fear",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 528,
+			"resisted_count": 426,
+			"evasion_count": 46,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 52.77777777777778,
+			"samples_sha256": "dea75d959fb898072966106f78cfc8abf153baf74054148aaeda4c564dce1331",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 9.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "poison",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 396,
+			"evasion_count": 116,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "cd5ba833fc4b9cdd67a7068a440ab3c574f8a985a47f9a79a5085a1792f187a9",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 9.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "poison",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 496,
+			"resisted_count": 381,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "2216c1b39ddfba2644d820fcf81fe70215179b6e4ab27b428c15a20fa7c98d98",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 9.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "poison",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 501,
+			"resisted_count": 376,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "7a8289a10f7c36d643c478993dc0d4c03891bd612a22ece0886be2f13ba0de75",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 9.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "poison",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 400,
+			"evasion_count": 112,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "2a2f61bcbbf39c43d1e1cfd28c4e3f7c7c6e822e263b8d16fc9a0225bcdb941e",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 10.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "slow",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 396,
+			"evasion_count": 116,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "3c3ef88b6b8ffaa56b6d6812e92bd6c0db8f0ec3841a5dd2e8119ed282b1296d",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 10.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "slow",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 496,
+			"resisted_count": 381,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "1f6ff590f68a1b61666a3c9b231a909673f646ec0e662674068bdd45c7e728a3",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 10.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "slow",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 501,
+			"resisted_count": 376,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "5c2eb02f3568a90b1cd5ebbb1a84a8db0440f59cae46a4072113326d09d23f4a",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 10.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "slow",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 400,
+			"evasion_count": 112,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "655e40455208e5c8c2ae6d0a3eece6457f67685092c05d854f5d0ff3704246e3",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 11.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "confusion",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 396,
+			"evasion_count": 116,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "726c9e8ba29ced996602d7b228138bbeb640de4232a56e3279a2474792f690a1",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 11.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "confusion",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 496,
+			"resisted_count": 381,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "5b5e4930e85ea343697f455889b11bf965edc2c67d2ae82a8973a4e8efbcceba",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 11.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "confusion",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 501,
+			"resisted_count": 376,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "4e3334b8c226033751def7a8a21350cf4447f42e0b27920451ee24c4c790c41b",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 11.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "confusion",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 400,
+			"evasion_count": 112,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "aa998afa674e577c14cbba4d5cbe94fa7db1e65f4067a7cd95207b43a7e9dba6",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 12.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "fear",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 396,
+			"evasion_count": 116,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "e19ae843756ed795c797bd7d2f671407a2a0af3dbc774a7607579b98f25a96b8",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 12.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "fear",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 496,
+			"resisted_count": 381,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "02ea01e0bc30e73ccca218593928c50fabdf6ed9d017a7469971dfb51b4e6e0b",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 12.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "fear",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 501,
+			"resisted_count": 376,
+			"evasion_count": 123,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "ae6c569011e096925957b1575d1ef0a92b3e6a281d409418abb40e5d1dc4b744",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 12.0,
+			"attacker": "Monstro #1",
+			"target": "Aliado #2",
+			"action_id": "fear",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 488,
+			"resisted_count": 400,
+			"evasion_count": 112,
+			"application_chance": 55.55555555555556,
+			"total_application_chance": 48.88888888888889,
+			"samples_sha256": "c6d97d5b58cde146f3dd3b10581ff893a6a881ae54bd9ea13a64756d099a6b36",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 13.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 475,
+			"resisted_count": 494,
+			"evasion_count": 31,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "cc2d60c0ebca58687708794ef79883903cc9ab5bc1b68cc2710ef0f21c41dfca",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 13.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 494,
+			"resisted_count": 476,
+			"evasion_count": 30,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "22c2894baefe7d5db7caa946fff8fdbb7e0b39992de851898e97394a9834e82d",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 13.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 508,
+			"resisted_count": 460,
+			"evasion_count": 32,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "3031e619ef26a6f563ab8e78d1e01a03ef80f9486154114de22eefe115084a00",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 13.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "poison",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 484,
+			"resisted_count": 489,
+			"evasion_count": 27,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "e03a25a3657ffe5b83849740cc62287f6ee7024264f828168930eb5d4e585000",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 14.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 475,
+			"resisted_count": 494,
+			"evasion_count": 31,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "932a2304b9380b48b626489d09b9725ee7dd304215f61d182b12dc1049ae52a2",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 14.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 494,
+			"resisted_count": 476,
+			"evasion_count": 30,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "98a759163c870c10625983b69f2f6909432ef047f58e5f4bf08e6aa159cbe411",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 14.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 508,
+			"resisted_count": 460,
+			"evasion_count": 32,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "9f33cbc7872fa2bf0980aeb58ff6e3d088f10640c1e2c54d6930ba97c8b070df",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 14.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "slow",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 484,
+			"resisted_count": 489,
+			"evasion_count": 27,
+			"application_chance": 50.0,
+			"total_application_chance": 48.5,
+			"samples_sha256": "aa9a74dee22c8e7e12497c2b9ca8ccfe46694ccd4e3b23ae78e269efa0ae53a5",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 15.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 550,
+			"resisted_count": 419,
+			"evasion_count": 31,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "2e0fe1b29b973c7e1bfb6b8869c069b6309e0f1b2c049c5feb5120a53d999b9e",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 15.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 407,
+			"evasion_count": 30,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "872c31c953febf2e08a6938182e74cca4d091af4a5c0df85ddf2ca83b761cfeb",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 15.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 405,
+			"evasion_count": 32,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "10aaa8703f90b33d0fe4a4d15d41cb0416513bf726d698bd7de04732dcd12ec2",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 15.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "confusion",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 551,
+			"resisted_count": 422,
+			"evasion_count": 27,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "4bcbde7280411e3c7b4caae404ced2ac607e559b8647f43aeaf0e6dd4999ac21",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		},
+		{
+			"case_index": 16.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 733,
+			"count": 1000,
+			"applied_count": 550,
+			"resisted_count": 419,
+			"evasion_count": 31,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "f8cce328ee7efdcb2fc69f5d52f4653082b58b0f87da234c534cac5600565bef",
+			"rng_before": {
+				"variance": 2560584074900415983,
+				"critical": 910896633035983042,
+				"evasion": 8887142738707480218,
+				"affliction": 6870333320814699358
+			},
+			"rng_after": {
+				"variance": -6122859712560498497,
+				"critical": -1536111306893299886,
+				"evasion": 1682390110720955178,
+				"affliction": -613678735718892306
+			}
+		},
+		{
+			"case_index": 16.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 112,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 407,
+			"evasion_count": 30,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "c1ce2bce8689a69e786e4432f75e209c6f99dacdeb8d109b58a9c63ee41624df",
+			"rng_before": {
+				"variance": 1724188917948008126,
+				"critical": -469134950288073749,
+				"evasion": -1354788438923356173,
+				"affliction": 6230379773182490447
+			},
+			"rng_after": {
+				"variance": 154701905174042702,
+				"critical": -4695560332101019205,
+				"evasion": 7280286440684535747,
+				"affliction": 6246962419058819615
+			}
+		},
+		{
+			"case_index": 16.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 2026,
+			"count": 1000,
+			"applied_count": 563,
+			"resisted_count": 405,
+			"evasion_count": 32,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "efc2d47e9419a36274a276a24710561429009dafce2fe43ff9e42490668b6679",
+			"rng_before": {
+				"variance": -5476342462851192736,
+				"critical": -2494831131442957939,
+				"evasion": 7680708563909148421,
+				"affliction": 1255793549657451713
+			},
+			"rng_after": {
+				"variance": 7502239069684223088,
+				"critical": -4645082716981820963,
+				"evasion": 2949906638462780757,
+				"affliction": -8034747583152566767
+			}
+		},
+		{
+			"case_index": 16.0,
+			"attacker": "Aliado #2",
+			"target": "Monstro #1",
+			"action_id": "fear",
+			"seed": 31415,
+			"count": 1000,
+			"applied_count": 551,
+			"resisted_count": 422,
+			"evasion_count": 27,
+			"application_chance": 57.142857142857146,
+			"total_application_chance": 55.42857142857143,
+			"samples_sha256": "423c7715541d09fad81e3d52c607b42f94033b777c8d3a9cc8833875cc556145",
+			"rng_before": {
+				"variance": 550117360941847761,
+				"critical": 3831593643580676004,
+				"evasion": -9199442953321475796,
+				"affliction": -2054025606509252752
+			},
+			"rng_after": {
+				"variance": -2486058083475699167,
+				"critical": -7237321229520445260,
+				"evasion": 8536650668902622268,
+				"affliction": 3099470140209014656
+			}
+		}
+	],
+	"checks": 128128,
+	"failures": 0
+}

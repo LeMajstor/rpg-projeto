@@ -4,7 +4,7 @@
 
 ## Confirmado
 
-- Atributos D54 e siglas D57: HP, MP, INI, ATQ F, DEF F, MAG, DEF M e CRI; EVA acrescentada por D74/D75, com base fixa, sem crescimento natural por nível.
+- Atributos D54 e siglas D57: HP, MP, INI, ATQ F, DEF F, MAG, DEF M e CRI; EVA D74/D75 com direção de crescimento revisada em D95. ATQ D/DEF D implementados por D94; INT/VIG por D100/D110, em1..999 para ambos os lados. Crescimento por nível de INT/VIG é desenho futuro, sem progressão automática no laboratório.
 - Escalas vigentes (D59/D69/D76): **HP, MP, ATQ F, DEF F, MAG e DEF M: aliados 0..999**; **HP dos monstros 1..99999**; **MP, ATQ F, DEF F, MAG e DEF M dos monstros 1..9999**. **INI e CRI: 1..99 para ambos**. Ampliação dos monstros confirmada em 27/10/2026 para permitir grandezas maiores, inclusive chefes; não define valores por inimigo.
 - Dano mínimo de 1 para um ataque que atinge alvo válido (D55).
 - **D64:** armas somam bônus ao ATQ F próprio, armaduras à DEF F própria. D66 implementa campos próprios do aliado, bônus de arma/armadura e totais efetivos separados; monstros mantêm atributos diretos. Potência pertence à ação. Valores de itens e limites efetivos ainda a definir; ver seção 7.5 do `GDD.md`.
@@ -220,7 +220,7 @@ chance (%) = limitar(CRI × conversão + chance da arma + item + buff, 0, 100)
 
 A conversão **1% por ponto de CRI foi confirmada pelo usuário em D63**. Exemplo: CRI 5 + arma com 5% = chance total 10%, antes de outros bônus. O campo de conversão 0..10% é uma ferramenta de experimentação do laboratório, sem criar uma configuração do jogo ou mudar a regra aprovada. Item/buff são campos numéricos em pontos percentuais, de −100 a +100 cada; não implementam itens ou magias reais. Somente a arma fornece multiplicador. Os seis presets de espada usam **5% / 2×**, com chance editável 0..100% e multiplicador 1..10×; as antigas armas de controle 2×/3× foram removidas a pedido do usuário. Valores das armas e limites dos campos continuam parâmetros de teste, sem constituir regra definitiva.
 
-As ações iniciais são ataque físico **1× / 0 MP**, técnica física **1,8× / 4 MP** e magia **1,5× / 7 MP**. Potência pode variar 0..10×, custo 0..999 MP. Físicas permitem crítico inicialmente; magia não, mas a opção pode ser ligada para comparação. Fichas e valores em `data/damage_lab.json` são exemplos originais, sem classes, bestiário ou progressão aprovados. Nenhuma fórmula foi copiada automaticamente da referência de Chrono Trigger.
+As ações iniciais são ataque físico **1× / 0 MP**, técnica física **1,8× / 4 MP** e magia **1,5× / 7 MP**. Nas ações de dano, potência pode variar0..10× e custo0..999MP; nas magias puras de aflição, potência não se aplica e o custo inicial é4MP. Físicas permitem crítico; D103/D110 restringem crítico ao dano físico. Magia não permite crítico, inclusive no modo forçado. Fichas e valores em `data/damage_lab.json` são exemplos originais, sem classes, bestiário ou progressão aprovados. Nenhuma fórmula foi copiada automaticamente da referência de Chrono Trigger.
 
 ## Lotes, sequência e comparação
 
@@ -228,7 +228,7 @@ Cada amostra começa com **os mesmos HP/MP e condições**. Isso permite coletar
 
 Resumo com mínimo, máximo, média, médias normal/crítica, totais de dano/HP removido, quantidade e frequência observada de críticos e chance configurada. Histograma com até 12 intervalos, distinguindo esquivas, danos normais e críticos. Aba **Amostras** exibe todas as ações e permite selecionar cada uma para decompor o cálculo. Aba **Condições** registra as fichas, arma, ação, modificadores, semente e início da sequência daquele resultado.
 
-Há três RNGs independentes, derivados da semente: variação, crítico e esquiva. Cada ação avança cada fluxo uma vez, inclusive nos modos fixos, em esquivas e em ações sem permissão de esquiva. Alterar a permissão de crítico não muda a sequência da variação. Ações e lotes sucessivos continuam a sequência; 10× + 10× equivalem às primeiras 20 amostras de uma execução maior iniciada na mesma semente. **Reiniciar sequência** volta ao primeiro sorteio sem mudar as fichas; alterar a semente também reinicia. A mesma configuração, semente e posição na sequência reproduzem o resultado na engine validada.
+Há quatro RNGs independentes, derivados da semente: variação, crítico, esquiva e aflição (D110). Cada ação avança cada fluxo uma vez, inclusive nos modos fixos, em esquivas e em ações sem permissão de esquiva. Alterar a permissão de crítico não muda a sequência da variação. Ações e lotes sucessivos continuam a sequência; 10× + 10× equivalem às primeiras 20 amostras de uma execução maior iniciada na mesma semente. **Reiniciar sequência** volta ao primeiro sorteio sem mudar as fichas; alterar a semente também reinicia. A mesma configuração, semente e posição na sequência reproduzem o resultado na engine validada.
 
 Histórico guarda até **12 execuções** com cópias das condições e estados de RNG. Editar o próximo caso não reescreve resultados anteriores. Consultar o histórico não aplica suas fichas ao próximo teste nem altera a sequência atual. **Restaurar caso** volta aos presets e semente iniciais, mantendo o histórico. Fechar o laboratório descarta a sessão; presets pessoais explicitamente salvos continuam em disco.
 
@@ -240,7 +240,7 @@ A pasta inicial é `exports/damage-lab/`, na raiz do projeto, criada ao abrir a 
 
 O arquivo contém **todas as linhas daquela execução**, mesmo que só parte esteja visível na tabela. Exportar um resultado antigo usa sua cópia de condições e sorteios, mesmo depois de editar o próximo caso. Não executa novas ações, não muda o histórico nem avança o RNG. Exporta uma execução por arquivo; para comparar casos, selecione e exporte cada resultado desejado. Anexe o `.json` na conversa para análise.
 
-Formato legível, UTF-8, com números sem arredondamento de apresentação e booleanos de crítico/esquiva. A versão atual é **3**, com EVA e seu RNG/estatísticas; versão 2 acrescentou composição/equipamentos. Arquivos v1/v2 anteriores são preservados:
+Formato legível, UTF-8, com números sem arredondamento de apresentação e booleanos de crítico/esquiva. A versão atual é **5**, com INT/VIG, testes de aflição e quarto RNG; versão4 acrescentou distância, versão3 EVA e versão2 composição/equipamentos. Arquivos anteriores são preservados:
 
 | Campo | Conteúdo |
 | --- | --- |
@@ -305,3 +305,59 @@ Seletor físico: da arma (contato para monstro), corpo a corpo ou distância. Ma
 ## Direção futura da EVA — D95, 28/10/2026
 
 Usuário revisa a regra de ausência de crescimento natural: EVA poderá receber+1 a cada10 ou15 níveis (intervalo ainda por escolher), além de modificadores de equipamentos/magias e aumentos permanentes de+1 por itens especiais raros encontrados na campanha. Não há progressão por nível nem esses itens/efeitos implementados no laboratório. Presets e valores atuais permanecem; o campo EVA própria continua editável para testes. A composição atual própria+equipamento não perde ou ganha valores automaticamente por este registro. INI não foi alterada.
+
+
+## Testes de aplicação de aflições — D110/D111 implementados
+
+**D98–D111, 28/10/2026:** o recorte estudado é somente magias cujo objetivo é aplicar uma aflição, sem dano direto. Não incluir ataques físicos com aflição nem ações que combinam dano e aflição nesta etapa. Campos e testes implementados após autorização do usuário em D110; avaliação de balanceamento posterior.
+
+- MAG do atacante enfrenta **DEF M + VIG** para Veneno/Lentidão e **DEF M + INT** para Confusão/Medo (D111).
+- Fórmula comum vigente D111: `chance (%) = 100 × MAG / (MAG + DEF M + resistência específica)`. Soma sem teto adicional, mantendo os limites dos atributos próprios. Prévia e amostras mostram DEF M, VIG/INT e total.
+- **D109 — regra vigente:** usar diretamente a fórmula pura, sem saturação, mínimo de5% ou máximo de95%. Substitui os limites anteriores D102/D107. EVA permanece anterior e pode impedir a aplicação; chance total por tentativa = `(1 − EVA/100) × chance da fórmula`. Com MAG e resistência positivas, a chance da fórmula fica estritamente entre0% e100%.
+- INT/VIG próprios em **1..999**, com crescimento por nível definido para o desenho futuro. Referências iniciais escolhidas em D106; ganhos por nível pendentes, sem implementar progressão.
+- **D105:** Veneno, Lentidão, Confusão e Medo iniciais permitem esquiva por EVA. Primeiro verificar esquiva; se ocorrer, encerrar sem aflição. Sem esquiva, testar MAG contra DEF M + VIG/INT. Permissão configurável por magia: outras futuras poderão ignorar EVA, mantendo o teste de resistência. Resistir e esquivar são resultados distintos; não criar essas magias futuras agora.
+- Crítico se refere somente ao dano físico; aflições não têm crítico. A opção experimental atual que permite ligar crítico em magia descreve a implementação anterior, não essa nova regra aprovada. D110 implementa a restrição: interface desabilita crítico para magia, modelo e calculadora impedem crítico mágico inclusive no modo forçado.
+- Preservar referências e demais atributos/equipamentos. **D106:** Aliado #1 INT20/VIG25; Aliado #2 INT20/VIG20; Monstro #1 INT15/VIG20. Valores experimentais: campos ausentes são preenchidos em memória ao ler os presets; valores novos personalizados são preservados. Arquivos e revisões não são alterados na leitura. Salvar/Atualizar passam a persistir INT/VIG normalmente.
+- **D108:** custo inicial de **4 MP** para cada uma das quatro magias, para fins de teste.
+
+**Disponível:** escolha Veneno, Lentidão, Confusão ou Medo em Ação. INT/VIG aparecem nas duas fichas; próprios/diretos1..999. Prévia mostra a composição da resistência (DEF M + VIG/INT), a chance após a etapa EVA e a chance total por tentativa. F6/F7/F8/F9 executam1×/10×/100×/1000×, com4MP por tentativa e recursos restaurados por amostra. Resumo/gráfico/tabela separam Esquivou/Resistiu/Aplicou; escolher uma amostra mostra resistência, chances e sorteios. A etapa DEF M + VIG/INT é marcada como não realizada se houve esquiva. Histórico preserva condições anteriores; exportação F10 gera JSONv5 com a fórmula `affliction_application_v2`, DEF M/INT/VIG e resistência combinada, estatísticas, índices e quarto RNG em texto. Para aflições, não há dano direto nem aplicação do mínimo1. Potência/variação/crítico ficam indisponíveis nessa ação; demais testes de dano continuam disponíveis. Eventos de duração/ticks não são executados.
+
+
+### Compatibilidade, sorteios e verificação de D110
+
+A biblioteca continua no formato de presets versão1, com campos aditivos. `intelligence`/`vigor` ausentes recebem referências por identidade estável do personagem ou categoria de monstro, configuradas em `data/damage_lab.json`. A leitura preserva atributos existentes, bônus, IDs, revisões e arquivo pessoal. Definição de instalação do Aliado #2 também atualizada. Novas exportações usam versão5; arquivos de relatórios anteriores não são regravados.
+
+O quarto RNG (`affliction`) usa uma semente derivada independente e estado copiável. Cada amostra avança os quatro fluxos uma vez, inclusive ações sem aflição ou esquivadas. O teste de resistência não é realizado quando há esquiva, embora o sorteio independente seja consumido para manter a sequência reproduzível. Alternar ações ou editar fichas não modifica os sorteios de dano/variação/esquiva anteriores. JSON inclui chances condicionais e totais, classificação da tentativa e estado dos quatro fluxos; exportar não recalcula.
+
+Verificações específicas e regressões aprovadas em `VALIDACAO.md`. Para executar as suítes novas, na pasta do projeto:
+
+```sh
+godot --headless --path . --script res://tests/damage_affliction_tests.gd
+godot --headless --path . --script res://tests/damage_defm_tests.gd
+godot --headless --path . --script res://tests/damage_affliction_ui_smoke.gd
+```
+
+Para conferir com renderização real e salvar capturas:
+
+```sh
+godot --path . --audio-driver Dummy --script res://tests/damage_affliction_ui_smoke.gd -- --visual-captures=res://artifacts/damage-lab-afflictions
+```
+
+
+### Estudo histórico dos três presets — versão anterior sem DEF M, 28/10/2026
+
+A matriz de quatro confrontos válidos e quatro magias foi executada com cinco sementes,5.000 tentativas por caso (80.000 no total). Sem mudanças de atributos/equipamentos/presets. Resultados próximos à fórmula, com maior desvio0,39 ponto percentual; mesma MAG dá mesmo desempenho ofensivo e EVA compensa parte da menor VIG do segundo aliado. [Análise completa e scripts](../artifacts/aflicoes-presets-2026-10-28/analise.md). Avaliação dos efeitos em batalha e aprovação de balanceamento continuam para outra etapa.
+
+
+### Adoção de DEF M — D111
+
+Depois da comparação de duas rodadas1.000×, o usuário adotou a soma de DEF M à resistência específica para as quatro magias. O custo4MP, EVA anterior, ausência de dano direto/crítico e fórmula sem limites adicionais foram preservados. Editar DEF M atualiza as chances da próxima execução; histórico e resultados anteriores não mudam. Amostras/JSON incluem `specific_resistance`, `magic_defense`, `combined_resistance` e `resistance_formula`. JSON continua na versão5, identificando a fórmula nova como `affliction_application_v2`; relatórios anteriores permanecem intactos com sua identificação original.
+
+A suíte `damage_defm_tests.gd` reproduz exatamente o caso aceito: MAG25 contra DEF M21 + VIG25, EVA5%, semente421,1.000 tentativas →309 aplicações/647 resistências/44 esquivas. Também verifica as quatro magias, soma acima999 sem limitação, contribuição de cada parcela, mesmas sequências RNG, preservação de histórico e curva sem piso/teto.
+
+Scripts dos estudos anteriores usam as referências congeladas `artifacts/damage-lab-defm/calculator_v1.gd` e `export_v1.gd` para manter a reprodução dos resultados históricos sem DEF M. Esses arquivos não são usados pelo laboratório jogável. Resultados atuais de regressão e capturas em `artifacts/damage-lab-defm/`; resumo em VALIDACAO.md.
+
+
+### Estudo atual dos três presets com DEF M — 29/10/2026
+
+Matriz D111 de quatro confrontos válidos/quatro magias, com cinco sementes e5.000 tentativas por confronto/magia, total80.000. Aplicações observadas incluindo EVA: aliados→monstro28,86% em Veneno/Lentidão e31,06% em Confusão/Medo; monstro→#1 33,74%/36,00%; monstro→#2 33,32% nos quatro. Maior desvio teórico0,33 ponto percentual, zero divergências na auditoria. Comparação com a versão anterior utilizou os mesmos presets/sorteios; nenhuma mudança de atributos ou custo. [Resultados completos e reprodução](../artifacts/aflicoes-presets-defm-2026-10-29/analise.md).

@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+Aliado #1 → Monstro #1 · poison: esperado 48.5%; observado 46.0%; aplicou/resistiu/esquivou 460/520/20
+Aliado #1 → Monstro #1 · slow: esperado 48.5%; observado 46.0%; aplicou/resistiu/esquivou 460/520/20
+Aliado #1 → Monstro #1 · confusion: esperado 55.43%; observado 53.0%; aplicou/resistiu/esquivou 530/450/20
+Aliado #1 → Monstro #1 · fear: esperado 55.43%; observado 53.0%; aplicou/resistiu/esquivou 530/450/20
+Monstro #1 → Aliado #1 · poison: esperado 47.5%; observado 44.4%; aplicou/resistiu/esquivou 444/512/44
+Monstro #1 → Aliado #1 · slow: esperado 47.5%; observado 44.4%; aplicou/resistiu/esquivou 444/512/44
+Monstro #1 → Aliado #1 · confusion: esperado 52.78%; observado 49.5%; aplicou/resistiu/esquivou 495/461/44
+Monstro #1 → Aliado #1 · fear: esperado 52.78%; observado 49.5%; aplicou/resistiu/esquivou 495/461/44
+Monstro #1 → Aliado #2 · poison: esperado 48.89%; observado 45.2%; aplicou/resistiu/esquivou 452/425/123
+Monstro #1 → Aliado #2 · slow: esperado 48.89%; observado 45.2%; aplicou/resistiu/esquivou 452/425/123
+Monstro #1 → Aliado #2 · confusion: esperado 48.89%; observado 45.2%; aplicou/resistiu/esquivou 452/425/123
+Monstro #1 → Aliado #2 · fear: esperado 48.89%; observado 45.2%; aplicou/resistiu/esquivou 452/425/123
+Aliado #2 → Monstro #1 · poison: esperado 48.5%; observado 46.0%; aplicou/resistiu/esquivou 460/520/20
+Aliado #2 → Monstro #1 · slow: esperado 48.5%; observado 46.0%; aplicou/resistiu/esquivou 460/520/20
+Aliado #2 → Monstro #1 · confusion: esperado 55.43%; observado 53.0%; aplicou/resistiu/esquivou 530/450/20
+Aliado #2 → Monstro #1 · fear: esperado 55.43%; observado 53.0%; aplicou/resistiu/esquivou 530/450/20
+AFLIÇÕES ENTRE PRESETS: 16 lotes, 16000 tentativas; 2 pares bloqueados por lado; 32149 verificações, 0 falhas

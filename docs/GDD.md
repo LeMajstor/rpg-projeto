@@ -262,7 +262,7 @@ Posição lógica/repouso e progresso exato da rota são preservados. A área de
 
 **Confirmado em 26/10/2026 (D54):** aliados e inimigos terão quatro atributos distintos, além de HP, MP e INI:
 
-**Siglas de interface confirmadas (D57, ampliadas por D74/D94):**
+**Siglas de interface confirmadas (D57, ampliadas por D74/D94/D100):**
 
 | Atributo | Sigla | Função |
 | --- | --- | --- |
@@ -273,10 +273,12 @@ Posição lógica/repouso e progresso exato da rota são preservados. A área de
 | Defesa Física | DEF F | Proteção contra contato/corpo a corpo (D94 no laboratório). |
 | Ataque à Distância | ATQ D | Poder ofensivo de disparos físicos. |
 | Defesa à Distância | DEF D | Proteção contra disparos físicos que acertam. |
-| Poder Mágico | MAG | Poder ofensivo das ações mágicas. |
-| Defesa Mágica | DEF M | Proteção contra dano mágico. |
+| Poder Mágico | MAG | Poder ofensivo das ações mágicas e aplicação de aflições contra DEF M + VIG/INT; versão vigente D111 no laboratório. |
+| Defesa Mágica | DEF M | Proteção contra dano mágico e parcela da resistência às aflições mágicas, somada a VIG/INT por D111. |
 | Chance-base de crítico | CRI | Chance própria do personagem, conforme D56. |
 | Esquiva | EVA | Chance própria de evitar um golpe; crescimento natural lento e aumentos permanentes raros conforme D95. Edição/composição implementadas no laboratório por D75/D84. |
+| Inteligência | INT | Resistência específica contra Confusão/Medo, somada à DEF M por D111. Faixa 1..999; edição/testes implementados em D110. Crescimento por nível confirmado no desenho, sem progressão implementada. |
+| Vigor | VIG | Resistência específica contra Veneno/Lentidão, somada à DEF M por D111. Faixa 1..999; edição/testes implementados em D110. Crescimento por nível confirmado no desenho, sem progressão implementada. |
 
 **D94 — ATQ D/DEF D implementados no laboratório (28/10/2026):** usuário autoriza separar contato ATQ F/DEF F, disparos físicos ATQ D/DEF D e magia MAG/DEF M. DEF D própria escolhida45/30 para #1/#2; referência ATQ D10/20 adotada no teste. Espada soma somente ATQ F; arco somente ATQ D. Arma determina modo padrão do aliado; monstro permanece contato por padrão e um seletor permite override físico. As proteções passam a fornecer os dois bônus espelhados de D93, mantendo DEF F e EVA anteriores. Campos de distância usam as faixas existentes de ATQ/DEF. Presets antigos são atualizados em memória por ID e atributos próprios, sem mudar revisões/arquivo ao ler; novas exportações JSONv4 identificam modalidade e atributos usados. Monstro #1 recebe DEF D40 por compatibilidade, preservando o dano do arco. Danos já calibrados e três RNGs preservados; **combate integrado continua com o sistema anterior**. Especificação em [ATQ_DISTANCIA.md](ATQ_DISTANCIA.md).
 
@@ -370,6 +372,47 @@ Os valores efetivos entram no cálculo de dano. A potência continua pertencendo
 
 **D77 — revisar presets do laboratório (27/10/2026):** excluir todos os presets anteriores de aliados/inimigos, incluindo referências fornecidas e os três personalizados locais existentes. Retirar o seletor antigo de oito exemplos, mantendo somente uma ficha manual de aliado e uma de monstro. Biblioteca começa vazia; futuros presets salvos pelo usuário persistem normalmente, sem limpeza automática ao iniciar. Em cada categoria, oferecer **Salvar**, **Carregar**, **Atualizar** e **Excluir**. Carregar restaura os nove atributos, multiplicador próprio e equipamentos completos do aliado, recalculando totais; permite recarregar o mesmo preset e descarta texto pendente anterior. Nome do preset identifica o participante salvo. Exclusão persiste em disco, mantém a ficha atual para edição e não altera histórico/RNG ou a outra categoria. Ação, semente e demais controles globais continuam separados das fichas. Esta decisão substitui as referências protegidas e o catálogo manual anterior de D72; detalhes em [LABORATORIO_DANOS.md](LABORATORIO_DANOS.md).
 
+### 7.6 INT, VIG e teste de aplicação de aflições
+
+**Escopo atual confirmado em D98 (28/10/2026):** estudar somente o ataque e o teste de aplicação contra VIG/INT do alvo, no contexto do laboratório de danos. Ticks, dano periódico e funcionamento das aflições em combate ficam para o laboratório de batalha em etapa posterior. As propostas abaixo sobre duração, pausas e execução dos efeitos são contexto adiado, não tarefas atuais. A sugestão de 5 segundos/5% não foi adotada.
+
+**28/10/2026 — proposta do usuário, sem implementação autorizada:** usar INT (inteligência) e VIG (vigor) em testes contra aflições impostas por magias e outros eventos adversos. A discussão amplia o conjunto de atributos em estudo, sem acrescentar campos à ficha nem modificar MAG/DEF M ou as regras atuais.
+
+**D99 — escolha confirmada em 28/10/2026:** MAG do atacante participa do teste de aplicação de aflições mágicas contra VIG ou INT do alvo. Usando a mesma magia contra o mesmo alvo, um atacante com MAG maior deve ter mais chance de aplicar a aflição. A intenção é valorizar magos mais fortes e permitir que chefes com MAG alta apliquem aflições com maior facilidade. A alternativa de teste independente da MAG do atacante não foi escolhida. Distribuição por VIG/INT, fórmula, probabilidades, limites e fonte ofensiva de efeitos não mágicos continuam pendentes. Sem implementação ou alterações no cálculo de dano existente.
+
+**D100 — escala e crescimento confirmados em 28/10/2026:** INT e VIG terão faixa própria de **1 a 999** e aumentarão **a cada nível**, até o limite. Valores iniciais, quantidade de ganho por nível e curvas por personagem permanecem pendentes; aumentar por nível não significa adotar ganhos iguais entre atributos ou personagens. A exceção numérica dos outros atributos dos monstros não amplia automaticamente esta faixa. INI continua sem crescimento natural por nível; EVA mantém o crescimento lento de D95. Esta decisão define o desenho, sem implementar níveis, progressão ou novos campos no laboratório.
+
+**D101 — fórmula-base inicial (28/10/2026), ampliada por D111:** `chance-base de aplicar (%) = 100 × MAG / (MAG + resistência)`. Usar VIG contra Veneno/Lentidão e INT contra Confusão/Medo. A mesma fórmula vale para as quatro; variações por aflição podem ser reavaliadas em versões futuras. Valores iguais dão 50%; MAG duas vezes a resistência dá aproximadamente 66,67%; três vezes dá 75%. Duplicar ambos preserva a chance-base. D100 define INT/VIG próprios em 1..999. Sem implementação por este registro.
+
+| Aflição proposta | Efeito descrito pelo usuário |
+| --- | --- |
+| Lentidão | Reduz INI pela metade e EVA base para zero. |
+| Veneno | Proposta inicial por rodada substituída por ticks temporais (D97); intervalo e dano ainda a definir. |
+| Confusão | Alvo realiza ações aleatórias, podendo atacar aliados ou beneficiar inimigos com buffs. |
+| Medo | Alvo não ataca, fica imóvel e não realiza ações. |
+
+**D103 — esquiva e crítico (28/10/2026):** esquiva evita dano e aflição; crítico se refere somente ao dano físico, sujeito a reavaliação futura. Aflições não têm crítico. D105 confirma que as quatro magias iniciais permitem esquiva; se ocorrer, a aflição não é aplicada. DEF M continua tratando dano mágico, separado do teste contra VIG/INT. A permissão experimental editável de crítico para magia no laboratório atual não corresponde à direção aprovada, sem mudança de código por este registro.
+
+**D105 — EVA por magia (28/10/2026):** Veneno, Lentidão, Confusão e Medo iniciais permitem esquiva por EVA. Ordem: verificar esquiva; se o alvo esquivar, encerrar a tentativa sem aflição; caso contrário, testar MAG contra VIG/INT para aplicar ou resistir. Outras magias futuras poderão não permitir esquiva e passar diretamente ao teste de resistência. Essa permissão é configurável por magia; ignorar EVA não significa ignorar VIG/INT ou garantir aplicação. Não criar conteúdo futuro nesta etapa. Desenho confirmado, ainda sem implementação.
+
+**D106 — referências provisórias escolhidas com autorização do usuário (28/10/2026):** Aliado #1 **INT20/VIG25**; Aliado #2 **INT20/VIG20**; Monstro #1 **INT15/VIG20**. Valores próximos à MAG20 inicial dos aliados, com pequena diferença de VIG entre eles; não definem classes ou progressão. Preservar os outros atributos e equipamentos. Valores de teste integrados em D110: carregar presets anteriores completa os campos ausentes em memória, sem regravar o arquivo pessoal.
+
+**D108 — custo inicial das quatro magias (28/10/2026):** **4 MP** para cada tentativa de Veneno, Lentidão, Confusão e Medo no laboratório. Referência experimental, sem dano direto ou execução dos efeitos na batalha.
+
+**D104 — recorte atual e referências (28/10/2026):** considerar somente magias que tentam aplicar aflição, sem dano direto. Ataques físicos com aflição e ações que combinam dano e aflição ficam fora desta etapa. Manter Aliado #1, Aliado #2 e Monstro #1 como referências, preservando fichas e equipamentos. Valores iniciais de INT/VIG definidos posteriormente em D106, sem regravar presets por este registro.
+
+**D109 — remoção dos limites confirmada (28/10/2026), fórmula-base ampliada por D111:** usar diretamente `chance de aplicar (%) = 100 × MAG / (MAG + resistência)`, **sem mínimo de5% nem máximo de95%**, revogando D102/D107. Com MAG e resistência positivas, a chance fica estritamente entre0% e100%; vantagens extremas podem levar a resultados próximos desses extremos. Resistências próprias em1..999 evitam denominador zero para MAG não negativa. A etapa EVA permanece anterior: a chance total por tentativa é `(1 − EVA/100) × chance da fórmula`, podendo chegar a0% com EVA100%. Nenhuma alteração de código por este registro.
+
+No ATB individual não há uma rodada global definida. Recomenda-se Veneno em intervalos de tempo de batalha, respeitando pausas de Wait, sem depender da ação da vítima. Medo precisaria de duração finita ou recuperação que não dependa de agir. Lentidão poderia reduzir temporariamente a INI efetiva, suprimir a contribuição da EVA própria e preservar bônus de equipamento; essa interpretação, a ordem dos modificadores, o arredondamento e os limites ainda precisam de decisão. A base permanente não seria apagada.
+
+**D96 — exceção confirmada em 28/10/2026:** a proibição de fogo amigo D53 vale para ataques convencionais. Sob Confusão, atacar aliados pode acontecer. Esse conflito de desenho está resolvido; a exceção ainda não está implementada. Definir ações elegíveis, custos e possibilidade de usar habilidades/itens; limitar inicialmente a ataques básicos é apenas uma recomendação. A imobilidade de Medo não altera as posições lógicas fixas dos aliados; eventual pausa de rota dos inimigos e sua retomada precisam de especificação.
+
+**D97 — Veneno temporal confirmado em 28/10/2026:** usar ticks de tempo no ATB, com intervalo e dano ainda em discussão. **Recomendação experimental, sem números aprovados:** começar avaliando um tick a cada 5 segundos de batalha, causando 5% do HP máximo. Com 40 HP, seriam 2 HP por tick e 8 HP após 20 segundos completos, sem cura ou interrupção. Primeiro tick somente ao completar o intervalo. Pausar a contagem durante pausas de Wait e pausa manual é uma recomendação. Arredondamento, mínimo, duração, acúmulo, possibilidade de levar HP a zero e regras para diferentes alvos permanecem pendentes. Battle Speed atualmente altera somente carga de ATB: um tick de tempo fixo causaria mais dano por ciclo de ação em velocidades lentas; não alterar essa configuração automaticamente, definir a relação antes de implementar.
+
+**D110 — implementado em 28/10/2026, após autorização do usuário:** testes no laboratório de danos com INT/VIG editáveis1..999, referências provisórias D106, quatro magias puras de aflição/4MP, fórmula comum pura sem limites adicionais e EVA anterior por magia. Resultados Esquivou/Resistiu/Aplicou em amostra única, lotes, histórico, gráfico e JSONv5; dano/HP removido sempre zero para essas ações. Crítico restrito ao dano físico. Presets antigos recebem campos ausentes em memória, sem alterar atributos anteriores, equipamentos, arquivo ou revisão. RNG de aflição separado dos fluxos anteriores. **Adiados:** avaliação de balanceamento com o usuário, ganhos/curvas por nível, duração, cura, acúmulo, ticks, efeitos em batalha e fontes não mágicas. Combate integrado permanece sem migração. Roteiro e verificações em LABORATORIO_DANOS.md e VALIDACAO.md.
+
+**D111 — DEF M adotada e aplicada no laboratório (28/10/2026):** usuário aceitou a versão comparada em P12. Usar `chance (%) = 100 × MAG / (MAG + DEF M + resistência específica)`, sendo VIG para Veneno/Lentidão e INT para Confusão/Medo. A soma usa os valores efetivos do alvo e não recebe teto adicional; limites dos atributos próprios continuam iguais. EVA é verificada antes; sem esquiva, aplicar o teste da fórmula nova, sem piso5% ou teto95%. Quatro magias puras de4MP, sem dano direto ou crítico. Interface e JSONv5 identificam DEF M, parcela específica e total, com fórmula `affliction_application_v2`. Presets/atributos/equipamentos preservados; sem alteração de ticks, duração, progressão ou combate integrado. A proposta P12 está adotada; os estudos anteriores permanecem identificados como históricos da versão sem DEF M.
+
 ## 8. Tipos de alvo e área (direção funcional)
 
 Habilidades podem afetar:
@@ -378,7 +421,7 @@ Habilidades podem afetar:
 - **Linha/faixa**, se vier a ser adotada;
 - **Todos** os alvos de um lado (ou outra regra de alvo de cada habilidade).
 
-O posicionamento atual dos **inimigos móveis** importa na seleção das áreas de efeito. **D53 confirmado:** habilidade em área exige um alvo central válido; o círculo acompanha sua posição até o impacto, quando os demais atingidos são calculados pelo raio. **Não haverá fogo amigo:** ações ofensivas só afetam o lado adversário, tanto para aliados quanto para inimigos. Em Active, movimentos e prévia continuam durante seleção; Wait mantém sua pausa de seleção. Dimensões, demais geometrias e balanceamento continuam abertos. **Habilidades conjuntas/duplas/de grupo ficam para o futuro.**
+O posicionamento atual dos **inimigos móveis** importa na seleção das áreas de efeito. **D53 confirmado:** habilidade em área exige um alvo central válido; o círculo acompanha sua posição até o impacto, quando os demais atingidos são calculados pelo raio. **Não haverá fogo amigo nas ações convencionais:** ações ofensivas normais só afetam o lado adversário, tanto para aliados quanto para inimigos. **Exceção de desenho D96:** sob Confusão, atingir aliados pode acontecer; aflição e exceção ainda não implementadas. Em Active, movimentos e prévia continuam durante seleção; Wait mantém sua pausa de seleção. Dimensões, demais geometrias e balanceamento continuam abertos. **Habilidades conjuntas/duplas/de grupo ficam para o futuro.**
 
 ### 8.1 Interface de comandos e alvos
 

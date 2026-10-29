@@ -58,7 +58,7 @@ func _run() -> void:
 	expect(model.rng_state == rng and model.sequence_position == position, "Equipar/editar/prever não avança sorteios")
 	expect(physical["snapshot"]["equipment"]["attacker"]["weapon"]["attack_bonus"] == 10 and physical["snapshot"]["composition"]["attacker"]["effective"]["physical_attack"] == 30, "Histórico não muda após edição de equipamento")
 	var report = Export.document(physical)
-	expect(report["version"] == 4 and report["conditions"]["base_stats"]["attacker"]["physical_attack"] == 20 and report["conditions"]["equipment"]["attacker"]["armor"]["defense_bonus"] == 16, "JSON versionado inclui próprios, itens, bônus e totais originais")
+	expect(report["version"] == 5 and report["conditions"]["base_stats"]["attacker"]["physical_attack"] == 20 and report["conditions"]["equipment"]["attacker"]["armor"]["defense_bonus"] == 16, "JSON versionado inclui próprios, itens, bônus e totais originais")
 	var path = "/private/tmp/rpg-equipment-%d.json" % OS.get_process_id()
 	Export.save(path, physical)
 	var loaded = JSON.parse_string(FileAccess.get_file_as_string(path))

@@ -1,5 +1,82 @@
 # Validação da entrega
 
+
+## Matriz de aflições com DEF M — 29/10/2026
+
+Versão vigente D111 executada entre todos os presets salvos de lados opostos: Aliado #1 e Aliado #2 contra Monstro #1, nos dois sentidos, usando Veneno/Lentidão/Confusão/Medo. **16 casos ×5 sementes ×1.000 tentativas =80.000 tentativas analisadas**. Sementes421/733/112/2026/31415, iguais às do estudo anterior. Dois sentidos aliado↔aliado bloqueados pela regra sem fogo amigo. Nenhum atributo, equipamento, preset ou cálculo do jogo foi alterado pelo estudo.
+
+| Atacante → alvo | Veneno / Lentidão observados | Confusão / Medo observados |
+| --- | ---: | ---: |
+| Aliado #1 → Monstro #1 | 28,86% | 31,06% |
+| Aliado #2 → Monstro #1 | 28,86% | 31,06% |
+| Monstro #1 → Aliado #1 | 33,74% | 36,00% |
+| Monstro #1 → Aliado #2 | 33,32% | 33,32% |
+
+Valores incluem EVA e são baseados em5.000 tentativas por confronto/magia. Chances teóricas correspondentes:28,53%/30,79% contra o monstro;33,45%/35,98% contra #1;33,33% em todos contra #2. **Maior desvio observado/esperado:0,33 ponto percentual.** Primária:48.149 verificações, zero falhas; confirmação:128.128, zero falhas; auditoria independente Python de16.000 amostras primárias e comparação pareada:147.252 verificações, zero divergências.
+
+Presets brutos e fichas efetivas coincidiram com o estudo anterior. Mesmos quatro fluxos RNG e mesmas esquivas por tentativa em todas as versões/sementes; apenas aplicações viraram resistência. Contra o monstro, aplicações dos aliados caíram de48,42% para28,86% nas aflições corporais e de55,14% para31,06% nas mentais. #1/#2 estão quase empatados contra Veneno/Lentidão; a maior EVA de #2 mantém vantagem contra Confusão/Medo. O efeito real em batalha/duração continua fora deste estudo.
+
+[Análise completa, comparações com a versão anterior, amostras e scripts](../artifacts/aflicoes-presets-defm-2026-10-29/analise.md). Sorteios compartilhados permitem comparação direta, sem tratar as80.000 tentativas como um único conjunto de observações estatisticamente independentes. Aviso ambiental conhecido de certificados do macOS no headless, sem erro de script ou falha funcional.
+
+
+## DEF M nas quatro magias de aflição — D111, 28/10/2026
+
+Fórmula adotada pelo usuário e implementada: `100 × MAG / (MAG + DEF M + VIG ou INT)`. Veneno/Lentidão usam VIG; Confusão/Medo usam INT. Mesmos presets, atributos, custo4MP, EVA anterior e quatro fluxos RNG. Sem limites artificiais na chance ou na soma. Interface mostra a decomposição da resistência; JSONv5 usa `affliction_application_v2` e registra parcelas/total. Relatórios históricos preservados; seus scripts usam calculador/exportador v1 congelados para reprodução.
+
+**19 suítes headless aprovadas**, 17289 verificações, zero falhas. `damage_defm_tests`:1.165; `damage_affliction_tests`:4.142; `damage_affliction_ui_smoke`:32. Conferência gráfica Compatibility:35 verificações, três capturas, zero falhas. Logs e resultados por suíte em `artifacts/damage-lab-defm/test-results.json`. Capturas inspecionadas para campos, composição DEF M+VIG/INT, chances, resultados e amostras.
+
+A produção reproduziu a rodada experimental aceita: MAG25, DEF M21, VIG25, EVA5%, semente421,1.000 tentativas → **309 aplicações,647 resistências e44 esquivas**. Mesmos estados/sorteios que a versão anterior;135 aplicações converteram-se em resistência. Casos de soma10998 acima do limite dos atributos próprios e chances abaixo5%/acima95%, DEF M zero válida no aliado, influência isolada de DEF M, preservação de HP/custo/ausência de crítico e snapshots foram verificados.
+
+A compatibilidade real reabriu os três presets pessoais e reproduziu4.000 amostras físicas anteriores:24.071 verificações, zero falhas; arquivos/revisões e atributos/equipamentos preservados. Sem mudança de progressão, ticks, duração, efeitos contínuos ou combate integrado. Aviso ambiental conhecido de certificados do macOS no headless, sem erro de script nas execuções finais.
+
+
+
+## Veneno com VIG versus DEF M + VIG — experimento P12, 28/10/2026
+
+Duas rodadas solicitadas de1.000 tentativas cada, Monstro #1 atacando Aliado #1 com Veneno. Presets pessoais atuais: MAG25 do atacante; VIG25/DEF M21/EVA5% do alvo. Mesma semente421 reiniciada em cada rodada; os quatro sorteios e seus estados iniciais/finais conferidos como idênticos. Sem mudança de presets, atributos ou calculador do laboratório: proposta executada em cópia experimental isolada, com fórmula identificada nos relatórios.
+
+| Cálculo | Chance após passar por EVA | Chance por tentativa incluindo EVA | Aplicou | Resistiu | Esquivou |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Atual, VIG | 50,00% | 47,50% | 444 (44,40%) | 512 | 44 |
+| Proposta, DEF M + VIG | 35,21% | 33,45% | 309 (30,90%) | 647 | 44 |
+
+Nos mesmos sorteios,135 aplicações viraram resistência; redução observada de13,50 pontos percentuais (30,41% menos aplicações). Esquivas idênticas nas mesmas tentativas. Godot:8.147 verificações, zero falhas; auditoria Python das2.000 amostras:20.145 verificações, zero divergências. Todas as tentativas preservaram HP, gastaram4MP e não produziram dano/crítico. As diferenças entre observado e calculado refletem os1.000 sorteios de cada rodada; nenhuma rodada adicional foi incluída.
+
+[Comparação completa, JSONs e scripts](../artifacts/veneno-defm-comparacao-2026-10-28/analise.md). Adoção de DEF M permanece pendente; fórmula vigente D109/D110 preservada. Aviso ambiental conhecido de certificados do macOS no headless, sem erro de script.
+
+
+## Aflições entre todos os presets salvos — 28/10/2026
+
+Executados pelo modelo real os quatro confrontos válidos dos três presets pessoais, nos dois sentidos, com Veneno/Lentidão/Confusão/Medo. **16 casos ×5 sementes ×1.000 tentativas =80.000 tentativas analisadas**, além da reprodução exata da semente primária. Aliado #1↔Aliado #2 recusado pela regra sem fogo amigo, sem alterar facção ou simular Confusão ativa. Nenhum parâmetro ou preset foi alterado.
+
+Semente primária421:16 lotes com JSONv5 completo e32.149 verificações, zero falhas. Confirmação733/112/2026/31415:64 lotes e128.128 verificações, zero falhas. Auditoria independente em Python dos16.000 registros primários:128.162 verificações de fórmula, sorteios, recursos, índices e contagens, zero divergências. Maior desvio observado/esperado após5.000 tentativas por caso: **0,39 ponto percentual**. Presets/arquivo pessoal preservados integralmente.
+
+Resultados combinados observados, já incluindo EVA: aliados→monstro **48,42%** para Veneno/Lentidão e **55,14%** para Confusão/Medo; monstro→#1 **47,40%/52,44%**; monstro→#2 **48,50%** nos quatro. Referências reais: MAG20/20/25, VIG25/20/20, INT20/20/15 e EVA efetiva5%/12%/3%. A EVA do #2 compensa quase toda a menor VIG nas aflições corporais e o protege mais nas mentais. Os aliados têm aplicação idêntica por compartilharem MAG20 e o mesmo alvo. Não há conclusão sobre duração/intensidade dos efeitos em batalha nem ajuste automático de balanceamento.
+
+Método, resultados por semente, condições congeladas, amostras primárias, scripts reproduzíveis e análise em [aflicoes-presets-2026-10-28/analise.md](../artifacts/aflicoes-presets-2026-10-28/analise.md). As magias/confrontos compartilham sorteios para comparação; não foram tratados como80.000 observações estatísticas independentes nem usados para multiplicar artificialmente a confiança nos resultados. Aviso ambiental conhecido de certificados do macOS no headless, sem erro de script ou falha funcional.
+
+
+## INT/VIG e magias puras de aflição — D110, 28/10/2026
+
+Implementação autorizada após D99–D109. Executada com Godot4.7.2 Standard/macOS. **18 suítes headless aprovadas**, zero falhas nas execuções finais; resultados e logs em `artifacts/damage-lab-afflictions/`.
+
+| Verificação | Resultado |
+| --- | --- |
+| `damage_affliction_tests.gd` | 4.138 verificações, zero falhas. |
+| `damage_affliction_ui_smoke.gd` headless | 31 verificações, zero falhas. |
+| Mesma suíte com renderização Compatibility | 34 verificações, três capturas, zero falhas. |
+| Dezesseis suítes anteriores de danos/equipamentos/EVA/presets/UI/exportação | Todas aprovadas; contagens em `test-results.json`. |
+| Compatibilidade de presets e relatórios pessoais | 3 presets e4.000 amostras;24.071 verificações, zero falhas. |
+
+Cobertura: quatro magias, VIG/INT corretas, curva pura incluindo probabilidades abaixo5%/acima95%, fronteiras de sorteio, EVA anterior, permissão por ação, três resultados exclusivos, nenhum dano/mínimo1/crítico, gasto4MP em todos os resultados, recursos restaurados por amostra e bloqueio por MP insuficiente. Campos1..999 nos dois lados, validação de números inválidos, edição, inversão de lados, salvar/atualizar/reabrir e compatibilidade por leitura. RNG independente, mesma semente, continuidade entre lotes, mudança de semente, exportação/restauração dos quatro estados de64 bits, histórico imutável, chances condicionais/totais e lotes totalmente esquivados sem divisão por zero. JSONv5 identifica a fórmula de aplicação e sua ordem, preservando exportações de dano.
+
+`verify_compatibility.gd` nesta pasta confirmou referências #1 INT20/VIG25, #2 INT20/VIG20 e Monstro #1 INT15/VIG20, preservando todos os atributos anteriores, revisões e conteúdo do arquivo pessoal. Reproduziu4.000 amostras físicas anteriores com os mesmos sorteios e os mesmos dano/HP removido/crítico/esquiva/HP/MP finais. Leitura não regravou presets nem relatórios. Combate integrado e seus dados não foram alterados.
+
+Capturas `affliction-poison-summary.png`, `affliction-samples.png` e `affliction-evaded.png` inspecionadas: campos, resumo, probabilidades, tabela, gráfico e mensagem no duelo legíveis, com edição rolável e resultados dentro da janela1440×960. A suíte antiga de UI foi atualizada para a regra de crítico apenas físico; testes de exportação atualizados para versão5. A avaliação de balanceamento e a validação do usuário continuam posteriores; não há duração/ticks ou efeito de aflição ativo em batalha.
+
+Avisos ambientais conhecidos no headless: consulta aos certificados do macOS e consulta a um arquivo temporário ainda inexistente durante o teste de diálogo de exportação. Sem erros de script nas execuções finais. Controle físico e outras plataformas não testados.
+
+
 ## Quatro lotes do Monstro #1 — contato/distância, 28/10/2026
 
 Executados pelo modelo real do laboratório **4×1000 ataques**, usando os presets pessoais atuais, semente421 reiniciada em cada caso e mesmos sorteios verificados. Contato contra #1/#2 e distância contra #1/#2. Ataques24/24, potência1×, variação±10%, CRI3%/2×, EVA5%/12%. Arquivo pessoal preservado.

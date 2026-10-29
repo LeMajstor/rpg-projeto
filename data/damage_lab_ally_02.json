@@ -18,7 +18,9 @@
     "evasion_base": 7,
     "character_id": "ally_2",
     "ranged_attack": 20,
-    "ranged_defense": 30
+    "ranged_defense": 30,
+    "intelligence": 20,
+    "vigor": 20
   },
   "equipment": {
     "weapon": {

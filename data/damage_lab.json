@@ -37,7 +37,9 @@
       "evasion_base": 0,
       "character_id": "ally_1",
       "ranged_attack": 10,
-      "ranged_defense": 100
+      "ranged_defense": 100,
+      "intelligence": 20,
+      "vigor": 25
     },
     {
       "id": "heavy",
@@ -55,7 +57,9 @@
       "unarmed_critical_multiplier": 2.0,
       "evasion_base": 0,
       "ranged_attack": 130,
-      "ranged_defense": 160
+      "ranged_defense": 160,
+      "intelligence": 15,
+      "vigor": 20
     }
   ],
   "weapons": [
@@ -233,6 +237,54 @@
       "mp_cost": 7,
       "critical_allowed": false,
       "evasion_allowed": false
+    },
+    {
+      "id": "poison",
+      "name": "Veneno · aflição",
+      "damage_type": "magical",
+      "effect_type": "affliction",
+      "affliction_id": "poison",
+      "resistance_stat": "vigor",
+      "power": 0.0,
+      "mp_cost": 4,
+      "critical_allowed": false,
+      "evasion_allowed": true
+    },
+    {
+      "id": "slow",
+      "name": "Lentidão · aflição",
+      "damage_type": "magical",
+      "effect_type": "affliction",
+      "affliction_id": "slow",
+      "resistance_stat": "vigor",
+      "power": 0.0,
+      "mp_cost": 4,
+      "critical_allowed": false,
+      "evasion_allowed": true
+    },
+    {
+      "id": "confusion",
+      "name": "Confusão · aflição",
+      "damage_type": "magical",
+      "effect_type": "affliction",
+      "affliction_id": "confusion",
+      "resistance_stat": "intelligence",
+      "power": 0.0,
+      "mp_cost": 4,
+      "critical_allowed": false,
+      "evasion_allowed": true
+    },
+    {
+      "id": "fear",
+      "name": "Medo · aflição",
+      "damage_type": "magical",
+      "effect_type": "affliction",
+      "affliction_id": "fear",
+      "resistance_stat": "intelligence",
+      "power": 0.0,
+      "mp_cost": 4,
+      "critical_allowed": false,
+      "evasion_allowed": true
     }
   ],
   "default_armor": "armor_bronze",
@@ -384,5 +436,19 @@
       "default_weapon": "compound_bow",
       "default_armor": "leather_set"
     }
-  ]
+  ],
+  "affliction_reference_stats": {
+    "ally_1": {
+      "intelligence": 20,
+      "vigor": 25
+    },
+    "ally_2": {
+      "intelligence": 20,
+      "vigor": 20
+    },
+    "enemy": {
+      "intelligence": 15,
+      "vigor": 20
+    }
+  }
 }

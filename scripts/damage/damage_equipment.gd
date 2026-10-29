@@ -41,6 +41,10 @@ static func attack_mode(weapon: Dictionary) -> String:
 static func upgraded_actor(actor: Dictionary) -> Dictionary:
 	_ensure_catalog()
 	var result = actor.duplicate(true)
+	var reference: Dictionary = _catalog["affliction_reference_stats"].get(character_id(result) if result.get("side") == "ally" else "enemy", _catalog["affliction_reference_stats"]["enemy"])
+	for stat in ["intelligence", "vigor"]:
+		if not result.has(stat):
+			result[stat] = reference[stat]
 	if not result.has("ranged_attack"):
 		result["ranged_attack"] = result.get("physical_attack", 0)
 		if result.get("side") == "ally":

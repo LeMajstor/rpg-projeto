@@ -108,6 +108,8 @@ No aliado, edite **ATQ F/DEF F**, selecione arma/armadura e consulte **próprio 
 
 **Faixas das fichas:** HP, MP, ATQ F, DEF F, MAG e DEF M vão de **0 a 999 nos aliados** e **1 a 9999 nos monstros**; INI/CRI continuam **1 a 99** em ambos. A faixa acompanha o participante ao trocar lados. O limite efetivo de equipamento 999 é apenas do aliado; monstros usam seus valores diretamente. JSON inclui as faixas por categoria.
 
+**Aflições:** INT e VIG são editáveis em **1..999** nas duas fichas. No seletor **Ação**, Veneno/Lentidão testam **DEF M + VIG**; Confusão/Medo testam **DEF M + INT**. As quatro magias custam inicialmente **4 MP**, permitem EVA antes da resistência e usam a fórmula pura `MAG / (MAG + DEF M + resistência específica)`, sem limites adicionais. Resultados **Esquivou / Resistiu / Aplicou** aparecem no duelo, resumo, gráfico e amostras; a prévia mostra a soma da resistência, a chance após EVA e o total por tentativa. F6–F9 executam1×/10×/100×/1000×; F10 exporta JSONv5. Somente teste de aplicação, sem dano direto, duração ou ticks. Presets antigos recebem INT/VIG das referências ao carregar, sem regravação automática. Crítico fica restrito ao dano físico. Detalhes em [LABORATORIO_DANOS.md](docs/LABORATORIO_DANOS.md).
+
 **Presets de fichas:** no topo do painel, escolha **Aliado inicial · Bronze** e **Monstro inicial · 30 HP** para carregar os testes estudados. Edite e use **Salvar como…** para criar um personalizado; **Atualizar** grava alterações do personalizado selecionado. Referências são protegidas. Os salvos reaparecem ao reabrir; Restaurar caso não os apaga. Ação/variação/Seed continuam independentes, e equipamentos acompanham o aliado ao inverter os lados. O JSON de amostras registra preset, revisão e valores efetivamente usados.
 
 Para compartilhar um teste, selecione a execução em **Resultado** e use **Exportar JSON [F10]**. O arquivo reúne todas as amostras, resumo, fichas/configurações originais e Seed. Escolha o destino, salve e anexe o `.json` na conversa. A pasta sugerida é `exports/damage-lab/`; erros/caminho salvo aparecem no rodapé. Exportar não recalcula o lote nem avança os sorteios.
@@ -144,6 +146,9 @@ Na pasta do projeto, com o executável Godot disponível como `godot`:
 godot --headless --path . --script res://tests/run_tests.gd
 godot --headless --path . --script res://tests/ui_smoke.gd
 godot --headless --path . --script res://tests/damage_lab_tests.gd
+godot --headless --path . --script res://tests/damage_affliction_tests.gd
+godot --headless --path . --script res://tests/damage_defm_tests.gd
+godot --headless --path . --script res://tests/damage_affliction_ui_smoke.gd
 godot --headless --path . --script res://tests/damage_equipment_tests.gd
 godot --headless --path . --script res://tests/damage_enemy_ranges_tests.gd
 godot --headless --path . --script res://tests/damage_presets_tests.gd

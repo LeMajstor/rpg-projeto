@@ -6,7 +6,7 @@ const Export = preload("res://scripts/damage/damage_export.gd")
 const PresetLibrary = preload("res://scripts/damage/damage_presets.gd")
 const Field = preload("res://scripts/ui/damage_field.gd")
 const Histogram = preload("res://scripts/ui/damage_histogram.gd")
-const ATTRIBUTES = [["HP", "hp"], ["MP", "mp"], ["INI", "ini"], ["ATQ F", "physical_attack"], ["DEF F", "physical_defense"], ["ATQ D", "ranged_attack"], ["DEF D", "ranged_defense"], ["MAG", "magic_power"], ["DEF M", "magic_defense"], ["CRI", "critical_base"], ["EVA", "evasion_base"]]
+const ATTRIBUTES = [["HP", "hp"], ["MP", "mp"], ["INI", "ini"], ["ATQ F", "physical_attack"], ["DEF F", "physical_defense"], ["ATQ D", "ranged_attack"], ["DEF D", "ranged_defense"], ["MAG", "magic_power"], ["DEF M", "magic_defense"], ["INT", "intelligence"], ["VIG", "vigor"], ["CRI", "critical_base"], ["EVA", "evasion_base"]]
 const CRITICAL_MODES = ["rolled", "off", "forced"]
 var model
 var preset_library
@@ -119,7 +119,7 @@ func _build_ui() -> void:
 	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root.add_theme_constant_override("separation", 10)
 	margin.add_child(root)
-	root.add_child(_label("LABORATÓRIO / DANOS", 26, Color("e5eef8")))
+	root.add_child(_label("LABORATÓRIO / DANOS E AFLIÇÕES", 26, Color("e5eef8")))
 	root.add_child(_label("Proporcional v1 · fichas e parâmetros experimentais · independente do combate da exploração", 14, Color("a6bdd3")))
 	var toolbar = HBoxContainer.new()
 	toolbar.add_theme_constant_override("separation", 8)
@@ -276,7 +276,7 @@ func _build_ui() -> void:
 			model.action["mp_cost"] = int(value)
 			_preview())
 	critical_allowed = CheckBox.new()
-	critical_allowed.text = "Esta ação permite crítico (experimental)"
+	critical_allowed.text = "Esta ação permite crítico (somente dano físico)"
 	critical_allowed.toggled.connect(func(value):
 		if not syncing:
 			model.action["critical_allowed"] = value
@@ -685,6 +685,20 @@ func _sync_equipment_enabled() -> void:
 	armor_bonus.editable = not busy and model.armor.get("equipped", false)
 	armor_ranged_bonus.editable = not busy and model.armor.get("equipped", false)
 	armor_evasion_bonus.editable = not busy and model.armor.get("equipped", false)
+	_sync_action_enabled()
+
+func _sync_action_enabled() -> void:
+	var affliction: bool = Calculator.is_affliction(model.configuration())
+	var physical: bool = model.action["damage_type"] == "physical"
+	power_edit.editable = not busy and not affliction
+	critical_allowed.disabled = busy or not physical
+	if not physical:
+		critical_allowed.set_pressed_no_signal(false)
+	critical_mode.disabled = busy or not physical
+	for control in [item_edit, buff_edit, conversion_edit]:
+		control.editable = not busy and physical
+	variation_toggle.disabled = busy or affliction
+	variation_edit.editable = not busy and not affliction
 
 func _refresh_composition(config: Dictionary) -> void:
 	for role in ["attacker", "target"]:
@@ -712,12 +726,19 @@ func _preview() -> void:
 	if syncing:
 		return
 	var config: Dictionary = model.configuration()
+	_sync_action_enabled()
 	_refresh_composition(config)
 	_refresh_preset_controls()
 	field.preview(config)
 	field_caption.text = "PRÉVIA DO PRÓXIMO TESTE"
 	if not model.history.is_empty():
 		notice.text = "Condições do próximo teste atualizadas. Resultados anteriores permanecem no histórico."
+	if Calculator.is_affliction(config):
+		var selected = Calculator.damage_stats(config)
+		var chance = Calculator.application_chance(config)
+		var resistance = Calculator.application_resistance(config)
+		chance_label.text = "%s · MAG %d\nResistência: DEF M %d + %s %d = %d\nAplicar após EVA: %.2f%% · esquiva: %.2f%%\nAplicação por tentativa, incluindo EVA: %.2f%%\nSem dano direto ou crítico · custo %d MP" % [config["action"]["name"], config["attacker"]["magic_power"], resistance["magic_defense"], "VIG" if selected["defense_stat"] == "vigor" else "INT", resistance["specific"], resistance["total"], chance, Calculator.evasion_chance(config), (1.0 - Calculator.evasion_chance(config) / 100.0) * chance, config["action"]["mp_cost"]]
+		return
 	chance_label.text = "Crítico do atacante: %.2f%% · bônus da origem: %.2f p.p.\nEsquiva do alvo nesta ação: %.2f%% · EVA total %d\n1 CRI = 1%%; conversão ajustável só para testes." % [Calculator.critical_chance(config), config["critical_source"]["chance_bonus"], Calculator.evasion_chance(config), config["target"]["evasion_base"]]
 	var selected = Calculator.damage_stats(config)
 	chance_label.text += "\nFonte do dano: %s / %s" % [selected["attack_label"], selected["defense_label"]]
@@ -833,7 +854,10 @@ func _cancel_export() -> void:
 func _rebuild_history() -> void:
 	history_picker.clear()
 	for result in model.history:
-		history_picker.add_item("#%d · %d× · média %.2f · %s" % [result["run_number"], result["count"], result["mean"], result["snapshot"]["target"]["name"]])
+		if result.get("result_type") == "affliction":
+			history_picker.add_item("#%d · %d× · aplicou %d · %s" % [result["run_number"], result["count"], result["applied_count"], result["snapshot"]["action"]["name"]])
+		else:
+			history_picker.add_item("#%d · %d× · média %.2f · %s" % [result["run_number"], result["count"], result["mean"], result["snapshot"]["target"]["name"]])
 	history_picker.select(model.history.size() - 1)
 
 func _select_history(index: int) -> void:
@@ -845,6 +869,10 @@ func _select_history(index: int) -> void:
 func _show_result(result: Dictionary) -> void:
 	last_result = result
 	export_button.disabled = busy
+	if result.get("result_type") == "affliction":
+		_show_affliction_result(result)
+		return
+	_sample_columns(false)
 	var config: Dictionary = result["snapshot"]
 	var mode = {"rolled": "sorteado", "off": "desligado", "forced": "forçado"}[config["settings"]["critical_mode"]]
 	if not config["action"]["critical_allowed"]:
@@ -892,6 +920,9 @@ func _show_result(result: Dictionary) -> void:
 	_show_sample(result["samples"].back())
 
 func _show_sample(sample: Dictionary) -> void:
+	if sample.has("affliction"):
+		_show_affliction_sample(sample)
+		return
 	var base: Dictionary = sample["base"]
 	var text = "Amostra #%d · %s\nOfensiva %.0f × potência %.2f × parcela %.4f = base %.4f\nDefesa %.0f · variação %.4f× → %.4f · crítico %.2f× → %.4f\nArredondar e mínimo 1 → %d de dano · HP removido %d · HP %d → %d · MP %d → %d" % [sample["index"], "CRÍTICO" if sample["critical"] else "NORMAL", base["attack"], base["power"], base["ratio"], base["base"], base["defense"], sample["variation_factor"], sample["varied"], sample["critical_multiplier"], sample["raw"], sample["damage"], sample["hp_removed"], sample["hp_before"], sample["hp_after"], sample["mp_before"], sample["mp_after"]]
 	text += "\nAtributos: %s contra %s" % [base.get("attack_stat", "physical_attack"), base.get("defense_stat", "physical_defense")]
@@ -899,6 +930,62 @@ func _show_sample(sample: Dictionary) -> void:
 		text = "Amostra #%d · ESQUIVOU!\nChance de esquiva %.2f%% · sorteio %.2f%%\nDano 0 · sem crítico · mínimo 1 não se aplica\nHP %d → %d · MP %d → %d (ação consumida)" % [sample["index"], sample["evasion_chance"], sample["evasion_roll"] * 100, sample["hp_before"], sample["hp_after"], sample["mp_before"], sample["mp_after"]]
 	else:
 		text += "\nEsquiva: chance %.2f%% · sorteio %.2f%% · golpe acertou" % [sample["evasion_chance"], sample["evasion_roll"] * 100]
+	calculation.text = text
+	sample_detail.text = text
+
+func _sample_columns(affliction: bool) -> void:
+	var titles = ["#", "Resultado", "EVA %", "Sorteio EVA", "Aplicar %", "Sorteio apl.", "MP −"] if affliction else ["#", "Dano", "HP −", "Resultado", "Var. ×", "Crit. %", "Crit. ×"]
+	for index in range(titles.size()):
+		samples_tree.set_column_title(index, titles[index])
+		samples_tree.set_column_custom_minimum_width(index, 42 if index == 0 else 78 if affliction else 65)
+
+func _affliction_outcome(sample: Dictionary) -> String:
+	return {"evaded": "Esquivou", "resisted": "Resistiu", "applied": "Aplicou"}[sample["outcome"]]
+
+func _show_affliction_result(result: Dictionary) -> void:
+	var config: Dictionary = result["snapshot"]
+	var source = Calculator.damage_stats(config)
+	_sample_columns(true)
+	summary.text = "%s · %d tentativas · %d MP por amostra\nEsquivou: %d (%.2f%%) · Resistiu: %d (%.2f%%) · Aplicou: %d (%.2f%%)\nChance calculada após EVA: %.2f%% · total por tentativa: %.2f%%\nAplicações entre os %d testes de resistência: %.2f%%\nSem dano direto · HP preservado · sem crítico" % [config["action"]["name"], result["count"], config["action"]["mp_cost"], result["evasion_count"], result["evasion_frequency"], result["resisted_count"], result["resistance_frequency"], result["applied_count"], result["application_frequency"], result["application_chance"], result["total_application_chance"], result["hit_count"], result["application_hit_frequency"]]
+	histogram.result = result
+	histogram.queue_redraw()
+	samples_tree.clear()
+	var tree_root = samples_tree.create_item()
+	for sample in result["samples"]:
+		var row = samples_tree.create_item(tree_root)
+		row.set_metadata(0, sample["index"] - 1)
+		var values = [str(sample["index"]), _affliction_outcome(sample), "%.2f" % sample["evasion_chance"], "%.2f" % (sample["evasion_roll"] * 100.0), "%.2f" % sample["affliction"]["chance"], "%.2f" % (sample["affliction"]["roll"] * 100.0) if sample["affliction"]["tested"] else "—", str(sample["mp_before"] - sample["mp_after"])]
+		for column in range(values.size()):
+			row.set_text(column, values[column])
+	var lines: Array[String] = ["EXECUÇÃO #%d · %d× · semente %d · início %d" % [result["run_number"], result["count"], result["seed"], result["sequence_start"] + 1]]
+	for role in ["attacker", "target"]:
+		lines.append("\n%s: %s" % ["ATACANTE" if role == "attacker" else "ALVO", config[role]["name"]])
+		if config.get("presets", {}).has(role):
+			var preset: Dictionary = config["presets"][role]
+			lines.append("Preset: %s · revisão %d%s" % [preset["name"], preset["revision"], " · alterado para este teste" if preset["modified"] else ""])
+		var stats: Array[String] = []
+		for attr in ATTRIBUTES:
+			stats.append("%s %d" % [attr[0], config[role][attr[1]]])
+		lines.append(" · ".join(stats))
+		if config[role]["side"] == "ally":
+			var composition: Dictionary = config["composition"][role]
+			lines.append("EVA própria %d + armadura %d → efetiva %d%%" % [composition["base"]["evasion_base"], composition["bonuses"]["evasion_base"], composition["effective"]["evasion_base"]])
+	lines.append("\nAção: %s · %d MP · sem dano direto · sem crítico" % [config["action"]["name"], config["action"]["mp_cost"]])
+	var resistance = Calculator.application_resistance(config)
+	lines.append("Teste: MAG %d contra %s %d" % [config["attacker"]["magic_power"], source["defense_label"], resistance["total"]])
+	lines.append("Resistência: DEF M %d + %s %d = %d" % [resistance["magic_defense"], "VIG" if source["defense_stat"] == "vigor" else "INT", resistance["specific"], resistance["total"]])
+	lines.append("Chance = 100 × MAG / (MAG + %s) · sem limites adicionais" % source["defense_label"])
+	lines.append("Esquiva: %.2f%% · permite EVA: %s · aplicação após EVA: %.2f%% · total por tentativa: %.2f%%" % [result["evasion_chance"], "sim" if config["action"]["evasion_allowed"] else "não", result["application_chance"], result["total_application_chance"]])
+	lines.append("HP/MP restaurados por amostra. O teste registra aplicação; não simula duração ou efeito contínuo.")
+	conditions.text = "\n".join(lines)
+	_show_sample(result["samples"].back())
+
+func _show_affliction_sample(sample: Dictionary) -> void:
+	var effect: Dictionary = sample["affliction"]
+	var label = "VIG" if effect["resistance_stat"] == "vigor" else "INT"
+	var text = "Amostra #%d · %s\nEsquiva: %.2f%% · sorteio %.2f%%\nResistência: DEF M %.0f + %s %.0f = %.0f\nMAG %.0f / (MAG %.0f + DEF M %.0f + %s %.0f) × 100 = %.4f%%\nChance por tentativa incluindo EVA: %.4f%%" % [sample["index"], _affliction_outcome(sample), sample["evasion_chance"], sample["evasion_roll"] * 100.0, effect["magic_defense"], label, effect["specific_resistance"], effect["combined_resistance"], effect["magic_power"], effect["magic_power"], effect["magic_defense"], label, effect["specific_resistance"], effect["chance"], effect["total_chance"]]
+	text += "\nSorteio de aplicação: %.4f%%" % (effect["roll"] * 100.0) if effect["tested"] else "\nTeste de resistência não realizado: alvo esquivou."
+	text += "\nDano 0 · sem crítico · HP %d → %d · MP %d → %d" % [sample["hp_before"], sample["hp_after"], sample["mp_before"], sample["mp_after"]]
 	calculation.text = text
 	sample_detail.text = text
 

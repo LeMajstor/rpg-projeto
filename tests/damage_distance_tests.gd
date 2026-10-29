@@ -106,7 +106,7 @@ func _run() -> void:
 	expect(model.apply_preset(reopened.get_entry(saved["preset"]["id"])).is_empty() and model.armor["ranged_defense_bonus"] == 17, "Reabre preservando DEF D editada")
 	var historical = model.run(1000)
 	var document = Export.document(historical)
-	expect(document["version"] == 4 and document["conditions"]["damage_stats"]["mode"] == "ranged" and document["formula"].has("ranged"), "JSON v4 explica a fonte selecionada e fórmula de disparo")
+	expect(document["version"] == 5 and document["conditions"]["damage_stats"]["mode"] == "ranged" and document["formula"].has("ranged"), "JSON v5 explica a fonte selecionada e fórmula de disparo")
 	expect(document["samples"][0]["base"]["defense_stat"] == "ranged_defense" and document["conditions"]["target"]["ranged_defense"] == 47, "Cada amostra identifica o par de atributos efetivo")
 	model.armor["ranged_defense_bonus"] = 0
 	expect(historical["snapshot"]["target"]["ranged_defense"] == 47, "Histórico não muda após editar defesa nova")

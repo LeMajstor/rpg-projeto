@@ -69,7 +69,7 @@ func _run() -> void:
 	screen._request_export()
 	screen._save_export(export_path)
 	var report: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(export_path))
-	expect(report["version"] == 4 and report["conditions"]["base_stats"]["target"]["ranged_defense"] == 30 and report["conditions"]["target"]["ranged_defense"] == 47 and report["samples"][0]["base"]["defense_stat"] == "ranged_defense", "UI exporta novos próprios, bônus, efetivos e par usado")
+	expect(report["version"] == 5 and report["conditions"]["base_stats"]["target"]["ranged_defense"] == 30 and report["conditions"]["target"]["ranged_defense"] == 47 and report["samples"][0]["base"]["defense_stat"] == "ranged_defense", "UI exporta novos próprios, bônus, efetivos e par usado")
 	var copy = save_preset("ally","Defesa à distância editada")
 	screen.armor_ranged_bonus.value = 2
 	expect(historical["snapshot"]["target"]["ranged_defense"] == 47, "Editar próxima defesa não muda resultado anterior")

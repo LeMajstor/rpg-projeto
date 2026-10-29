@@ -113,8 +113,9 @@ func _run() -> void:
 			var spin: SpinBox = screen.profile_edits[role][key]
 			var evasion: bool = key == "evasion_base"
 			var small: bool = key in ["ini", "critical_base"]
+			var resistance: bool = key in ["intelligence", "vigor"]
 			var monster: bool = role == "target"
-			expect(spin.min_value == (0 if evasion else 1 if small or monster else 0) and spin.max_value == (100 if evasion else 99 if small else 99999 if monster and key == "hp" else 9999 if monster else 999), "Editor respeita faixa de cada atributo por lado")
+			expect(spin.min_value == (0 if evasion else 1 if resistance or small or monster else 0) and spin.max_value == (100 if evasion else 99 if small else 999 if resistance else 99999 if monster and key == "hp" else 9999 if monster else 999), "Editor respeita faixa de cada atributo por lado")
 	var attack: SpinBox = screen.profile_edits["attacker"]["physical_attack"]
 	attack.grab_focus()
 	key(KEY_RIGHT)
@@ -236,7 +237,7 @@ func _run() -> void:
 	screen.item_edit.value = 5
 	screen.buff_edit.value = 10
 	screen.run_buttons[2].pressed.emit()
-	expect(screen.last_result["critical_count"] == 100 and screen.last_result["snapshot"]["weapon"]["critical_multiplier"] == 3, "Crítico forçado aplica arma, inclusive na magia habilitada")
+	expect(screen.last_result["critical_count"] == 0 and not screen.last_result["snapshot"]["action"]["critical_allowed"] and screen.critical_allowed.disabled, "Magia não permite crítico mesmo com modo forçado ou alteração programática")
 	await capture("damage-magic-critical")
 	var state: Dictionary = screen.model.rng_state.duplicate()
 	var history_count: int = screen.model.history.size()
@@ -247,6 +248,7 @@ func _run() -> void:
 	screen._sync_controls()
 	screen._preview()
 	expect(screen.model.attacker["side"] != screen.model.target["side"], "Troca de lados mantém atacante e alvo opostos")
+	choose(screen.action_picker, 0) # Modificadores de crítico só se aplicam ao dano físico.
 	screen.conversion_edit.grab_focus()
 	await process_frame
 	await process_frame
@@ -307,7 +309,7 @@ func _run() -> void:
 	screen._request_export()
 	screen._save_export(export_path)
 	exported = JSON.parse_string(FileAccess.get_file_as_string(export_path))
-	expect(exported["version"] == 4 and exported["conditions"]["base_stats"]["target"]["physical_defense"] == 20 and exported["conditions"]["composition"]["target"]["effective"]["physical_defense"] == 36, "JSON exporta próprios e totais do aliado alvo")
+	expect(exported["version"] == 5 and exported["conditions"]["base_stats"]["target"]["physical_defense"] == 20 and exported["conditions"]["composition"]["target"]["effective"]["physical_defense"] == 36, "JSON exporta próprios e totais do aliado alvo")
 	expect(exported["conditions"]["equipment"]["target"]["armor"]["id"] == "armor_iron" and not exported["conditions"]["equipment"].has("attacker"), "JSON identifica os itens somente no aliado")
 	DirAccess.remove_absolute(export_path)
 	screen.profile_edits["target"]["physical_defense"].grab_focus()
@@ -382,7 +384,7 @@ func _run() -> void:
 	screen._request_export()
 	screen._save_export(export_path)
 	exported = JSON.parse_string(FileAccess.get_file_as_string(export_path))
-	expect(exported["version"] == 4 and exported["conditions"]["target"]["evasion_base"] == 25 and exported["summary"]["evasion_count"] == screen.last_result["evasion_count"], "Interface exporta EVA, condições e resumo completos")
+	expect(exported["version"] == 5 and exported["conditions"]["target"]["evasion_base"] == 25 and exported["summary"]["evasion_count"] == screen.last_result["evasion_count"], "Interface exporta EVA, condições e resumo completos")
 	DirAccess.remove_absolute(export_path)
 	screen.profile_edits["target"]["evasion_base"].grab_focus()
 	await process_frame

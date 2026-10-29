@@ -1,0 +1,6 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+2026-10-28 23:55:52.974 Godot[85504:51752640] NSURLIsPackageKey lookup returned Error Domain=NSCocoaErrorDomain Code=260 "O arquivo “rpg-damage-ui-export-85504.json” não pôde ser aberto porque tal arquivo não existe." UserInfo={NSURL=file:///private/tmp/rpg-damage-ui-export-85504.json/, NSFilePath=/private/tmp/rpg-damage-ui-export-85504.json, NSUnderlyingError=0x7474c0240 {Error Domain=NSPOSIXErrorDomain Code=2 "No such file or directory"}} for path /private/tmp/rpg-damage-ui-export-85504.json.
+LAB DANOS/UI: 120 verificações, 0 falhas

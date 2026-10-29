@@ -33,7 +33,7 @@ func _init(definitions: Dictionary) -> void:
 func definition(collection: String, id: String) -> Dictionary:
 	for entry in data[collection]:
 		if entry["id"] == id:
-			return entry.duplicate(true)
+			return Equipment.upgraded_actor(entry) if collection == "profiles" else entry.duplicate(true)
 	return {}
 
 func reset_case() -> void:
@@ -149,6 +149,8 @@ func configuration() -> Dictionary:
 			config["composition"][role] = resolved["composition"]
 	if attacker["side"] == "ally":
 		config["weapon"] = weapon.duplicate(true)
+	if config["action"]["damage_type"] == "magical":
+		config["action"]["critical_allowed"] = false
 	config["critical_source"] = Calculator.critical_source(config)
 	config["damage_stats"] = Calculator.damage_stats(config)
 	config["presets"] = {}

@@ -72,6 +72,8 @@ func _draw() -> void:
 		draw_circle(origin.lerp(target_point, t) + Vector2(0, -20 * sin(PI * t)), 8, Color("9bd8ff"))
 	if impact:
 		var text = "Esquivou!" if result["evaded"] else "%d%s" % [result["damage"], "  CRÍTICO" if result["critical"] else ""]
+		if result.has("affliction"):
+			text = "Esquivou!" if result["evaded"] else "Aplicou!" if result["affliction"]["applied"] else "Resistiu!"
 		var text_width = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x
 		_text(Vector2(clampf(target_point.x - text_width * 0.5, 10, size.x - text_width - 10), target_point.y - 50), text, Color("91c8ff") if result["evaded"] else Color("ffe29b") if result["critical"] else Color("ffa6a0"), 22)
 		if active and not result["evaded"]:

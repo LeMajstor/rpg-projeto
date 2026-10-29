@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+Monstro MAG 25.0 → Aliado VIG 25.0 / DEF M 21.0 / EVA 5
+Rodada 1: chance após EVA 50.0%; por tentativa 47.5%; aplicou/resistiu/esquivou 444/512/44; observado 44.4%
+Rodada 2: chance após EVA 35.2112676056338%; por tentativa 33.4507042253521%; aplicou/resistiu/esquivou 309/647/44; observado 30.9%
+COMPARAÇÃO: 2.000 tentativas, 135 aplicações viraram resistência; 8147 verificações, 0 falhas

@@ -1,0 +1,236 @@
+{
+	"seed": 421,
+	"presets_sha256": "2833210ddb94bfaf732cdd0e91a17d2af977fbe1b133a967132c7b424fc8129a",
+	"calculator_sha256": "059680d4d316fc88315b226b88c2ed60409ce9a34adb5a1fa52e125ba5352727",
+	"config": {
+		"action": {
+			"id": "poison",
+			"name": "Veneno · aflição",
+			"damage_type": "magical",
+			"effect_type": "affliction",
+			"affliction_id": "poison",
+			"resistance_stat": "vigor",
+			"power": 0.0,
+			"mp_cost": 4.0,
+			"critical_allowed": false,
+			"evasion_allowed": true
+		},
+		"settings": {
+			"seed": 421.0,
+			"variation_enabled": true,
+			"variation_percent": 10.0,
+			"crit_per_point": 1.0,
+			"critical_mode": "rolled",
+			"item_bonus": 0.0,
+			"buff_bonus": 0.0,
+			"history_limit": 12.0,
+			"animation_seconds": 0.8,
+			"impact_fraction": 0.5,
+			"melee_stop_distance": 44.0,
+			"melee_impact_hold": 0.15,
+			"effective_stat_limit": 999.0
+		},
+		"base_stats": {
+			"attacker": {
+				"id": "heavy",
+				"name": "Monstro #1",
+				"side": "enemy",
+				"color": "d99c65",
+				"hp": 45.0,
+				"mp": 8.0,
+				"ini": 7.0,
+				"physical_attack": 24.0,
+				"physical_defense": 40.0,
+				"magic_power": 25.0,
+				"magic_defense": 28.0,
+				"critical_base": 3.0,
+				"unarmed_critical_multiplier": 2.0,
+				"evasion_base": 3.0,
+				"intelligence": 15.0,
+				"vigor": 20.0,
+				"ranged_attack": 24.0,
+				"ranged_defense": 40.0
+			},
+			"target": {
+				"id": "ally_1",
+				"name": "Aliado #1",
+				"side": "ally",
+				"color": "6fc8ff",
+				"hp": 40.0,
+				"mp": 12.0,
+				"ini": 9.0,
+				"physical_attack": 23.0,
+				"physical_defense": 45.0,
+				"magic_power": 20.0,
+				"magic_defense": 21.0,
+				"critical_base": 5.0,
+				"unarmed_critical_multiplier": 2.0,
+				"evasion_base": 5.0,
+				"character_id": "ally_1",
+				"intelligence": 20.0,
+				"vigor": 25.0,
+				"ranged_attack": 10.0,
+				"ranged_defense": 45.0
+			}
+		},
+		"equipment": {
+			"target": {
+				"owner_id": "ally_1",
+				"weapon": {
+					"id": "sword_bronze",
+					"name": "Espada de Bronze",
+					"attack_bonus": 10.0,
+					"critical_chance": 5.0,
+					"critical_multiplier": 2.0,
+					"equipped": true,
+					"attack_mode": "melee"
+				},
+				"armor": {
+					"id": "armor_bronze",
+					"name": "Armadura de Bronze",
+					"defense_bonus": 10.0,
+					"equipped": true,
+					"evasion_bonus": 0.0,
+					"ranged_defense_bonus": 5.0
+				}
+			}
+		},
+		"composition": {
+			"target": {
+				"base": {
+					"physical_attack": 23.0,
+					"ranged_attack": 10.0,
+					"physical_defense": 45.0,
+					"ranged_defense": 45.0,
+					"evasion_base": 5.0
+				},
+				"bonuses": {
+					"physical_attack": 10,
+					"ranged_attack": 0,
+					"physical_defense": 10,
+					"ranged_defense": 5,
+					"evasion_base": 0
+				},
+				"raw_total": {
+					"physical_attack": 33.0,
+					"ranged_attack": 10.0,
+					"physical_defense": 55.0,
+					"ranged_defense": 50.0,
+					"evasion_base": 5.0
+				},
+				"effective": {
+					"physical_attack": 33,
+					"ranged_attack": 10,
+					"physical_defense": 55,
+					"ranged_defense": 50,
+					"evasion_base": 5
+				},
+				"limit": 999,
+				"evasion_limit": 100
+			}
+		},
+		"attacker": {
+			"id": "heavy",
+			"name": "Monstro #1",
+			"side": "enemy",
+			"color": "d99c65",
+			"hp": 45.0,
+			"mp": 8.0,
+			"ini": 7.0,
+			"physical_attack": 24.0,
+			"physical_defense": 40.0,
+			"magic_power": 25.0,
+			"magic_defense": 28.0,
+			"critical_base": 3.0,
+			"unarmed_critical_multiplier": 2.0,
+			"evasion_base": 3.0,
+			"intelligence": 15.0,
+			"vigor": 20.0,
+			"ranged_attack": 24.0,
+			"ranged_defense": 40.0
+		},
+		"target": {
+			"id": "ally_1",
+			"name": "Aliado #1",
+			"side": "ally",
+			"color": "6fc8ff",
+			"hp": 40.0,
+			"mp": 12.0,
+			"ini": 9.0,
+			"physical_attack": 33,
+			"physical_defense": 55,
+			"magic_power": 20.0,
+			"magic_defense": 21.0,
+			"critical_base": 5.0,
+			"unarmed_critical_multiplier": 2.0,
+			"evasion_base": 5,
+			"character_id": "ally_1",
+			"intelligence": 20.0,
+			"vigor": 25.0,
+			"ranged_attack": 10,
+			"ranged_defense": 50
+		},
+		"critical_source": {
+			"kind": "innate",
+			"name": "Crítico próprio de teste",
+			"chance_bonus": 0.0,
+			"multiplier": 2.0
+		},
+		"damage_stats": {
+			"mode": "affliction",
+			"attack_stat": "magic_power",
+			"defense_stat": "vigor",
+			"attack_label": "MAG",
+			"defense_label": "VIG"
+		},
+		"presets": {
+			"attacker": {
+				"id": "user_42514_3038375027",
+				"name": "Monstro #1",
+				"revision": 1,
+				"source": "custom",
+				"modified": false
+			},
+			"target": {
+				"id": "user_42514_3029764496",
+				"name": "Aliado #1",
+				"revision": 2,
+				"source": "custom",
+				"modified": false
+			}
+		}
+	},
+	"rows": [
+		{
+			"round": 1,
+			"count": 1000,
+			"application_chance": 50.0,
+			"total_application_chance": 47.5,
+			"applied_count": 444,
+			"resisted_count": 512,
+			"evasion_count": 44,
+			"application_frequency": 44.4,
+			"application_hit_frequency": 46.44351464435147,
+			"resistance_frequency": 51.2,
+			"evasion_frequency": 4.4
+		},
+		{
+			"round": 2,
+			"count": 1000,
+			"application_chance": 35.2112676056338,
+			"total_application_chance": 33.45070422535211,
+			"applied_count": 309,
+			"resisted_count": 647,
+			"evasion_count": 44,
+			"application_frequency": 30.9,
+			"application_hit_frequency": 32.32217573221757,
+			"resistance_frequency": 64.7,
+			"evasion_frequency": 4.4
+		}
+	],
+	"applications_changed_to_resisted": 135,
+	"presets_unchanged": true,
+	"calculator_unchanged": true,
+	"checks": 8147,
+	"failures": 0
+}

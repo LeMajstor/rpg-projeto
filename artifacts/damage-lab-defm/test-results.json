@@ -1,0 +1,154 @@
+[
+  {
+    "test": "damage_affliction_tests",
+    "exit_code": 0,
+    "summary": [
+      "AFLIÇÕES/DANOS: 4142 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_affliction_ui_smoke",
+    "exit_code": 0,
+    "summary": [
+      "AFLIÇÕES/UI: 32 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_ally_02_tests",
+    "exit_code": 0,
+    "summary": [
+      "ALIADO #2: 48 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_ally_02_ui_smoke",
+    "exit_code": 0,
+    "summary": [
+      "ALIADO #2/UI: 30 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_defm_tests",
+    "exit_code": 0,
+    "summary": [
+      "DEF M/AFLIÇÕES: 1165 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_distance_tests",
+    "exit_code": 0,
+    "summary": [
+      "DISTÂNCIA: 73 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_distance_ui_smoke",
+    "exit_code": 0,
+    "summary": [
+      "DISTÂNCIA/UI: 22 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_enemy_ranges_tests",
+    "exit_code": 0,
+    "summary": [
+      "FAIXAS/MONSTROS: 1208 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_equipment_exclusivity_tests",
+    "exit_code": 0,
+    "summary": [
+      "EXCLUSIVIDADE: 73 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_equipment_exclusivity_ui_smoke",
+    "exit_code": 0,
+    "summary": [
+      "EXCLUSIVIDADE/UI: 15 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_equipment_scales_tests",
+    "exit_code": 0,
+    "summary": [
+      "ESCALAS/EQUIPAMENTOS: 512 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_equipment_scales_ui_smoke",
+    "exit_code": 0,
+    "summary": [
+      "ESCALAS/UI: 48 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_equipment_tests",
+    "exit_code": 0,
+    "summary": [
+      "EQUIPAMENTOS/DANOS: 66 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_evasion_tests",
+    "exit_code": 0,
+    "summary": [
+      "ESQUIVA/DANOS: 4093 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_export_tests",
+    "exit_code": 0,
+    "summary": [
+      "EXPORTAÇÃO/DANOS: 2280 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_lab_tests",
+    "exit_code": 0,
+    "summary": [
+      "LAB DANOS: 3217 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_lab_ui_smoke",
+    "exit_code": 0,
+    "summary": [
+      "LAB DANOS/UI: 120 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_presets_tests",
+    "exit_code": 0,
+    "summary": [
+      "PRESETS/DANOS: 92 verificações, 0 falhas"
+    ],
+    "errors": []
+  },
+  {
+    "test": "damage_presets_ui_smoke",
+    "exit_code": 0,
+    "summary": [
+      "PRESETS/UI: 53 verificações, 0 falhas"
+    ],
+    "errors": []
+  }
+]

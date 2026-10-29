@@ -93,7 +93,7 @@ func _run() -> void:
 		for field in ["critical_roll", "variation_roll", "evasion_roll"]:
 			expect(no_evade["samples"][i][field] == mixed["samples"][i][field], "Alterar EVA não muda os fluxos independentes")
 	var report = Export.document(mixed)
-	expect(report["version"] == 4 and report["summary"]["evasion_count"] == mixed["evasion_count"] and report["conditions"]["target"]["evasion_base"] == 25, "JSON v4 conserva EVA e estatísticas históricas")
+	expect(report["version"] == 5 and report["summary"]["evasion_count"] == mixed["evasion_count"] and report["conditions"]["target"]["evasion_base"] == 25, "JSON v5 conserva EVA e estatísticas históricas")
 	var restored: Dictionary = {}
 	for stream in report["run"]["rng_after"]:
 		restored[stream] = report["run"]["rng_after"][stream].to_int()

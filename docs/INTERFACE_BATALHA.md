@@ -32,7 +32,7 @@ Os atalhos 1–4 e A/H/I/F permanecem como atalhos de teclado. F3, Espaço e F5 
 - Área ofensiva precisa selecionar um adversário vivo como centro; ponto livre, aliado e ID inválido são rejeitados sem custo antes de confirmar.
 - Círculo usa a **posição lógica atual** do alvo central. A mão acompanha sua posição visual, inclusive flutuação, sem mudar a geometria de efeito.
 - Em Active, a prévia se atualiza enquanto os inimigos se movem. Durante a ação, o centro acompanha o alvo até o impacto. Os participantes dentro do raio são avaliados **nesse instante**, com a mesma regra usada pela prévia.
-- Ações ofensivas afetam somente o lado adversário. Isso vale para aliados e inimigos: nenhum causa fogo amigo. Efeitos de recuperação usam o próprio lado e mantêm sua elegibilidade anterior.
+- Ações ofensivas convencionais afetam somente o lado adversário. Isso vale para aliados e inimigos. Efeitos de recuperação usam o próprio lado e mantêm sua elegibilidade anterior. **D96 (28/10/2026):** Confusão é uma exceção de desenho que permite atingir aliados; ainda sem implementação, ações elegíveis e sorteios pendentes. O fluxo convencional implementado permanece igual.
 - Antes de confirmar, alvo invalidado é substituído por outro válido; sem candidatos, retorna à lista/comandos. Executor incapacitado devolve foco aos cards.
 - Se o centro for invalidado **depois** da confirmação, o efeito não troca automaticamente de alvo nem reembolsa o custo, preservando a política técnica T07. Não há ações simultâneas novas ou fila de comandos do jogador.
 
