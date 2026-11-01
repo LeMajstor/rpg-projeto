@@ -1,0 +1,998 @@
+{
+  "checks": 1996484,
+  "failures": 0,
+  "attempts": 110000,
+  "new_enemy_attempts": 55000,
+  "survival_trials": 130000,
+  "new_enemy_survival_trials": 65000,
+  "rows": [
+    {
+      "case_id": "m1-incoming-ally_1",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #1",
+      "ally_id": "ally_1",
+      "outgoing": false,
+      "action_id": "basic",
+      "mode": "melee",
+      "count": 5000,
+      "attacker": "Monstro #1",
+      "target": "Aliado #1",
+      "hp": 40.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 5,
+      "evasion_count": 247,
+      "critical_count": 141,
+      "normal_bounds": [
+        7,
+        8
+      ],
+      "critical_bounds": [
+        13,
+        16
+      ],
+      "mean_damage": 7.2024,
+      "theoretical_mean_damage": 7.194926432291667,
+      "normal_mean": 7.361231569817867,
+      "critical_mean": 14.624113475177305,
+      "normal_count": 4612,
+      "normal_hits_histogram": {
+        "6": 4969,
+        "5": 31
+      },
+      "normal_hits_theory": {
+        "5": 0.005780251218708351,
+        "6": 0.9942197487812918
+      },
+      "mixed_attempts_histogram": {
+        "6": 3321,
+        "7": 965,
+        "5": 513,
+        "8": 151,
+        "9": 24,
+        "4": 23,
+        "10": 3
+      },
+      "mixed_hits_histogram": {
+        "6": 4299,
+        "5": 672,
+        "4": 29
+      },
+      "mean_attempts_to_zero": 6.1584,
+      "theoretical_attempts_to_zero": 6.155371703873441,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m1-physical-ally_1",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #1",
+      "ally_id": "ally_1",
+      "outgoing": true,
+      "action_id": "basic",
+      "mode": "melee",
+      "count": 5000,
+      "attacker": "Aliado #1",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 3.0,
+      "evasion_count": 140,
+      "critical_count": 469,
+      "normal_bounds": [
+        13,
+        16
+      ],
+      "critical_bounds": [
+        27,
+        33
+      ],
+      "mean_damage": 15.8972,
+      "theoretical_mean_damage": 15.919223140495868,
+      "normal_mean": 14.922796629469369,
+      "critical_mean": 29.76545842217484,
+      "normal_count": 4391,
+      "normal_hits_histogram": {
+        "4": 2148,
+        "3": 2852
+      },
+      "normal_hits_theory": {
+        "3": 0.5680485421315163,
+        "4": 0.43195145786848355
+      },
+      "mixed_attempts_histogram": {
+        "4": 1634,
+        "3": 2658,
+        "2": 530,
+        "5": 168,
+        "6": 8,
+        "7": 2
+      },
+      "mixed_hits_histogram": {
+        "4": 1564,
+        "3": 2872,
+        "2": 564
+      },
+      "mean_attempts_to_zero": 3.2944,
+      "theoretical_attempts_to_zero": 3.3063696340058035,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m1-incoming-ally_2",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #2",
+      "ally_id": "ally_2",
+      "outgoing": false,
+      "action_id": "basic",
+      "mode": "melee",
+      "count": 5000,
+      "attacker": "Monstro #1",
+      "target": "Aliado #2",
+      "hp": 36.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 12,
+      "evasion_count": 597,
+      "critical_count": 132,
+      "normal_bounds": [
+        9,
+        11
+      ],
+      "critical_bounds": [
+        18,
+        21
+      ],
+      "mean_damage": 8.8422,
+      "theoretical_mean_damage": 8.843843402777779,
+      "normal_mean": 9.746663544837274,
+      "critical_mean": 19.568181818181817,
+      "normal_count": 4271,
+      "normal_hits_histogram": {
+        "4": 5000
+      },
+      "normal_hits_theory": {
+        "4": 1.0000000000000002
+      },
+      "mixed_attempts_histogram": {
+        "5": 1408,
+        "4": 2825,
+        "3": 289,
+        "6": 357,
+        "7": 97,
+        "11": 1,
+        "8": 17,
+        "2": 3,
+        "9": 2,
+        "10": 1
+      },
+      "mixed_hits_histogram": {
+        "4": 4561,
+        "3": 433,
+        "2": 6
+      },
+      "mean_attempts_to_zero": 4.4418,
+      "theoretical_attempts_to_zero": 4.44519659090902,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m1-physical-ally_2",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #2",
+      "ally_id": "ally_2",
+      "outgoing": true,
+      "action_id": "basic",
+      "mode": "ranged",
+      "count": 5000,
+      "attacker": "Aliado #2",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 3.0,
+      "evasion_count": 140,
+      "critical_count": 895,
+      "normal_bounds": [
+        12,
+        14
+      ],
+      "critical_bounds": [
+        19,
+        23
+      ],
+      "mean_damage": 13.8962,
+      "theoretical_mean_damage": 13.920308333333335,
+      "normal_mean": 12.889785624211854,
+      "critical_mean": 20.528491620111733,
+      "normal_count": 3965,
+      "normal_hits_histogram": {
+        "4": 5000
+      },
+      "normal_hits_theory": {
+        "4": 0.9999999999999999
+      },
+      "mixed_attempts_histogram": {
+        "4": 2755,
+        "3": 1906,
+        "5": 317,
+        "6": 17,
+        "2": 4,
+        "8": 1
+      },
+      "mixed_hits_histogram": {
+        "4": 2915,
+        "3": 2081,
+        "2": 4
+      },
+      "mean_attempts_to_zero": 3.6882,
+      "theoretical_attempts_to_zero": 3.690267306745725,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m1-incoming-ally_3",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": false,
+      "action_id": "basic",
+      "mode": "melee",
+      "count": 5000,
+      "attacker": "Monstro #1",
+      "target": "Aliado #3 — Mago",
+      "hp": 30.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 3,
+      "evasion_count": 140,
+      "critical_count": 144,
+      "normal_bounds": [
+        12,
+        15
+      ],
+      "critical_bounds": [
+        25,
+        30
+      ],
+      "mean_damage": 13.736,
+      "theoretical_mean_damage": 13.721028906249998,
+      "normal_mean": 13.721798134011875,
+      "critical_mean": 27.555555555555557,
+      "normal_count": 4716,
+      "normal_hits_histogram": {
+        "3": 4768,
+        "2": 232
+      },
+      "normal_hits_theory": {
+        "2": 0.0456000434027777,
+        "3": 0.9543999565972223
+      },
+      "mixed_attempts_histogram": {
+        "3": 4125,
+        "4": 362,
+        "2": 474,
+        "1": 21,
+        "5": 16,
+        "6": 2
+      },
+      "mixed_hits_histogram": {
+        "3": 4480,
+        "2": 499,
+        "1": 21
+      },
+      "mean_attempts_to_zero": 2.9768,
+      "theoretical_attempts_to_zero": 2.9838381898580493,
+      "one_attempt_ko": 21,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m1-physical-ally_3",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "basic",
+      "mode": "melee",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 3.0,
+      "evasion_count": 140,
+      "critical_count": 144,
+      "normal_bounds": [
+        3,
+        4
+      ],
+      "critical_bounds": [
+        5,
+        6
+      ],
+      "mean_damage": 3.6222,
+      "theoretical_mean_damage": 3.6197331632653063,
+      "normal_mean": 3.6734520780322306,
+      "critical_mean": 5.465277777777778,
+      "normal_count": 4716,
+      "normal_hits_histogram": {
+        "13": 2696,
+        "12": 2169,
+        "14": 135
+      },
+      "normal_hits_theory": {
+        "12": 0.4277165537599581,
+        "13": 0.5444349231908185,
+        "14": 0.027793721587945037,
+        "15": 5.480146127833112e-05
+      },
+      "mixed_attempts_histogram": {
+        "13": 2127,
+        "14": 764,
+        "12": 1817,
+        "11": 109,
+        "15": 159,
+        "17": 6,
+        "16": 18
+      },
+      "mixed_hits_histogram": {
+        "12": 2589,
+        "13": 2162,
+        "11": 160,
+        "14": 89
+      },
+      "mean_attempts_to_zero": 12.825,
+      "theoretical_attempts_to_zero": 12.817617590487407,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m1-mage-magic_skill",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "magic_skill",
+      "mode": "magical",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 7.0,
+      "evasion_percent": 0,
+      "evasion_count": 0,
+      "critical_count": 0,
+      "normal_bounds": [
+        32,
+        39
+      ],
+      "critical_bounds": null,
+      "mean_damage": 35.2714,
+      "theoretical_mean_damage": 35.295833333333334,
+      "normal_mean": 35.2714,
+      "critical_mean": null,
+      "normal_count": 5000,
+      "normal_hits_histogram": {
+        "2": 5000
+      },
+      "normal_hits_theory": {
+        "2": 1.0000000000000004
+      },
+      "mixed_attempts_histogram": {
+        "2": 5000
+      },
+      "mixed_hits_histogram": {
+        "2": 5000
+      },
+      "mean_attempts_to_zero": 2.0,
+      "theoretical_attempts_to_zero": 2.000000000000001,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        14,
+        14
+      ]
+    },
+    {
+      "case_id": "m1-mage-poison",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "poison",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 3.0,
+      "evasion_count": 140,
+      "critical_count": 0,
+      "applied_count": 2189,
+      "resisted_count": 2671,
+      "chance_conditional": 45.45454545454545,
+      "chance_total": 44.090909090909086,
+      "applied_percent": 43.78
+    },
+    {
+      "case_id": "m1-mage-slow",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "slow",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 3.0,
+      "evasion_count": 140,
+      "critical_count": 0,
+      "applied_count": 2189,
+      "resisted_count": 2671,
+      "chance_conditional": 45.45454545454545,
+      "chance_total": 44.090909090909086,
+      "applied_percent": 43.78
+    },
+    {
+      "case_id": "m1-mage-confusion",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "confusion",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 3.0,
+      "evasion_count": 140,
+      "critical_count": 0,
+      "applied_count": 2339,
+      "resisted_count": 2521,
+      "chance_conditional": 48.19277108433735,
+      "chance_total": 46.74698795180722,
+      "applied_percent": 46.78
+    },
+    {
+      "case_id": "m1-mage-fear",
+      "enemy": "Monstro #1",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "fear",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #1",
+      "hp": 45.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 3.0,
+      "evasion_count": 140,
+      "critical_count": 0,
+      "applied_count": 2339,
+      "resisted_count": 2521,
+      "chance_conditional": 48.19277108433735,
+      "chance_total": 46.74698795180722,
+      "applied_percent": 46.78
+    },
+    {
+      "case_id": "m2-incoming-ally_1",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #1",
+      "ally_id": "ally_1",
+      "outgoing": false,
+      "action_id": "basic",
+      "mode": "ranged",
+      "count": 5000,
+      "attacker": "Monstro #2 — Distância",
+      "target": "Aliado #1",
+      "hp": 40.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 5,
+      "evasion_count": 247,
+      "critical_count": 141,
+      "normal_bounds": [
+        7,
+        9
+      ],
+      "critical_bounds": [
+        14,
+        17
+      ],
+      "mean_damage": 7.5588,
+      "theoretical_mean_damage": 7.5596332465277785,
+      "normal_mean": 7.717476149176062,
+      "critical_mean": 15.609929078014185,
+      "normal_count": 4612,
+      "normal_hits_histogram": {
+        "6": 3842,
+        "5": 1158
+      },
+      "normal_hits_theory": {
+        "5": 0.22481172027122678,
+        "6": 0.775188279728773
+      },
+      "mixed_attempts_histogram": {
+        "6": 2741,
+        "5": 1189,
+        "7": 771,
+        "8": 132,
+        "4": 149,
+        "9": 11,
+        "10": 4,
+        "3": 3
+      },
+      "mixed_hits_histogram": {
+        "6": 3325,
+        "5": 1494,
+        "4": 177,
+        "3": 4
+      },
+      "mean_attempts_to_zero": 5.9176,
+      "theoretical_attempts_to_zero": 5.923888643862803,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m2-physical-ally_1",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #1",
+      "ally_id": "ally_1",
+      "outgoing": true,
+      "action_id": "basic",
+      "mode": "melee",
+      "count": 5000,
+      "attacker": "Aliado #1",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 5.0,
+      "evasion_count": 247,
+      "critical_count": 458,
+      "normal_bounds": [
+        15,
+        18
+      ],
+      "critical_bounds": [
+        30,
+        37
+      ],
+      "mean_damage": 17.4306,
+      "theoretical_mean_damage": 17.485081496786044,
+      "normal_mean": 16.72339930151339,
+      "critical_mean": 33.46288209606987,
+      "normal_count": 4295,
+      "normal_hits_histogram": {
+        "3": 5000
+      },
+      "normal_hits_theory": {
+        "3": 1.0
+      },
+      "mixed_attempts_histogram": {
+        "3": 3573,
+        "2": 848,
+        "4": 533,
+        "5": 42,
+        "6": 3,
+        "7": 1
+      },
+      "mixed_hits_histogram": {
+        "3": 4065,
+        "2": 935
+      },
+      "mean_attempts_to_zero": 2.9564,
+      "theoretical_attempts_to_zero": 2.957894736842092,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m2-incoming-ally_2",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #2",
+      "ally_id": "ally_2",
+      "outgoing": false,
+      "action_id": "basic",
+      "mode": "ranged",
+      "count": 5000,
+      "attacker": "Monstro #2 — Distância",
+      "target": "Aliado #2",
+      "hp": 36.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 12,
+      "evasion_count": 597,
+      "critical_count": 132,
+      "normal_bounds": [
+        8,
+        10
+      ],
+      "critical_bounds": [
+        16,
+        20
+      ],
+      "mean_damage": 8.16,
+      "theoretical_mean_damage": 8.1576,
+      "normal_mean": 8.994146569889956,
+      "critical_mean": 18.075757575757574,
+      "normal_count": 4271,
+      "normal_hits_histogram": {
+        "5": 1788,
+        "4": 3212
+      },
+      "normal_hits_theory": {
+        "4": 0.6463953665599758,
+        "5": 0.35360463344002435
+      },
+      "mixed_attempts_histogram": {
+        "7": 236,
+        "5": 1765,
+        "4": 1976,
+        "3": 193,
+        "6": 746,
+        "8": 62,
+        "9": 19,
+        "10": 1,
+        "11": 1,
+        "2": 1
+      },
+      "mixed_hits_histogram": {
+        "5": 1546,
+        "4": 3165,
+        "3": 287,
+        "2": 2
+      },
+      "mean_attempts_to_zero": 4.8252,
+      "theoretical_attempts_to_zero": 4.836987041314933,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m2-physical-ally_2",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #2",
+      "ally_id": "ally_2",
+      "outgoing": true,
+      "action_id": "basic",
+      "mode": "ranged",
+      "count": 5000,
+      "attacker": "Aliado #2",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 5.0,
+      "evasion_count": 247,
+      "critical_count": 880,
+      "normal_bounds": [
+        10,
+        12
+      ],
+      "critical_bounds": [
+        16,
+        20
+      ],
+      "mean_damage": 11.8586,
+      "theoretical_mean_damage": 11.8845,
+      "normal_mean": 11.225148463723212,
+      "critical_mean": 17.975,
+      "normal_count": 3873,
+      "normal_hits_histogram": {
+        "4": 5000
+      },
+      "normal_hits_theory": {
+        "4": 1.0000000000000002
+      },
+      "mixed_attempts_histogram": {
+        "4": 2843,
+        "3": 1550,
+        "5": 535,
+        "6": 65,
+        "8": 1,
+        "7": 6
+      },
+      "mixed_hits_histogram": {
+        "4": 3191,
+        "3": 1809
+      },
+      "mean_attempts_to_zero": 3.8274,
+      "theoretical_attempts_to_zero": 3.82217367690052,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m2-incoming-ally_3",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": false,
+      "action_id": "basic",
+      "mode": "ranged",
+      "count": 5000,
+      "attacker": "Monstro #2 — Distância",
+      "target": "Aliado #3 — Mago",
+      "hp": 30.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 3,
+      "evasion_count": 140,
+      "critical_count": 144,
+      "normal_bounds": [
+        12,
+        15
+      ],
+      "critical_bounds": [
+        25,
+        30
+      ],
+      "mean_damage": 13.736,
+      "theoretical_mean_damage": 13.721028906249998,
+      "normal_mean": 13.721798134011875,
+      "critical_mean": 27.555555555555557,
+      "normal_count": 4716,
+      "normal_hits_histogram": {
+        "3": 4768,
+        "2": 232
+      },
+      "normal_hits_theory": {
+        "2": 0.0456000434027777,
+        "3": 0.9543999565972223
+      },
+      "mixed_attempts_histogram": {
+        "3": 4125,
+        "4": 362,
+        "2": 474,
+        "1": 21,
+        "5": 16,
+        "6": 2
+      },
+      "mixed_hits_histogram": {
+        "3": 4480,
+        "2": 499,
+        "1": 21
+      },
+      "mean_attempts_to_zero": 2.9768,
+      "theoretical_attempts_to_zero": 2.9838381898580493,
+      "one_attempt_ko": 21,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m2-physical-ally_3",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "basic",
+      "mode": "melee",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 0.0,
+      "evasion_percent": 5.0,
+      "evasion_count": 247,
+      "critical_count": 141,
+      "normal_bounds": [
+        4,
+        5
+      ],
+      "critical_bounds": [
+        6,
+        7
+      ],
+      "mean_damage": 4.0724,
+      "theoretical_mean_damage": 4.070992346938776,
+      "normal_mean": 4.218993928881179,
+      "critical_mean": 6.411347517730497,
+      "normal_count": 4612,
+      "normal_hits_histogram": {
+        "10": 4407,
+        "9": 593
+      },
+      "normal_hits_theory": {
+        "8": 5.36659811516331e-06,
+        "9": 0.11340833579976672,
+        "10": 0.8865862976021182
+      },
+      "mixed_attempts_histogram": {
+        "10": 2588,
+        "11": 1215,
+        "9": 791,
+        "12": 321,
+        "13": 64,
+        "8": 9,
+        "14": 12
+      },
+      "mixed_hits_histogram": {
+        "10": 3720,
+        "9": 1263,
+        "8": 17
+      },
+      "mean_attempts_to_zero": 10.2576,
+      "theoretical_attempts_to_zero": 10.249520184594791,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        0,
+        0
+      ]
+    },
+    {
+      "case_id": "m2-mage-magic_skill",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "magic_skill",
+      "mode": "magical",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 7.0,
+      "evasion_percent": 0,
+      "evasion_count": 0,
+      "critical_count": 0,
+      "normal_bounds": [
+        32,
+        39
+      ],
+      "critical_bounds": null,
+      "mean_damage": 35.2714,
+      "theoretical_mean_damage": 35.295833333333334,
+      "normal_mean": 35.2714,
+      "critical_mean": null,
+      "normal_count": 5000,
+      "normal_hits_histogram": {
+        "2": 5000
+      },
+      "normal_hits_theory": {
+        "2": 1.0000000000000004
+      },
+      "mixed_attempts_histogram": {
+        "2": 5000
+      },
+      "mixed_hits_histogram": {
+        "2": 5000
+      },
+      "mean_attempts_to_zero": 2.0,
+      "theoretical_attempts_to_zero": 2.000000000000001,
+      "one_attempt_ko": 0,
+      "trial_count": 5000,
+      "mp_spent_bounds": [
+        14,
+        14
+      ]
+    },
+    {
+      "case_id": "m2-mage-poison",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "poison",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 5.0,
+      "evasion_count": 247,
+      "critical_count": 0,
+      "applied_count": 2144,
+      "resisted_count": 2609,
+      "chance_conditional": 45.45454545454545,
+      "chance_total": 43.18181818181818,
+      "applied_percent": 42.88
+    },
+    {
+      "case_id": "m2-mage-slow",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "slow",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 5.0,
+      "evasion_count": 247,
+      "critical_count": 0,
+      "applied_count": 2144,
+      "resisted_count": 2609,
+      "chance_conditional": 45.45454545454545,
+      "chance_total": 43.18181818181818,
+      "applied_percent": 42.88
+    },
+    {
+      "case_id": "m2-mage-confusion",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "confusion",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 5.0,
+      "evasion_count": 247,
+      "critical_count": 0,
+      "applied_count": 2289,
+      "resisted_count": 2464,
+      "chance_conditional": 48.19277108433735,
+      "chance_total": 45.78313253012048,
+      "applied_percent": 45.78
+    },
+    {
+      "case_id": "m2-mage-fear",
+      "enemy": "Monstro #2 — Distância",
+      "ally": "Aliado #3 — Mago",
+      "ally_id": "ally_3",
+      "outgoing": true,
+      "action_id": "fear",
+      "mode": "affliction",
+      "count": 5000,
+      "attacker": "Aliado #3 — Mago",
+      "target": "Monstro #2 — Distância",
+      "hp": 40.0,
+      "mp_cost": 4.0,
+      "evasion_percent": 5.0,
+      "evasion_count": 247,
+      "critical_count": 0,
+      "applied_count": 2289,
+      "resisted_count": 2464,
+      "chance_conditional": 48.19277108433735,
+      "chance_total": 45.78313253012048,
+      "applied_percent": 45.78
+    }
+  ]
+}

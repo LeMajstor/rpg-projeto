@@ -60,6 +60,32 @@
       "ranged_defense": 160,
       "intelligence": 15,
       "vigor": 20
+    },
+    {
+      "id": "enemy_ranged",
+      "name": "Monstro #2 — Distância",
+      "side": "enemy",
+      "color": "e7c56a",
+      "hp": 40,
+      "mp": 8,
+      "ini": 9,
+      "physical_attack": 24,
+      "ranged_attack": 24,
+      "physical_defense": 32,
+      "ranged_defense": 50,
+      "magic_power": 25,
+      "magic_defense": 28,
+      "intelligence": 15,
+      "vigor": 20,
+      "critical_base": 3,
+      "evasion_base": 5,
+      "unarmed_critical_multiplier": 2.0,
+      "offensive_policy": {
+        "action_ids": [
+          "basic"
+        ],
+        "physical_mode": "ranged"
+      }
     }
   ],
   "weapons": [
@@ -206,6 +232,84 @@
         "ally_2"
       ],
       "attack_mode": "ranged"
+    },
+    {
+      "id": "staff_wood",
+      "name": "Cajado de Madeira",
+      "attack_bonus": 2,
+      "magic_attack_bonus": 10,
+      "critical_chance": 0.0,
+      "critical_multiplier": 1.5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ],
+      "attack_mode": "melee"
+    },
+    {
+      "id": "staff_oak",
+      "name": "Cajado de Carvalho",
+      "attack_bonus": 3,
+      "magic_attack_bonus": 16,
+      "critical_chance": 0.0,
+      "critical_multiplier": 1.5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ],
+      "attack_mode": "melee"
+    },
+    {
+      "id": "staff_ash",
+      "name": "Cajado de Freixo",
+      "attack_bonus": 5,
+      "magic_attack_bonus": 24,
+      "critical_chance": 0.0,
+      "critical_multiplier": 1.5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ],
+      "attack_mode": "melee"
+    },
+    {
+      "id": "staff_yew",
+      "name": "Cajado de Teixo",
+      "attack_bonus": 7,
+      "magic_attack_bonus": 34,
+      "critical_chance": 0.0,
+      "critical_multiplier": 1.5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ],
+      "attack_mode": "melee"
+    },
+    {
+      "id": "staff_ancient",
+      "name": "Cajado Ancestral",
+      "attack_bonus": 10,
+      "magic_attack_bonus": 48,
+      "critical_chance": 0.0,
+      "critical_multiplier": 1.5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ],
+      "attack_mode": "melee"
+    },
+    {
+      "id": "staff_runic",
+      "name": "Cajado Rúnico",
+      "attack_bonus": 13,
+      "magic_attack_bonus": 65,
+      "critical_chance": 0.0,
+      "critical_multiplier": 1.5,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ],
+      "attack_mode": "melee"
     }
   ],
   "actions": [
@@ -217,26 +321,29 @@
       "mp_cost": 0,
       "critical_allowed": true,
       "evasion_allowed": true,
-      "physical_mode": "weapon"
+      "physical_mode": "weapon",
+      "reference_status": "v1_reference"
     },
     {
       "id": "physical_skill",
-      "name": "Técnica física · teste",
+      "name": "Técnica física · experimento",
       "damage_type": "physical",
       "power": 1.8,
       "mp_cost": 4,
       "critical_allowed": true,
       "evasion_allowed": true,
-      "physical_mode": "weapon"
+      "physical_mode": "weapon",
+      "reference_status": "experimental"
     },
     {
       "id": "magic_skill",
-      "name": "Magia · teste",
+      "name": "Magia ofensiva básica",
       "damage_type": "magical",
       "power": 1.5,
       "mp_cost": 7,
       "critical_allowed": false,
-      "evasion_allowed": false
+      "evasion_allowed": false,
+      "reference_status": "v1_reference"
     },
     {
       "id": "poison",
@@ -248,7 +355,8 @@
       "power": 0.0,
       "mp_cost": 4,
       "critical_allowed": false,
-      "evasion_allowed": true
+      "evasion_allowed": true,
+      "reference_status": "v1_reference"
     },
     {
       "id": "slow",
@@ -260,7 +368,8 @@
       "power": 0.0,
       "mp_cost": 4,
       "critical_allowed": false,
-      "evasion_allowed": true
+      "evasion_allowed": true,
+      "reference_status": "v1_reference"
     },
     {
       "id": "confusion",
@@ -272,7 +381,8 @@
       "power": 0.0,
       "mp_cost": 4,
       "critical_allowed": false,
-      "evasion_allowed": true
+      "evasion_allowed": true,
+      "reference_status": "v1_reference"
     },
     {
       "id": "fear",
@@ -284,7 +394,8 @@
       "power": 0.0,
       "mp_cost": 4,
       "critical_allowed": false,
-      "evasion_allowed": true
+      "evasion_allowed": true,
+      "reference_status": "v1_reference"
     }
   ],
   "default_armor": "armor_bronze",
@@ -420,6 +531,78 @@
         "ally_2"
       ],
       "ranged_defense_bonus": 65
+    },
+    {
+      "id": "robe_simple",
+      "name": "Veste Simples",
+      "defense_bonus": 2,
+      "ranged_defense_bonus": 2,
+      "magic_defense_bonus": 10,
+      "evasion_bonus": 0,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ]
+    },
+    {
+      "id": "robe_sewn",
+      "name": "Veste Costurada",
+      "defense_bonus": 3,
+      "ranged_defense_bonus": 3,
+      "magic_defense_bonus": 16,
+      "evasion_bonus": 0,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ]
+    },
+    {
+      "id": "robe_embroidered",
+      "name": "Veste Bordada",
+      "defense_bonus": 5,
+      "ranged_defense_bonus": 5,
+      "magic_defense_bonus": 24,
+      "evasion_bonus": 0,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ]
+    },
+    {
+      "id": "robe_enchanted",
+      "name": "Veste Encantada",
+      "defense_bonus": 7,
+      "ranged_defense_bonus": 7,
+      "magic_defense_bonus": 34,
+      "evasion_bonus": 0,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ]
+    },
+    {
+      "id": "robe_arcane",
+      "name": "Veste Arcana",
+      "defense_bonus": 10,
+      "ranged_defense_bonus": 10,
+      "magic_defense_bonus": 48,
+      "evasion_bonus": 0,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ]
+    },
+    {
+      "id": "robe_runic",
+      "name": "Veste Rúnica",
+      "defense_bonus": 13,
+      "ranged_defense_bonus": 13,
+      "magic_defense_bonus": 65,
+      "evasion_bonus": 0,
+      "equipped": true,
+      "allowed_character_ids": [
+        "ally_3"
+      ]
     }
   ],
   "characters": [
@@ -435,6 +618,13 @@
       "name": "Aliado #2",
       "default_weapon": "compound_bow",
       "default_armor": "leather_set"
+    },
+    {
+      "id": "ally_3",
+      "name": "Aliado #3 — Mago",
+      "default_weapon": "staff_wood",
+      "default_armor": "robe_simple",
+      "legacy_ranged_attack": 8
     }
   ],
   "affliction_reference_stats": {
@@ -449,6 +639,19 @@
     "enemy": {
       "intelligence": 15,
       "vigor": 20
+    },
+    "ally_3": {
+      "intelligence": 25,
+      "vigor": 15
     }
+  },
+  "ruleset": {
+    "id": "damage_lab_v1",
+    "version": 1,
+    "status": "approved_initial",
+    "approved_on": "2026-11-01",
+    "decision": "D124",
+    "scope": "damage_attributes_equipment_lab",
+    "balance_status": "initial_reference"
   }
 }

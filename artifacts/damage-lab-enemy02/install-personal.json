@@ -1,0 +1,10 @@
+{
+  "status": "installed",
+  "id": "user_ranged_1793547210480995000",
+  "name": "Monstro #2 — Distância",
+  "backup": "artifacts/damage-lab-enemy02/backups/presets-before-dbad5939bfa8.json",
+  "before_sha256": "dbad5939bfa80eaaae18ee4278f6b17e0827dbc2b5981aa7ce3a9fb9f49daae7",
+  "after_sha256": "85098c78aee6caf703ec5bb7c33707d0b964355f813f952a1a1109fab13171b8",
+  "previous_records_unchanged": true,
+  "preset_count": 5
+}

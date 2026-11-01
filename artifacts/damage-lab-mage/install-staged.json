@@ -1,0 +1,10 @@
+{
+  "status": "installed",
+  "id": "user_mage_1793539563931112000",
+  "name": "Aliado #3 — Mago",
+  "backup": "artifacts/damage-lab-mage/backups/presets-before-2833210ddb94.json",
+  "before_sha256": "2833210ddb94bfaf732cdd0e91a17d2af977fbe1b133a967132c7b424fc8129a",
+  "after_sha256": "8af047f711b167f41d4fa023136a186a654697138e479cc9a98a6fc7f8d212a7",
+  "previous_records_unchanged": true,
+  "preset_count": 4
+}

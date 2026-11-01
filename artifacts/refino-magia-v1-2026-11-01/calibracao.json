@@ -1,0 +1,5068 @@
+{
+	"rows": [
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #1",
+			"seed": 421,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.348,
+			"total": 35348,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "A-heavy-seed-421.json",
+			"samples_sha256": "37287c5dbeccd9b287b7eba33661a03814fafe4c16bfcf624fd21abd0fe18005",
+			"rng_before": {
+				"variance": "5503763067071952039",
+				"critical": "9028910824851835770",
+				"evasion": "-707220157692989278",
+				"affliction": "-1240066137402995386"
+			},
+			"rng_after": {
+				"variance": "4558613390319291767",
+				"critical": "1848302246595508234",
+				"evasion": "-7010564743965151438",
+				"affliction": "7018441754629875926"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #1",
+			"seed": 733,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.197,
+			"total": 35197,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "4b189f28b87da6d8a48e5e70eb4a5c7433d653e1989fc504b15c17210678ec31",
+			"rng_before": {
+				"variance": "2560584074900415983",
+				"critical": "910896633035983042",
+				"evasion": "8887142738707480218",
+				"affliction": "6870333320814699358"
+			},
+			"rng_after": {
+				"variance": "-6122859712560498497",
+				"critical": "-1536111306893299886",
+				"evasion": "1682390110720955178",
+				"affliction": "-613678735718892306"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #1",
+			"seed": 112,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.294,
+			"total": 35294,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "ad43526efe3ccd02e5243fa0267b13028567e2d59bbf8136c277ef9733861060",
+			"rng_before": {
+				"variance": "1724188917948008126",
+				"critical": "-469134950288073749",
+				"evasion": "-1354788438923356173",
+				"affliction": "6230379773182490447"
+			},
+			"rng_after": {
+				"variance": "154701905174042702",
+				"critical": "-4695560332101019205",
+				"evasion": "7280286440684535747",
+				"affliction": "6246962419058819615"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #1",
+			"seed": 2026,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.205,
+			"total": 35205,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "09d2fe51d9b04df34d46b2cb655c3df40498a08337f2d35d8bfdd96f9ad6425e",
+			"rng_before": {
+				"variance": "-5476342462851192736",
+				"critical": "-2494831131442957939",
+				"evasion": "7680708563909148421",
+				"affliction": "1255793549657451713"
+			},
+			"rng_after": {
+				"variance": "7502239069684223088",
+				"critical": "-4645082716981820963",
+				"evasion": "2949906638462780757",
+				"affliction": "-8034747583152566767"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #1",
+			"seed": 31415,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.313,
+			"total": 35313,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "9606599579735b016129f0604a5b2ca1ef44acb4a848dba2631337fd7991fecd",
+			"rng_before": {
+				"variance": "550117360941847761",
+				"critical": "3831593643580676004",
+				"evasion": "-9199442953321475796",
+				"affliction": "-2054025606509252752"
+			},
+			"rng_after": {
+				"variance": "-2486058083475699167",
+				"critical": "-7237321229520445260",
+				"evasion": "8536650668902622268",
+				"affliction": "3099470140209014656"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 421,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.348,
+			"total": 35348,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "A-enemy_ranged-seed-421.json",
+			"samples_sha256": "db058fae5a2abd25c0ba83dbadcf0172be5efa3d693a78fc0938be58309258b7",
+			"rng_before": {
+				"variance": "5503763067071952039",
+				"critical": "9028910824851835770",
+				"evasion": "-707220157692989278",
+				"affliction": "-1240066137402995386"
+			},
+			"rng_after": {
+				"variance": "4558613390319291767",
+				"critical": "1848302246595508234",
+				"evasion": "-7010564743965151438",
+				"affliction": "7018441754629875926"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 733,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.197,
+			"total": 35197,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "5492de1bbc8e2d7d8bdc0602a4b9cceb68d4cbedf28beb0867c26858fa65ac23",
+			"rng_before": {
+				"variance": "2560584074900415983",
+				"critical": "910896633035983042",
+				"evasion": "8887142738707480218",
+				"affliction": "6870333320814699358"
+			},
+			"rng_after": {
+				"variance": "-6122859712560498497",
+				"critical": "-1536111306893299886",
+				"evasion": "1682390110720955178",
+				"affliction": "-613678735718892306"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 112,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.294,
+			"total": 35294,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "5c0d1dc5dd249ee4b582821c43d0b1f68ee4a28c4ec05c5badb28e3867082527",
+			"rng_before": {
+				"variance": "1724188917948008126",
+				"critical": "-469134950288073749",
+				"evasion": "-1354788438923356173",
+				"affliction": "6230379773182490447"
+			},
+			"rng_after": {
+				"variance": "154701905174042702",
+				"critical": "-4695560332101019205",
+				"evasion": "7280286440684535747",
+				"affliction": "6246962419058819615"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 2026,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.205,
+			"total": 35205,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "627a6271efb7041352d22fec9070ebc8d11ae3f64cadf688b92a7aa1725af43d",
+			"rng_before": {
+				"variance": "-5476342462851192736",
+				"critical": "-2494831131442957939",
+				"evasion": "7680708563909148421",
+				"affliction": "1255793549657451713"
+			},
+			"rng_after": {
+				"variance": "7502239069684223088",
+				"critical": "-4645082716981820963",
+				"evasion": "2949906638462780757",
+				"affliction": "-8034747583152566767"
+			}
+		},
+		{
+			"variant": {
+				"id": "A",
+				"power": 1.5,
+				"mp": 7
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 31415,
+			"count": 1000,
+			"minimum": 32,
+			"maximum": 39,
+			"mean": 35.313,
+			"total": 35313,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.5,
+					"mp_cost": 7,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "dfd9ab8bfee8650b02d3e73c63d5c45c59f3b4feecb8fa712b2c3ecc3b7c4402",
+			"rng_before": {
+				"variance": "550117360941847761",
+				"critical": "3831593643580676004",
+				"evasion": "-9199442953321475796",
+				"affliction": "-2054025606509252752"
+			},
+			"rng_after": {
+				"variance": "-2486058083475699167",
+				"critical": "-7237321229520445260",
+				"evasion": "8536650668902622268",
+				"affliction": "3099470140209014656"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #1",
+			"seed": 421,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.285,
+			"total": 28285,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "B-heavy-seed-421.json",
+			"samples_sha256": "83507589ad76e48a2a1d208e479a6a7226796425669c54c98528b6f798a5e789",
+			"rng_before": {
+				"variance": "5503763067071952039",
+				"critical": "9028910824851835770",
+				"evasion": "-707220157692989278",
+				"affliction": "-1240066137402995386"
+			},
+			"rng_after": {
+				"variance": "4558613390319291767",
+				"critical": "1848302246595508234",
+				"evasion": "-7010564743965151438",
+				"affliction": "7018441754629875926"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #1",
+			"seed": 733,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.164,
+			"total": 28164,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "cb6dbc0a31560cb302ef0b38fb5a0744c40e6b9000c93648f285e6bfbe725d1f",
+			"rng_before": {
+				"variance": "2560584074900415983",
+				"critical": "910896633035983042",
+				"evasion": "8887142738707480218",
+				"affliction": "6870333320814699358"
+			},
+			"rng_after": {
+				"variance": "-6122859712560498497",
+				"critical": "-1536111306893299886",
+				"evasion": "1682390110720955178",
+				"affliction": "-613678735718892306"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #1",
+			"seed": 112,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.256,
+			"total": 28256,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "2dbae5210549e99d709cd3e60b203a847b48e2fce466f97763d444ac477abc46",
+			"rng_before": {
+				"variance": "1724188917948008126",
+				"critical": "-469134950288073749",
+				"evasion": "-1354788438923356173",
+				"affliction": "6230379773182490447"
+			},
+			"rng_after": {
+				"variance": "154701905174042702",
+				"critical": "-4695560332101019205",
+				"evasion": "7280286440684535747",
+				"affliction": "6246962419058819615"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #1",
+			"seed": 2026,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.179,
+			"total": 28179,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "c3a0b5e4c6e1e6b1fc053a92f6a0dd2806625a6b1ebe092a7c5a4027c20a5bef",
+			"rng_before": {
+				"variance": "-5476342462851192736",
+				"critical": "-2494831131442957939",
+				"evasion": "7680708563909148421",
+				"affliction": "1255793549657451713"
+			},
+			"rng_after": {
+				"variance": "7502239069684223088",
+				"critical": "-4645082716981820963",
+				"evasion": "2949906638462780757",
+				"affliction": "-8034747583152566767"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #1",
+			"seed": 31415,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.266,
+			"total": 28266,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "heavy",
+						"name": "Monstro #1",
+						"side": "enemy",
+						"color": "d99c65",
+						"hp": 45.0,
+						"mp": 8.0,
+						"ini": 7.0,
+						"physical_attack": 24.0,
+						"physical_defense": 40.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"critical_base": 3.0,
+						"unarmed_critical_multiplier": 2.0,
+						"evasion_base": 3.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"ranged_attack": 24.0,
+						"ranged_defense": 40.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "heavy",
+					"name": "Monstro #1",
+					"side": "enemy",
+					"color": "d99c65",
+					"hp": 45.0,
+					"mp": 8.0,
+					"ini": 7.0,
+					"physical_attack": 24.0,
+					"physical_defense": 40.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"critical_base": 3.0,
+					"unarmed_critical_multiplier": 2.0,
+					"evasion_base": 3.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"ranged_attack": 24.0,
+					"ranged_defense": 40.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_42514_3038375027",
+						"name": "Monstro #1",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "98b35e7b3bd52107d0b43f3ab81c6ccf1c8b771b40fc12f591fefbb7e3c07584",
+			"rng_before": {
+				"variance": "550117360941847761",
+				"critical": "3831593643580676004",
+				"evasion": "-9199442953321475796",
+				"affliction": "-2054025606509252752"
+			},
+			"rng_after": {
+				"variance": "-2486058083475699167",
+				"critical": "-7237321229520445260",
+				"evasion": "8536650668902622268",
+				"affliction": "3099470140209014656"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 421,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.285,
+			"total": 28285,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "B-enemy_ranged-seed-421.json",
+			"samples_sha256": "1927585f70d3291bed5d9d4aa908b99ddbaf1ec0f7ab659dca0302348c3bb82f",
+			"rng_before": {
+				"variance": "5503763067071952039",
+				"critical": "9028910824851835770",
+				"evasion": "-707220157692989278",
+				"affliction": "-1240066137402995386"
+			},
+			"rng_after": {
+				"variance": "4558613390319291767",
+				"critical": "1848302246595508234",
+				"evasion": "-7010564743965151438",
+				"affliction": "7018441754629875926"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 733,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.164,
+			"total": 28164,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "6725e6d00cc0d25a57dde41117b6190735fc62bf58eed26a152fe888dc1b87f0",
+			"rng_before": {
+				"variance": "2560584074900415983",
+				"critical": "910896633035983042",
+				"evasion": "8887142738707480218",
+				"affliction": "6870333320814699358"
+			},
+			"rng_after": {
+				"variance": "-6122859712560498497",
+				"critical": "-1536111306893299886",
+				"evasion": "1682390110720955178",
+				"affliction": "-613678735718892306"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 112,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.256,
+			"total": 28256,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "cbe9c41f2de87a86a4f38ee7a9efa4534cf97a2984683db193c50d7056d3fe7f",
+			"rng_before": {
+				"variance": "1724188917948008126",
+				"critical": "-469134950288073749",
+				"evasion": "-1354788438923356173",
+				"affliction": "6230379773182490447"
+			},
+			"rng_after": {
+				"variance": "154701905174042702",
+				"critical": "-4695560332101019205",
+				"evasion": "7280286440684535747",
+				"affliction": "6246962419058819615"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 2026,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.179,
+			"total": 28179,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "c64ef178d617caab1a4d7dccdde4e9d1f3b9b2c880667fe35d01f59a234be975",
+			"rng_before": {
+				"variance": "-5476342462851192736",
+				"critical": "-2494831131442957939",
+				"evasion": "7680708563909148421",
+				"affliction": "1255793549657451713"
+			},
+			"rng_after": {
+				"variance": "7502239069684223088",
+				"critical": "-4645082716981820963",
+				"evasion": "2949906638462780757",
+				"affliction": "-8034747583152566767"
+			}
+		},
+		{
+			"variant": {
+				"id": "B",
+				"power": 1.2,
+				"mp": 6
+			},
+			"enemy": "Monstro #2 — Distância",
+			"seed": 31415,
+			"count": 1000,
+			"minimum": 25,
+			"maximum": 31,
+			"mean": 28.266,
+			"total": 28266,
+			"conditions": {
+				"action": {
+					"id": "magic_skill",
+					"name": "Magia · teste",
+					"damage_type": "magical",
+					"power": 1.2,
+					"mp_cost": 6,
+					"critical_allowed": false,
+					"evasion_allowed": false
+				},
+				"settings": {
+					"seed": 421.0,
+					"variation_enabled": true,
+					"variation_percent": 10.0,
+					"crit_per_point": 1.0,
+					"critical_mode": "rolled",
+					"item_bonus": 0.0,
+					"buff_bonus": 0.0,
+					"history_limit": 12.0,
+					"animation_seconds": 0.8,
+					"impact_fraction": 0.5,
+					"melee_stop_distance": 44.0,
+					"melee_impact_hold": 0.15,
+					"effective_stat_limit": 999.0
+				},
+				"base_stats": {
+					"attacker": {
+						"id": "ally_1",
+						"character_id": "ally_3",
+						"name": "Aliado #3 — Mago",
+						"side": "ally",
+						"color": "bba4ef",
+						"hp": 30.0,
+						"mp": 24.0,
+						"ini": 7.0,
+						"physical_attack": 12.0,
+						"ranged_attack": 8.0,
+						"physical_defense": 16.0,
+						"ranged_defense": 16.0,
+						"magic_power": 30.0,
+						"magic_defense": 30.0,
+						"intelligence": 25.0,
+						"vigor": 15.0,
+						"critical_base": 3.0,
+						"evasion_base": 3.0,
+						"unarmed_critical_multiplier": 2.0
+					},
+					"target": {
+						"id": "enemy_ranged",
+						"name": "Monstro #2 — Distância",
+						"side": "enemy",
+						"color": "e7c56a",
+						"hp": 40.0,
+						"mp": 8.0,
+						"ini": 9.0,
+						"physical_attack": 24.0,
+						"ranged_attack": 24.0,
+						"physical_defense": 32.0,
+						"ranged_defense": 50.0,
+						"magic_power": 25.0,
+						"magic_defense": 28.0,
+						"intelligence": 15.0,
+						"vigor": 20.0,
+						"critical_base": 3.0,
+						"evasion_base": 5.0,
+						"unarmed_critical_multiplier": 2.0
+					}
+				},
+				"equipment": {
+					"attacker": {
+						"owner_id": "ally_3",
+						"weapon": {
+							"id": "staff_wood",
+							"name": "Cajado de Madeira",
+							"attack_bonus": 2.0,
+							"magic_attack_bonus": 10.0,
+							"critical_chance": 0.0,
+							"critical_multiplier": 1.5,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							],
+							"attack_mode": "melee"
+						},
+						"armor": {
+							"id": "robe_simple",
+							"name": "Veste Simples",
+							"defense_bonus": 2.0,
+							"ranged_defense_bonus": 2.0,
+							"magic_defense_bonus": 10.0,
+							"evasion_bonus": 0.0,
+							"equipped": true,
+							"allowed_character_ids": [
+								"ally_3"
+							]
+						}
+					}
+				},
+				"composition": {
+					"attacker": {
+						"base": {
+							"physical_attack": 12.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 16.0,
+							"ranged_defense": 16.0,
+							"evasion_base": 3.0,
+							"magic_power": 30.0,
+							"magic_defense": 30.0
+						},
+						"bonuses": {
+							"physical_attack": 2,
+							"ranged_attack": 0,
+							"physical_defense": 2,
+							"ranged_defense": 2,
+							"evasion_base": 0,
+							"magic_power": 10,
+							"magic_defense": 10
+						},
+						"raw_total": {
+							"physical_attack": 14.0,
+							"ranged_attack": 8.0,
+							"physical_defense": 18.0,
+							"ranged_defense": 18.0,
+							"evasion_base": 3.0,
+							"magic_power": 40.0,
+							"magic_defense": 40.0
+						},
+						"effective": {
+							"physical_attack": 14,
+							"ranged_attack": 8,
+							"physical_defense": 18,
+							"ranged_defense": 18,
+							"evasion_base": 3,
+							"magic_power": 40,
+							"magic_defense": 40
+						},
+						"limit": 999,
+						"evasion_limit": 100
+					}
+				},
+				"attacker": {
+					"id": "ally_1",
+					"character_id": "ally_3",
+					"name": "Aliado #3 — Mago",
+					"side": "ally",
+					"color": "bba4ef",
+					"hp": 30.0,
+					"mp": 24.0,
+					"ini": 7.0,
+					"physical_attack": 14,
+					"ranged_attack": 8,
+					"physical_defense": 18,
+					"ranged_defense": 18,
+					"magic_power": 40,
+					"magic_defense": 40,
+					"intelligence": 25.0,
+					"vigor": 15.0,
+					"critical_base": 3.0,
+					"evasion_base": 3,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"target": {
+					"id": "enemy_ranged",
+					"name": "Monstro #2 — Distância",
+					"side": "enemy",
+					"color": "e7c56a",
+					"hp": 40.0,
+					"mp": 8.0,
+					"ini": 9.0,
+					"physical_attack": 24.0,
+					"ranged_attack": 24.0,
+					"physical_defense": 32.0,
+					"ranged_defense": 50.0,
+					"magic_power": 25.0,
+					"magic_defense": 28.0,
+					"intelligence": 15.0,
+					"vigor": 20.0,
+					"critical_base": 3.0,
+					"evasion_base": 5.0,
+					"unarmed_critical_multiplier": 2.0
+				},
+				"weapon": {
+					"id": "staff_wood",
+					"name": "Cajado de Madeira",
+					"attack_bonus": 2.0,
+					"magic_attack_bonus": 10.0,
+					"critical_chance": 0.0,
+					"critical_multiplier": 1.5,
+					"equipped": true,
+					"allowed_character_ids": [
+						"ally_3"
+					],
+					"attack_mode": "melee"
+				},
+				"critical_source": {
+					"kind": "weapon",
+					"name": "Cajado de Madeira",
+					"chance_bonus": 0.0,
+					"multiplier": 1.5
+				},
+				"damage_stats": {
+					"mode": "magical",
+					"attack_stat": "magic_power",
+					"defense_stat": "magic_defense",
+					"attack_label": "MAG",
+					"defense_label": "DEF M"
+				},
+				"attacker_policy": {},
+				"presets": {
+					"attacker": {
+						"id": "user_mage_1793540837711411000",
+						"name": "Aliado #3 — Mago",
+						"revision": 2,
+						"source": "custom",
+						"modified": false
+					},
+					"target": {
+						"id": "user_ranged_1793547210480995000",
+						"name": "Monstro #2 — Distância",
+						"revision": 1,
+						"source": "custom",
+						"modified": false
+					}
+				}
+			},
+			"report": "",
+			"samples_sha256": "e65a7539083beeb2eefb8000835850c6ca9db41982dcc2117f7a364c16499845",
+			"rng_before": {
+				"variance": "550117360941847761",
+				"critical": "3831593643580676004",
+				"evasion": "-9199442953321475796",
+				"affliction": "-2054025606509252752"
+			},
+			"rng_after": {
+				"variance": "-2486058083475699167",
+				"critical": "-7237321229520445260",
+				"evasion": "8536650668902622268",
+				"affliction": "3099470140209014656"
+			}
+		}
+	],
+	"checks": 40087,
+	"failures": 0,
+	"presets_sha256": "85098c78aee6caf703ec5bb7c33707d0b964355f813f952a1a1109fab13171b8",
+	"presets_unchanged": true
+}

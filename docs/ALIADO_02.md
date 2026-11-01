@@ -4,6 +4,8 @@
 
 ## Direção confirmada
 
+**D116 (01/11/2026):** Aliados #1 e #2 normalmente não podem usar magias. Condições/itens especiais para isso pertencem a uma versão futura e não foram definidos. MAG/MP das fichas permanecem; MP pode custear técnicas físicas especiais. Estudos anteriores de magia ofensiva com esses presets eram comparações hipotéticas do laboratório.
+
 Segundo aliado com arco composto e conjunto de couro. Priorizar críticos, maior INI e esquiva, com menor proteção física e resistência ao ser atingido em comparação com o Aliado #1. D82 refina a direção e D83 atualiza o multiplicador: CRI/EVA próprios levemente maiores, HP menor, MP levemente maior; arco com chance de crítico maior e multiplicador **1,6×**. Valores próprios e percentual da arma foram adotados para este preset de teste em D84. Nenhuma classe, raça, identidade, técnica, munição ou regra de alcance foi definida. INI não cresce naturalmente com nível; D95 permite crescimento muito lento da EVA e aumentos permanentes de+1 por itens raros. Intervalo e progressão dos demais atributos ainda serão desenhados.
 
 ## Atributos próprios do preset — nível 1

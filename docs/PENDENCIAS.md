@@ -2,6 +2,22 @@
 
 Esta lista impede que o Codex transforme lacunas em decisões arbitrárias.
 
+**D125 — laboratório de danos V1 finalizado e aceito pelo usuário em 01/11/2026.** Não há pendência impeditiva desse fechamento. As avaliações de integração, ATB, recursos entre encontros e progressão abaixo são trabalho futuro; a referência atual permanece. Ver `DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md`.
+
+- **D112/D113/P13/P14/D115 — mago implementado:** ficha e seis estágios de cajados/vestes cadastrados no laboratório, com INI7 e DEF F/DEF D naturais16. Composição mágica e persistência disponíveis; três presets anteriores preservados.21 suítes e bateria de120 mil tentativas concluídas sem falhas. Nenhuma pendência do cadastro solicitado; avaliar balanceamento, ritmo em batalha e futuros atributos/inimigos para os estágios superiores. Ver `ALIADO_03.md`.
+
+- **D114 — proteção física do mago:** fragilidade intencional, compensada por apoio dos aliados e buffs de magia/itens. Definir posteriormente efeitos, valores, custos, duração, acúmulo e formas de apoio. Direção confirmada, sem incluir sistemas/ações de proteção novos na entrega atual do preset.
+
+- **D116 — acesso a magia:** #1/#2 normalmente não usam magias. Possíveis condições/itens especiais permanecem para versão futura, sem definir exceções agora. Não alterar MAG/MP das fichas por essa restrição. Estudo Monstro #1 → três aliados concluído com 60 mil tentativas, sem mudanças de atributos/equipamentos; balanceamento e efeitos em batalha ainda dependem de avaliação.
+
+- **D117/P15/D118 — concluído:** balanceamento de aflições mantido para os testes; crítico físico dos seis cajados atualizado para1,5×, com chance adicional0p.p./CRI própria3. Preset pessoal revisão2 reaberto; demais presets preservados. Sem pendência da correção solicitada; magias/aflições inalteradas.
+
+- **P16/D120/D121/D122 — concluído no laboratório:** Monstro #2 — Distância criado com HP40/INI9/EVA5/DEF F32/DEF D50/ATQ D24 e demais atributos de referência. Somente físico à distância; persistência/repertório validados.23 suítes aprovadas;110 mil tentativas e130 mil sequências nos dois sentidos/controle, zero divergências. Nenhuma pendência do cadastro/bateria pedidos. Avaliar ATB/INI para confirmar patamar; decidir posteriormente se a sobrevivência ao arco deve diferenciar mais (3,69→3,83 tentativas atuais), sem alterar atributos automaticamente. Ver `MONSTRO_02.md`.
+
+- **D119 — bateria física concluída:** Monstro #1 contra três aliados, contato/distância, 30 mil golpes e 60 mil sequências de sobrevivência, sem alterar fichas/fórmulas. Mago normalmente cai em três acertos normais (95,36%); dois em 4,64%; crítico pode derrubá-lo com HP cheio (21/5.000 sequências na primeira tentativa). Referência em `../artifacts/monstro-fisico-tres-aliados-2026-11-01/analise.md`. Resultados aceitos como referência da V1 por D125; qualquer revisão futura da tolerância a esse risco exige nova decisão, sem ajuste automático.
+
+- **D123/D124 — fechamento V1 concluído no laboratório:** magia ofensiva básica1,5×/7MP, sem EVA/crítico; fórmula proporcional, variação±10%, arredondamento final e mínimo1 adotados. Rótulos/registro atualizados;25 suítes/35.706 verificações e teste gráfico12 aprovados. Nenhuma pendência desse fechamento. Integração, ATB, progressão, itens/buffs e efeitos contínuos são etapas futuras. Fonte: `DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md`.
+
 ## Situação após autorização do laboratório
 
 - Engine e linguagem — **Godot + GDScript confirmados**.

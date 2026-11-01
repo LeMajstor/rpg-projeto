@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+m1-incoming-ally_1 concluído: cinco sementes, 5.000 tentativas
+m1-physical-ally_1 concluído: cinco sementes, 5.000 tentativas
+m1-incoming-ally_2 concluído: cinco sementes, 5.000 tentativas
+m1-physical-ally_2 concluído: cinco sementes, 5.000 tentativas
+m1-incoming-ally_3 concluído: cinco sementes, 5.000 tentativas
+m1-physical-ally_3 concluído: cinco sementes, 5.000 tentativas
+m1-mage-magic_skill concluído: cinco sementes, 5.000 tentativas
+m1-mage-poison concluído: cinco sementes, 5.000 tentativas
+m1-mage-slow concluído: cinco sementes, 5.000 tentativas
+m1-mage-confusion concluído: cinco sementes, 5.000 tentativas
+m1-mage-fear concluído: cinco sementes, 5.000 tentativas
+m2-incoming-ally_1 concluído: cinco sementes, 5.000 tentativas
+m2-physical-ally_1 concluído: cinco sementes, 5.000 tentativas
+m2-incoming-ally_2 concluído: cinco sementes, 5.000 tentativas
+m2-physical-ally_2 concluído: cinco sementes, 5.000 tentativas
+m2-incoming-ally_3 concluído: cinco sementes, 5.000 tentativas
+m2-physical-ally_3 concluído: cinco sementes, 5.000 tentativas
+m2-mage-magic_skill concluído: cinco sementes, 5.000 tentativas
+m2-mage-poison concluído: cinco sementes, 5.000 tentativas
+m2-mage-slow concluído: cinco sementes, 5.000 tentativas
+m2-mage-confusion concluído: cinco sementes, 5.000 tentativas
+m2-mage-fear concluído: cinco sementes, 5.000 tentativas
+BATERIA MONSTRO #2/REFERÊNCIA: 110000 tentativas; 130000 sequências; 1422397 verificações, 0 falhas

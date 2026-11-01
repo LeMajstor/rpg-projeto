@@ -1,0 +1,385 @@
+{
+  "checks": 768516,
+  "failures": 0,
+  "shot_count": 30000,
+  "survival_trial_count": 60000,
+  "rows": [
+    {
+      "character_id": "ally_1",
+      "target": "Aliado #1",
+      "mode": "melee",
+      "hp": 40.0,
+      "defense": 55,
+      "evasion_percent": 5,
+      "normal_damage_bounds": [
+        7,
+        8
+      ],
+      "critical_damage_bounds": [
+        13,
+        16
+      ],
+      "normal_damage_mean_observed": 7.361231569817867,
+      "critical_damage_mean_observed": 14.624113475177305,
+      "normal_damage_bounds_observed": [
+        7,
+        8
+      ],
+      "critical_damage_bounds_observed": [
+        13,
+        16
+      ],
+      "damage_mean_observed": 7.2024,
+      "damage_mean_theoretical": 7.194926432291667,
+      "evasion_count": 247,
+      "critical_count": 141,
+      "normal_count": 4612,
+      "normal_hits_mean_observed": 5.9938,
+      "normal_hits_mean_theoretical": 5.994219748781292,
+      "normal_hits_histogram": {
+        "6": 4969,
+        "5": 31
+      },
+      "normal_hits_distribution_theoretical": {
+        "5": 0.005780251218708351,
+        "6": 0.9942197487812918
+      },
+      "mixed_attempts_mean_observed": 6.1584,
+      "mixed_attempts_mean_theoretical": 6.15537170387344,
+      "mixed_hits_mean_observed": 5.854,
+      "mixed_hits_mean_theoretical": 5.84760311867986,
+      "mixed_attempt_histogram": {
+        "6": 3321,
+        "7": 965,
+        "5": 513,
+        "8": 151,
+        "9": 24,
+        "4": 23,
+        "10": 3
+      },
+      "mixed_hit_histogram": {
+        "6": 4299,
+        "5": 672,
+        "4": 29
+      },
+      "one_attempt_knockouts": 0,
+      "one_hit_knockouts": 0,
+      "one_attempt_knockout_chance_theoretical": 0
+    },
+    {
+      "character_id": "ally_2",
+      "target": "Aliado #2",
+      "mode": "melee",
+      "hp": 36.0,
+      "defense": 35,
+      "evasion_percent": 12,
+      "normal_damage_bounds": [
+        9,
+        11
+      ],
+      "critical_damage_bounds": [
+        18,
+        21
+      ],
+      "normal_damage_mean_observed": 9.746663544837274,
+      "critical_damage_mean_observed": 19.568181818181817,
+      "normal_damage_bounds_observed": [
+        9,
+        11
+      ],
+      "critical_damage_bounds_observed": [
+        18,
+        21
+      ],
+      "damage_mean_observed": 8.8422,
+      "damage_mean_theoretical": 8.843843402777779,
+      "evasion_count": 597,
+      "critical_count": 132,
+      "normal_count": 4271,
+      "normal_hits_mean_observed": 4.0,
+      "normal_hits_mean_theoretical": 4.000000000000001,
+      "normal_hits_histogram": {
+        "4": 5000
+      },
+      "normal_hits_distribution_theoretical": {
+        "4": 1.0000000000000002
+      },
+      "mixed_attempts_mean_observed": 4.4418,
+      "mixed_attempts_mean_theoretical": 4.445196590909018,
+      "mixed_hits_mean_observed": 3.911,
+      "mixed_hits_mean_theoretical": 3.911773,
+      "mixed_attempt_histogram": {
+        "5": 1408,
+        "4": 2825,
+        "3": 289,
+        "6": 357,
+        "7": 97,
+        "11": 1,
+        "8": 17,
+        "2": 3,
+        "9": 2,
+        "10": 1
+      },
+      "mixed_hit_histogram": {
+        "4": 4561,
+        "3": 433,
+        "2": 6
+      },
+      "one_attempt_knockouts": 0,
+      "one_hit_knockouts": 0,
+      "one_attempt_knockout_chance_theoretical": 0
+    },
+    {
+      "character_id": "ally_3",
+      "target": "Aliado #3 — Mago",
+      "mode": "melee",
+      "hp": 30.0,
+      "defense": 18,
+      "evasion_percent": 3,
+      "normal_damage_bounds": [
+        12,
+        15
+      ],
+      "critical_damage_bounds": [
+        25,
+        30
+      ],
+      "normal_damage_mean_observed": 13.721798134011875,
+      "critical_damage_mean_observed": 27.555555555555557,
+      "normal_damage_bounds_observed": [
+        12,
+        15
+      ],
+      "critical_damage_bounds_observed": [
+        25,
+        30
+      ],
+      "damage_mean_observed": 13.736,
+      "damage_mean_theoretical": 13.721028906249998,
+      "evasion_count": 140,
+      "critical_count": 144,
+      "normal_count": 4716,
+      "normal_hits_mean_observed": 2.9536,
+      "normal_hits_mean_theoretical": 2.9543999565972223,
+      "normal_hits_histogram": {
+        "3": 4768,
+        "2": 232
+      },
+      "normal_hits_distribution_theoretical": {
+        "2": 0.0456000434027777,
+        "3": 0.9543999565972223
+      },
+      "mixed_attempts_mean_observed": 2.9768,
+      "mixed_attempts_mean_theoretical": 2.9838381898580493,
+      "mixed_hits_mean_observed": 2.8918,
+      "mixed_hits_mean_theoretical": 2.8943230441623258,
+      "mixed_attempt_histogram": {
+        "3": 4125,
+        "4": 362,
+        "2": 474,
+        "1": 21,
+        "5": 16,
+        "6": 2
+      },
+      "mixed_hit_histogram": {
+        "3": 4480,
+        "2": 499,
+        "1": 21
+      },
+      "one_attempt_knockouts": 21,
+      "one_hit_knockouts": 21,
+      "one_attempt_knockout_chance_theoretical": 0.003561718749999995
+    },
+    {
+      "character_id": "ally_1",
+      "target": "Aliado #1",
+      "mode": "ranged",
+      "hp": 40.0,
+      "defense": 50,
+      "evasion_percent": 5,
+      "normal_damage_bounds": [
+        7,
+        9
+      ],
+      "critical_damage_bounds": [
+        14,
+        17
+      ],
+      "normal_damage_mean_observed": 7.717476149176062,
+      "critical_damage_mean_observed": 15.609929078014185,
+      "normal_damage_bounds_observed": [
+        7,
+        9
+      ],
+      "critical_damage_bounds_observed": [
+        14,
+        17
+      ],
+      "damage_mean_observed": 7.5588,
+      "damage_mean_theoretical": 7.5596332465277785,
+      "evasion_count": 247,
+      "critical_count": 141,
+      "normal_count": 4612,
+      "normal_hits_mean_observed": 5.7684,
+      "normal_hits_mean_theoretical": 5.775188279728772,
+      "normal_hits_histogram": {
+        "6": 3842,
+        "5": 1158
+      },
+      "normal_hits_distribution_theoretical": {
+        "5": 0.22481172027122678,
+        "6": 0.775188279728773
+      },
+      "mixed_attempts_mean_observed": 5.9176,
+      "mixed_attempts_mean_theoretical": 5.923888643862803,
+      "mixed_hits_mean_observed": 5.628,
+      "mixed_hits_mean_theoretical": 5.627694211669736,
+      "mixed_attempt_histogram": {
+        "6": 2741,
+        "5": 1189,
+        "7": 771,
+        "8": 132,
+        "4": 149,
+        "9": 11,
+        "10": 4,
+        "3": 3
+      },
+      "mixed_hit_histogram": {
+        "6": 3325,
+        "5": 1494,
+        "4": 177,
+        "3": 4
+      },
+      "one_attempt_knockouts": 0,
+      "one_hit_knockouts": 0,
+      "one_attempt_knockout_chance_theoretical": 0
+    },
+    {
+      "character_id": "ally_2",
+      "target": "Aliado #2",
+      "mode": "ranged",
+      "hp": 36.0,
+      "defense": 40,
+      "evasion_percent": 12,
+      "normal_damage_bounds": [
+        8,
+        10
+      ],
+      "critical_damage_bounds": [
+        16,
+        20
+      ],
+      "normal_damage_mean_observed": 8.994146569889956,
+      "critical_damage_mean_observed": 18.075757575757574,
+      "normal_damage_bounds_observed": [
+        8,
+        10
+      ],
+      "critical_damage_bounds_observed": [
+        16,
+        20
+      ],
+      "damage_mean_observed": 8.16,
+      "damage_mean_theoretical": 8.157599999999999,
+      "evasion_count": 597,
+      "critical_count": 132,
+      "normal_count": 4271,
+      "normal_hits_mean_observed": 4.3576,
+      "normal_hits_mean_theoretical": 4.353604633440025,
+      "normal_hits_histogram": {
+        "5": 1788,
+        "4": 3212
+      },
+      "normal_hits_distribution_theoretical": {
+        "4": 0.6463953665599758,
+        "5": 0.35360463344002435
+      },
+      "mixed_attempts_mean_observed": 4.8252,
+      "mixed_attempts_mean_theoretical": 4.83698704131493,
+      "mixed_hits_mean_observed": 4.251,
+      "mixed_hits_mean_theoretical": 4.256548596357261,
+      "mixed_attempt_histogram": {
+        "7": 236,
+        "5": 1765,
+        "4": 1976,
+        "3": 193,
+        "6": 746,
+        "8": 62,
+        "9": 19,
+        "10": 1,
+        "11": 1,
+        "2": 1
+      },
+      "mixed_hit_histogram": {
+        "5": 1546,
+        "4": 3165,
+        "3": 287,
+        "2": 2
+      },
+      "one_attempt_knockouts": 0,
+      "one_hit_knockouts": 0,
+      "one_attempt_knockout_chance_theoretical": 0
+    },
+    {
+      "character_id": "ally_3",
+      "target": "Aliado #3 — Mago",
+      "mode": "ranged",
+      "hp": 30.0,
+      "defense": 18,
+      "evasion_percent": 3,
+      "normal_damage_bounds": [
+        12,
+        15
+      ],
+      "critical_damage_bounds": [
+        25,
+        30
+      ],
+      "normal_damage_mean_observed": 13.721798134011875,
+      "critical_damage_mean_observed": 27.555555555555557,
+      "normal_damage_bounds_observed": [
+        12,
+        15
+      ],
+      "critical_damage_bounds_observed": [
+        25,
+        30
+      ],
+      "damage_mean_observed": 13.736,
+      "damage_mean_theoretical": 13.721028906249998,
+      "evasion_count": 140,
+      "critical_count": 144,
+      "normal_count": 4716,
+      "normal_hits_mean_observed": 2.9536,
+      "normal_hits_mean_theoretical": 2.9543999565972223,
+      "normal_hits_histogram": {
+        "3": 4768,
+        "2": 232
+      },
+      "normal_hits_distribution_theoretical": {
+        "2": 0.0456000434027777,
+        "3": 0.9543999565972223
+      },
+      "mixed_attempts_mean_observed": 2.9768,
+      "mixed_attempts_mean_theoretical": 2.9838381898580493,
+      "mixed_hits_mean_observed": 2.8918,
+      "mixed_hits_mean_theoretical": 2.8943230441623258,
+      "mixed_attempt_histogram": {
+        "3": 4125,
+        "4": 362,
+        "2": 474,
+        "1": 21,
+        "5": 16,
+        "6": 2
+      },
+      "mixed_hit_histogram": {
+        "3": 4480,
+        "2": 499,
+        "1": 21
+      },
+      "one_attempt_knockouts": 21,
+      "one_hit_knockouts": 21,
+      "one_attempt_knockout_chance_theoretical": 0.003561718749999995
+    }
+  ]
+}

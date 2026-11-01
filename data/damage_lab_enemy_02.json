@@ -1,0 +1,24 @@
+{
+  "name": "Monstro #2 — Distância",
+  "side": "enemy",
+  "actor": {
+    "id": "enemy_ranged",
+    "name": "Monstro #2 — Distância",
+    "side": "enemy",
+    "color": "e7c56a",
+    "hp": 40,
+    "mp": 8,
+    "ini": 9,
+    "physical_attack": 24,
+    "ranged_attack": 24,
+    "physical_defense": 32,
+    "ranged_defense": 50,
+    "magic_power": 25,
+    "magic_defense": 28,
+    "intelligence": 15,
+    "vigor": 20,
+    "critical_base": 3,
+    "evasion_base": 5,
+    "unarmed_critical_multiplier": 2.0
+  }
+}

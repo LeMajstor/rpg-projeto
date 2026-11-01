@@ -1,4 +1,5 @@
 extends RefCounted
+const ActionPolicy = preload("res://scripts/damage/damage_action_policy.gd")
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
 const Equipment = preload("res://scripts/damage/damage_equipment.gd")
 const Presets = preload("res://scripts/damage/damage_presets.gd")
@@ -70,10 +71,28 @@ func choose_profile(role: String, id: String) -> void:
 					attacker = profile.duplicate(true)
 				break
 
+	_normalize_action()
+
 func swap_roles() -> void:
 	var previous = attacker
 	attacker = target
 	target = previous
+	_normalize_action()
+
+func _normalize_action() -> void:
+	var rules = ActionPolicy.policy(attacker)
+	if rules.is_empty(): return
+	if not ActionPolicy.allows(attacker,action):
+		action = definition("actions",rules["action_ids"][0])
+	action["physical_mode"] = rules["physical_mode"]
+
+func choose_action(id: String) -> String:
+	var selected = definition("actions",id)
+	if selected.is_empty() or not ActionPolicy.allows(attacker,selected):
+		return "Este inimigo possui somente ataque físico básico à distância."
+	action = selected
+	_normalize_action()
+	return ""
 
 func ally_role() -> String:
 	return "attacker" if attacker["side"] == "ally" else "target"
@@ -122,6 +141,7 @@ func apply_preset(preset: Dictionary) -> String:
 		loadouts[Equipment.character_id(ally())] = preset["equipment"].duplicate(true)
 	selected_presets[side] = {"id": preset["id"], "name": preset["name"], "revision": int(preset.get("revision", 1)), "source": preset.get("source", "custom")}
 	preset_baselines[side] = preset_payload(side)
+	_normalize_action()
 	return ""
 
 func preset_modified(side: String) -> bool:
@@ -151,8 +171,12 @@ func configuration() -> Dictionary:
 		config["weapon"] = weapon.duplicate(true)
 	if config["action"]["damage_type"] == "magical":
 		config["action"]["critical_allowed"] = false
+		if not Calculator.is_affliction(config):
+			config["action"]["evasion_allowed"] = false
 	config["critical_source"] = Calculator.critical_source(config)
 	config["damage_stats"] = Calculator.damage_stats(config)
+	config["attacker_policy"] = ActionPolicy.policy(attacker)
+	config["ruleset"] = data.get("ruleset",{}).duplicate(true)
 	config["presets"] = {}
 	for side in selected_presets:
 		var role = ally_role() if side == "ally" else ("target" if ally_role() == "attacker" else "attacker")

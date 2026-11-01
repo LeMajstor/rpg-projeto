@@ -1,5 +1,6 @@
 extends RefCounted
 ## Fórmula experimental pura, independente do BattleModel e da renderização.
+const ActionPolicy = preload("res://scripts/damage/damage_action_policy.gd")
 const Equipment = preload("res://scripts/damage/damage_equipment.gd")
 const ALLOWED_COUNTS = [1, 10, 100, 1000]
 const STATS = ["hp", "mp", "ini", "physical_attack", "physical_defense", "ranged_attack", "ranged_defense", "magic_power", "magic_defense", "intelligence", "vigor", "critical_base", "evasion_base"]
@@ -58,6 +59,9 @@ static func validate(config: Dictionary) -> String:
 		for category in ["weapon", "armor"]:
 			if not equipment.get(category) is Dictionary or not Equipment.can_equip(config[role], equipment[category], category):
 				return "Equipamento exclusivo ou inválido para este personagem."
+		for category in ["weapon", "armor"]:
+			if not Equipment.valid_magic_bonus(equipment[category], category):
+				return "Bônus mágico de equipamento inválido."
 		if equipment["weapon"].get("attack_mode") != Equipment.attack_mode(equipment["weapon"]):
 			return "Modalidade da arma inválida."
 		var eva_bonus = equipment["armor"].get("evasion_bonus", 0)
@@ -80,6 +84,8 @@ static func validate(config: Dictionary) -> String:
 			return "Magia de aflição inválida: somente aplicação, sem dano direto."
 	if action.get("physical_mode", "weapon") not in ["weapon", "melee", "ranged"]:
 		return "Modalidade física inválida."
+	if not ActionPolicy.allows(config["attacker"],action):
+		return "Este inimigo possui somente ataque físico básico à distância."
 	if config["attacker"]["mp"] < action["mp_cost"]:
 		return "MP insuficiente para esta ação."
 	if config["attacker"]["side"] == "ally":
@@ -124,7 +130,7 @@ static func damage_stats(config: Dictionary) -> Dictionary:
 		return {"mode": "magical", "attack_stat": "magic_power", "defense_stat": "magic_defense", "attack_label": "MAG", "defense_label": "DEF M"}
 	var mode: String = config["action"].get("physical_mode", "weapon")
 	if mode == "weapon":
-		mode = Equipment.attack_mode(config.get("weapon", {})) if config["attacker"]["side"] == "ally" else "melee"
+		mode = Equipment.attack_mode(config.get("weapon", {})) if config["attacker"]["side"] == "ally" else ActionPolicy.default_physical_mode(config["attacker"])
 	return {"mode": mode, "attack_stat": "ranged_attack" if mode == "ranged" else "physical_attack", "defense_stat": "ranged_defense" if mode == "ranged" else "physical_defense", "attack_label": "ATQ D" if mode == "ranged" else "ATQ F", "defense_label": "DEF D" if mode == "ranged" else "DEF F"}
 
 static func base_damage(config: Dictionary) -> Dictionary:
@@ -152,6 +158,8 @@ static func critical_chance(config: Dictionary) -> float:
 	return clampf(float(config["attacker"]["critical_base"]) * settings["crit_per_point"] + critical_source(config)["chance_bonus"] + settings["item_bonus"] + settings["buff_bonus"], 0.0, 100.0)
 
 static func evasion_chance(config: Dictionary) -> float:
+	if config["action"].get("damage_type") == "magical" and not is_affliction(config):
+		return 0.0
 	return float(config["target"]["evasion_base"]) if config["action"].get("evasion_allowed", false) else 0.0
 
 static func sample(config: Dictionary, variation_roll: float, critical_roll: float, evasion_roll: float = 1.0, affliction_roll: float = 1.0) -> Dictionary:

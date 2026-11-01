@@ -1,0 +1,27 @@
+{
+  "id": "damage_lab_v1",
+  "version": 1,
+  "status": "approved_initial",
+  "decision": "D124",
+  "date": "2026-11-01",
+  "scope": "damage_attributes_equipment_lab",
+  "suites": 25,
+  "checks": 35706,
+  "failures": 0,
+  "visual_checks": 12,
+  "presets_unchanged": true,
+  "preset_count": 5,
+  "magic_samples_equal_to_calibration_A": true,
+  "magic": {
+    "power": 1.5,
+    "mp_cost": 7,
+    "evasion_allowed": false,
+    "critical_allowed": false
+  },
+  "files_sha256": {
+    "catalog-v1.json": "d4b7671105137d589f0edefe03ac15a5d776d9a5fd986753272b547b3170379a",
+    "presets-v1.json": "85098c78aee6caf703ec5bb7c33707d0b964355f813f952a1a1109fab13171b8",
+    "magia-ofensiva-v1-1000.json": "57a745f305f32c908652a3b5fc0e2448d5eb38d5169c9ba67cc17d860e3cf41c",
+    "test-results.json": "d1ce76629aca2319281b1d68dcf5dc5acfee5693d1acdf00f2ae653bb5f6c93e"
+  }
+}

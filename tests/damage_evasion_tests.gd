@@ -40,10 +40,10 @@ func _run() -> void:
 	model.settings["buff_bonus"] = 100
 	expect(Calculator.evasion_chance(model.configuration()) == 0, "Modificadores existentes de CRI não alteram EVA ou permissão da magia")
 	model.action["evasion_allowed"] = true
-	expect(Calculator.evasion_chance(model.configuration()) == 100, "Bônus de crítico não são somados à EVA do alvo")
+	expect(Calculator.evasion_chance(model.configuration()) == 0, "D124: magia direta ignora EVA mesmo com permissão antiga ligada")
 	model.settings["item_bonus"] = 0
 	model.settings["buff_bonus"] = 0
-	expect(model.run(1)["samples"][0]["evaded"], "Permissão em dados permite experimentar esquiva na magia")
+	expect(not model.run(1)["samples"][0]["evaded"], "D124: parâmetro antigo não reativa esquiva na magia de dano")
 	model.action["evasion_allowed"] = false
 	expect(model.run(1)["evasion_chance"] == 0, "Desligar permissão zera chance efetiva, preservando EVA própria")
 	model.swap_roles()

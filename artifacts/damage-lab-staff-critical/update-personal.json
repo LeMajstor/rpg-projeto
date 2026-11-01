@@ -1,0 +1,11 @@
+{
+  "status": "updated",
+  "id": "user_mage_1793540837711411000",
+  "old_multiplier": 2.0,
+  "new_multiplier": 1.5,
+  "revision": 2,
+  "only_multiplier_and_revision_changed": true,
+  "backup": "artifacts/damage-lab-staff-critical/backups/presets-before-1384619f4781.json",
+  "before_sha256": "1384619f47816019b00dc17e354ddd284482b1e5d92201c9f6c44e2d568439c4",
+  "after_sha256": "dbad5939bfa80eaaae18ee4278f6b17e0827dbc2b5981aa7ce3a9fb9f49daae7"
+}

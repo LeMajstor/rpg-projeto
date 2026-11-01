@@ -1,0 +1,12 @@
+{
+  "previous_four_presets_unchanged": true,
+  "new_preset_revision": 1,
+  "new_preset_type": "enemy_ranged",
+  "ranged_only": true,
+  "suites": 23,
+  "regression_checks": 34675,
+  "failures": 0,
+  "attempts": 110000,
+  "survival_trials": 130000,
+  "audit_checks": 1996484
+}

@@ -96,3 +96,22 @@ D86 no laboratório de danos: catálogo sem itens `none`, com permissões para a
 D92: escalas do segundo aliado configuradas somente no catálogo do laboratório. IDs iniciais `compound_bow`/`leather_set` preservados; resolução do nome atual por categoria/ID em `damage_equipment.gd` usada pela atualização em cópia de `damage_presets.gd`. Não substituir atributos/valores de equipamento salvos pelos defaults ao atualizar nomes. Seletores existentes por metadado ID e política canônica cobrem os novos estágios. Histórico anterior e biblioteca em disco não são regravados durante a leitura.
 
 D94: `ranged_attack`/`ranged_defense` entram em fichas, limites e composição. `attack_mode` canônico na arma determina onde aplicar `attack_bonus`; `ranged_defense_bonus` da proteção é independente de `defense_bonus`. `Calculator.damage_stats` resolve a fonte por ação (`physical_mode: weapon/melee/ranged`) e dano mágico, sem depender do personagem. Legados #1 usam ATQ D10 configurado no personagem; arqueiro e monstro copiam ATQ F próprio se ATQ D faltar; DEF D ausente copia DEF F própria conforme escolha do usuário. Campos de equipamento ausentes vêm do catálogo, sem sobrescrever valores presentes. Fonte é capturada em snapshot/amostra e JSONv4, sem RNG adicional. Biblioteca pessoal continua versão1 com compatibilidade aditiva de leitura; exportações anteriores não são regravadas.
+
+
+## Mago e composição mágica de equipamentos — D115, 01/11/2026
+
+MAG/DEF M próprias somam `weapon.magic_attack_bonus`/`armor.magic_defense_bonus`; ausência significa zero. Apenas famílias com campo no catálogo aceitam bônus mágico não nulo. Validação inteiro0..999; efetivo limitado999, mantendo soma bruta. Campos aditivos no preset v1 e JSONv5, sem mudar fórmulas/RNG. Interface mostra composição e permite edição em itens compatíveis. Cadastro explícito pelo instalador Python, com backup, checagem de concorrência antes da gravação atômica e preservação dos registros existentes; inicialização não reinstala. Identidade `ally_3` reutiliza modelo manual de aliado, com apresentação geométrica violeta provisória. Preset/escala isolados do combate integrado;21 suítes e verificação gráfica aprovadas.
+
+
+## Política ofensiva do inimigo de distância — D122, 01/11/2026
+
+Novo tipo `enemy_ranged` em `profiles` contém `offensive_policy` declarativa (`action_ids: [basic]`, `physical_mode: ranged`). `damage_action_policy.gd` resolve pelo ID canônico e ignora políticas forjadas na cópia. Tipos sem política mantêm comportamento genérico anterior. O ID do tipo já participa da validação de presets e da identidade imutável ao atualizar; não exige campos mágicos zero nem remoção de atributos.
+
+Modelo normaliza a ação ao carregar/mudar atacante e não consome RNG nem reescreve histórico. Calculadora recusa ação/modo proibidos; padrão `weapon` resolve modalidade canônica do inimigo. Interface fixa distância, desabilita ações e restaura seleção visual se um sinal inválido for emitido. Restrição não afeta o inimigo como alvo. Snapshot/JSONv5 recebem campo aditivo `attacker_policy`; fórmulas/RNG preservados. Receita não é importada automaticamente na inicialização. Preset criado explicitamente com backup e gravação atômica. Sem integração ao combate da exploração ou política nova para os aliados legados.
+
+
+## Referência V1 — D124, 01/11/2026
+
+Fórmula/potência/custo adotados explicitamente: proporcional_v1, variação±10%, arredondamento final, mínimo1; magia direta1,5×/7MP sem crítico/EVA. `Calculator.evasion_chance` ignora EVA em magia não aflitiva; modelo também normaliza a flag e UI bloqueia o controle. Isso substitui o antigo override experimental somente para dano mágico direto. Aflições conservam elegibilidade por ação.
+
+`data/damage_lab.json.ruleset` identifica `damage_lab_v1`/versão1/`approved_initial`/D124/escopo laboratorial. Campos aditivos nas ações distinguem `v1_reference` e `experimental`; preservam IDs. Configuração copia referência ao snapshot e JSONv5 registra origem/status e valores efetivos. A referência identifica os padrões aprovados; ajustes na ferramenta não aprovam automaticamente novos parâmetros. Histórico e cinco presets preservados.25 suítes e inspeção gráfica aprovadas; fonte consolidada em `DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md`.

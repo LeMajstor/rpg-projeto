@@ -1,6 +1,88 @@
 # Validação da entrega
 
 
+## Fechamento da referência V1 — D124, 01/11/2026
+
+**25 suítes headless aprovadas,35.706 verificações, zero falhas.** Incluem `damage_v1_reference_tests.gd` (1020) e `damage_v1_reference_ui_smoke.gd` (11). Verificação gráfica Compatibility:12 verificações, uma captura inspecionada, zero falhas. Resultado por suíte e captura em `artifacts/damage-v1-final/`.
+
+Confirma magia ofensiva básica1,5×/7MP, extremos32–39 com MAG40/DEF M28, bloqueio de crítico forçado/EVA100/flags antigas, normalização do snapshot, custo por amostra e MP insuficiente sem consumir sorteios/histórico. Confirma mínimo1 com ofensiva efetiva0 e arredondamento2,5→3; físico e aflição preservam suas regras de EVA, inclusive custo4MP. Referência V1/status de ação presentes em snapshot/JSON, técnica genérica explicitamente experimento. Suítes anteriores verificam atributos, equipamentos/limites, tipos, persistência e históricos.
+
+Calibração prévia das alternativas A/B:20 mil tentativas,40.087 verificações Godot e8.020 na conferência Python, zero divergências; dados em `artifacts/refino-magia-v1-2026-11-01/`. A escolhida é A, sem mudar seus números em relação ao teste anterior; B não foi adotada. Biblioteca pessoal de cinco presets preservada integralmente. Relatórios históricos não regravados.
+
+Snapshot da referência/hashes em `artifacts/damage-v1-final/reference-manifest.json`. [Regras finais, limites e comandos](DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md). Integração, ATB temporal, progressão e efeitos contínuos não foram incluídos nesta validação.
+
+
+## Monstro #2 — Distância e bateria bidirecional — D122, 01/11/2026
+
+**23 suítes headless aprovadas,34.675 verificações, zero falhas.** Novas suítes: `damage_enemy_02_tests.gd` (51) e `damage_enemy_02_ui_smoke.gd` (17). Verificação gráfica Compatibility:19 verificações, duas capturas inspecionadas. A última passagem também confirma retorno visual à ação válida após tentativa de sinal proibido. Evidências em `artifacts/damage-lab-enemy02/test-results.json` e `visual/`.
+
+Cobertura: atributos, tipo canônico, seleção apenas do básico físico de distância, recusa de contato/técnica/magia, defesa correta, comportamento como alvo, cópia/renomeação, identidade ao atualizar, persistência, inversão, RNG/histórico e dados/exportação. Preset pessoal salvo uma vez, biblioteca reaberta com cinco presets e quatro registros anteriores integralmente preservados; backup e recibo em `artifacts/damage-lab-enemy02/`.
+
+**110.000 tentativas e130.000 sequências acumuladas**, metade novo inimigo/metade Monstro #1 de controle.22 casos×5 sementes×1.000 tentativas. Inclui ataque básico do inimigo contra cada aliado, três básicos aliados de volta, magia de dano e quatro aflições do mago separadamente. Somente o mago usa magias; novo monstro exclusivamente físico de distância. Sequências param no primeiro0HP, acumulando MP e confirmando suficiência; diagnóstico de normais isolados e mistura crítica/EVA.
+
+Godot: **1.422.397 verificações, zero falhas**. Auditoria Python independente: **1.996.484 verificações, zero divergências**, recalculando cada tentativa/passo e distribuições teóricas. Sem alterações após os testes; biblioteca preservada pelo hash/conteúdo. Relatórios volumosos em `.json.gz`, compactados sem perda; analisador aceita também JSON não compactado. Não houve teste de ATB ou novas magias/efeitos contínuos.
+
+Novo monstro→#1/#2/mago: dano médio7,56/8,16/13,74 e tentativas médias para cair5,92/4,83/2,98. Básicos #1/#2/mago→novo monstro: média17,43/11,86/4,07 e tentativas para vencer2,96/3,83/10,26. Magia de dano:32–39, média35,27, dois usos/14MP. Aplicação de Veneno/Lentidão42,88%, Confusão/Medo45,78%. [Análise completa, condições e comandos](../artifacts/monstro02-bateria-2026-11-01/analise.md).
+
+INI9 é preservada, mas temporalidade/mesmo patamar geral ainda precisam de avaliação no laboratório de batalha. O arco causa menos dano por tentativa que contra Monstro #1, com aumento pequeno de sobrevivência total do inimigo pela contrapartida HP40. Nenhum balanceamento adicional foi aplicado automaticamente.
+
+
+## Dano físico nos três aliados — D119, 01/11/2026
+
+**30.000 golpes isolados e 60.000 sequências acumuladas executados**, zero falhas. Monstro #1, equipamentos iniciais dos três aliados, contato/distância, cinco sementes (421/733/112/2026/31415). Ataque básico 1×/0 MP, variação ±10%, CRI 3%/2×, EVA real. Cada caso: 5.000 golpes, 5.000 sequências sem crítico/esquiva e 5.000 sequências com críticos/esquivas. Override de distância já existente; não cria ação inimiga nova.
+
+Godot: **327.205 verificações**, zero falhas. Auditoria Python independente: **768.516 verificações**, zero divergências. Recalcula cada golpe e cada passo acumulado por fórmula/sorteios, confirma modalidade, dano normal/crítico/esquiva, recursos, encerramento no primeiro 0 HP, histogramas e contagem de amostras usadas/descartadas. Hashes de pools e estados RNG são registrados para reprodução. Sequências usam HP local: nenhum sistema de combate foi alterado. Teoria separada integra variação arredondada e programação dinâmica de sobrevivência.
+
+Mago: normal 12–15/crítico 25–30; média por tentativa 13,736; cai em três normais em 95,36% e dois em 4,64%. Mistura real: 2,9768 tentativas médias. Primeiro ataque letal por crítico em 21/5.000 sequências (0,42%; teoria 0,36%). Contato/distância idênticos no mago pelos atributos iguais e sorteios compartilhados. #1/#2 mantêm resistência maior e diferenças de proteção das famílias.
+
+Biblioteca pessoal preservada integralmente por comparação de conteúdo/hash. Sem cura, buffs, ATB, ações dos aliados ou mudança de fichas. Monstro #2 permanece proposta. [Análise, condições, contagens e reprodução](../artifacts/monstro-fisico-tres-aliados-2026-11-01/analise.md).
+
+
+## Crítico dos cajados — D118, 01/11/2026
+
+**Duas suítes aprovadas, 17.318 verificações, zero falhas:** `damage_mage_tests.gd` com 17.300 e `damage_mage_ui_smoke.gd` com 18. Seis cajados com multiplicador físico 1,5×; chance própria 3% e adicional da arma zero preservadas. Confirma normal 3–4/crítico 5–6 contra Monstro #1, composição de 36 pares, reabertura/salvamento, interface, histórico/JSON e ausência de crítico mágico. Cinco lotes de mil amostras (quatro aflições e magia de dano) reproduzem exatamente os mesmos resultados com multiplicador 2× ou 1,5×. As 16 mil amostras legadas dos aliados anteriores continuam verificadas.
+
+Preset pessoal do mago atualizado com backup e gravação atômica; revisão 1→2. Comparação integral confirmou que só o multiplicador e a revisão mudaram; outros três presets e campos preservados. Biblioteca reaberta validou o multiplicador 1,5×. Evidências e logs em `artifacts/damage-lab-staff-critical/`, incluindo `update-personal.json` e `installed-inventory.json`. Históricos e relatórios de batalhas anteriores não recalculados.
+
+Comandos das duas suítes em [ALIADO_03.md](ALIADO_03.md). Sem alteração de fórmulas, efeitos, MAG/DEF M, equipamentos dos outros aliados ou acesso a magia.
+
+
+## Monstro #1 aplicando aflições nos três aliados — D116, 01/11/2026
+
+**60.000 tentativas executadas**, 12 casos (três alvos × quatro magias) × cinco sementes × 1.000 amostras. Conjurador único Monstro #1, MAG 25; equipamentos iniciais de cada aliado. Sem alteração de atributos, equipamento, biblioteca pessoal ou fórmulas. Mesmos sorteios entre casos; recursos restaurados por amostra, quatro magias de 4 MP com EVA anterior.
+
+| Alvo | Veneno/Lentidão observados | Confusão/Medo observados |
+| --- | ---: | ---: |
+| Aliado #1 | 33,74% | 36,00% |
+| Aliado #2 | 33,32% | 33,32% |
+| Aliado #3 — Mago | 30,56% | 26,94% |
+
+Primária: 36.111 verificações; confirmação nas outras sementes: 96.096; auditoria Python independente: 60.148. **Zero falhas/divergências**, maior desvio observado/teórico 0,29 ponto percentual. Conferência independente de cada amostra primária: fórmula, soma DEF M+VIG/INT, EVA, sorteios compartilhados, consumo MP, HP inalterado e ausência de crítico. Contagens reproduzem o estudo anterior nas mesmas condições. Biblioteca pessoal preservada pelo hash/conteúdo.
+
+[Análise completa, contagens, condições e comandos](../artifacts/monstro-aflicoes-tres-aliados-2026-11-01/analise.md). Estudos anteriores com #1/#2 conjurando são hipotéticos; D116 confirma que normalmente não usam magia, com exceções futuras ainda não definidas. Duração e efeitos das aflições permanecem fora desta bateria.
+
+
+## Preset de mago e escalas mágicas — D115, 01/11/2026
+
+**21 suítes headless aprovadas,34.597 verificações, zero falhas.** Incluem17.291 na nova suíte do mago e17 na interface. Teste gráfico Compatibility separado:20 verificações, três capturas inspecionadas, zero falhas. Logs e resultados individuais em `artifacts/damage-lab-mage/test-results.json`; capturas em `artifacts/damage-lab-mage/visual/`.
+
+Cobertura:36 combinações de estágios, atributos naturais/bônus/totais, limite999/soma bruta, exclusividade por catálogo, entradas inválidas, recarga/persistência, inversão dos lados, crítico físico, aflições, edição por teclado, histórico/JSON e famílias anteriores.16.000 amostras primárias anteriores reproduzidas na precisão decimal dos JSONs (tolerância relativa1e-12), estados RNG textuais idênticos. Famílias físicas mantêm seus dados e permissões; bônus mágicos ausentes valem zero.
+
+Preset pessoal instalado uma vez com backup; reabertura validou quatro presets, preservando integralmente os três registros originais e suas revisões. Evidências em `artifacts/damage-lab-mage/install-personal.json`, `installed-inventory.json` e `backups/`. A cena não importa/reinstala automaticamente.
+
+**Bateria de aflições:120.000 tentativas**,24 casos×5 sementes×1.000. Execução primária:72.225 verificações, zero falhas; confirmação:192.192, zero falhas; auditoria Python:120.492, zero divergências. Mago→monstro:43,78% em Veneno/Lentidão e46,78% em Confusão/Medo; monstro→mago:30,56%/26,94%. Aliados anteriores mantêm resultados. Maior desvio observado/teórico0,33 ponto percentual. [Análise completa e comandos](../artifacts/aflicoes-mago-2026-11-01/analise.md).
+
+Para verificar a implementação:
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --log-file /private/tmp/rpg-mage-test.log --path . --script res://tests/damage_mage_tests.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --log-file /private/tmp/rpg-mage-ui-test.log --path . --script res://tests/damage_mage_ui_smoke.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --audio-driver Dummy --log-file /private/tmp/rpg-mage-visual.log --script res://tests/damage_mage_ui_smoke.gd -- --visual-captures=res://artifacts/damage-lab-mage/visual
+```
+
+Aviso ambiental conhecido de certificados do macOS no headless, sem erro de script nas execuções finais. A bateria restaura recursos por amostra e não mede autonomia MP, ATB, duração/efeitos de aflições ou proteções futuras de D114. Nenhuma migração ao combate integrado.
+
+
 ## Matriz de aflições com DEF M — 29/10/2026
 
 Versão vigente D111 executada entre todos os presets salvos de lados opostos: Aliado #1 e Aliado #2 contra Monstro #1, nos dois sentidos, usando Veneno/Lentidão/Confusão/Medo. **16 casos ×5 sementes ×1.000 tentativas =80.000 tentativas analisadas**. Sementes421/733/112/2026/31415, iguais às do estudo anterior. Dois sentidos aliado↔aliado bloqueados pela regra sem fogo amigo. Nenhum atributo, equipamento, preset ou cálculo do jogo foi alterado pelo estudo.

@@ -1,0 +1,11 @@
+{
+  "suites": 2,
+  "checks": 17318,
+  "failures": 0,
+  "staff_count": 6,
+  "multiplier": 1.5,
+  "chance_percent": 3,
+  "preset_revision": 2,
+  "only_multiplier_and_revision_changed": true,
+  "historical_inventory_preserved": true
+}

@@ -1,4 +1,5 @@
 extends Control
+const ActionPolicy = preload("res://scripts/damage/damage_action_policy.gd")
 const Equipment = preload("res://scripts/damage/damage_equipment.gd")
 const Model = preload("res://scripts/damage/damage_lab_model.gd")
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
@@ -28,6 +29,8 @@ var profile_edits: Dictionary = {}
 var weapon_picker: OptionButton
 var armor_picker: OptionButton
 var weapon_bonus: SpinBox
+var weapon_magic_bonus: SpinBox
+var armor_magic_bonus: SpinBox
 var armor_bonus: SpinBox
 var armor_ranged_bonus: SpinBox
 var armor_evasion_bonus: SpinBox
@@ -120,7 +123,7 @@ func _build_ui() -> void:
 	root.add_theme_constant_override("separation", 10)
 	margin.add_child(root)
 	root.add_child(_label("LABORATÓRIO / DANOS E AFLIÇÕES", 26, Color("e5eef8")))
-	root.add_child(_label("Proporcional v1 · fichas e parâmetros experimentais · independente do combate da exploração", 14, Color("a6bdd3")))
+	root.add_child(_label("Referência V1 · parâmetros editáveis para teste · independente do combate da exploração", 14, Color("a6bdd3")))
 	var toolbar = HBoxContainer.new()
 	toolbar.add_theme_constant_override("separation", 8)
 	root.add_child(toolbar)
@@ -237,6 +240,10 @@ func _build_ui() -> void:
 			else:
 				model.ally()["unarmed_critical_multiplier"] = value
 			_preview())
+	weapon_magic_bonus = _number(weapon_box, "MAG +", 0, 999, 1, func(value):
+		if not syncing and Equipment.supports_magic_bonus(model.weapon, "weapon"):
+			model.weapon["magic_attack_bonus"] = int(value)
+			_preview())
 	var armor_box = _panel(editor, "ARMADURA DO ALIADO · valores de teste")
 	armor_picker = _select(armor_box, model.data["armors"].map(func(entry): return entry["name"]), _choose_armor)
 	armor_bonus = _number(armor_box, "DEF F +", 0, 999, 1, func(value):
@@ -246,6 +253,10 @@ func _build_ui() -> void:
 	armor_ranged_bonus = _number(armor_box, "DEF D +", 0, 999, 1, func(value):
 		if not syncing:
 			model.armor["ranged_defense_bonus"] = int(value)
+			_preview())
+	armor_magic_bonus = _number(armor_box, "DEF M +", 0, 999, 1, func(value):
+		if not syncing and Equipment.supports_magic_bonus(model.armor, "armor"):
+			model.armor["magic_defense_bonus"] = int(value)
 			_preview())
 	armor_evasion_bonus = _number(armor_box, "EVA +", 0, 100, 1, func(value):
 		if not syncing:
@@ -262,7 +273,7 @@ func _build_ui() -> void:
 	var action_row = HBoxContainer.new()
 	action_box.add_child(action_row)
 	# A seleção explícita permite comparar disparos/contato sem trocar personagem ou arma.
-	physical_mode_picker = _select(action_box, ["Físico: da arma (monstro: contato)", "Físico: corpo a corpo", "Físico: distância"], func(index):
+	physical_mode_picker = _select(action_box, ["Físico: padrão do atacante", "Físico: corpo a corpo", "Físico: distância"], func(index):
 		if not syncing:
 			model.action["physical_mode"] = PHYSICAL_MODES[index]
 			_preview())
@@ -519,11 +530,13 @@ func _sync_controls() -> void:
 	seed_edit.value = model.seed_value
 	weapon_chance.value = model.weapon["critical_chance"]
 	weapon_bonus.value = model.weapon["attack_bonus"]
+	weapon_magic_bonus.value = model.weapon.get("magic_attack_bonus", 0)
+	armor_magic_bonus.value = model.armor.get("magic_defense_bonus", 0)
 	armor_bonus.value = model.armor["defense_bonus"]
 	armor_ranged_bonus.value = model.armor["ranged_defense_bonus"]
 	weapon_bonus.get_parent().get_child(0).text = "ATQ D +" if Equipment.attack_mode(model.weapon) == "ranged" else "ATQ F +"
 	physical_mode_picker.select(PHYSICAL_MODES.find(model.action.get("physical_mode", "weapon")))
-	physical_mode_picker.disabled = busy or model.action["damage_type"] == "magical"
+	physical_mode_picker.disabled = busy or model.action["damage_type"] == "magical" or not ActionPolicy.policy(model.attacker).is_empty()
 	armor_evasion_bonus.value = model.armor.get("evasion_bonus", 0)
 	weapon_multiplier.value = model.weapon["critical_multiplier"] if model.weapon.get("equipped", true) else model.ally()["unarmed_critical_multiplier"]
 	enemy_multiplier.value = model.enemy()["unarmed_critical_multiplier"]
@@ -600,13 +613,14 @@ func _choose_preset(index: int, side: String) -> void:
 		_refresh_preset_controls()
 		notice.text = "Este preset foi excluído. A ficha atual foi mantida."
 		return
+	var previous_action = model.action.duplicate(true)
 	error = model.apply_preset(entry)
 	if not error.is_empty():
 		notice.text = error
 		return
 	_sync_controls()
 	_preview()
-	notice.text = "Preset carregado: %s. Ação, parâmetros e sequência preservados." % entry["name"]
+	notice.text = "Preset carregado: %s. %s" % [entry["name"],"Ação ajustada: ataque físico básico à distância." if previous_action != model.action else "Ação, parâmetros e sequência preservados."]
 
 func _request_preset_save(side: String) -> void:
 	if busy or export_dialog.visible or preset_dialog.visible:
@@ -679,7 +693,9 @@ func _delete_preset(side: String) -> void:
 	preset_save_buttons[side].grab_focus()
 
 func _sync_equipment_enabled() -> void:
-	physical_mode_picker.disabled = busy or model.action["damage_type"] == "magical"
+	physical_mode_picker.disabled = busy or model.action["damage_type"] == "magical" or not ActionPolicy.policy(model.attacker).is_empty()
+	weapon_magic_bonus.editable = not busy and Equipment.supports_magic_bonus(model.weapon, "weapon")
+	armor_magic_bonus.editable = not busy and Equipment.supports_magic_bonus(model.armor, "armor")
 	weapon_bonus.editable = not busy and model.weapon.get("equipped", true)
 	weapon_chance.editable = not busy and model.weapon.get("equipped", true)
 	armor_bonus.editable = not busy and model.armor.get("equipped", false)
@@ -688,8 +704,19 @@ func _sync_equipment_enabled() -> void:
 	_sync_action_enabled()
 
 func _sync_action_enabled() -> void:
+	for index in range(model.data["actions"].size()):
+		var permitted = ActionPolicy.allows(model.attacker,model.data["actions"][index])
+		action_picker.set_item_disabled(index,not permitted)
+		var tooltip = "Exemplo experimental; não é uma técnica individual definida para a V1." if model.data["actions"][index].get("reference_status") == "experimental" else "Referência V1; valores efetivos desta execução ficam registrados no histórico. Campos editados não alteram os padrões."
+		action_picker.get_popup().set_item_tooltip(index,tooltip if permitted else "Este inimigo possui somente ataque físico básico à distância.")
+	physical_mode_picker.tooltip_text = "Este inimigo ataca somente à distância." if not ActionPolicy.policy(model.attacker).is_empty() else "Seleciona ATQ F/DEF F ou ATQ D/DEF D; o padrão depende da arma ou do perfil do atacante."
 	var affliction: bool = Calculator.is_affliction(model.configuration())
 	var physical: bool = model.action["damage_type"] == "physical"
+	var direct_magic: bool = model.action["damage_type"] == "magical" and not affliction
+	evasion_allowed.disabled = busy or direct_magic
+	evasion_allowed.tooltip_text = "Magia de dano direto ignora EVA; DEF M reduz o dano." if direct_magic else "EVA é testada antes do dano/aplicação quando a ação permite."
+	if direct_magic:
+		evasion_allowed.set_pressed_no_signal(false)
 	power_edit.editable = not busy and not affliction
 	critical_allowed.disabled = busy or not physical
 	if not physical:
@@ -703,16 +730,16 @@ func _sync_action_enabled() -> void:
 func _refresh_composition(config: Dictionary) -> void:
 	for role in ["attacker", "target"]:
 		var allied: bool = config[role]["side"] == "ally"
-		for stat in ["physical_attack", "physical_defense", "ranged_attack", "ranged_defense"]:
+		for stat in ["physical_attack", "physical_defense", "ranged_attack", "ranged_defense", "magic_power", "magic_defense"]:
 			var caption: Label = profile_edits[role][stat].get_parent().get_child(0)
-			caption.text = {"physical_attack": "ATQ F", "physical_defense": "DEF F", "ranged_attack": "ATQ D", "ranged_defense": "DEF D"}[stat]
+			caption.text = {"physical_attack": "ATQ F", "physical_defense": "DEF F", "ranged_attack": "ATQ D", "ranged_defense": "DEF D", "magic_power": "MAG", "magic_defense": "DEF M"}[stat]
 		if not allied:
 			composition_labels[role].text = "Atributos diretos · sem equipamentos"
 			continue
 		var composition: Dictionary = config["composition"][role]
 		var lines: Array[String] = []
-		for stat in ["physical_attack", "physical_defense", "ranged_attack", "ranged_defense"]:
-			var line = "%s: %d + %d = %d" % [{"physical_attack": "ATQ F", "physical_defense": "DEF F", "ranged_attack": "ATQ D", "ranged_defense": "DEF D"}[stat], composition["base"][stat], composition["bonuses"][stat], composition["raw_total"][stat]]
+		for stat in ["physical_attack", "physical_defense", "ranged_attack", "ranged_defense", "magic_power", "magic_defense"]:
+			var line = "%s: %d + %d = %d" % [{"physical_attack": "ATQ F", "physical_defense": "DEF F", "ranged_attack": "ATQ D", "ranged_defense": "DEF D", "magic_power": "MAG", "magic_defense": "DEF M"}[stat], composition["base"][stat], composition["bonuses"][stat], composition["raw_total"][stat]]
 			if composition["raw_total"][stat] != composition["effective"][stat]:
 				line += " → %d (limite de teste)" % composition["effective"][stat]
 			lines.append(line)
@@ -767,7 +794,12 @@ func _choose_armor(index: int) -> void:
 
 func _choose_action(index: int) -> void:
 	if not syncing:
-		model.action = model.data["actions"][index].duplicate(true)
+		if index < 0 or index >= model.data["actions"].size(): return
+		var error: String = model.choose_action(model.data["actions"][index]["id"])
+		if not error.is_empty():
+			_sync_controls()
+			notice.text = error
+			return
 		_sync_controls()
 		_preview()
 
@@ -904,6 +936,8 @@ func _show_result(result: Dictionary) -> void:
 			var equipment: Dictionary = config["equipment"][role]
 			lines.append("Próprio + bônus → efetivo: ATQ F %d + %d → %d · DEF F %d + %d → %d" % [composition["base"]["physical_attack"], composition["bonuses"]["physical_attack"], composition["effective"]["physical_attack"], composition["base"]["physical_defense"], composition["bonuses"]["physical_defense"], composition["effective"]["physical_defense"]])
 			lines.append("ATQ D %d + %d → %d · DEF D %d + %d → %d" % [composition["base"]["ranged_attack"], composition["bonuses"]["ranged_attack"], composition["effective"]["ranged_attack"], composition["base"]["ranged_defense"], composition["bonuses"]["ranged_defense"], composition["effective"]["ranged_defense"]])
+			if composition["base"].has("magic_power"):
+				lines.append("MAG %d + %d → %d · DEF M %d + %d → %d" % [composition["base"]["magic_power"], composition["bonuses"]["magic_power"], composition["effective"]["magic_power"], composition["base"]["magic_defense"], composition["bonuses"]["magic_defense"], composition["effective"]["magic_defense"]])
 			lines.append("EVA própria %d + armadura %d → efetiva %d%%" % [composition["base"]["evasion_base"], composition["bonuses"]["evasion_base"], composition["effective"]["evasion_base"]])
 			if equipment["weapon"].get("equipped", true):
 				lines.append("Arma: %s · chance %.2f%% · crítico %.2f× · armadura: %s" % [equipment["weapon"]["name"], equipment["weapon"]["critical_chance"], equipment["weapon"]["critical_multiplier"], equipment["armor"]["name"]])
@@ -969,6 +1003,8 @@ func _show_affliction_result(result: Dictionary) -> void:
 		lines.append(" · ".join(stats))
 		if config[role]["side"] == "ally":
 			var composition: Dictionary = config["composition"][role]
+			if composition["base"].has("magic_power"):
+				lines.append("MAG %d + %d → %d · DEF M %d + %d → %d" % [composition["base"]["magic_power"], composition["bonuses"]["magic_power"], composition["effective"]["magic_power"], composition["base"]["magic_defense"], composition["bonuses"]["magic_defense"], composition["effective"]["magic_defense"]])
 			lines.append("EVA própria %d + armadura %d → efetiva %d%%" % [composition["base"]["evasion_base"], composition["bonuses"]["evasion_base"], composition["effective"]["evasion_base"]])
 	lines.append("\nAção: %s · %d MP · sem dano direto · sem crítico" % [config["action"]["name"], config["action"]["mp_cost"]])
 	var resistance = Calculator.application_resistance(config)

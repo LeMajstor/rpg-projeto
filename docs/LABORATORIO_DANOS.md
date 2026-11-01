@@ -1,5 +1,7 @@
 # Laboratório de danos
 
+**Referência vigente:** [V1 de danos, atributos e equipamentos](DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md), fechada por D124 e aceita pelo usuário em 01/11/2026 por D125. As seções históricas abaixo preservam o processo experimental; decisões posteriores substituem os parâmetros antigos quando indicado.
+
 **Status em 26/10/2026 (D60): implementado para experimentar e ajustar durante os testes**, conforme autorização do usuário. Cena independente `scenes/damage_lab.tscn`, aberta por `Executar laboratorio de danos.command`. O combate da exploração e o laboratório de combate continuam com seus cálculos anteriores. Fórmula, fichas e números abaixo são **experimentais**, sem confirmação de balanceamento definitivo.
 
 ## Confirmado
@@ -361,3 +363,40 @@ Scripts dos estudos anteriores usam as referências congeladas `artifacts/damage
 ### Estudo atual dos três presets com DEF M — 29/10/2026
 
 Matriz D111 de quatro confrontos válidos/quatro magias, com cinco sementes e5.000 tentativas por confronto/magia, total80.000. Aplicações observadas incluindo EVA: aliados→monstro28,86% em Veneno/Lentidão e31,06% em Confusão/Medo; monstro→#1 33,74%/36,00%; monstro→#2 33,32% nos quatro. Maior desvio teórico0,33 ponto percentual, zero divergências na auditoria. Comparação com a versão anterior utilizou os mesmos presets/sorteios; nenhuma mudança de atributos ou custo. [Resultados completos e reprodução](../artifacts/aflicoes-presets-defm-2026-10-29/analise.md).
+
+
+### Terceiro aliado — mago D115, 01/11/2026
+
+Preset pessoal **Aliado #3 — Mago** criado com HP30/MP24/INI7, DEF F/DEF D naturais16, MAG/DEF M naturais30, INT25/VIG15, CRI/EVA3. Primeiro cajado/veste dão MAG40/DEF M40, ATQ F14 e DEF F18/DEF D18. Seis cajados/seis vestes exclusivos, seleção independente e campos MAG+/DEF M+ editáveis nos equipamentos compatíveis. Composição própria+bônus separada na interface/histórico/JSONv5; equipamentos antigos sem campos mágicos continuam com bônus zero. Biblioteca reaberta com quatro presets; três anteriores preservados.
+
+Detalhes da ficha e instruções em [ALIADO_03.md](ALIADO_03.md); escala em [ESCALA_CAJADOS_E_VESTES.md](ESCALA_CAJADOS_E_VESTES.md).21 suítes headless/34.597 verificações e teste gráfico/20 verificações aprovados. Matriz de aflições com o mago:120 mil tentativas, zero divergências; [análise e reprodução](../artifacts/aflicoes-mago-2026-11-01/analise.md). Valores experimentais; proteção por buffs/itens, ATB e integração ao combate continuam para outra etapa.
+
+
+### Acesso a magia e comparação defensiva — D116, 01/11/2026
+
+Aliados #1 e #2 normalmente não usam magias no desenho do jogo; exceções por condições ou itens especiais pertencem a versão futura ainda sem definição. MAG/MP nas fichas não concedem essa capacidade. A ferramenta genérica permite comparações hipotéticas, preservadas como histórico, sem alterar acesso a habilidades na aventura. Nesta bateria o único conjurador é Monstro #1 (MAG 25), contra os três aliados com seus equipamentos iniciais.
+
+12 casos × 5 sementes × 1.000 = **60 mil tentativas**, sem alterar presets/fórmulas. Chance observada de aplicação, incluindo EVA: #1 **33,74%/36,00%**, #2 **33,32%/33,32%**, mago **30,56%/26,94%**, respectivamente para Veneno/Lentidão e Confusão/Medo. Zero falhas e divergências; maior desvio teórico 0,29 ponto percentual. [Análise, dados e reprodução](../artifacts/monstro-aflicoes-tres-aliados-2026-11-01/analise.md). Recursos são restaurados por amostra; não mede duração, ticks, ATB ou autonomia MP.
+
+
+### Bateria física dos três aliados — D119, 01/11/2026
+
+30 mil ataques isolados de Monstro #1 em contato/distância contra os três aliados, cinco sementes, equipamentos iniciais e nenhuma ficha/fórmula alterada. Mais 60 mil sequências com dano acumulado até 0 HP: metade somente normais, metade com críticos/esquivas reais. O observador externo acumula `damage`, encerra no primeiro 0 HP e reinicia o próximo ensaio com HP cheio; não muda a restauração por amostra da ferramenta nem cria combate novo.
+
+Mago: normal 12–15, crítico 25–30, média recebida 13,736; três acertos normais em 95,36% e dois em 4,64%. Média com críticos/EVA: 2,9768 tentativas; 21/5.000 sequências terminaram no primeiro ataque por crítico. Primeiro e segundo aliados resistem mais; couro melhora a defesa de distância do segundo. [Comparação completa, auditoria e comandos](../artifacts/monstro-fisico-tres-aliados-2026-11-01/analise.md). Sem cura, buffs, efeitos contínuos, ATB ou mudança de balanceamento; Monstro #2 ainda é proposta.
+
+
+### Monstro #2 — Distância e bateria nos dois sentidos — D122, 01/11/2026
+
+Preset pessoal criado com HP40/MP8/INI9, ATQ F/D24, DEF F32/DEF D50, MAG25/DEF M28, INT15/VIG20, CRI3/EVA5, crítico físico2×. Tipo `enemy_ranged` com política canônica de somente básico físico à distância, sem contato/magias. Interface bloqueia ações incompatíveis; carregar/trocar lados ajusta a ação se necessário sem alterar RNG/histórico. A restrição vale apenas como atacante. Tipos legados mantêm a ferramenta genérica anterior.
+
+Cadastro único com backup, quatro registros anteriores preservados, biblioteca reaberta com cinco presets.23 suítes/34.675 verificações e teste gráfico/19 verificações aprovados. Bateria:110 mil tentativas individuais e130 mil sequências acumuladas, metade novo monstro/metade Monstro #1 de referência. Aliados usam seus básicos; magia de dano e quatro aflições do mago são cenários separados já existentes, sem criar magias e sem #1/#2 conjurando. Sem ATB, cura, buffs ou efeitos contínuos; HP/MP acumulados pelo observador até incapacitação.
+
+Arco causa menos dano médio ao novo monstro (13,90→11,86), mas HP40 limita a diferença nas tentativas para vencer (3,69→3,83). Espada se beneficia da DEF F32 (15,90→17,43;3,29→2,96 tentativas). Magia do mago mantém32–39 e dois usos/14MP; novo inimigo só causa dano físico à distância. Ficha e uso em [MONSTRO_02.md](MONSTRO_02.md); [análise detalhada e reprodução](../artifacts/monstro02-bateria-2026-11-01/analise.md). INI9 e meta de mesmo patamar precisam de validação temporal futura; nenhum número foi ajustado após a bateria.
+
+
+### Fechamento V1 — D124, 01/11/2026
+
+Usuário adotou a opção A: **Magia ofensiva básica, potência1,5×/7MP**, MAG/DEF M, sem EVA/crítico. Fórmula proporcional, variação±10%, arredondamento final ao inteiro mais próximo e mínimo1 nos acertos mantidos como referência V1. Antiga permissão experimental de esquiva na magia direta foi substituída: calculadora ignora essa flag, modelo normaliza e interface desabilita; as quatro aflições continuam testando EVA antes da resistência.
+
+Ação `magic_skill` preserva ID e recebe nome claro; exemplo físico vira `Técnica física · experimento`, sem assumir técnica individual. Snapshot/JSONv5 recebem referência `damage_lab_v1` e status da ação, preservando valores efetivos e arquivos antigos.25 suítes/35.706 verificações e teste gráfico/12 aprovados. Valores das fichas/equipamentos e biblioteca pessoal não foram alterados no fechamento. Fonte e limites em [DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md](DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md).

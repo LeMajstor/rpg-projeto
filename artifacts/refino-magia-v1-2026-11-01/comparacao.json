@@ -1,0 +1,32 @@
+{
+  "checks": 8020,
+  "failures": 0,
+  "attempts": 20000,
+  "defaults_changed": false,
+  "rows": [
+    {
+      "variant": "A",
+      "power": 1.5,
+      "mp": 7,
+      "damage": [
+        32,
+        39
+      ],
+      "observed_mean": 35.2714,
+      "uses_with_mp24": 3,
+      "casts_to_defeat_current_enemies": 2
+    },
+    {
+      "variant": "B",
+      "power": 1.2,
+      "mp": 6,
+      "damage": [
+        25,
+        31
+      ],
+      "observed_mean": 28.23,
+      "uses_with_mp24": 4,
+      "casts_to_defeat_current_enemies": 2
+    }
+  ]
+}

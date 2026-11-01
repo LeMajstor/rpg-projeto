@@ -373,7 +373,7 @@ func _run() -> void:
 	expect(not screen.evasion_allowed.button_pressed and screen.last_result["evasion_count"] == 0, "Magia por padrão não permite esquiva")
 	screen.evasion_allowed.button_pressed = true
 	key(KEY_F7)
-	expect(screen.last_result["evasion_count"] == 10, "Controle de permissão permite comparar esquiva em magia")
+	expect(screen.evasion_allowed.disabled and screen.last_result["evasion_count"] == 0 and not screen.evasion_allowed.button_pressed, "D124: magia direta mantém esquiva desabilitada mesmo após sinal programático")
 	choose(screen.action_picker, 0)
 	screen.profile_edits["target"]["evasion_base"].value = 25
 	choose(screen.critical_mode, 0)

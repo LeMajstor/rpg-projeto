@@ -27,7 +27,7 @@ func _run() -> void:
 	var path = directory.path_join("presets.json")
 	var library = Library.new(definitions, path)
 	expect(library.load_error.is_empty() and library.entries("ally").is_empty() and library.entries("enemy").is_empty() and not FileAccess.file_exists(path), "Biblioteca começa vazia, sem referências ou arquivo pessoal criado")
-	expect(definitions["profiles"].size() == 2, "Somente duas fichas manuais, sem catálogo de exemplos antigos")
+	expect(definitions["profiles"].filter(func(p): return not p.has("offensive_policy")).size() == 2, "Duas fichas manuais legadas; tipo de distância restrito é separado")
 	var model = Model.new(definitions)
 	# Valores distintos exercitam todos os campos, inclusive zero, limites e cinco dígitos.
 	var own = {"hp": 45, "mp": 0, "ini": 17, "physical_attack": 23, "physical_defense": 28, "magic_power": 367, "magic_defense": 999, "critical_base": 8, "evasion_base": 19, "unarmed_critical_multiplier": 2.2}

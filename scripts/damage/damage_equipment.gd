@@ -75,6 +75,20 @@ static func default_item(actor: Dictionary, category: String) -> Dictionary:
 					return item.duplicate(true)
 	return {}
 
+static func magic_bonus_field(category: String) -> String:
+	return "magic_attack_bonus" if category == "weapon" else "magic_defense_bonus"
+
+static func supports_magic_bonus(item: Dictionary, category: String) -> bool:
+	return catalog_item(category, str(item.get("id", ""))).has(magic_bonus_field(category))
+
+static func valid_magic_bonus(item: Dictionary, category: String) -> bool:
+	var value = item.get(magic_bonus_field(category), 0)
+	if not (value is int or value is float) or not is_finite(float(value)):
+		return false
+	if value < 0 or value > 999 or float(value) != floorf(float(value)):
+		return false
+	return value == 0 or supports_magic_bonus(item, category)
+
 static func resolve(actor: Dictionary, weapon: Dictionary, armor: Dictionary, limit: int) -> Dictionary:
 	var effective = actor.duplicate(true)
 	if actor["side"] != "ally":
@@ -83,8 +97,8 @@ static func resolve(actor: Dictionary, weapon: Dictionary, armor: Dictionary, li
 	var defense_bonus = int(armor.get("defense_bonus", 0))
 	var ranged_defense_bonus = int(armor.get("ranged_defense_bonus", 0))
 	var evasion_bonus = int(armor.get("evasion_bonus", 0))
-	var base = {"physical_attack": actor["physical_attack"], "ranged_attack": actor["ranged_attack"], "physical_defense": actor["physical_defense"], "ranged_defense": actor["ranged_defense"], "evasion_base": actor["evasion_base"]}
-	var bonuses = {"physical_attack": 0, "ranged_attack": 0, "physical_defense": defense_bonus, "ranged_defense": ranged_defense_bonus, "evasion_base": evasion_bonus}
+	var base = {"physical_attack": actor["physical_attack"], "ranged_attack": actor["ranged_attack"], "physical_defense": actor["physical_defense"], "ranged_defense": actor["ranged_defense"], "evasion_base": actor["evasion_base"], "magic_power": actor["magic_power"], "magic_defense": actor["magic_defense"]}
+	var bonuses = {"physical_attack": 0, "ranged_attack": 0, "physical_defense": defense_bonus, "ranged_defense": ranged_defense_bonus, "evasion_base": evasion_bonus, "magic_power": int(weapon.get("magic_attack_bonus", 0)), "magic_defense": int(armor.get("magic_defense_bonus", 0))}
 	bonuses["ranged_attack" if attack_mode(weapon) == "ranged" else "physical_attack"] = attack_bonus
 	var raw: Dictionary = {}
 	var totals: Dictionary = {}

@@ -1,0 +1,168 @@
+{
+  "format": "rpg.damage_lab.presets",
+  "version": 1,
+  "presets": [
+    {
+      "side": "ally",
+      "actor": {
+        "id": "ally_1",
+        "name": "Aliado #1",
+        "side": "ally",
+        "color": "6fc8ff",
+        "hp": 40.0,
+        "mp": 12.0,
+        "ini": 9.0,
+        "physical_attack": 23,
+        "physical_defense": 45.0,
+        "magic_power": 20.0,
+        "magic_defense": 21.0,
+        "critical_base": 5.0,
+        "unarmed_critical_multiplier": 2.0,
+        "evasion_base": 5.0,
+        "character_id": "ally_1"
+      },
+      "equipment": {
+        "weapon": {
+          "id": "sword_bronze",
+          "name": "Espada de Bronze",
+          "attack_bonus": 10.0,
+          "critical_chance": 5.0,
+          "critical_multiplier": 2.0,
+          "equipped": true
+        },
+        "armor": {
+          "id": "armor_bronze",
+          "name": "Armadura de Bronze",
+          "defense_bonus": 10.0,
+          "equipped": true,
+          "evasion_bonus": 0.0
+        }
+      },
+      "id": "user_42514_3029764496",
+      "name": "Aliado #1",
+      "revision": 2
+    },
+    {
+      "side": "enemy",
+      "actor": {
+        "id": "heavy",
+        "name": "Monstro #1",
+        "side": "enemy",
+        "color": "d99c65",
+        "hp": 45.0,
+        "mp": 8.0,
+        "ini": 7.0,
+        "physical_attack": 24.0,
+        "physical_defense": 40.0,
+        "magic_power": 25.0,
+        "magic_defense": 28.0,
+        "critical_base": 3.0,
+        "unarmed_critical_multiplier": 2.0,
+        "evasion_base": 3.0
+      },
+      "id": "user_42514_3038375027",
+      "name": "Monstro #1",
+      "revision": 1.0
+    },
+    {
+      "name": "Aliado #2",
+      "side": "ally",
+      "actor": {
+        "id": "ally_1",
+        "name": "Aliado #2",
+        "side": "ally",
+        "color": "6fc8ff",
+        "hp": 36.0,
+        "mp": 14.0,
+        "ini": 11.0,
+        "physical_attack": 20.0,
+        "physical_defense": 30.0,
+        "magic_power": 20.0,
+        "magic_defense": 21.0,
+        "critical_base": 7.0,
+        "unarmed_critical_multiplier": 2.0,
+        "evasion_base": 7.0,
+        "character_id": "ally_2"
+      },
+      "equipment": {
+        "weapon": {
+          "id": "compound_bow",
+          "name": "Arco composto",
+          "attack_bonus": 10.0,
+          "critical_chance": 12.0,
+          "critical_multiplier": 1.6,
+          "equipped": true,
+          "allowed_character_ids": [
+            "ally_2"
+          ]
+        },
+        "armor": {
+          "id": "leather_set",
+          "name": "Conjunto de couro",
+          "defense_bonus": 5.0,
+          "evasion_bonus": 5.0,
+          "equipped": true,
+          "allowed_character_ids": [
+            "ally_2"
+          ]
+        }
+      },
+      "id": "user_41489_237435",
+      "revision": 1.0
+    },
+    {
+      "name": "Aliado #3 — Mago",
+      "side": "ally",
+      "actor": {
+        "id": "ally_1",
+        "character_id": "ally_3",
+        "name": "Aliado #3 — Mago",
+        "side": "ally",
+        "color": "bba4ef",
+        "hp": 30,
+        "mp": 24,
+        "ini": 7,
+        "physical_attack": 12,
+        "ranged_attack": 8,
+        "physical_defense": 16,
+        "ranged_defense": 16,
+        "magic_power": 30,
+        "magic_defense": 30,
+        "intelligence": 25,
+        "vigor": 15,
+        "critical_base": 3,
+        "evasion_base": 3,
+        "unarmed_critical_multiplier": 2.0
+      },
+      "equipment": {
+        "weapon": {
+          "id": "staff_wood",
+          "name": "Cajado de Madeira",
+          "attack_bonus": 2,
+          "magic_attack_bonus": 10,
+          "critical_chance": 0.0,
+          "critical_multiplier": 1.5,
+          "equipped": true,
+          "allowed_character_ids": [
+            "ally_3"
+          ],
+          "attack_mode": "melee"
+        },
+        "armor": {
+          "id": "robe_simple",
+          "name": "Veste Simples",
+          "defense_bonus": 2,
+          "ranged_defense_bonus": 2,
+          "magic_defense_bonus": 10,
+          "evasion_bonus": 0,
+          "equipped": true,
+          "allowed_character_ids": [
+            "ally_3"
+          ]
+        }
+      },
+      "id": "user_mage_1793540837711411000",
+      "revision": 2
+    }
+  ]
+}

@@ -28,7 +28,7 @@ func _run() -> void:
 	var path = "/private/tmp/rpg-equipment-scales-%d.json" % OS.get_process_id()
 	var library = Library.new(data, path)
 	var first = model.ally().duplicate(true)
-	expect(data["weapons"].size() == 12 and data["armors"].size() == 12, "Seis itens de cada família, sem slots vazios")
+	expect(data["weapons"].filter(func(item): return Equipment.can_equip(first, item, "weapon")).size() == 6 and data["armors"].filter(func(item): return Equipment.can_equip(first, item, "armor")).size() == 6, "Primeiro aliado conserva seis opções por slot")
 	for index in range(6):
 		for category in ["weapon", "armor"]:
 			var id: String = BOW_IDS[index] if category == "weapon" else TRAJE_IDS[index]

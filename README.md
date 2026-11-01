@@ -199,3 +199,18 @@ godot --path . --audio-driver Dummy --script res://tests/render_performance.gd
 ```
 
 O teste reporta tempos e verifica que a origem da câmera é consultada apenas uma vez por desenho. Resultados da correção de lentidão em [VALIDACAO.md](docs/VALIDACAO.md).
+
+
+## Mago no laboratório de danos
+
+O preset **Aliado #3 — Mago** está disponível na biblioteca local desta instalação. Carregue-o pelo seletor de presets do aliado: HP30/MP24/INI7, MAG30/DEF M30 naturais, chegando40/40 com Cajado de Madeira/Veste Simples; DEF F/DEF D16 naturais,18 equipadas. Seis cajados e seis vestes exclusivos, com bônus mágicos e físicos separados. Ficha, escala e verificação em [ALIADO_03.md](docs/ALIADO_03.md). A instalação não se repete automaticamente ao iniciar; demais presets e combate integrado preservados.
+
+
+## Inimigo físico de distância
+
+Preset local **Monstro #2 — Distância** disponível no laboratório de danos: HP40/INI9/ATQ D24/DEF F32/DEF D50/EVA5%. Carregue no seletor do inimigo e use Trocar lados para ele atacar. Seu tipo permite apenas básico físico à distância; como alvo, recebe as ações dos aliados normalmente. Sem contato ou magias desse inimigo. [Ficha e uso](docs/MONSTRO_02.md); [bateria detalhada nos dois sentidos](artifacts/monstro02-bateria-2026-11-01/analise.md). Cadastro único; quatro presets anteriores e combate integrado preservados.
+
+
+## Referência V1 de danos, atributos e equipamentos
+
+Laboratório de danos V1 finalizado e aceito pelo usuário em 01/11/2026 (D124/D125). A ação **Magia ofensiva básica** usa1,5×/7MP, MAG contra DEF M, sem crítico/EVA; variação±10%, arredondamento final e mínimo1 nos acertos. A técnica física genérica continua marcada como experimento.25 suítes e inspeção gráfica aprovadas; cinco presets preservados. [Fonte consolidada da V1](docs/DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md). Integração ao combate, progressão e efeitos contínuos são etapas futuras.

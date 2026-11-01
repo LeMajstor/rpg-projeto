@@ -99,6 +99,8 @@ static func validate_entry(value: Variant, catalog: Dictionary) -> String:
 			return "Equipamento não pertence ao catálogo atual."
 		if not Equipment.can_equip(actor, original, category):
 			return "Equipamento exclusivo de outro personagem: " + original["name"]
+		if not Equipment.valid_magic_bonus(item, category):
+			return "Bônus mágico de equipamento inválido."
 		var bonus = "attack_bonus" if category == "weapon" else "defense_bonus"
 		if not _number(item.get(bonus), 0, 999, true):
 			return "Bônus de equipamento inválido."

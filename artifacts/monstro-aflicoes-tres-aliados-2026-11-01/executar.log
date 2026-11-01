@@ -1,0 +1,17 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+Monstro #1 → Aliado #1 · poison: esperado 33.45%; observado 30.9%; aplicou/resistiu/esquivou 309/647/44
+Monstro #1 → Aliado #1 · slow: esperado 33.45%; observado 30.9%; aplicou/resistiu/esquivou 309/647/44
+Monstro #1 → Aliado #1 · confusion: esperado 35.98%; observado 33.4%; aplicou/resistiu/esquivou 334/622/44
+Monstro #1 → Aliado #1 · fear: esperado 35.98%; observado 33.4%; aplicou/resistiu/esquivou 334/622/44
+Monstro #1 → Aliado #2 · poison: esperado 33.33%; observado 30.5%; aplicou/resistiu/esquivou 305/572/123
+Monstro #1 → Aliado #2 · slow: esperado 33.33%; observado 30.5%; aplicou/resistiu/esquivou 305/572/123
+Monstro #1 → Aliado #2 · confusion: esperado 33.33%; observado 30.5%; aplicou/resistiu/esquivou 305/572/123
+Monstro #1 → Aliado #2 · fear: esperado 33.33%; observado 30.5%; aplicou/resistiu/esquivou 305/572/123
+Monstro #1 → Aliado #3 — Mago · poison: esperado 30.31%; observado 28.3%; aplicou/resistiu/esquivou 283/697/20
+Monstro #1 → Aliado #3 — Mago · slow: esperado 30.31%; observado 28.3%; aplicou/resistiu/esquivou 283/697/20
+Monstro #1 → Aliado #3 — Mago · confusion: esperado 26.94%; observado 25.4%; aplicou/resistiu/esquivou 254/726/20
+Monstro #1 → Aliado #3 — Mago · fear: esperado 26.94%; observado 25.4%; aplicou/resistiu/esquivou 254/726/20
+MONSTRO CONTRA TRÊS ALIADOS: 12 lotes, 12000 tentativas; 0 pares bloqueados por lado; 36111 verificações, 0 falhas
