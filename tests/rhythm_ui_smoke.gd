@@ -39,7 +39,7 @@ func _run() -> void:
 	lab.mode_picker.item_selected.emit(1)
 	for enemy in lab.model.enemies:
 		enemy["ini_modifier"] = -float(enemy["ini"])
-	expect(lab.model.preset["id"] == "lab_rhythm" and lab.preset_picker.item_count == 15, "Presets atuais acessíveis junto das referências legadas")
+	expect(lab.model.preset["id"] == "lab_rhythm" and lab.preset_picker.item_count == 16, "Presets atuais acessíveis junto das referências legadas")
 	lab.pause_button.button_pressed = true
 	lab.debug_button.button_pressed = true
 	lab._refresh()

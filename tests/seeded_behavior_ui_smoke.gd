@@ -44,8 +44,8 @@ func _run() -> void:
 	root.add_child(lab)
 	await process_frame
 	lab.set_process(false)
-	expect(lab.model.preset["id"] == "lab_seeded" and lab.preset_picker.selected == 10, "Laboratório inicia na nova versão")
-	expect(lab.preset_picker.item_count == 15, "Cinco opções atuais e dez anteriores")
+	expect(lab.model.preset["id"] == "lab_damage_v1" and lab.preset_picker.selected == 15, "Laboratório inicia na nova versão")
+	expect(lab.preset_picker.item_count == 16, "V1, cinco opções de movimento e dez anteriores")
 	for index in range(15):
 		expect(lab.preset_picker.get_item_text(index).begins_with("Legado · ") == (index < 10), "Todas as opções anteriores marcadas como legadas")
 	start()

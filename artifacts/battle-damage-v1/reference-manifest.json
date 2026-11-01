@@ -1,0 +1,26 @@
+{
+  "decision": "D126",
+  "date": "2026-11-01",
+  "scope": "independent_battle_lab_first_stage",
+  "ruleset": "damage_lab_v1",
+  "afflictions": "second_stage_not_implemented",
+  "source_presets_exact_copy": true,
+  "tests": {
+    "suites": 64,
+    "checks": 300192,
+    "failures": 0,
+    "all_passed": true
+  },
+  "graphical_ui_checks": 24,
+  "graphical_ui_failures": 0,
+  "source_sha256": {
+    "data/battle_damage_v1.json": "81ee967df9672c2cb17cda9d38415acaa562759e8dbd6951b7ce218e2049734d",
+    "data/damage_lab.json": "d4b7671105137d589f0edefe03ac15a5d776d9a5fd986753272b547b3170379a",
+    "scripts/combat/damage_v1_bridge.gd": "186e6d9e50ca0779aacacd8f9b5c72bfbf28ce5d7098623179a32691b8554c2f",
+    "scripts/combat/battle_model.gd": "f96650df4f11540f0771378fe1ca4f7bad55a4ebe34ce5f5cd5608128b235c81",
+    "scripts/ui/combat_lab.gd": "c80fe9849bd4174de83344b55e71458bc69d833751192b4083653bc86ad41957",
+    "scripts/ui/battle_preparation.gd": "d9a9a7a9649109fb8453f6890ceb8fad0a1e22f428e686b33f84c0ef66addcf5",
+    "scripts/damage/damage_calculator.gd": "c2276ed6151f5376b6a7e7dbc202efb2ba629a14d68132c6733b69bdbfc6dceb",
+    "scripts/damage/damage_equipment.gd": "de54fefa0a94e2728d35d9d2f1210fc42205755b95d2294a8d0b7ec668bf1a31"
+  }
+}

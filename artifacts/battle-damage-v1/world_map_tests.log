@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+PASS _test_topology_and_content
+PASS _test_authoring
+PASS _test_physical_route
+PASS _test_landscape_collision
+PASS _test_street_npcs
+PASS _test_world_has_no_encounters
+PASS _test_four_area_persistence
+PASS _test_reset
+MUNDO/VILA: 8 grupos, 3638 verificações, 0 falhas

@@ -104,8 +104,8 @@ func _test_ui_defaults() -> void:
 	root.add_child(lab)
 	await process_frame
 	lab.set_process(false)
-	expect(lab.model.preset["id"] == "lab_seeded", "Laboratório abre no comportamento por semente")
-	expect(lab.definitions["presets"][lab.preset_picker.selected]["id"] == "lab_seeded", "Seletor corresponde à batalha inicial")
+	expect(lab.model.preset["id"] == "lab_damage_v1", "Laboratório abre na V1 com movimento por semente")
+	expect(lab.definitions["presets"][lab.preset_picker.selected]["id"] == "lab_damage_v1", "Seletor corresponde à batalha inicial")
 	for index in range(data["presets"].size()):
 		var id: String = data["presets"][index]["id"]
 		expect(lab.preset_picker.get_item_text(index).begins_with("Legado · ") == (id in data["legacy_preset_ids"]), "Modelos anteriores identificados como legados")

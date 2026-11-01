@@ -1,5 +1,13 @@
 # Validação da entrega
 
+## Primeira integração ao laboratório de batalha — D126, 01/11/2026
+
+**64 suítes headless aprovadas,300.192 verificações, zero falhas**, incluindo o laboratório de danos, combate anterior, movimentos por semente, exploração e interfaces. As duas suítes novas verificam217 condições no modelo e21 na interface. Teste gráfico Compatibility:24 verificações, três capturas inspecionadas. Resultado por suíte em `artifacts/battle-damage-v1/test-results.json`; capturas em `artifacts/battle-damage-v1/visual/`.
+
+Verifica importação das cinco fichas, paridade de dano/rolagens entre calculadora e impacto, esquiva/crítico físicos, magia32–39 sem EVA/crítico, HP acumulado e três usos7MP, MP insuficiente/cancelamento sem custo ou RNG, equipamentos exclusivos/pendentes/sem empilhamento, ATB por INI, KO, vitória/derrota, continuação preservando recursos e retorno exato. Doze partidas completas (Wait/Active, três sementes, repetição) terminam e reproduzem o estado final. Regressões antigas selecionam explicitamente o cenário histórico que exercitam, mantendo suas expectativas numéricas.
+
+Aflições permanecem para segunda parte; exploração não foi migrada. O roteiro para avaliar ritmo e decisões de gameplay está em `BATALHA_DANOS_V1.md`; testes automatizados não aprovam balanceamento coletivo por conta do usuário.
+
 
 ## Fechamento da referência V1 — D124, 01/11/2026
 

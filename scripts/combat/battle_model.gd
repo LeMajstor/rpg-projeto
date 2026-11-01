@@ -4,6 +4,7 @@ const Route = preload("res://scripts/combat/route_motion.gd")
 const Policy = preload("res://scripts/combat/target_policy.gd")
 const AttackMotion = preload("res://scripts/combat/attack_motion.gd")
 const FullscreenMotion = preload("res://scripts/combat/fullscreen_motion.gd")
+const DamageV1 = preload("res://scripts/combat/damage_v1_bridge.gd")
 const BATTLEFIELD_SIZE = Vector2(920, 440)
 const CENTER_SETTING = "move_to_center_for_fullscreen_skill"
 
@@ -25,6 +26,31 @@ var decisions: Array[Dictionary] = []
 var simulation_time = 0.0
 var completed_actions = 0
 var simulation_seed = 421
+var pending_loadouts: Dictionary = {}
+var damage_rngs: Dictionary = {}
+var damage_results: Array[Dictionary] = []
+
+func uses_damage_v1() -> bool:
+	return preset.get("damage_ruleset", "") == "damage_lab_v1"
+
+func set_pending_equipment(id: String, category: String, item_id: String) -> bool:
+	for candidate in data["presets"]:
+		if candidate.get("damage_ruleset", "") != "damage_lab_v1":
+			continue
+		for definition in candidate["party"]:
+			if definition["id"] != id:
+				continue
+			var item = DamageV1.Equipment.catalog_item(category, item_id)
+			if not DamageV1.Equipment.can_equip(definition["damage_base"], item, category):
+				return false
+			if not pending_loadouts.has(id):
+				pending_loadouts[id] = definition["loadout"].duplicate(true)
+			pending_loadouts[id][category] = item
+			return true
+	return false
+
+func skill_for(actor: Dictionary, id: String) -> Dictionary:
+	return DamageV1.skill(actor, id) if uses_damage_v1() else data["skills"].get(id, {})
 
 func _init(definitions: Dictionary) -> void:
 	data = definitions
@@ -39,12 +65,25 @@ func default_preset_index() -> int:
 func start(preset_index: int, preserve_party: bool = false, random_seed: int = 421) -> bool:
 	if preserve_party and (party.is_empty() or living(party).is_empty()):
 		return false
-	preset = data["presets"][clampi(preset_index, 0, data["presets"].size() - 1)]
+	var next_preset: Dictionary = data["presets"][clampi(preset_index, 0, data["presets"].size() - 1)]
+	if preserve_party and preset.get("damage_ruleset", "") != next_preset.get("damage_ruleset", ""):
+		log_event("Para trocar entre V1 e referências anteriores, use Novo teste.")
+		return false
+	preset = next_preset
 	rng.seed = random_seed
 	simulation_seed = random_seed
+	damage_rngs.clear()
+	for channel in {"variance": 0x5a4f3d2c, "critical": 0x27d4eb2d, "evasion": 0x6c8e9cf5, "affliction": 0x3b9d72a1}:
+		var stream = RandomNumberGenerator.new()
+		stream.seed = random_seed ^ {"variance": 0x5a4f3d2c, "critical": 0x27d4eb2d, "evasion": 0x6c8e9cf5, "affliction": 0x3b9d72a1}[channel]
+		damage_rngs[channel] = stream
+	damage_results.clear()
 	if not preserve_party:
 		party.clear()
-		for definition in data["party"]:
+		for original in preset.get("party", data["party"]):
+			var definition: Dictionary = original
+			if uses_damage_v1() and pending_loadouts.has(definition["id"]):
+				definition = DamageV1.equip_definition(definition, pending_loadouts[definition["id"]])
 			party.append(_make_actor(definition, "ally", definition["id"]))
 		inventory.clear()
 		for id in data["items"]:
@@ -300,15 +339,17 @@ func submit(skill_id: String, target_id: String = "", center: Vector2 = Vector2.
 		return true
 	var skill: Dictionary
 	if not item_id.is_empty():
+		if uses_damage_v1():
+			return false
 		if not data["items"].has(item_id) or inventory.get(item_id, 0) <= 0:
 			return false
 		skill = item_skill(item_id)
 	else:
-		if not data["skills"].has(skill_id):
-			return false
 		if skill_id != "attack" and not actor.get("skills", []).has(skill_id):
 			return false
-		skill = data["skills"][skill_id]
+		skill = skill_for(actor, skill_id)
+		if skill.is_empty():
+			return false
 	if actor["mp"] < skill.get("mp_cost", 0) or targets_for(actor, skill, target_id, center).is_empty():
 		return false
 	_begin_action(actor, skill, target_id, center, item_id)
@@ -415,14 +456,30 @@ func _apply_action(actor: Dictionary) -> void:
 	for target in targets:
 		match skill["effect"]:
 			"damage":
-				var damage = maxi(1, int(actor["attack"]) + int(skill.get("power", 0)))
+				var damage: int
+				var suffix = ""
+				if uses_damage_v1():
+					var config = DamageV1.configuration(actor, target, skill)
+					# Fluxos independentes da IA/movimento; um sorteio por canal no impacto.
+					var sample = DamageV1.Calculator.sample(config, damage_rngs["variance"].randf(), damage_rngs["critical"].randf(), damage_rngs["evasion"].randf(), damage_rngs["affliction"].randf())
+					damage = sample["damage"]
+					# O custo foi debitado uma única vez ao confirmar. sample não controla recursos.
+					sample["mp_before"] = actor["mp"] + int(skill["mp_cost"])
+					sample["mp_after"] = actor["mp"]
+					sample.merge({"actor_id": actor["id"], "target_id": target["id"], "skill": skill["name"], "time": simulation_time, "ruleset": "damage_lab_v1"})
+					damage_results.append(sample)
+					if damage_results.size() > 100:
+						damage_results.pop_front()
+					suffix = " · ESQUIVA" if sample["evaded"] else " · CRÍTICO" if sample["critical"] else ""
+				else:
+					damage = maxi(1, int(actor["attack"]) + int(skill.get("power", 0)))
 				target["hp"] = maxi(0, target["hp"] - damage)
 				target["last_attacker"] = actor["id"]
 				if target["hp"] == 0:
 					target["atb"] = 0.0
 					if selected_id == target["id"]:
 						selected_id = ""
-				result.append("%s −%d HP" % [target["short_name"], damage])
+				result.append("%s −%d HP%s" % [target["short_name"], damage, suffix])
 			"hp", "revive":
 				target["hp"] = mini(int(target["max_hp"]), target["hp"] + int(skill["amount"]))
 				result.append("%s +HP" % target["short_name"])
@@ -448,14 +505,15 @@ func _schedule_enemy(enemy: Dictionary) -> void:
 	var choices: Array = []
 	var action_weights: Array = []
 	for entry in enemy.get("actions", []):
-		if data["skills"].has(entry["id"]) and enemy["mp"] >= data["skills"][entry["id"]]["mp_cost"]:
+		var option = skill_for(enemy, entry["id"])
+		if not option.is_empty() and enemy["mp"] >= option["mp_cost"]:
 			choices.append(entry["id"])
 			action_weights.append(entry["weight"])
 	if choices.is_empty():
 		choices = ["attack"]
 		action_weights = [1.0]
 	var skill_id = choices[Policy.pick_index(action_weights, rng)]
-	var skill = data["skills"][skill_id]
+	var skill = skill_for(enemy, skill_id)
 	var candidates = living(party)
 	if candidates.is_empty():
 		_check_end()

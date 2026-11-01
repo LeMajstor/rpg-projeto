@@ -1,0 +1,584 @@
+{
+  "suites": 64,
+  "checks": 300192,
+  "failures": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "suite": "area_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "ÁREAS: 9 grupos, 146 verificações, 0 falhas"
+      ],
+      "checks": 146,
+      "failures": 0
+    },
+    {
+      "suite": "area_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "ÁREAS/UI: 39 verificações, 0 falhas"
+      ],
+      "checks": 39,
+      "failures": 0
+    },
+    {
+      "suite": "battle_damage_v1_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "BATALHA DANOS V1: 217 verificações, 0 falhas"
+      ],
+      "checks": 217,
+      "failures": 0
+    },
+    {
+      "suite": "battle_damage_v1_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "BATALHA DANOS V1 UI: 21 verificações, 0 falhas"
+      ],
+      "checks": 21,
+      "failures": 0
+    },
+    {
+      "suite": "battle_navigation_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "NAVEGAÇÃO/UI: 48 verificações, 0 falhas"
+      ],
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "suite": "battle_speed_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "BATTLE SPEED: 111 verificações, 0 falhas"
+      ],
+      "checks": 111,
+      "failures": 0
+    },
+    {
+      "suite": "battle_speed_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "BATTLE SPEED/UI: 16 verificações, 0 falhas"
+      ],
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "suite": "camera_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "CÂMERA: 5 grupos, 110 verificações, 0 falhas"
+      ],
+      "checks": 110,
+      "failures": 0
+    },
+    {
+      "suite": "camera_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "CÂMERA/UI: 50 verificações, 0 falhas"
+      ],
+      "checks": 50,
+      "failures": 0
+    },
+    {
+      "suite": "centered_area_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "ÁREA CENTRADA: 74 verificações, 0 falhas"
+      ],
+      "checks": 74,
+      "failures": 0
+    },
+    {
+      "suite": "damage_affliction_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "AFLIÇÕES/DANOS: 4142 verificações, 0 falhas"
+      ],
+      "checks": 4142,
+      "failures": 0
+    },
+    {
+      "suite": "damage_affliction_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "AFLIÇÕES/UI: 32 verificações, 0 falhas"
+      ],
+      "checks": 32,
+      "failures": 0
+    },
+    {
+      "suite": "damage_ally_02_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "ALIADO #2: 48 verificações, 0 falhas"
+      ],
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "suite": "damage_ally_02_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "ALIADO #2/UI: 30 verificações, 0 falhas"
+      ],
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "suite": "damage_defm_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "DEF M/AFLIÇÕES: 1165 verificações, 0 falhas"
+      ],
+      "checks": 1165,
+      "failures": 0
+    },
+    {
+      "suite": "damage_distance_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "DISTÂNCIA: 73 verificações, 0 falhas"
+      ],
+      "checks": 73,
+      "failures": 0
+    },
+    {
+      "suite": "damage_distance_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "DISTÂNCIA/UI: 22 verificações, 0 falhas"
+      ],
+      "checks": 22,
+      "failures": 0
+    },
+    {
+      "suite": "damage_enemy_02_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "MONSTRO #2: 51 verificações, 0 falhas"
+      ],
+      "checks": 51,
+      "failures": 0
+    },
+    {
+      "suite": "damage_enemy_02_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "MONSTRO #2/UI: 17 verificações, 0 falhas"
+      ],
+      "checks": 17,
+      "failures": 0
+    },
+    {
+      "suite": "damage_enemy_ranges_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "FAIXAS/MONSTROS: 1208 verificações, 0 falhas"
+      ],
+      "checks": 1208,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_exclusivity_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "EXCLUSIVIDADE: 73 verificações, 0 falhas"
+      ],
+      "checks": 73,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_exclusivity_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "EXCLUSIVIDADE/UI: 15 verificações, 0 falhas"
+      ],
+      "checks": 15,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_scales_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "ESCALAS/EQUIPAMENTOS: 512 verificações, 0 falhas"
+      ],
+      "checks": 512,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_scales_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "ESCALAS/UI: 48 verificações, 0 falhas"
+      ],
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "EQUIPAMENTOS/DANOS: 66 verificações, 0 falhas"
+      ],
+      "checks": 66,
+      "failures": 0
+    },
+    {
+      "suite": "damage_evasion_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "ESQUIVA/DANOS: 4093 verificações, 0 falhas"
+      ],
+      "checks": 4093,
+      "failures": 0
+    },
+    {
+      "suite": "damage_export_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "EXPORTAÇÃO/DANOS: 2280 verificações, 0 falhas"
+      ],
+      "checks": 2280,
+      "failures": 0
+    },
+    {
+      "suite": "damage_lab_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "LAB DANOS: 3217 verificações, 0 falhas"
+      ],
+      "checks": 3217,
+      "failures": 0
+    },
+    {
+      "suite": "damage_lab_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "LAB DANOS/UI: 120 verificações, 0 falhas"
+      ],
+      "checks": 120,
+      "failures": 0
+    },
+    {
+      "suite": "damage_mage_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "MAGO: 17300 verificações, 0 falhas"
+      ],
+      "checks": 17300,
+      "failures": 0
+    },
+    {
+      "suite": "damage_mage_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "MAGO/UI: 18 verificações, 0 falhas"
+      ],
+      "checks": 18,
+      "failures": 0
+    },
+    {
+      "suite": "damage_presets_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "PRESETS/DANOS: 92 verificações, 0 falhas"
+      ],
+      "checks": 92,
+      "failures": 0
+    },
+    {
+      "suite": "damage_presets_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "PRESETS/UI: 53 verificações, 0 falhas"
+      ],
+      "checks": 53,
+      "failures": 0
+    },
+    {
+      "suite": "damage_v1_reference_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "REFERÊNCIA V1: 1020 verificações, 0 falhas"
+      ],
+      "checks": 1020,
+      "failures": 0
+    },
+    {
+      "suite": "damage_v1_reference_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "REFERÊNCIA V1/UI: 11 verificações, 0 falhas"
+      ],
+      "checks": 11,
+      "failures": 0
+    },
+    {
+      "suite": "day_lighting_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "ILUMINAÇÃO: 2894 verificações, 0 falhas"
+      ],
+      "checks": 2894,
+      "failures": 0
+    },
+    {
+      "suite": "depth_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "PROFUNDIDADE: 6 grupos, 264 verificações, 0 falhas"
+      ],
+      "checks": 264,
+      "failures": 0
+    },
+    {
+      "suite": "depth_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "PROFUNDIDADE/UI: 23 verificações, 0 falhas"
+      ],
+      "checks": 23,
+      "failures": 0
+    },
+    {
+      "suite": "exploration_rhythm_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "RITMOS/EXPLORAÇÃO: 2124 verificações, 0 falhas"
+      ],
+      "checks": 2124,
+      "failures": 0
+    },
+    {
+      "suite": "exploration_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "EXPLORAÇÃO: 9 grupos, 3338 verificações, 0 falhas"
+      ],
+      "checks": 3338,
+      "failures": 0
+    },
+    {
+      "suite": "exploration_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "INTEGRAÇÃO/UI: 30 verificações, 0 falhas"
+      ],
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "suite": "fullscreen_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "TELA INTEIRA: 10 grupos, 620 verificações, 0 falhas"
+      ],
+      "checks": 620,
+      "failures": 0
+    },
+    {
+      "suite": "fullscreen_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "TELA INTEIRA/UI: 26 verificações, 0 falhas"
+      ],
+      "checks": 26,
+      "failures": 0
+    },
+    {
+      "suite": "interaction_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "INTERAÇÕES: 9 grupos, 3597 verificações, 0 falhas"
+      ],
+      "checks": 3597,
+      "failures": 0
+    },
+    {
+      "suite": "interaction_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "INTERAÇÕES/UI: 36 verificações, 0 falhas"
+      ],
+      "checks": 36,
+      "failures": 0
+    },
+    {
+      "suite": "internal_areas_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "INTERIORES: 8 grupos, 6370 verificações, 0 falhas"
+      ],
+      "checks": 6370,
+      "failures": 0
+    },
+    {
+      "suite": "internal_areas_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "INTERIORES/UI: 52 verificações, 0 falhas"
+      ],
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "suite": "motion_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "MOVIMENTO/MELEE: 9 grupos, 1944 verificações, 0 falhas"
+      ],
+      "checks": 1944,
+      "failures": 0
+    },
+    {
+      "suite": "motion_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "MOVIMENTO/UI: 16 verificações, 0 falhas"
+      ],
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "suite": "rhythm_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "RITMOS: 56409 verificações, 0 falhas"
+      ],
+      "checks": 56409,
+      "failures": 0
+    },
+    {
+      "suite": "rhythm_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "RITMOS/UI: 26 verificações, 0 falhas"
+      ],
+      "checks": 26,
+      "failures": 0
+    },
+    {
+      "suite": "run_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "RESULTADO: 14 grupos, 162488 verificações, 0 falhas"
+      ],
+      "checks": 162488,
+      "failures": 0
+    },
+    {
+      "suite": "seeded_behavior_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "COMPORTAMENTO/SEMENTE: 14860 verificações, 0 falhas"
+      ],
+      "checks": 14860,
+      "failures": 0
+    },
+    {
+      "suite": "seeded_behavior_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "COMPORTAMENTO/UI: 34 verificações, 0 falhas"
+      ],
+      "checks": 34,
+      "failures": 0
+    },
+    {
+      "suite": "terrain_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "RELEVO: 7 grupos, 2814 verificações, 0 falhas"
+      ],
+      "checks": 2814,
+      "failures": 0
+    },
+    {
+      "suite": "terrain_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "RELEVO/UI: 84 verificações, 0 falhas"
+      ],
+      "checks": 84,
+      "failures": 0
+    },
+    {
+      "suite": "town_events_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "EVENTOS/CIDADE: 7 grupos, 214 verificações, 0 falhas"
+      ],
+      "checks": 214,
+      "failures": 0
+    },
+    {
+      "suite": "town_events_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "EVENTOS/CIDADE/UI: 72 verificações, 0 falhas"
+      ],
+      "checks": 72,
+      "failures": 0
+    },
+    {
+      "suite": "ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "UI: 32 verificações, 0 falhas"
+      ],
+      "checks": 32,
+      "failures": 0
+    },
+    {
+      "suite": "world_clock_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "RELÓGIO: 5 grupos, 1478 verificações, 0 falhas"
+      ],
+      "checks": 1478,
+      "failures": 0
+    },
+    {
+      "suite": "world_clock_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "RELÓGIO/UI: 52 verificações, 0 falhas"
+      ],
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "suite": "world_map_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "MUNDO/VILA: 8 grupos, 3638 verificações, 0 falhas"
+      ],
+      "checks": 3638,
+      "failures": 0
+    },
+    {
+      "suite": "world_map_ui_smoke.gd",
+      "exit_code": 0,
+      "result": [
+        "MUNDO/VILA/UI: 49 verificações, 0 falhas"
+      ],
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "suite": "world_time_tests.gd",
+      "exit_code": 0,
+      "result": [
+        "TEMPO/ÁREAS: 6 grupos, 70 verificações, 0 falhas"
+      ],
+      "checks": 70,
+      "failures": 0
+    }
+  ]
+}

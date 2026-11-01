@@ -28,6 +28,8 @@ func _run() -> void:
 	root.add_child(lab)
 	await process_frame
 	lab.set_process(false)
+	lab.preset_picker.select(10) # Cenário histórico usado por esta regressão.
+	lab._start(false)
 	for enemy in lab.model.enemies:
 		enemy["ini_modifier"] = -float(enemy["ini"])
 	expect(lab.cards.size() == 4, "Interface tem quatro cartões")

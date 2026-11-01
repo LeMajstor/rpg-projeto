@@ -4,6 +4,8 @@ signal restart_exploration_requested
 const Hand = preload("res://scripts/ui/battle_hand.gd")
 const Battle = preload("res://scripts/combat/battle_model.gd")
 const Field = preload("res://scripts/ui/battlefield.gd")
+const DamageV1 = preload("res://scripts/combat/damage_v1_bridge.gd")
+const Preparation = preload("res://scripts/ui/battle_preparation.gd")
 
 var model
 var definitions: Dictionary
@@ -47,6 +49,9 @@ var capture_path = ""
 var encounter_mode = false
 var result_reported = false
 var encounter_restart: Button
+var preparation_window
+var preparation_button: Button
+var debug_party_signature = ""
 
 var party_focus_id = ""
 var command_index = 0
@@ -74,6 +79,7 @@ func _ready() -> void:
 		definitions = model.data
 	else:
 		definitions = JSON.parse_string(FileAccess.get_file_as_string("res://data/lab.json"))
+		definitions = DamageV1.extend_definitions(definitions)
 		model = Battle.new(definitions)
 	_build_ui()
 	Input.joy_connection_changed.connect(func(_device, connected):
@@ -164,6 +170,14 @@ func _build_ui() -> void:
 		if legacy:
 			preset_picker.set_item_tooltip(preset_picker.item_count - 1, "Referência histórica; os encontros atuais usam os novos ritmos.")
 	toolbar.add_child(preset_picker)
+	if not encounter_mode:
+		preparation_window = Preparation.new()
+		preparation_window.model = model
+		preparation_window.visible = false
+		preparation_window.start_requested.connect(func():
+			preset_picker.select(model.default_preset_index())
+			_start(false))
+		add_child(preparation_window)
 	mode_picker = OptionButton.new()
 	mode_picker.add_item("Wait / Espera")
 	mode_picker.add_item("Active / Ativo")
@@ -201,6 +215,8 @@ func _build_ui() -> void:
 	battle_speed_picker.item_selected.connect(func(index): model.battle_speed = index + 1)
 	battle_settings.add_child(battle_speed_picker)
 	battle_settings.add_child(_label("Velocidade de carga do ATB · aliados e inimigos", 14, Color("9bb0c8")))
+	if not encounter_mode:
+		preparation_button = _add_button(battle_settings, "Preparar equipamentos V1 [E]", _open_preparation)
 	var controls = HBoxContainer.new()
 	controls.add_theme_constant_override("separation", 12)
 	root.add_child(controls)
@@ -330,7 +346,7 @@ func _build_ui() -> void:
 	for index in range(4):
 		_build_card(team, index)
 	var footer = "Setas / direcional: navegar · Enter / Z / botão sul: confirmar · Esc / X / botão leste: voltar · Tab / Start: opções"
-	footer += "   ·   retorno automático após vitória/fuga" if encounter_mode else "   ·   F5: reiniciar recursos do teste"
+	footer += "   ·   retorno automático após vitória/fuga" if encounter_mode else "   ·   E: equipamentos · F5: reiniciar teste"
 	root.add_child(_label(footer, 13, Color("8da5bf")))
 
 func _build_card(parent: Node, index: int) -> void:
@@ -356,7 +372,7 @@ func _build_card(parent: Node, index: int) -> void:
 	box.add_child(mp)
 	var atb = _bar(Color("edc776"))
 	box.add_child(atb)
-	cards.append({"style": style, "button": button, "stats": stats, "hp": hp, "mp": mp, "atb": atb})
+	cards.append({"panel": panel, "style": style, "button": button, "stats": stats, "hp": hp, "mp": mp, "atb": atb})
 
 func _label(text: String, font_size: int = 16, color: Color = Color("b8ccdf")) -> Label:
 	var label = Label.new()
@@ -434,6 +450,8 @@ func _clear_aim() -> void:
 func _set_menu(kind: String) -> void:
 	if model.selected_id.is_empty() or not model.action.is_empty():
 		return
+	if model.uses_damage_v1() and kind == "items":
+		return
 	_clear_aim()
 	menu_kind = kind
 	list_index = 0
@@ -443,7 +461,9 @@ func _choose_action(id: String, item: String = "") -> void:
 	if model.selected_id.is_empty() or not model.action.is_empty():
 		return
 	var actor = model.actor_by_id(model.selected_id)
-	var skill: Dictionary = model.item_skill(item) if not item.is_empty() else definitions["skills"].get(id, {})
+	if model.uses_damage_v1() and not item.is_empty():
+		return
+	var skill: Dictionary = model.item_skill(item) if not item.is_empty() else model.skill_for(model.actor_by_id(model.selected_id), id)
 	if skill.is_empty() or actor["mp"] < skill.get("mp_cost", 0) or (not item.is_empty() and model.inventory.get(item, 0) <= 0):
 		return
 	target_return_menu = menu_kind if menu_kind in ["skills", "items"] else ""
@@ -458,9 +478,11 @@ func _choose_action(id: String, item: String = "") -> void:
 func _aim_skill() -> Dictionary:
 	if not aim_item.is_empty():
 		return model.item_skill(aim_item)
-	return definitions["skills"].get(aim_id, {})
+	return model.skill_for(model.actor_by_id(model.selected_id), aim_id)
 
 func _on_party_clicked(index: int) -> void:
+	if index >= model.party.size():
+		return
 	var member = model.party[index]
 	if menu_kind == "target" and not aim_item.is_empty():
 		_confirm(member["id"], member["logical_position"])
@@ -485,8 +507,10 @@ func _escape() -> void:
 func _process(delta: float) -> void:
 	if model == null:
 		return
-	_repeat_navigation(delta)
-	if not pause_button.button_pressed:
+	var preparing: bool = preparation_window != null and preparation_window.visible
+	if not preparing:
+		_repeat_navigation(delta)
+	if not pause_button.button_pressed and not preparing:
 		accumulator += minf(delta, 0.25) * speed_slider.value
 		var step: float = definitions["settings"]["fixed_step"]
 		while accumulator >= step:
@@ -522,6 +546,8 @@ func _refresh() -> void:
 	var state = "SELEÇÃO / TEMPO PAUSADO" if model.is_waiting() else "SIMULAÇÃO EM CURSO"
 	if pause_button.button_pressed:
 		state = "PAUSA DE DEPURAÇÃO"
+	if preparation_window != null and preparation_window.visible:
+		state = "PREPARAÇÃO / TEMPO PAUSADO"
 	if model.outcome != "running":
 		state = "BATALHA ENCERRADA"
 	status_label.text = state
@@ -535,7 +561,13 @@ func _refresh() -> void:
 		button.disabled = selected.is_empty() or not model.action.is_empty() or model.outcome != "running"
 	command_buttons[3].disabled = command_buttons[3].disabled or not model.preset.get("can_escape", true)
 	command_buttons[3].tooltip_text = "Fuga bloqueada neste preset" if not model.preset.get("can_escape", true) else "Consome a ação; tenta retirar todo o grupo"
+	command_buttons[1].disabled = command_buttons[1].disabled or selected.get("skills", []).is_empty()
+	command_buttons[2].disabled = command_buttons[2].disabled or model.uses_damage_v1()
+	command_buttons[2].tooltip_text = "Itens ainda não migrados para a V1" if model.uses_damage_v1() else ""
 	for index in range(cards.size()):
+		cards[index]["panel"].visible = index < model.party.size()
+		if index >= model.party.size():
+			continue
 		var actor = model.party[index]
 		var card = cards[index]
 		var ready = model.is_ready(actor)
@@ -543,6 +575,8 @@ func _refresh() -> void:
 		card["button"].text = "    [%d] %s · %s" % [index + 1, actor["short_name"], tag]
 		card["button"].disabled = model.outcome != "running" or not model.action.is_empty() or (not ready and aim_item.is_empty())
 		card["stats"].text = "HP %d/%d   MP %d/%d   INI %.0f\nATB %.0f%%" % [actor["hp"], actor["max_hp"], actor["mp"], actor["max_mp"], model.effective_ini(actor), actor["atb"] * 100]
+		if model.uses_damage_v1():
+			card["stats"].text += "\n%s\n%s" % [actor["loadout"]["weapon"]["name"], actor["loadout"]["armor"]["name"]]
 		card["hp"].value = float(actor["hp"]) / actor["max_hp"] * 100
 		card["mp"].value = float(actor["mp"]) / actor["max_mp"] * 100
 		card["atb"].value = actor["atb"] * 100
@@ -596,7 +630,7 @@ Confirme para escolher a ação.", 14))
 	var busy = not model.action.is_empty()
 	if menu_kind == "skills":
 		for id in actor["skills"]:
-			var skill = definitions["skills"][id]
+			var skill = model.skill_for(actor, id)
 			var button = _game_button(action_menu, "%s · %d MP" % [skill["name"], skill["mp_cost"]], _choose_action.bind(id))
 			button.disabled = busy or actor["mp"] < skill["mp_cost"]
 			list_buttons.append(button)
@@ -627,6 +661,13 @@ Active mantém o combate em curso.", 14))
 	back.disabled = busy
 
 func _refresh_debug() -> void:
+	var signature = str(model.party.map(func(member): return member["short_name"]))
+	if signature != debug_party_signature:
+		debug_party_signature = signature
+		debug_actor.clear()
+		for member in model.party:
+			debug_actor.add_item(member["short_name"])
+		last_debug_selection = ""
 	_sync_fullscreen_editor()
 	var lines: Array[String] = []
 	lines.append("Semente da batalha: %d" % model.simulation_seed)
@@ -772,7 +813,7 @@ func _enabled_index(buttons: Array, current: int, step: int = 1) -> int:
 func _sync_hands() -> void:
 	var free = model.action.is_empty() and model.outcome == "running"
 	for index in range(cards.size()):
-		cards[index]["button"].get_meta("battle_hand").active = free and not settings_open and model.selected_id.is_empty() and model.party[index]["id"] == party_focus_id
+		cards[index]["button"].get_meta("battle_hand").active = index < model.party.size() and free and not settings_open and model.selected_id.is_empty() and model.party[index]["id"] == party_focus_id
 	if command_index >= 0 and command_buttons[command_index].disabled and free:
 		command_index = maxi(0, _enabled_index(command_buttons, command_index))
 	for index in range(command_buttons.size()):
@@ -894,6 +935,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _handle_battle_input(event: InputEvent) -> bool:
+	if preparation_window != null and preparation_window.visible:
+		return false
 	if model == null or get_viewport().gui_get_focus_owner() is LineEdit:
 		return false
 	if event is InputEventJoypadMotion:
@@ -951,7 +994,14 @@ func _handle_battle_input(event: InputEvent) -> bool:
 			if not settings_open: _escape()
 		KEY_F3: debug_button.button_pressed = not debug_button.button_pressed
 		KEY_F5: _start(false)
+		KEY_E:
+			if preparation_window != null:
+				_open_preparation()
 		KEY_SPACE: pause_button.button_pressed = not pause_button.button_pressed
 		_: return false
 	_refresh()
 	return true
+
+func _open_preparation() -> void:
+	_reset_navigation_hold()
+	preparation_window.open()

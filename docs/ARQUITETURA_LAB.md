@@ -2,6 +2,8 @@
 
 `GDD.md` é a fonte de regras; `DECISOES_TECNICAS.md` registra preenchimentos experimentais autorizados. `ARQUITETURA.md` permanece como proposta histórica anterior ao GDD consolidado.
 
+**D126:** a UI independente acrescenta `data/battle_damage_v1.json` por `scripts/combat/damage_v1_bridge.gd`. O preset novo seleciona a calculadora/composição compartilhadas do laboratório de danos; o modelo temporal continua responsável por HP/MP, ATB e impacto. `scripts/ui/battle_preparation.gd` mantém equipamentos pendentes até o reinício. A exploração continua carregando apenas `data/lab.json`. Dados, limites e testes em [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
+
 Na v0.2, a exploração compartilha `BattleModel` com esta cena através de `configure_encounter`, e recebe sinais de resultado. O núcleo e os presets não foram reimplementados. O laboratório é iniciado diretamente por sua cena/lançador; o projeto principal inicia `scenes/exploration_test.tscn`. Dependências e novos arquivos em [EXPLORACAO_V02.md](EXPLORACAO_V02.md).
 
 ```text

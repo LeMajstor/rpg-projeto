@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+PASS _test_preservation_and_profiles
+PASS _test_analytic_rhythm
+PASS _test_determinism
+PASS _test_flight_and_bounds
+PASS _test_wait_active_and_atb
+PASS _test_interrupt_every_phase
+PASS _test_target_geometry
+PASS _test_sequences
+PASS _test_asymmetric_return
+PASS _test_approach_preset
+PASS _test_invalid_and_degenerate
+RITMOS: 56409 verificações, 0 falhas

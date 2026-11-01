@@ -2,6 +2,8 @@
 
 **Referência vigente:** [V1 de danos, atributos e equipamentos](DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md), fechada por D124 e aceita pelo usuário em 01/11/2026 por D125. As seções históricas abaixo preservam o processo experimental; decisões posteriores substituem os parâmetros antigos quando indicado.
 
+**D126:** fórmula, composição e cinco fichas dessa referência agora também são usadas pelo novo cenário do laboratório de batalha independente. A biblioteca pessoal não é regravada pela batalha. Aflições ficam para a segunda parte; exploração e cenários antigos conservam seus cálculos. Ver [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
+
 **Status em 26/10/2026 (D60): implementado para experimentar e ajustar durante os testes**, conforme autorização do usuário. Cena independente `scenes/damage_lab.tscn`, aberta por `Executar laboratorio de danos.command`. O combate da exploração e o laboratório de combate continuam com seus cálculos anteriores. Fórmula, fichas e números abaixo são **experimentais**, sem confirmação de balanceamento definitivo.
 
 ## Confirmado

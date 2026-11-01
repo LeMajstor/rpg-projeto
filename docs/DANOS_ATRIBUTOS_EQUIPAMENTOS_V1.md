@@ -6,6 +6,8 @@ Não há pendência que impeça o fechamento desta primeira versão. Avaliaçõe
 
 A exploração e o combate integrado conservam seus cálculos anteriores. Este fechamento não migra automaticamente fichas, equipamentos ou fórmulas para eles.
 
+**Etapa posterior autorizada — D126:** a primeira integração ao laboratório de batalha independente foi implementada com três aliados, dois monstros, básicos físicos, magia ofensiva do mago e preparação de equipamentos. Compartilha este cálculo sem alterar a referência. Aflições ficam para a segunda parte; exploração permanece fora da migração. Roteiro em [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
+
 ## Magia ofensiva básica — D123/D124
 
 | Propriedade | Referência adotada |

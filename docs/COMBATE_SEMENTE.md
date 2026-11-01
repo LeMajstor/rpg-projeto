@@ -1,5 +1,7 @@
 # Combate atual — comportamento por semente
 
+**Atualização D126 (01/11/2026):** o laboratório independente agora abre em **V1 · danos e equipamentos**, reutilizando os comportamentos por semente pesado/ágil com três aliados e dois monstros. A demonstração `lab_seeded` descrita abaixo continua no seletor; os encontros da exploração permanecem iguais. Roteiro da nova integração: [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
+
 **Decisão de escopo — 26/10/2026 (D48):** este modelo de movimentação permanece até a pré-alfa, inclusive. A geometria dos caminhos continua predefinida, com as variações atuais de comportamento por semente. Uma movimentação mais orgânica sem rota fixa fica como possibilidade futura, após esse marco, sem solução escolhida ou implementação autorizada.
 
 **Battle Speed (D50/D51):** padrão 4, escala 1 lento→8 rápido. Ritmos anteriores deslocados uma posição acima (3 → 4, 4 → 5 etc.); nível 6 conserva os tempos originais de referência; ajuste somente de ATB, disponível no menu da exploração e no laboratório. Ver [BATTLE_SPEED.md](BATTLE_SPEED.md).

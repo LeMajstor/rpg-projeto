@@ -5,6 +5,8 @@
 
 **Status:** Godot + GDScript confirmados. Laboratório de combate e protótipo integrado de exploração v0.2 autorizados; detalhes em [LABORATORIO.md](LABORATORIO.md) e [EXPLORACAO_V02.md](EXPLORACAO_V02.md). Plataforma comercial, orçamento e arte definitiva continuam abertos. Testes locais em desktop são uma escolha operacional.
 
+**D126 — 01/11/2026:** primeira integração da referência de danos V1 ao laboratório de batalha independente implementada: três aliados, Monstros #1/#2, básicos físicos, magia ofensiva do mago e preparação dos seis estágios de equipamentos. Composição/fórmula compartilhadas; HP/MP acumulados, custo na confirmação e dano no impacto. Preserva ATB/controles/retornos e movimentos por semente. **Aflições ficam para a segunda parte.** Exploração e cenários anteriores mantêm suas regras; descrições históricas de isolamento de D60–D125 são ampliadas somente para este cenário. Ver [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
+
 ## 1. Visão e pilares
 
 RPG digital de fantasia medieval, magia, raças e classes, inspirado na sensação de aventura de *Breath of Fire I* e *Chrono Trigger*; não será cópia das obras. A história existe como premissa inicial, mas seu conteúdo ainda será refinado.

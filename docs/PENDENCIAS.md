@@ -2,7 +2,9 @@
 
 Esta lista impede que o Codex transforme lacunas em decisões arbitrárias.
 
-**D125 — laboratório de danos V1 finalizado e aceito pelo usuário em 01/11/2026.** Não há pendência impeditiva desse fechamento. As avaliações de integração, ATB, recursos entre encontros e progressão abaixo são trabalho futuro; a referência atual permanece. Ver `DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md`.
+**D125 — laboratório de danos V1 finalizado e aceito pelo usuário em 01/11/2026.** Não há pendência impeditiva desse fechamento. A referência atual permanece. D126 autoriza e implementa a primeira integração ao laboratório de batalha; progressão e avaliações adicionais continuam separadas. Ver `DANOS_ATRIBUTOS_EQUIPAMENTOS_V1.md`.
+
+- **D126 — primeira integração implementada:** três aliados, dois monstros, básicos físicos, magia ofensiva do mago e preparação dos seis estágios de equipamentos no laboratório independente. Fórmula compartilhada; HP/MP temporais, ATB e retornos verificados. Falta a avaliação de gameplay pelo diretor criativo, sem ajustar automaticamente as fichas. **Aflições ficam para a segunda parte**, por decisão expressa: definir duração/execução dos efeitos antes de integrá-los. Itens/buffs e migração à exploração não entram neste primeiro recorte. Ver `BATALHA_DANOS_V1.md`.
 
 - **D112/D113/P13/P14/D115 — mago implementado:** ficha e seis estágios de cajados/vestes cadastrados no laboratório, com INI7 e DEF F/DEF D naturais16. Composição mágica e persistência disponíveis; três presets anteriores preservados.21 suítes e bateria de120 mil tentativas concluídas sem falhas. Nenhuma pendência do cadastro solicitado; avaliar balanceamento, ritmo em batalha e futuros atributos/inimigos para os estágios superiores. Ver `ALIADO_03.md`.
 

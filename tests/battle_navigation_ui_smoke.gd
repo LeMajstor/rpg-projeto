@@ -88,6 +88,8 @@ func _run() -> void:
 	root.add_child(lab)
 	await process_frame
 	lab.set_process(false)
+	lab.preset_picker.select(10) # Regressão da equipe histórica de quatro.
+	lab._start(false)
 	key(KEY_ENTER)
 	expect(lab.model.selected_id.is_empty(), "Confirmar não seleciona card sem ATB pronto")
 	reset()

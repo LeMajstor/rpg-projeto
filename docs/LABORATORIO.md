@@ -1,6 +1,8 @@
 # Laboratório de combate — escopo e teste manual
 
-**Modelo vigente:** o laboratório abre em **Atual · comportamento por semente** e todos os seis encontros de exploração usam a nova versão, com formações variadas. Todos os dez presets anteriores são legados. Controles, configuração e testes em [COMBATE_SEMENTE.md](COMBATE_SEMENTE.md). As demonstrações anteriores abaixo são registros históricos.
+**Modelo vigente (D126):** o laboratório independente abre em **V1 · danos e equipamentos**: três aliados contra Monstros #1/#2, básicos físicos e magia ofensiva do mago. **E** abre preparação de equipamentos com seis estágios por família; alterações entram no Novo teste, com atributos naturais/efetivos visíveis. Fórmula compartilhada com o laboratório de danos; aflições ficam para a segunda parte. Roteiro em [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
+
+Os quinze cenários anteriores continuam disponíveis. Os seis encontros da exploração preservam o combate anterior por semente, com quatro aliados e formações variadas. Controles, configuração e testes desse movimento em [COMBATE_SEMENTE.md](COMBATE_SEMENTE.md). As demonstrações de habilidades/itens abaixo se referem aos cenários anteriores.
 
 **Autorizado pelo usuário em 23/10/2026.** Prioridade: funcionamento das mecânicas, com gráficos provisórios. Sem exploração, missões, níveis ou técnicas conjuntas. Godot + GDScript confirmados; fichas/números experimentais.
 
@@ -50,4 +52,4 @@ Pausa/velocidade ficam na barra superior. Passo avança 1/60 s, respeitando Wait
 
 ## Limites
 
-Sem save da aventura, equipamentos, buffs, narrativa ou criação de personagem. Salvamento restrito e carregar save após derrota continuam requisitos do jogo; este laboratório tem Game Over e reinício manual. Perfis/habilidades/itens não são conteúdo definitivo. Consulte [DECISOES_TECNICAS.md](DECISOES_TECNICAS.md).
+Sem save da aventura, inventário de equipamentos, buffs, narrativa ou criação de personagem. A V1 permite preparar equipamentos de teste antes do reinício. Salvamento restrito e carregar save após derrota continuam requisitos do jogo; este laboratório tem Game Over e reinício manual. Perfis/habilidades/itens não são conteúdo definitivo. Consulte [DECISOES_TECNICAS.md](DECISOES_TECNICAS.md).

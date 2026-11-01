@@ -1,5 +1,7 @@
 # Escolhas técnicas do laboratório
 
+**D126 — integração de danos V1 (01/11/2026):** `damage_v1_bridge.gd` acrescenta o cenário somente à UI independente, usando uma cópia versionada das cinco fichas de D125 e o catálogo/composição/cálculo compartilhados. `battle_model.gd` escolhe o cálculo pelo `damage_ruleset` do preset, com fluxos de dano separados da IA e do movimento. HP/MP pertencem ao combate; custo único na confirmação, amostra pura no impacto. Equipamentos pendentes só são aplicados no reinício; continuação preserva recursos e equipamento ativo. Novas rotas reaproveitam pesado/ágil e perfil uniforme, escolhas técnicas provisórias. Exploração/dados anteriores não são alterados. Aflições ficam para segunda parte; consumíveis/habilidades antigos não são reinterpretados. Ver `BATALHA_DANOS_V1.md`.
+
 **23/10/2026.** O usuário confirmou Godot + GDScript e autorizou implementar o laboratório, documentando escolhas para lacunas. Os itens abaixo são decisões técnicas experimentais desta implementação, **não aprovação de balanceamento ou conteúdo definitivo**.
 
 O laboratório abaixo permanece acessível separadamente. As escolhas adicionais do protótipo integrado de exploração v0.2 estão em [EXPLORACAO_V02.md](EXPLORACAO_V02.md), incluindo seguimento por caminho, troca de líder, interação e compartilhamento de recursos.
