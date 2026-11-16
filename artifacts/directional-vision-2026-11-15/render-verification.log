@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+{"area":"vila","camera_queries_max":1,"draw_max_usec":521,"draw_median_usec":453}
+{"area":"entrada_mundo","camera_queries_max":1,"draw_max_usec":1374,"draw_median_usec":1286}
+{"area":"entrada_mundo_noite","camera_queries_max":1,"draw_max_usec":1303,"draw_median_usec":1232}
+{"area":"floresta","camera_queries_max":1,"draw_max_usec":1396,"draw_median_usec":1273}
+{"area":"rampa","camera_queries_max":1,"draw_max_usec":2402,"draw_median_usec":2044}
+{"area":"platô","camera_queries_max":1,"draw_max_usec":2147,"draw_median_usec":2015}
+{"area":"test_dungeon_upper/escada","culled_draw_calls":115,"unculled_draw_calls":305,"view_size":"(720, 480)"}
+{"area":"test_dungeon_upper/escada","culled_draw_calls":133,"unculled_draw_calls":305,"view_size":"(1392, 594)"}
+RENDER: 91 verificações, 0 falhas

@@ -28,6 +28,7 @@ var bounds: Rect2
 var contact_id = ""
 var wall_polygons: Array[PackedVector2Array] = []
 var body_polygons: Array[PackedVector2Array] = []
+var obstacle_revision = 0
 
 func automatic_encounters() -> bool:
 	return data.get("encounter_rules", {}).get("automatic_contact", false) and data.get("area_type", "") != "overworld"
@@ -43,7 +44,7 @@ func contact_along(from: Vector2, to: Vector2) -> Dictionary:
 	for entity in entities:
 		if entity["kind"] != "encounter" or not entity["present"] or not entity["interaction_available"] or entity["placement_pending"]:
 			continue
-		var t = Perception.static_fraction(entity,from,to) if Perception.stationary(entity) else Contact.fraction(from,to,entity["position"],contact_radius())
+		var t = Perception.static_fraction(entity,from,to,contact_radius()) if Perception.stationary(entity) else Contact.fraction(from,to,entity["position"],contact_radius())
 		if Perception.stationary(entity) and is_finite(t) and not clear_sight(from.lerp(to,t),entity["position"]) and from!=to:
 			# Pode entrar visível no cone após contornar a borda de uma parede.
 			var steps=maxi(1,ceili(from.distance_to(to)/4.0))
@@ -52,13 +53,13 @@ func contact_along(from: Vector2, to: Vector2) -> Dictionary:
 			for index in range(1,steps+1):
 				var current=float(index)/steps
 				var point=from.lerp(to,current)
-				if Perception.in_static_area(entity,point) and clear_sight(point,entity["position"]):
+				if Perception.in_static_area(entity,point,contact_radius()) and clear_sight(point,entity["position"]):
 					var low=previous
 					var high=current
 					for refinement in range(12):
 						var middle=(low+high)*0.5
 						point=from.lerp(to,middle)
-						if Perception.in_static_area(entity,point) and clear_sight(point,entity["position"]):
+						if Perception.in_static_area(entity,point,contact_radius()) and clear_sight(point,entity["position"]):
 							high=middle
 						else:
 							low=middle
@@ -78,6 +79,17 @@ func clear_sight(from: Vector2, to: Vector2) -> bool:
 		if Walls.blocks(shape,from,to):
 			return false
 	return true
+
+func sight_blockers(origin: Vector2, reach: float) -> Array[PackedVector2Array]:
+	# Só o F3 monta os contornos de visão; a detecção usa ângulo + visão exata.
+	var result: Array[PackedVector2Array]=[]
+	for rect in obstacles:
+		if rect.grow(reach+0.01).has_point(origin):
+			result.append(PackedVector2Array([rect.position,Vector2(rect.end.x,rect.position.y),rect.end,Vector2(rect.position.x,rect.end.y)]))
+	for index in range(wall_polygons.size()):
+		if _rect(data["wall_shapes"][index]["rect"]).grow(reach+0.01).has_point(origin):
+			result.append(wall_polygons[index])
+	return result
 
 func can_traverse(from: Vector2, to: Vector2) -> bool:
 	if not is_walkable(from) or not is_walkable(to):
@@ -107,6 +119,8 @@ func _init(definitions: Dictionary, member_ids: Array) -> void:
 			if definition.has("movement_behavior_data"):
 				options={"kind":definition["movement_behavior_data"]["kind"],"behavior":definition["movement_behavior_data"],"seed":definition["seed"],"presentation":definition["movement_behavior_data"].get("presentation",{})}
 			entity["route_state"] = Route.create(definition.get("route", [definition["position"]]), float(definition.get("speed", 0)),options)
+			if Perception.directional(entity) and not Perception.stationary(entity):
+				entity["look_direction"]=Perception.initial_direction(entity)
 			entity["default_placement"] = {"position": definition["position"], "route": definition.get("route", [definition["position"]]), "speed": definition.get("speed", 0)}
 			entity["placement_key"] = "default"
 			entity["placement_pending"] = false
@@ -376,6 +390,7 @@ func toggle_door(id: String) -> String:
 	return "door_open" if door["open"] else "door_closed"
 
 func _rebuild_obstacles() -> void:
+	obstacle_revision+=1
 	obstacles.clear()
 	wall_polygons.clear()
 	body_polygons.clear()

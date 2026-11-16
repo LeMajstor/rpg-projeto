@@ -35,11 +35,18 @@ func run() -> void:
 	place(Vector2(420,1165))
 	screen.map_view.show_path=true
 	screen._refresh_map()
-	await capture("static-circle-and-cone")
+	await capture("static-front-and-peripheral")
 	expect(screen.session.state=="exploration" and not lower.Perception.in_static_area(statue,lower.leader_position),"Líder fora das duas áreas não inicia luta")
 	screen.map_view.show_path=false
 	screen._refresh_map()
 	var shared=screen.session.battle
+	place(stationary_position+Vector2(-50,0))
+	screen._physics_process(1.0/120.0)
+	expect(screen.session.state=="exploration","Aproximar pelas costas a50 unidades não ativa o estático")
+	screen.map_view.show_path=true
+	screen._refresh_map()
+	await capture("static-blind-back")
+	screen.map_view.show_path=false
 	place(Vector2(410,1100))
 	screen._physics_process(1.0/120.0)
 	lab=screen.combat_ui

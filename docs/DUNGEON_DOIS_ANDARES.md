@@ -1,5 +1,9 @@
 # Dungeon ampliada e patrulhas territoriais
 
+**D159 — visão direcional autorizada e implementada em 15/11/2026:** móveis e estáticos usam visão frontal longa e periférica curta, orientadas pelo olhar e bloqueadas por paredes/portas. Substitui detecção circular dos móveis e círculo próximo dos estáticos. Parâmetros experimentais: frontal 180 unidades/90°, periférica 60/180°, costas sem percepção; contato físico com o líder continua iniciando a batalha completa de qualquer representante. Móveis olham no sentido do deslocamento e conservam orientação nas pausas; estáticos mantêm direção configurada. F3 mostra contornos recortados pelos sólidos. Mantém detecção individual, territórios fixos, perseguição/retomada, grupos e regras compartilhadas de combate. Varredura de cabeça permanece futura. Ver [VISAO_DIRECIONAL.md](VISAO_DIRECIONAL.md).
+
+Descrições de círculos de percepção abaixo preservam a etapa D158 anterior; o catálogo jogável usa D159.
+
 **Atualização vigente — D158:** cada participante da batalha aparece no mapa: 18 monstros nos mesmos seis encontros, nove por andar, com detecção individual. Movimento reutiliza o perfil comum pesado/ágil/voador/estático; estáticos ficam imóveis e ativam a batalha por círculo 60 ou cone 180/90° simultâneos, ambos bloqueados por paredes e somente pelo líder. Móveis detectam a 180, com perseguição/território por perfil e retomada da rota fixa sem deslocar sua área. Vitória/fuga bem-sucedida remove os três representantes do grupo. Dois pisos refeitos: galerias em L/T e cavernas irregulares, com caminhos para romper visão. Escadas, recursos, câmera e regras de batalha preservados. Substitui representação única, patrulha obrigatória de todos e valores uniformes de D157. Ver [INIMIGOS_INDIVIDUAIS.md](INIMIGOS_INDIVIDUAIS.md).
 
 O restante deste documento preserva o registro histórico anterior; representação e parâmetros uniformes foram substituídos por D158.

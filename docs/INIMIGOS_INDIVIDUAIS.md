@@ -1,5 +1,9 @@
 # Inimigos individuais e visão dos estáticos
 
+**D159 — visão direcional autorizada e implementada em 15/11/2026:** móveis e estáticos usam visão frontal longa e periférica curta, orientadas pelo olhar e bloqueadas por paredes/portas. Substitui detecção circular dos móveis e círculo próximo dos estáticos. Parâmetros experimentais: frontal 180 unidades/90°, periférica 60/180°, costas sem percepção; contato físico com o líder continua iniciando a batalha completa de qualquer representante. Móveis olham no sentido do deslocamento e conservam orientação nas pausas; estáticos mantêm direção configurada. F3 mostra contornos recortados pelos sólidos. Mantém detecção individual, territórios fixos, perseguição/retomada, grupos e regras compartilhadas de combate. Varredura de cabeça permanece futura. Ver [VISAO_DIRECIONAL.md](VISAO_DIRECIONAL.md).
+
+Descrições de círculos de percepção abaixo preservam a etapa D158 anterior; o catálogo jogável usa D159.
+
 **D158 — autorizado e implementado em 15/11/2026.** O mapa representa cada participante do encontro existente. Detecção individual, movimento conforme o tipo compartilhado da batalha e novos layouts com obstáculos para quebrar visão. Esta é a regra vigente da exploração; os registros D155–D157 descrevem suas etapas anteriores.
 
 ## Confirmado e implementado
@@ -31,7 +35,7 @@ Ao desistir, o monstro procura a projeção ou vértice acessível próximo da r
 
 O estático não patrulha nem persegue. Sua posição e orientação são fixas. Possui simultaneamente:
 
-- **Círculo de proximidade:** raio60 unidades, em todas as direções.
+- **Círculo de proximidade:** raio 60 unidades, em todas as direções.
 - **Cone frontal:** alcance180 unidades e abertura total90°, centrado em `vision_direction`.
 
 Entrar em **qualquer uma** das áreas com o líder inicia imediatamente o encontro completo, sem exigir contato físico ou E. **Paredes/portas bloqueiam ambas**; a presença geométrica na área atrás de uma parede não ativa a batalha. A verificação acompanha o segmento percorrido pelo líder para não ignorar uma entrada rápida nem a saída de uma sombra de parede. Seguidores e controles bloqueados não ativam os sensores.

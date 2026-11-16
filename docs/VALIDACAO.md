@@ -1,5 +1,15 @@
 # Validação da entrega
 
+## Visão frontal e periférica — D159, 15/11/2026
+
+**76 suítes headless, 353.355 verificações, zero falhas.** Nova suíte `directional_vision_tests.gd`: 165 verificações, com auditoria de milhares de posições contra os contornos visuais, direção/repouso, perda de visão, detecção individual, contato traseiro, varredura, bloqueio retangular/poligonal, portas/cache e parâmetros inválidos. `individual_enemies_tests.gd`: 289 verificações atualizadas à aproximação traseira furtiva até o contato físico.
+
+UI atual: 29 verificações headless / 39 gráficas, dez capturas dos dois andares, incluindo aproximação a 50 unidades atrás de estático sem batalha. `render_performance.gd`: 91 verificações gráficas, 19 comparações de pixels idênticos contra desenho completo, com F3, tamanhos diferentes e topo elevado. Reprodução por semente, recursos/estados e paridade do combate cobertos pela regressão.
+
+Sonda com monstros em movimento: mediana do desenho no piso2 de 0,784–0,834 ms sem F3 e 1,153–1,202 ms com F3 (CPU local, Godot 4.7.2/Compatibility/Apple M3 Pro; não garantia universal de FPS). Cache dos contornos, filtro de sólidos próximos e descarte de paredes fora da câmera preservados. Detecção não usa os polígonos do desenho.
+
+Resultados, executor, métricas, hashes e imagens em `artifacts/directional-vision-2026-11-15/`. Regras e comandos em [VISAO_DIRECIONAL.md](VISAO_DIRECIONAL.md). Relatórios D158 abaixo permanecem históricos.
+
 ## Correção de desempenho no segundo andar — 15/11/2026
 
 Paredes poligonais completamente fora da câmera deixam de ser reconstruídas/desenhadas. O recorte inclui faces e topo elevado, conservando a oclusão. Perfis, rotas, detecção e regras de combate permanecem iguais; todos os monstros continuam simulados fora da câmera.

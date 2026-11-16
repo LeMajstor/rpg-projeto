@@ -1365,7 +1365,7 @@
       "presentation": "stairs_down"
     }
   ],
-  "footer": "Móveis: contato · Estáticos: círculo/cone · E: objetos e escadas · F3: áreas/rotas",
+  "footer": "Móveis: contato · Estáticos: visão frontal/periférica · E: objetos e escadas · F3: áreas/rotas",
   "area_type": "dungeon",
   "time_advances": false,
   "lighting_profile": "fixed",

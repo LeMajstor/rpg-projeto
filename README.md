@@ -46,17 +46,17 @@ godot --path . --scene res://scenes/damage_lab.tscn
 | --- | --- |
 | WASD / setas | Andar sem diagonais; eixo mais recente tem prioridade. |
 | Tab / Esc / Equipe | Menu de liderança; escolha um integrante ativo. |
-| E / botão contextual | Interagir com NPC, objeto ou entrada/saída mais próxima ao alcance; móveis iniciam por contato com o líder; estáticos usam círculo/cone de visão. |
+| E / botão contextual | Interagir com NPC, objeto ou entrada/saída mais próxima ao alcance; móveis iniciam por contato com o líder; estáticos usam visão frontal/periférica. |
 | E / Enter / Espaço / Avançar | Avançar ou encerrar falas. |
 | 1 / 2 ou clique | Escolher resposta no diálogo do NPC 2. |
-| F3 | Ver trilha, sólidos, rotas, territórios, círculo/cone dos estáticos, alturas e relógio. |
+| F3 | Ver trilha, sólidos, rotas, territórios, visão frontal/periférica recortada por paredes, alturas e relógio. |
 | Reiniciar teste | Restaurar explicitamente todas as áreas e os recursos iniciais. |
 
 O jogo inicia na **vila**. A casa fica ao norte; o **portão a nordeste** usa E para sair ao mundo aberto. Ande à direita pela faixa inicial e depois suba pelo lado direito dos blocos. NPCs 4 e 5 estão nas ruas; NPCs 1–3 permanecem na casa. NPC 2 oferece duas respostas.
 
 No **mundo aberto**, a interação **Entrar na vila** permite voltar. Para a dungeon, siga o caminho para leste, depois norte e novamente leste até a entrada de pedra. Use E para entrar. Mar, montanhas, colinas e massas florestais bloqueiam passagem. Um platô ao norte do marcador da vila tem **rampa**: contorne a vila pelo leste e siga o desvio à esquerda. **W/↑ sobe; S/↓ desce**, com altura gradual para cada integrante. Caminhos continuam livres; não há encontros no mundo. Detalhes em [RELEVO_E_FLORESTAS.md](docs/RELEVO_E_FLORESTAS.md).
 
-Na **dungeon**, cada monstro corresponde a um participante da batalha e detecta o líder individualmente. Pesados, ágeis e voadores usam os perfis comuns, com velocidades e territórios próprios; paredes quebram a visão e a perseguição. Estáticos permanecem parados: entrar no círculo de60 unidades ou cone frontal de180 unidades/90° inicia a batalha, desde que não haja parede bloqueando. Contato com qualquer móvel também inicia o grupo completo de três inimigos. Seguidores não disparam encontros. Ao desistir, o móvel retoma um trecho acessível próximo da rota fixa. **M2 continua impedindo fuga em batalha**; vitória/fuga bem-sucedida remove os três representantes daquele grupo. Use a alavanca na porta central e E nas escadas para visitar os dois pisos. Ao sair, retorna ao mundo; a casa não recupera HP/MP. [Regras e roteiro atual](docs/INIMIGOS_INDIVIDUAIS.md).
+Na **dungeon**, cada monstro corresponde a um participante da batalha e detecta somente o líder, individualmente. Todos usam **visão frontal longa e periférica curta**, orientadas pelo olhar e bloqueadas por paredes. Aproximação pelas costas não causa percepção; contato físico continua iniciando a batalha completa em qualquer direção. Estáticos permanecem parados e iniciam o encontro ao ver o líder. Móveis usam os perfis comuns, olham no sentido do deslocamento e retomam a rota fixa ao perder visão. **F3:** dourado = frontal, azul = periférica, verde = território da patrulha. Parâmetros de teste frontal 180/90° e periférico 60/180°. **M2 impede fuga em batalha**; vitória/fuga bem-sucedida remove os três representantes do grupo. Use a alavanca na porta central e E nas escadas para visitar os dois pisos. [Visão e roteiro atual](docs/VISAO_DIRECIONAL.md).
 
 Roteiro e arquivos atuais em [VILA_E_MUNDO.md](docs/VILA_E_MUNDO.md). Câmera, profundidade e transições conservam os controles existentes.
 

@@ -3,11 +3,14 @@ extends Control
 const Camera = preload("res://scripts/exploration/exploration_camera.gd")
 const Depth = preload("res://scripts/exploration/exploration_depth.gd")
 const DayLighting = preload("res://scripts/exploration/day_lighting.gd")
+const VisionGeometry = preload("res://scripts/exploration/vision_geometry.gd")
 var session:
 	set(value):
 		if session != null and session.clock.time_changed.is_connected(_on_time_changed):
 			session.clock.time_changed.disconnect(_on_time_changed)
 		session = value
+		_vision_world=null
+		_vision_cache.clear()
 		if session != null:
 			session.clock.time_changed.connect(_on_time_changed)
 		queue_redraw()
@@ -21,6 +24,8 @@ var _frame_origin = Vector2.ZERO
 var _frame_scale = 1.0
 var _frame_is_night = false
 var _ellipse_points = PackedVector2Array()
+var _vision_world
+var _vision_cache: Dictionary = {}
 
 func _ready() -> void:
 	custom_minimum_size = Vector2(760, 420)
@@ -164,7 +169,9 @@ func _draw() -> void:
 			if entity["present"] and entity["kind"] == "encounter" and world.automatic_encounters():
 				var awareness: Dictionary = entity.get("awareness", {})
 				var rules=world.Perception.rules(world,entity)
-				if world.Perception.stationary(entity):
+				if world.Perception.directional(entity):
+					_draw_vision(world,entity)
+				elif world.Perception.stationary(entity):
 					draw_arc(screen_point(entity["position"]),float(rules["near_radius"])*scale,0,TAU,40,Color("ffe0a0"),1.5)
 					var direction=Vector2(entity["vision_direction"][0],entity["vision_direction"][1]).angle()
 					var half=deg_to_rad(float(rules["cone_degrees"])*0.5)
@@ -174,7 +181,7 @@ func _draw() -> void:
 					draw_colored_polygon(cone,Color(1,0.8,0.4,0.12))
 					cone.append(cone[0])
 					draw_polyline(cone,Color("e8b575"),1.5)
-				else:
+				if not world.Perception.stationary(entity):
 					var patrol: Array=world.EncounterMotion.Territory.points(entity)
 					for index in range(patrol.size()):
 						var a: Vector2=patrol[index]
@@ -186,7 +193,8 @@ func _draw() -> void:
 							var side=(b-a).orthogonal().normalized()*float(rules["chase_limit"])
 							for sign_value in [-1,1]:
 								draw_line(screen_point(a+side*sign_value),screen_point(b+side*sign_value),Color("b3d99b",0.25),1)
-					draw_arc(screen_point(entity["position"]),float(rules["detection_radius"])*scale,0,TAU,48,Color("e9af6e",0.5),1)
+					if not world.Perception.directional(entity):
+						draw_arc(screen_point(entity["position"]),float(rules["detection_radius"])*scale,0,TAU,48,Color("e9af6e",0.5),1)
 				_label(entity["position"]+Vector2(25,5),{"patrol":"patrulha","chase":"persegue","return":"retorna","static":"estático"}.get(awareness.get("state","patrol"),""),Color("ffe3aa"),12)
 
 			var points: Array = entity["route_state"]["points"]
@@ -197,11 +205,48 @@ func _draw() -> void:
 	# Instruções ficam na tela; não viajam com as coordenadas do mapa.
 	var hud_height = 44.0 if show_path else 25.0
 	draw_rect(Rect2(0, size.y - hud_height, size.x, hud_height), Color(0.04, 0.08, 0.1, 0.85))
-	draw_string(font, Vector2(12, size.y - hud_height + 17), world.data.get("footer", "E: interagir"), HORIZONTAL_ALIGNMENT_LEFT, size.x - 24, 13, Color("b2c8c1"))
+	var footer: String=world.data.get("footer", "E: interagir")
+	if show_path and world.data.has("encounter_groups"):
+		footer="Visão: dourado = frontal · azul = periférica · verde = território da patrulha · paredes bloqueiam visão"
+	draw_string(font, Vector2(12, size.y - hud_height + 17), footer, HORIZONTAL_ALIGNMENT_LEFT, size.x - 24, 13, Color("b2c8c1"))
 	if show_path:
 		var center = camera_center()
 		draw_string(font, Vector2(12, size.y - 7), "Líder (%.1f, %.1f) · altura %.1f · câmera (%.1f, %.1f) · escala %.3f" % [world.leader_position.x, world.leader_position.y, world.elevation_at(world.leader_position), center.x, center.y, scale], HORIZONTAL_ALIGNMENT_LEFT, size.x - 24, 13, Color("e4c776"))
 	_drawing = false
+
+func _vision_polygons(world,entity: Dictionary) -> Array[PackedVector2Array]:
+	if _vision_world != world:
+		_vision_world=world
+		_vision_cache.clear()
+	var config: Dictionary=entity["exploration_behavior"]["vision"]
+	var direction: Vector2=world.Perception.direction(entity)
+	var signature=[entity["position"],direction,world.obstacle_revision,config]
+	var cached: Dictionary=_vision_cache.get(entity["id"],{})
+	if cached.get("signature",[])==signature:
+		return cached["polygons"]
+	var origin: Vector2=entity["position"]
+	var blockers: Array[PackedVector2Array]=world.sight_blockers(origin,float(config["front_range"]))
+	var result: Array[PackedVector2Array]=[]
+	for prefix in ["front","peripheral"]:
+		result.append(VisionGeometry.sector(origin,direction,float(config[prefix+"_range"]),float(config[prefix+"_degrees"]),blockers))
+	_vision_cache[entity["id"]]={"signature":signature.duplicate(true),"polygons":result}
+	return result
+
+func _draw_vision(world,entity: Dictionary) -> void:
+	var reach=float(entity["exploration_behavior"]["vision"]["front_range"])
+	if not _visible_rect(Rect2(entity["position"]-Vector2.ONE*reach,Vector2.ONE*reach*2).grow(2)):
+		return
+	var fields=_vision_polygons(world,entity)
+	for index in range(fields.size()):
+		var polygon=PackedVector2Array()
+		for point in fields[index]:
+			polygon.append(screen_point(point))
+		if polygon.size()<3 or Geometry2D.triangulate_polygon(polygon).is_empty():
+			continue
+		var color=Color("f0c180") if index==0 else Color("8ed9dc")
+		draw_colored_polygon(polygon,Color(color,0.12))
+		polygon.append(polygon[0])
+		draw_polyline(polygon,color,1.5)
 
 func _visible_rect(rect: Rect2) -> bool:
 	return Rect2(screen_point(rect.position), rect.size * _scale_factor()).intersects(Rect2(Vector2.ZERO, size), true)
@@ -349,8 +394,8 @@ func _draw_entity(entity: Dictionary, scale: float, near: bool) -> void:
 		var vertices = PackedVector2Array([center + Vector2(0, -25) * scale, center + Vector2(23, 0) * scale,
 			center + Vector2(0, 19) * scale, center + Vector2(-23, 0) * scale])
 		draw_colored_polygon(vertices,Color(entity.get("color","ef937f")))
-		if entity.get("movement_profile","")=="static":
-			var direction=Vector2(entity["vision_direction"][0],entity["vision_direction"][1]).normalized()
+		if session.world.Perception.directional(entity) or entity.get("movement_profile","")=="static":
+			var direction=session.world.Perception.direction(entity)
 			draw_line(center,center+direction*24*scale,Color("ffe6a5"),3*scale)
 		draw_circle(center + Vector2(-7, -5) * scale, 3 * scale, Color("25323d"))
 		draw_circle(center + Vector2(7, -5) * scale, 3 * scale, Color("25323d"))

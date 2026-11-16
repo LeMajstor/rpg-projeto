@@ -16,9 +16,8 @@ static func advance(world, entity: Dictionary, delta: float) -> void:
 	var rules: Dictionary = Perception.rules(world,entity)
 	var radius = float(rules["chase_limit"])
 	var sees = entity["interaction_available"] \
-		and position.distance_to(world.leader_position) <= float(rules["detection_radius"]) \
 		and Territory.contains(entity,world.leader_position,radius) \
-		and world.clear_sight(position,world.leader_position)
+		and Perception.sees(world,entity,world.leader_position)
 	if awareness["state"] != "chase" and sees:
 		if awareness["state"]=="patrol":
 			awareness["trail"]=[position]
@@ -89,10 +88,17 @@ static func _move(world, entity: Dictionary, target: Vector2) -> bool:
 		var t = world.Contact.fraction(from,target,world.leader_position,world.contact_radius())
 		if is_finite(t) and world.clear_sight(from.lerp(target,t),world.leader_position):
 			entity["position"] = from.lerp(target,t)
+			_face_movement(entity,from)
 			world.contact_id = entity["id"]
 			return true
 	entity["position"] = target
+	_face_movement(entity,from)
 	return true
+
+static func _face_movement(entity: Dictionary,from: Vector2) -> void:
+	var displacement: Vector2=entity["position"]-from
+	if Perception.directional(entity) and not displacement.is_zero_approx():
+		entity["look_direction"]=displacement.normalized()
 
 static func _record(trail: Array, position: Vector2) -> void:
 	if trail.is_empty():

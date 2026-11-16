@@ -12,7 +12,8 @@ static func assemble(source: Dictionary) -> Dictionary:
 	if not source.get("encounters",[]) is Array:
 		return source
 	var data=battle_definitions()
-	var profiles: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/exploration_enemy_behaviors.json"))["profiles"]
+	var exploration: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/exploration_enemy_behaviors.json"))
+	var profiles: Dictionary=exploration["profiles"]
 	var result=source.duplicate(true)
 	var actors: Array=[]
 	var groups: Array=[]
@@ -41,6 +42,7 @@ static func assemble(source: Dictionary) -> Dictionary:
 				"movement_profile":profile_id,"movement_behavior_data":behavior,"exploration_behavior":profiles[profile_id].duplicate(true),
 				"reference_profile_id":type["reference_profile_id"],"color":type["color"],"speed":behavior["speed"],
 				"label":encounter_title+"/"+participant["id"].to_upper()+" · "+title,"seed":int(data["settings"]["seed"]) ^ int((source["id"]+group["id"]+participant["id"]).hash())},true)
+			actor["exploration_behavior"]["vision"]=exploration["vision"].duplicate(true)
 			if profile_id=="static":
 				actor["route"]=[actor["position"]]
 			actors.append(actor)

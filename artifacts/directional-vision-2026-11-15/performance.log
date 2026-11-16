@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+{"area":"test_dungeon","debug":false,"draw_calls":189.0,"draw_median_usec":631,"draw_p95_usec":789,"frame_median_usec":4474,"frame_p95_usec":6141,"location":"(220.0, 1350.0)","primitives":4420.0}
+{"area":"test_dungeon","debug":true,"draw_calls":291.0,"draw_median_usec":833,"draw_p95_usec":921,"frame_median_usec":4925,"frame_p95_usec":6639,"location":"(220.0, 1350.0)","primitives":7011.0}
+{"area":"test_dungeon","debug":false,"draw_calls":189.0,"draw_median_usec":575,"draw_p95_usec":709,"frame_median_usec":3910,"frame_p95_usec":5856,"location":"(560.0, 660.0)","primitives":4420.0}
+{"area":"test_dungeon","debug":true,"draw_calls":307.0,"draw_median_usec":1114,"draw_p95_usec":1221,"frame_median_usec":5521,"frame_p95_usec":7325,"location":"(560.0, 660.0)","primitives":7939.0}
+{"area":"test_dungeon_upper","debug":false,"draw_calls":150.0,"draw_median_usec":784,"draw_p95_usec":1018,"frame_median_usec":6492,"frame_p95_usec":8201,"location":"(220.0, 1350.0)","primitives":3920.0}
+{"area":"test_dungeon_upper","debug":true,"draw_calls":215.0,"draw_median_usec":1153,"draw_p95_usec":1453,"frame_median_usec":6545,"frame_p95_usec":8545,"location":"(220.0, 1350.0)","primitives":5756.0}
+{"area":"test_dungeon_upper","debug":false,"draw_calls":165.0,"draw_median_usec":834,"draw_p95_usec":925,"frame_median_usec":6593,"frame_p95_usec":7764,"location":"(1620.0, 570.0)","primitives":3939.0}
+{"area":"test_dungeon_upper","debug":true,"draw_calls":247.0,"draw_median_usec":1202,"draw_p95_usec":1400,"frame_median_usec":6542,"frame_p95_usec":7655,"location":"(1620.0, 570.0)","primitives":6401.0}

@@ -85,13 +85,13 @@ func sensor_fixture():
 	return Session.new(data.duplicate(true),map)
 
 func test_static_sensors() -> void:
-	for case in [[Vector2(450,500),true],[Vector2(430,500),false],[Vector2(650,500),true],[Vector2(681,500),false],[Vector2(600,600),true],[Vector2(570,630),false],[Vector2(500,561),false]]:
+	for case in [[Vector2(450,500),false],[Vector2(480,500),true],[Vector2(500,555),true],[Vector2(430,500),false],[Vector2(650,500),true],[Vector2(681,500),false],[Vector2(600,600),true],[Vector2(570,630),false],[Vector2(500,561),false]]:
 		var session=sensor_fixture()
 		var actor: Dictionary=session.world.entities[0]
 		var original: Dictionary=actor["route_state"].duplicate(true)
 		session.world.leader_position=case[0]
 		session.tick(STEP)
-		expect((session.state=="battle")==case[1],"Círculo/cone: "+str(case[0]))
+		expect((session.state=="battle")==case[1],"Visão frontal/periférica ou contato: "+str(case[0]))
 		expect(actor["position"]==Vector2(500,500) and actor["route_state"]==original,"Estático não se desloca nem patrulha")
 	# Ambas as áreas dependem de visão livre.
 	for distance in [50,150]:
@@ -99,7 +99,7 @@ func test_static_sensors() -> void:
 		session.world.obstacles.append(Rect2(520,450,10,100))
 		session.world.leader_position=Vector2(500+distance,500)
 		session.tick(STEP)
-		expect(session.state=="exploration","Parede bloqueia círculo/cone")
+		expect(session.state=="exploration","Parede bloqueia visão frontal/periférica")
 	# Movimento longo não pula uma área de ativação; sem contato físico.
 	var session=sensor_fixture()
 	var world=session.world
@@ -114,8 +114,8 @@ func test_static_sensors() -> void:
 	world.path.assign([Vector2(278,500),world.leader_position])
 	world.path_length=102
 	session.move(Vector2.RIGHT,3)
-	expect(session.state=="battle" and world.leader_position.is_equal_approx(Vector2(440,500)),"Entrada traseira ativa círculo60")
-	# Seguidor dentro do círculo e líder fora não dispara.
+	expect(session.state=="battle" and world.leader_position.is_equal_approx(Vector2(476,500)),"Aproximação traseira só ativa por contato físico24")
+	# Seguidor dentro da visão periférica e líder fora não dispara.
 	session=sensor_fixture()
 	world=session.world
 	world.obstacles.append(Rect2(550,480,20,40))
@@ -124,7 +124,7 @@ func test_static_sensors() -> void:
 	world.path_length=102
 	session.move(Vector2.UP,1)
 	expect(session.state=="battle" and world.leader_position.y<480 and world.leader_position.y>430,"Ao sair da sombra da parede, ativa cone no primeiro trecho visível")
-	# Seguidor dentro do círculo e líder fora não dispara.
+	# Seguidor dentro da visão periférica e líder fora não dispara.
 	session=sensor_fixture()
 	world=session.world
 	world.leader_position=Vector2(500,610)

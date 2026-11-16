@@ -1,0 +1,136 @@
+{
+  "decision": "D159",
+  "date": "2026-11-15",
+  "scope": "Visão frontal/periférica orientada na exploração; dados/regras de batalha preservados",
+  "vision": {
+    "front_range": 180,
+    "front_degrees": 90,
+    "peripheral_range": 60,
+    "peripheral_degrees": 180
+  },
+  "headless": {
+    "suites": 76,
+    "checks": 353355,
+    "failures": 0,
+    "all_passed": true
+  },
+  "graphics": {
+    "scene_checks": 39,
+    "scene_failures": 0,
+    "scene_captures": 10,
+    "render_checks": 91,
+    "render_failures": 0,
+    "pixel_comparisons": 19,
+    "reference": "Vista completa sem descarte de geometria; comparação da renderização atual",
+    "renderer": "Compatibility / Apple M3 Pro / Godot4.7.2"
+  },
+  "performance": [
+    {
+      "area": "test_dungeon",
+      "debug": false,
+      "draw_calls": 189.0,
+      "draw_median_usec": 631,
+      "draw_p95_usec": 789,
+      "frame_median_usec": 4474,
+      "frame_p95_usec": 6141,
+      "location": "(220.0, 1350.0)",
+      "primitives": 4420.0
+    },
+    {
+      "area": "test_dungeon",
+      "debug": true,
+      "draw_calls": 291.0,
+      "draw_median_usec": 833,
+      "draw_p95_usec": 921,
+      "frame_median_usec": 4925,
+      "frame_p95_usec": 6639,
+      "location": "(220.0, 1350.0)",
+      "primitives": 7011.0
+    },
+    {
+      "area": "test_dungeon",
+      "debug": false,
+      "draw_calls": 189.0,
+      "draw_median_usec": 575,
+      "draw_p95_usec": 709,
+      "frame_median_usec": 3910,
+      "frame_p95_usec": 5856,
+      "location": "(560.0, 660.0)",
+      "primitives": 4420.0
+    },
+    {
+      "area": "test_dungeon",
+      "debug": true,
+      "draw_calls": 307.0,
+      "draw_median_usec": 1114,
+      "draw_p95_usec": 1221,
+      "frame_median_usec": 5521,
+      "frame_p95_usec": 7325,
+      "location": "(560.0, 660.0)",
+      "primitives": 7939.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "debug": false,
+      "draw_calls": 150.0,
+      "draw_median_usec": 784,
+      "draw_p95_usec": 1018,
+      "frame_median_usec": 6492,
+      "frame_p95_usec": 8201,
+      "location": "(220.0, 1350.0)",
+      "primitives": 3920.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "debug": true,
+      "draw_calls": 215.0,
+      "draw_median_usec": 1153,
+      "draw_p95_usec": 1453,
+      "frame_median_usec": 6545,
+      "frame_p95_usec": 8545,
+      "location": "(220.0, 1350.0)",
+      "primitives": 5756.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "debug": false,
+      "draw_calls": 165.0,
+      "draw_median_usec": 834,
+      "draw_p95_usec": 925,
+      "frame_median_usec": 6593,
+      "frame_p95_usec": 7764,
+      "location": "(1620.0, 570.0)",
+      "primitives": 3939.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "debug": true,
+      "draw_calls": 247.0,
+      "draw_median_usec": 1202,
+      "draw_p95_usec": 1400,
+      "frame_median_usec": 6542,
+      "frame_p95_usec": 7655,
+      "location": "(1620.0, 570.0)",
+      "primitives": 6401.0
+    }
+  ],
+  "note": "Custo do callback de desenho na CPU,80 amostras após20 de aquecimento, monstros avançando em1/120s. Não é garantia de FPS. Contornos só são construídos no F3 e são armazenados enquanto orientação/posição/obstáculos/configuração não mudam.",
+  "sha256": {
+    "data/exploration_enemy_behaviors.json": "79c8152e5addd2b51754ebeaf97d5027dd07127a99ac491dbc39c26d4c4164d9",
+    "data/dungeon.json": "7c4dc38dc534e15f67c6b0472b2a4ae476a3e236b4d2e174276a73f8fac47165",
+    "data/dungeon_upper.json": "30daac71623583a4435b6f5246bce3c241950da76ffb3622146d087e6fd6cc99",
+    "scripts/exploration/encounter_roster.gd": "a5c1d96f3f73da1b1b38897f29a48cccea84584f88db9060be7f743087de2713",
+    "scripts/exploration/encounter_perception.gd": "6f32a4f35f6be3a0e1bca38f9cbaa8a041a90b05fea1c4cf3dfb82096e48146a",
+    "scripts/exploration/encounter_motion.gd": "0897c2c5ed82151eca878409e1ccfbec87b9944a9c33a3fcbbec47dbbc4b69a8",
+    "scripts/exploration/vision_geometry.gd": "a0c7cd9568600c9bd0c226ed7842d4246e70504b7c32593d0c859bf5949679ff",
+    "scripts/exploration/exploration_model.gd": "538ddf0a5530e14e9b92fb482482221f29f932b05c6eda020e85a54e1bb22f0c",
+    "scripts/exploration/exploration_session.gd": "7637c4e07f69c05b7bbab0b7bd323a490754cbaf8e9a53f9b691565f3fdc45d5",
+    "scripts/exploration/exploration_view.gd": "31ea65ff38f6c17d1ae59228e5044ad1ba435f259329097cc28e646d1d253218",
+    "scripts/exploration/area_catalog.gd": "368669d828efccffe655058a61d43e63a15a6fd695a885f1925710f8b7e19e5e",
+    "tests/directional_vision_tests.gd": "99d5b1a2d9e006a70d72d159ceb84368288f0464e20e901c2358442530664018",
+    "tests/individual_enemies_tests.gd": "f058d2f424cb386099aedd454815ce1d10831cd96ef6e09e88002b3de20ca981",
+    "tests/exploration_pursuit_ui_smoke.gd": "281b79d6439efcee9976e4042de239bbe1b402460d7f590f545ddc567a39e3b0",
+    "tests/render_performance.gd": "f094f9dec4f562f04e6ac95687a4ad71ad082c17783a79e356f92a1b631ff8c6",
+    "docs/VISAO_DIRECIONAL.md": "147acd1a5d9975f7fff7b229346afd482f61d1a7a636fa0cac5f4b6055435fe8"
+  }
+}

@@ -239,7 +239,7 @@ func begin_encounter(id: String = "") -> bool:
 	if state != "exploration" or encounter.get("kind", "") != "encounter":
 		return false
 	if world.automatic_encounters():
-		var in_range: bool=world.Perception.in_static_area(encounter,world.leader_position) if world.Perception.stationary(encounter) else world.leader_position.distance_to(encounter["position"])<=world.contact_radius()+0.0001
+		var in_range: bool=world.Perception.in_static_area(encounter,world.leader_position,world.contact_radius()) if world.Perception.stationary(encounter) else world.leader_position.distance_to(encounter["position"])<=world.contact_radius()+0.0001
 		if world.menu_open or world.dialogue_open or world.transitioning or not encounter["present"] or not encounter["interaction_available"] \
 			or not in_range \
 			or not world.clear_sight(world.leader_position, encounter["position"]):

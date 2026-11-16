@@ -1,9 +1,27 @@
 {
-  "source": "D158: movimento por participante; patrulha reutiliza o perfil da batalha",
+  "source": "D159: visão frontal/periférica orientada; parâmetros experimentais do teste",
   "profiles": {
-    "heavy": {"chase_speed": 108, "chase_limit": 180},
-    "agile": {"chase_speed": 144, "chase_limit": 240},
-    "flying": {"chase_speed": 162, "chase_limit": 320},
-    "static": {"chase_speed": 0, "chase_limit": 0, "near_radius": 60, "cone_range": 180, "cone_degrees": 90}
+    "heavy": {
+      "chase_speed": 108,
+      "chase_limit": 180
+    },
+    "agile": {
+      "chase_speed": 144,
+      "chase_limit": 240
+    },
+    "flying": {
+      "chase_speed": 162,
+      "chase_limit": 320
+    },
+    "static": {
+      "chase_speed": 0,
+      "chase_limit": 0
+    }
+  },
+  "vision": {
+    "front_range": 180,
+    "front_degrees": 90,
+    "peripheral_range": 60,
+    "peripheral_degrees": 180
   }
 }

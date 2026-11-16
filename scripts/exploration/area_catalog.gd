@@ -94,14 +94,24 @@ static func valid_map(data: Dictionary) -> bool:
 			ids[entity["id"]] = true
 			if entity.has("exploration_behavior"):
 				var settings: Dictionary=entity["exploration_behavior"]
+				if settings.has("vision"):
+					var vision=settings["vision"]
+					if not vision is Dictionary:
+						return false
+					for key in ["front_range","front_degrees","peripheral_range","peripheral_degrees"]:
+						if not numbers([vision.get(key)],1) or float(vision[key])<=0:
+							return false
+					if vision["peripheral_range"]>vision["front_range"] or vision["front_degrees"]>vision["peripheral_degrees"] or vision["peripheral_degrees"]>180:
+						return false
 				if entity.get("movement_profile","")=="static":
 					if not numbers(entity.get("vision_direction"),2) or Vector2(entity["vision_direction"][0],entity["vision_direction"][1]).length_squared()==0:
 						return false
-					for key in ["near_radius","cone_range","cone_degrees"]:
-						if not numbers([settings.get(key)],1) or float(settings[key])<=0:
+					if not settings.has("vision"):
+						for key in ["near_radius","cone_range","cone_degrees"]:
+							if not numbers([settings.get(key)],1) or float(settings[key])<=0:
+								return false
+						if float(settings["cone_degrees"])>180:
 							return false
-					if float(settings["cone_degrees"])>180:
-						return false
 				else:
 					for key in ["chase_speed","chase_limit"]:
 						if not numbers([settings.get(key)],1) or float(settings[key])<=0:
