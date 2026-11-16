@@ -5,6 +5,7 @@ const Policy = preload("res://scripts/combat/target_policy.gd")
 const AttackMotion = preload("res://scripts/combat/attack_motion.gd")
 const FullscreenMotion = preload("res://scripts/combat/fullscreen_motion.gd")
 const DamageV1 = preload("res://scripts/combat/damage_v1_bridge.gd")
+const Afflictions = preload("res://scripts/combat/affliction_rules.gd")
 const BATTLEFIELD_SIZE = Vector2(920, 440)
 const CENTER_SETTING = "move_to_center_for_fullscreen_skill"
 
@@ -29,6 +30,8 @@ var simulation_seed = 421
 var pending_loadouts: Dictionary = {}
 var damage_rngs: Dictionary = {}
 var damage_results: Array[Dictionary] = []
+var recovery_rng = RandomNumberGenerator.new()
+var confusion_rng = RandomNumberGenerator.new()
 
 func uses_damage_v1() -> bool:
 	return preset.get("damage_ruleset", "") == "damage_lab_v1"
@@ -72,6 +75,8 @@ func start(preset_index: int, preserve_party: bool = false, random_seed: int = 4
 	preset = next_preset
 	rng.seed = random_seed
 	simulation_seed = random_seed
+	recovery_rng.seed = random_seed ^ 0x7243ba12
+	confusion_rng.seed = random_seed ^ 0x13c6a951
 	damage_rngs.clear()
 	for channel in {"variance": 0x5a4f3d2c, "critical": 0x27d4eb2d, "evasion": 0x6c8e9cf5, "affliction": 0x3b9d72a1}:
 		var stream = RandomNumberGenerator.new()
@@ -86,7 +91,7 @@ func start(preset_index: int, preserve_party: bool = false, random_seed: int = 4
 				definition = DamageV1.equip_definition(definition, pending_loadouts[definition["id"]])
 			party.append(_make_actor(definition, "ally", definition["id"]))
 		inventory.clear()
-		for id in data["items"]:
+		for id in available_item_ids():
 			inventory[id] = int(data["items"][id]["quantity"])
 	for index in range(party.size()):
 		var member = party[index]
@@ -96,6 +101,7 @@ func start(preset_index: int, preserve_party: bool = false, random_seed: int = 4
 		member["atb"] = 0.0
 		member["last_attacker"] = ""
 		member["last_target"] = ""
+		member["affliction"] = {}
 	enemies.clear()
 	for entry in preset["enemies"]:
 		var enemy = _make_actor(data["enemy_types"][entry["type"]], "enemy", entry["id"])
@@ -159,7 +165,7 @@ func _make_actor(definition: Dictionary, side: String, id: String) -> Dictionary
 		"logical_position": Vector2.ZERO, "home_position": Vector2.ZERO,
 		"visual_offset": Vector2.ZERO, "route_state": Route.create([], 0.0),
 		"facing": Vector2.RIGHT if side == "ally" else Vector2.LEFT,
-		"visual_focus_id": "",
+		"visual_focus_id": "", "affliction": {},
 		"last_attacker": "", "last_target": "",
 		CENTER_SETTING: bool(definition.get(CENTER_SETTING, side == "ally")),
 		"fullscreen_center_override": null}, true)
@@ -195,7 +201,10 @@ func living(group: Array) -> Array:
 	return group.filter(func(actor): return actor["hp"] > 0)
 
 func effective_ini(actor: Dictionary) -> float:
-	return maxf(0.0, float(actor["ini"]) + actor["ini_modifier"])
+	return Afflictions.ini(actor)
+
+func affliction_name(actor: Dictionary) -> String:
+	return data.get("affliction_rules", {}).get(Afflictions.id(actor), {}).get("name", "")
 
 func atb_rate_multiplier() -> float:
 	# Configuração de ritmo do jogo; não escala rotas, animações ou relógio.
@@ -206,6 +215,9 @@ func atb_rate_multiplier() -> float:
 	return rate if is_finite(rate) and rate > 0.0 else 1.0
 
 func is_ready(actor: Dictionary) -> bool:
+	return _is_charged(actor) and Afflictions.id(actor) not in ["fear", "confusion"]
+
+func _is_charged(actor: Dictionary) -> bool:
 	return not actor.is_empty() and actor["hp"] > 0 and actor["atb"] >= 1.0 and action.get("actor_id", "") != actor["id"]
 
 func is_waiting() -> bool:
@@ -224,15 +236,22 @@ func cancel_selection() -> void:
 func tick(delta: float) -> void:
 	if outcome != "running" or delta <= 0.0:
 		return
+	_maintain_fear()
 	if not selected_id.is_empty() and not is_ready(actor_by_id(selected_id)):
 		selected_id = ""
-	var waiting = is_waiting()
-	if not waiting:
+	# D132: apresentação da ação tem relógio próprio; o tempo da batalha
+	# (ATB, rotas e ticks de Veneno) só corre fora da execução.
+	if action.is_empty() and not is_waiting():
 		simulation_time += delta
 		var atb_multiplier = atb_rate_multiplier()
+		_advance_afflictions(delta)
+		if outcome != "running":
+			return
 		for actor in actors():
 			if actor["hp"] <= 0:
 				actor["atb"] = 0.0
+				continue
+			if Afflictions.id(actor) == "fear":
 				continue
 			if action.get("actor_id", "") == actor["id"]:
 				continue
@@ -245,6 +264,15 @@ func tick(delta: float) -> void:
 	if not action.is_empty():
 		_advance_action(delta)
 	if outcome == "running" and action.is_empty() and not is_waiting():
+		for actor in actors():
+			if Afflictions.id(actor) == "confusion" and _is_charged(actor):
+				var targets = living(actors()).filter(func(other): return other["id"] != actor["id"])
+				if not targets.is_empty():
+					var skill = skill_for(actor, "attack").duplicate(true)
+					skill["confused"] = true
+					var target = targets[confusion_rng.randi_range(0, targets.size() - 1)]
+					_begin_action(actor, skill, target["id"], Vector2.ZERO, "")
+				return
 		for enemy in enemies:
 			if is_ready(enemy):
 				_schedule_enemy(enemy)
@@ -298,8 +326,10 @@ func _face_point(actor: Dictionary, origin: Vector2, point: Vector2) -> void:
 func target_candidates(actor: Dictionary, skill: Dictionary) -> Array:
 	if actor.is_empty() or skill.is_empty():
 		return []
+	if skill.get("confused", false):
+		return living(actors()).filter(func(other): return other["id"] != actor["id"])
 	var group = enemies if actor["side"] == "ally" else party
-	if skill.get("effect", "damage") != "damage":
+	if skill.get("effect", "damage") not in ["damage", "affliction"]:
 		group = party if actor["side"] == "ally" else enemies
 	return group.filter(func(target): return target["hp"] == 0 if skill.get("effect", "") == "revive" else target["hp"] > 0)
 
@@ -318,8 +348,24 @@ func targets_for(actor: Dictionary, skill: Dictionary, target_id: String = "", _
 		return targets_in_radius(actor, skill, target["logical_position"])
 	return [target]
 
+func available_item_ids() -> Array:
+	# D147: catálogo comum, repertório e estoque separados por preset.
+	if preset.has("item_ids"):
+		return preset["item_ids"]
+	# Cenários anteriores não recebem itens exclusivos de presets novos.
+	return data["items"].keys().filter(func(id):
+		for candidate in data["presets"]:
+			if candidate.get("item_ids", []).has(id):
+				return false
+		return true)
+
+func can_use_item(actor: Dictionary, id: String) -> bool:
+	return not actor.is_empty() and actor.get("side", "") == "ally" and actor["hp"] > 0 \
+		and actor.get("affliction", {}).get("id", "") not in ["fear", "confusion"] \
+		and available_item_ids().has(id) and inventory.get(id, 0) > 0
+
 func item_skill(id: String) -> Dictionary:
-	if not data["items"].has(id):
+	if not available_item_ids().has(id) or not data["items"].has(id):
 		return {}
 	var item = data["items"][id].duplicate(true)
 	item["target"] = "single"
@@ -339,9 +385,7 @@ func submit(skill_id: String, target_id: String = "", center: Vector2 = Vector2.
 		return true
 	var skill: Dictionary
 	if not item_id.is_empty():
-		if uses_damage_v1():
-			return false
-		if not data["items"].has(item_id) or inventory.get(item_id, 0) <= 0:
+		if not can_use_item(actor, item_id):
 			return false
 		skill = item_skill(item_id)
 	else:
@@ -438,6 +482,7 @@ func _advance_action(delta: float) -> void:
 		_check_end()
 		if escaped and outcome == "running":
 			outcome = "escaped"
+			_clear_battle_afflictions()
 			selected_id = ""
 
 func _apply_action(actor: Dictionary) -> void:
@@ -455,13 +500,34 @@ func _apply_action(actor: Dictionary) -> void:
 	var result: Array[String] = []
 	for target in targets:
 		match skill["effect"]:
-			"damage":
+			"cleanse":
+				# Os efeitos são derivados do estado: limpá-lo também restaura INI/EVA.
+				# Não regrava naturais nem sorteia EVA/resistência.
+				var was_affected: bool = not target.get("affliction", {}).is_empty()
+				_remove_affliction(target)
+				result.append("%s · %s" % [target["short_name"], "Aflição removida" if was_affected else "Sem aflição · nenhum efeito"])
+			"damage", "affliction":
 				var damage: int
 				var suffix = ""
 				if uses_damage_v1():
 					var config = DamageV1.configuration(actor, target, skill)
 					# Fluxos independentes da IA/movimento; um sorteio por canal no impacto.
 					var sample = DamageV1.Calculator.sample(config, damage_rngs["variance"].randf(), damage_rngs["critical"].randf(), damage_rngs["evasion"].randf(), damage_rngs["affliction"].randf())
+					if skill["effect"] == "affliction":
+						var blocked = not target["affliction"].is_empty()
+						var protected = skill["damage_action"]["affliction_id"] == "fear" and _fear_protected(target)
+						if blocked or protected:
+							sample["outcome"] = "already_afflicted" if blocked else "protected"
+							sample["affliction"]["applied"] = false
+							sample["affliction"]["resisted"] = false
+							sample["affliction"]["tested"] = false
+							sample["evaded"] = false
+							sample["affliction"]["blocked"] = true
+						elif sample["affliction"]["applied"]:
+							target["affliction"] = {"id": skill["damage_action"]["affliction_id"], "source_id": actor["id"], "source_magic": actor["damage_stats"]["magic_power"], "elapsed": 0.0}
+							if selected_id == target["id"] and Afflictions.id(target) in ["fear", "confusion"]:
+								selected_id = ""
+						result.append("%s · %s" % [target["short_name"], {"applied": "Aplicou", "resisted": "Resistiu", "evaded": "Esquivou", "already_afflicted": "Já possui aflição · sem efeito", "protected": "Protegido contra Medo"}[sample["outcome"]]])
 					damage = sample["damage"]
 					# O custo foi debitado uma única vez ao confirmar. sample não controla recursos.
 					sample["mp_before"] = actor["mp"] + int(skill["mp_cost"])
@@ -474,14 +540,22 @@ func _apply_action(actor: Dictionary) -> void:
 				else:
 					damage = maxi(1, int(actor["attack"]) + int(skill.get("power", 0)))
 				target["hp"] = maxi(0, target["hp"] - damage)
-				target["last_attacker"] = actor["id"]
+				if damage > 0:
+					target["last_attacker"] = actor["id"]
 				if target["hp"] == 0:
 					target["atb"] = 0.0
 					if selected_id == target["id"]:
 						selected_id = ""
-				result.append("%s −%d HP%s" % [target["short_name"], damage, suffix])
+				elif damage > 0 and Afflictions.id(target) == "fear":
+					if recovery_rng.randf() < Afflictions.recovery_chance(target):
+						_remove_affliction(target)
+						result.append("%s recuperou-se do Medo" % target["short_name"])
+				if skill["effect"] == "damage":
+					result.append("%s −%d HP%s" % [target["short_name"], damage, suffix])
 			"hp", "revive":
 				target["hp"] = mini(int(target["max_hp"]), target["hp"] + int(skill["amount"]))
+				if skill["effect"] == "revive":
+					_remove_affliction(target)
 				result.append("%s +HP" % target["short_name"])
 			"mp":
 				target["mp"] = mini(int(target["max_mp"]), target["mp"] + int(skill["amount"]))
@@ -490,6 +564,7 @@ func _apply_action(actor: Dictionary) -> void:
 		log_event("Nenhum alvo atingido no instante do impacto.")
 	else:
 		log_event(" | ".join(result))
+	_maintain_fear()
 
 func _check_end() -> void:
 	if living(party).is_empty():
@@ -500,6 +575,59 @@ func _check_end() -> void:
 		outcome = "victory"
 		selected_id = ""
 		log_event("VITÓRIA · HP/MP preservados; nenhuma recuperação automática.")
+	if outcome != "running":
+		_clear_battle_afflictions()
+
+func _remove_affliction(actor: Dictionary) -> void:
+	actor["affliction"] = {}
+
+func _clear_battle_afflictions() -> void:
+	for actor in actors():
+		_remove_affliction(actor)
+
+func _fear_protected(target: Dictionary) -> bool:
+	return target["side"] == "ally" and living(party).filter(func(member): return Afflictions.id(member) != "fear").size() <= 1
+
+func _maintain_fear() -> void:
+	for actor in actors():
+		if Afflictions.id(actor) != "fear":
+			continue
+		var source = actor_by_id(actor["affliction"].get("source_id", ""))
+		if not source.is_empty() and source["hp"] <= 0:
+			_remove_affliction(actor)
+			log_event("%s livre de Medo · aplicador derrotado" % actor["short_name"])
+	var survivors = living(party)
+	if not survivors.is_empty() and survivors.all(func(member): return Afflictions.id(member) == "fear"):
+		var chosen: Dictionary = survivors[0]
+		for member in survivors:
+			if Afflictions.intelligence(member) > Afflictions.intelligence(chosen):
+				chosen = member
+		_remove_affliction(chosen)
+		log_event("%s livre de Medo · proteção do grupo" % chosen["short_name"])
+
+func _advance_afflictions(delta: float) -> void:
+	var rule: Dictionary = data.get("affliction_rules", {}).get("poison", {})
+	if rule.is_empty():
+		return
+	var rates: Array = data["battle_speed"]["atb_multipliers"]
+	var normalized_delta = delta * atb_rate_multiplier() / float(rates[int(rule["reference_battle_speed"]) - 1])
+	for actor in living(actors()):
+		if Afflictions.id(actor) != "poison":
+			continue
+		actor["affliction"]["elapsed"] = float(actor["affliction"].get("elapsed", 0.0)) + normalized_delta
+		while actor["hp"] > 0 and Afflictions.id(actor) == "poison" and actor["affliction"]["elapsed"] + 0.00000001 >= float(rule["interval"]):
+			actor["affliction"]["elapsed"] = maxf(0.0, actor["affliction"]["elapsed"] - float(rule["interval"]))
+			var damage = Afflictions.poison_damage(actor, rule)
+			actor["hp"] = maxi(0, actor["hp"] - damage)
+			log_event("%s · Veneno −%d HP" % [actor["short_name"], damage])
+			if actor["hp"] == 0:
+				actor["atb"] = 0.0
+				if selected_id == actor["id"]:
+					selected_id = ""
+				_maintain_fear()
+				_check_end()
+				if outcome != "running":
+					return
 
 func _schedule_enemy(enemy: Dictionary) -> void:
 	var choices: Array = []
@@ -554,6 +682,8 @@ func debug_ready_allies() -> void:
 
 func debug_restore() -> void:
 	for member in party:
+		if member["hp"] == 0:
+			_remove_affliction(member)
 		member["hp"] = int(member["max_hp"])
 		member["mp"] = int(member["max_mp"])
 	log_event("DEPURAÇÃO: HP/MP restaurados, inclusive incapacitados.")

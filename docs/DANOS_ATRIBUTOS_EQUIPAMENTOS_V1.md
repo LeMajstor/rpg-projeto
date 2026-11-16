@@ -8,6 +8,8 @@ A exploração e o combate integrado conservam seus cálculos anteriores. Este f
 
 **Etapa posterior autorizada — D126:** a primeira integração ao laboratório de batalha independente foi implementada com três aliados, dois monstros, básicos físicos, magia ofensiva do mago e preparação de equipamentos. Compartilha este cálculo sem alterar a referência. Aflições ficam para a segunda parte; exploração permanece fora da migração. Roteiro em [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
 
+**D148 — integração atual de 15/11/2026:** as cinco referências aprovadas foram centralizadas em `damage_reference_profiles.json` e estão disponíveis nos dois laboratórios; ações, equipamentos e matemática são comuns. As quatro aflições têm efeitos temporais no laboratório de combate conforme D127–D146, com Remédio D147 funcional. Isso supera as notas históricas de isolamento/efeitos futuros neste documento para o laboratório independente, sem rebalancear a referência V1 ou criar conteúdo experimental como habilidade definitiva. Exploração permanece para a próxima etapa. Ver [PARIDADE_LABORATORIOS.md](PARIDADE_LABORATORIOS.md).
+
 ## Magia ofensiva básica — D123/D124
 
 | Propriedade | Referência adotada |

@@ -1,6 +1,10 @@
 # Combate atual — comportamento por semente
 
+**D149 — 15/11/2026:** catálogo jogável migrado para as fichas/repertórios/regras compartilhados com o laboratório. Seis encontros e geometria/ritmos/RNG preservados; movimentos pesado/estático reutilizam Monstro #1 e ágil/voador Monstro #2, como associação técnica configurável. Três aliados aprovados mantêm seus slots anteriores. As ondas antigas dão lugar ao repertório atual; ID histórico da formação superior permanece. Ver [COMBATE_EXPLORACAO_COMPARTILHADO.md](COMBATE_EXPLORACAO_COMPARTILHADO.md).
+
 **Atualização D126 (01/11/2026):** o laboratório independente agora abre em **V1 · danos e equipamentos**, reutilizando os comportamentos por semente pesado/ágil com três aliados e dois monstros. A demonstração `lab_seeded` descrita abaixo continua no seletor; os encontros da exploração permanecem iguais. Roteiro da nova integração: [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
+
+**D148 — 15/11/2026:** o cenário atual do laboratório usa regras e cinco fichas compartilhadas com o laboratório de danos, incluindo as quatro aflições e Remédio. As quinze demonstrações anteriores aparecem como Legado somente no laboratório independente. O catálogo da exploração mantém sua classificação e encontros atuais até a migração posterior. Não altera geometria, política de movimento ou RNG por participante. Ver `PARIDADE_LABORATORIOS.md`.
 
 **Decisão de escopo — 26/10/2026 (D48):** este modelo de movimentação permanece até a pré-alfa, inclusive. A geometria dos caminhos continua predefinida, com as variações atuais de comportamento por semente. Uma movimentação mais orgânica sem rota fixa fica como possibilidade futura, após esse marco, sem solução escolhida ou implementação autorizada.
 

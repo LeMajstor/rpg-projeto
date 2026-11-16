@@ -1,0 +1,42 @@
+{
+  "decision": "D156",
+  "date": "2026-11-15",
+  "parameters": {
+    "detection_radius": 180,
+    "chase_limit": 120,
+    "chase_speed": 144,
+    "leader_speed": 180
+  },
+  "sources": {
+    "data/areas.json": "d0388e7fe07affc4116b3099d677457065f6a1ed5f6427eae79a7bcfcdf33222",
+    "data/dungeon.json": "0240095bca10d14cc97e29d6920bc20d8c93c256c3f8cc4356af63b965d48ca6",
+    "scripts/exploration/area_catalog.gd": "b1c1285369a4f7041a4a134e17d5f4ba2eb0b0f0d8f2f35c1f84090165ec0d17",
+    "scripts/exploration/exploration_model.gd": "07b0ed7fe897e84444d0be18c04519e1be54d8fc0376f832a964947d9d460b91",
+    "scripts/exploration/exploration_session.gd": "091ec4fdad2df6e750206a355c3fc5452ad309f3c9619c738c3712d589bcbc8d",
+    "scripts/exploration/exploration_test.gd": "24d3d7495ff11b1d0979356466b83c1c631a3edd09be14a3e7780e9ecb77d004",
+    "scripts/exploration/exploration_view.gd": "3684291858fc6f5391ba8b49f59dc7d304d9a000439f768d5c675f760231cb01",
+    "scripts/exploration/encounter_contact.gd": "807cb8e78ae103530b50c7db54dab4145de5d11d725470a597bcedecbb4e9285",
+    "scripts/exploration/encounter_motion.gd": "ef6d10d3aa27e5a6909b88b60e061a3420ac532944d1f5e20e9fa7afe26fe889",
+    "scripts/combat/battle_model.gd": "05f09d5b03979edd8af8b0a8446efd983a427142b3b014aef12c52fd86e166e1",
+    "scripts/combat/damage_v1_bridge.gd": "5ebb06a953a4c74c6d7d03d3ccc9e6a2b2026a01b760495f4b0decde35a569f8",
+    "data/damage_reference_profiles.json": "45835cbfeb73219aeea26a57fc0469d47e846fa0a964b2fa28f2aaa3d41dbaee",
+    "data/damage_lab.json": "643f65aaaa8b324ce443165abde301686417f012159b624a6c4eb2e2ce685a98",
+    "data/battle_damage_v1.json": "bda7297353d05dd3a3189cf0f0c531fe7ea2881f925ef43e364a0a0ce56dc6f4",
+    "tests/exploration_pursuit_tests.gd": "87e4009b56963505cca1b7221d958c7b47663ff016945116744dfec6b241e34d",
+    "tests/exploration_pursuit_ui_smoke.gd": "20b39c60e570169130f689ced679d1fe8e357d7f7413c77d9c437d21de9df77f"
+  },
+  "graphics": {
+    "suite": "exploration_pursuit_ui_smoke.gd",
+    "renderer": "Compatibility",
+    "checks": 29,
+    "failures": 0,
+    "captures_inspected": [
+      "visual/pursuit-contact-battle.png",
+      "visual/pursuit-escaped-map.png",
+      "visual/pursuit-fixed-limit.png",
+      "visual/pursuit-radius.png",
+      "visual/pursuit-return.png"
+    ]
+  },
+  "note": "Limite120 fixo no ponto de saída da patrulha, independente do raio móvel180."
+}

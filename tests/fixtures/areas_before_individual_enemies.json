@@ -1,0 +1,3293 @@
+{
+  "lab_exterior": {
+    "notice": "Vila provisória: NPCs nas ruas e na casa; portão leva ao mundo aberto.",
+    "world_size": [
+      1440,
+      900
+    ],
+    "walkable_bounds": [
+      24,
+      24,
+      1392,
+      852
+    ],
+    "spawn": [
+      210,
+      500
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "obstacles": [
+      {
+        "rect": [
+          300,
+          190,
+          128,
+          270
+        ],
+        "label": "EDIFÍCIO A",
+        "kind": "wall",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          540,
+          360,
+          280,
+          72
+        ],
+        "label": "BLOCO B",
+        "kind": "wall",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          600,
+          120,
+          150,
+          100
+        ],
+        "label": "EDIFÍCIO C",
+        "kind": "wall",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          350,
+          650,
+          210,
+          26
+        ],
+        "label": "PAREDE",
+        "kind": "wall",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          350,
+          720,
+          210,
+          26
+        ],
+        "label": "PAREDE",
+        "kind": "wall",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          610,
+          720,
+          26,
+          120
+        ],
+        "label": "",
+        "kind": "wall",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          680,
+          650,
+          26,
+          190
+        ],
+        "label": "",
+        "kind": "wall",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          82.5,
+          379,
+          20,
+          16
+        ],
+        "label": "",
+        "kind": "tree",
+        "visual_height": 96,
+        "canopy_width": 96
+      },
+      {
+        "rect": [
+          192.5,
+          294,
+          20,
+          16
+        ],
+        "label": "",
+        "kind": "tree",
+        "visual_height": 96,
+        "canopy_width": 96
+      },
+      {
+        "rect": [
+          470,
+          260,
+          42,
+          40
+        ],
+        "label": "",
+        "kind": "rock",
+        "visual_height": 18
+      },
+      {
+        "rect": [
+          735,
+          550,
+          55,
+          50
+        ],
+        "label": "",
+        "kind": "rock",
+        "visual_height": 18
+      },
+      {
+        "rect": [
+          282.5,
+          834,
+          20,
+          16
+        ],
+        "label": "",
+        "kind": "tree",
+        "visual_height": 96,
+        "canopy_width": 96
+      },
+      {
+        "rect": [
+          780,
+          110,
+          120,
+          120
+        ],
+        "label": "CASA DE TESTE",
+        "kind": "house",
+        "visual_height": 48,
+        "night_windows": true
+      },
+      {
+        "rect": [
+          1170,
+          110,
+          26,
+          120
+        ],
+        "label": "",
+        "kind": "wall",
+        "visual_height": 56
+      },
+      {
+        "rect": [
+          1264,
+          110,
+          26,
+          120
+        ],
+        "label": "",
+        "kind": "wall",
+        "visual_height": 56
+      },
+      {
+        "rect": [
+          1000,
+          620,
+          140,
+          110
+        ],
+        "label": "CASA / SEGREDO",
+        "kind": "house",
+        "visual_height": 48,
+        "night_windows": true
+      },
+      {
+        "rect": [
+          876,
+          562,
+          12,
+          12
+        ],
+        "kind": "lamp",
+        "label": "",
+        "visual_height": 72,
+        "night_light": true
+      }
+    ],
+    "regions": [
+      {
+        "rect": [
+          44,
+          44,
+          510,
+          132
+        ],
+        "label": "VILA DE TESTES / ruas e casa",
+        "color": "354840"
+      },
+      {
+        "rect": [
+          880,
+          385,
+          250,
+          195
+        ],
+        "label": "PRAÇA / NPCs de teste",
+        "color": "4b514a"
+      },
+      {
+        "rect": [
+          335,
+          595,
+          390,
+          260
+        ],
+        "label": "COLISÕES / corredores estreitos",
+        "color": "343e48"
+      }
+    ],
+    "encounters": [],
+    "interaction_distance": 64,
+    "npcs": [
+      {
+        "id": "npc_04",
+        "label": "NPC 4",
+        "position": [
+          900,
+          500
+        ],
+        "color": "9ebbe4",
+        "dialogue_id": "patrol",
+        "route": [
+          [
+            900,
+            500
+          ],
+          [
+            1060,
+            500
+          ]
+        ],
+        "speed": 32,
+        "placement_by_period": {
+          "night": {
+            "position": [
+              970,
+              780
+            ]
+          }
+        },
+        "interaction_rules": [
+          {
+            "when": {
+              "flags_set": [
+                "house_secret_discovered"
+              ]
+            },
+            "dialogue_id": "resident_knows"
+          },
+          {
+            "when": {
+              "periods": [
+                "night"
+              ]
+            },
+            "dialogue_id": "resident_night"
+          }
+        ]
+      },
+      {
+        "id": "npc_05",
+        "label": "NPC 5",
+        "position": [
+          1090,
+          290
+        ],
+        "color": "e1b4ae",
+        "dialogue_id": "objects",
+        "dialogue_by_period": {
+          "night": "clock_night"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "secret_stone",
+        "label": "Pedra misteriosa",
+        "object_type": "mysterious_stone",
+        "position": [
+          1177,
+          688
+        ],
+        "rect": [
+          1160,
+          660,
+          34,
+          28
+        ],
+        "visual_height": 22,
+        "solid": true,
+        "interaction_rules": [
+          {
+            "when": {
+              "flags_set": [
+                "house_secret_discovered"
+              ]
+            },
+            "dialogue_id": "stone_known"
+          },
+          {
+            "when": {
+              "periods": [
+                "night"
+              ],
+              "flags_unset": [
+                "house_secret_discovered"
+              ]
+            },
+            "dialogue_id": "stone_discover",
+            "set_flag": "house_secret_discovered"
+          },
+          {
+            "when": {},
+            "dialogue_id": "stone_day"
+          }
+        ]
+      }
+    ],
+    "dialogues": {
+      "patrol": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Este NPC segue uma rota programada. Durante a conversa, ele para no ponto exato.",
+            "next": "1"
+          },
+          "1": {
+            "text": "O menu da equipe e o combate também pausam as patrulhas.",
+            "next": "secret_hint"
+          },
+          "secret_hint": {
+            "text": "À noite, há uma luz estranha junto da segunda casa, ao sul da praça. Durante o dia, a pedra parece comum.",
+            "next": ""
+          }
+        }
+      },
+      "objects": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "O portão da vila leva ao mundo aberto. A mini dungeon fica lá fora, seguindo o caminho até a entrada de pedra.",
+            "next": "1"
+          },
+          "1": {
+            "text": "O baú, a porta e a alavanca continuam na dungeon. Entrar na vila ou na casa não recupera HP e MP.",
+            "next": ""
+          }
+        }
+      },
+      "clock_night": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "É noite: as janelas das duas casas e o poste estão acesos. O relógio permanece pausado na vila; o mapa-múndi preserva e retoma esse horário.",
+            "next": ""
+          }
+        }
+      },
+      "resident_night": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "A luz estranha aparece na pedra ao lado desta casa durante a noite. Você pode examiná-la.",
+            "next": ""
+          }
+        }
+      },
+      "resident_knows": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Você encontrou a inscrição escondida na pedra. A descoberta continua registrada, mesmo quando o dia volta.",
+            "next": ""
+          }
+        }
+      },
+      "stone_day": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Uma pedra comum. À luz do dia, não é possível descobrir o seu segredo.",
+            "next": ""
+          }
+        }
+      },
+      "stone_discover": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "O Segredo da Casa: sob o brilho noturno, uma inscrição escondida fica visível. Descoberta registrada.",
+            "next": ""
+          }
+        }
+      },
+      "stone_known": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Você já descobriu a inscrição escondida. A descoberta permanece registrada; não há nova recompensa.",
+            "next": ""
+          }
+        }
+      }
+    },
+    "id": "lab_exterior",
+    "label": "Vila de testes",
+    "entries": {
+      "from_house": {
+        "position": [
+          840,
+          310
+        ],
+        "facing": [
+          1,
+          0
+        ],
+        "arrival_transition_id": "house_entrance"
+      },
+      "from_world": {
+        "position": [
+          1230,
+          310
+        ],
+        "facing": [
+          1,
+          0
+        ],
+        "arrival_transition_id": "town_exit"
+      },
+      "from_secret_house": {
+        "position": [
+          1070,
+          800
+        ],
+        "facing": [
+          1,
+          0
+        ],
+        "arrival_transition_id": "secret_house_entrance"
+      }
+    },
+    "transitions": [
+      {
+        "id": "house_entrance",
+        "label": "Entrar na casa",
+        "position": [
+          840,
+          244
+        ],
+        "target_area_id": "test_house",
+        "target_entry_id": "from_lab",
+        "interaction_distance": 64
+      },
+      {
+        "id": "town_exit",
+        "label": "Sair da vila / mundo aberto",
+        "position": [
+          1230,
+          244
+        ],
+        "target_area_id": "test_world",
+        "target_entry_id": "from_town",
+        "interaction_distance": 64
+      },
+      {
+        "id": "secret_house_entrance",
+        "label": "Entrar na segunda casa",
+        "position": [
+          1070,
+          744
+        ],
+        "target_area_id": "secret_house",
+        "target_entry_id": "from_town",
+        "interaction_distance": 64
+      }
+    ],
+    "footer": "Casa original: norte · segunda casa/pedra: sul da praça · NPC 4: praça de dia / casa à noite · E: interagir",
+    "terrain": [
+      {
+        "kind": "path",
+        "rect": [
+          180,
+          476,
+          1090,
+          48
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          816,
+          244,
+          48,
+          360
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          1206,
+          244,
+          48,
+          360
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          816,
+          604,
+          48,
+          196
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          816,
+          776,
+          290,
+          40
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          1046,
+          744,
+          48,
+          56
+        ]
+      }
+    ],
+    "area_type": "town",
+    "time_advances": false,
+    "lighting_profile": "cycle"
+  },
+  "test_house": {
+    "id": "test_house",
+    "label": "Casa de testes / NPCs",
+    "notice": "Interior provisório; sem conteúdo narrativo, descanso ou recompensas.",
+    "world_size": [
+      720,
+      480
+    ],
+    "walkable_bounds": [
+      24,
+      24,
+      672,
+      432
+    ],
+    "spawn": [
+      360,
+      300
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "interaction_distance": 64,
+    "regions": [
+      {
+        "rect": [
+          118,
+          78,
+          484,
+          344
+        ],
+        "label": "CASA DE TESTE / interior",
+        "color": "50483f"
+      }
+    ],
+    "obstacles": [
+      {
+        "rect": [
+          100,
+          60,
+          520,
+          18
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          100,
+          60,
+          18,
+          380
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          602,
+          60,
+          18,
+          380
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          100,
+          422,
+          220,
+          18
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          400,
+          422,
+          220,
+          18
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          180,
+          150,
+          140,
+          70
+        ],
+        "kind": "wall",
+        "label": "MESA",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          480,
+          130,
+          100,
+          35
+        ],
+        "kind": "wall",
+        "label": "MÓVEL",
+        "visual_height": 28
+      }
+    ],
+    "encounters": [],
+    "npcs": [
+      {
+        "id": "npc_01",
+        "label": "NPC 1",
+        "position": [
+          420,
+          140
+        ],
+        "color": "87cfc1",
+        "dialogue_id": "welcome"
+      },
+      {
+        "id": "npc_02",
+        "label": "NPC 2",
+        "position": [
+          380,
+          230
+        ],
+        "color": "e3c984",
+        "dialogue_id": "choices",
+        "route": [
+          [
+            380,
+            230
+          ],
+          [
+            455,
+            230
+          ]
+        ],
+        "speed": 28
+      },
+      {
+        "id": "npc_03",
+        "label": "NPC 3",
+        "position": [
+          540,
+          250
+        ],
+        "color": "bcafe0",
+        "dialogue_id": "collision"
+      }
+    ],
+    "objects": [
+      {
+        "id": "sign_01",
+        "label": "Placa",
+        "object_type": "sign",
+        "position": [
+          550,
+          395
+        ],
+        "dialogue_id": "sign"
+      }
+    ],
+    "dialogues": {
+      "welcome": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Este é um NPC de teste. A conversa pausa a fila e as patrulhas do mapa.",
+            "next": "1"
+          },
+          "1": {
+            "text": "Use E, Enter ou o botão Avançar para ler as próximas falas. Ao encerrar, o mapa retoma.",
+            "next": ""
+          }
+        }
+      },
+      "choices": {
+        "start": "question",
+        "nodes": {
+          "question": {
+            "text": "Qual teste você quer conhecer?",
+            "choices": [
+              {
+                "text": "Encontros",
+                "next": "encounters"
+              },
+              {
+                "text": "Fila e colisões",
+                "next": "formation"
+              }
+            ]
+          },
+          "encounters": {
+            "text": "Os seis encontros ficam na mini dungeon, no mundo aberto. Saia da vila pelo portão. Todos usam os ritmos atuais de batalha; M2 impede fuga.",
+            "next": "end"
+          },
+          "formation": {
+            "text": "Os móveis da casa e os corredores do exterior e da dungeon permitem testar colisões e a fila.",
+            "next": "end"
+          },
+          "end": {
+            "text": "A resposta só muda esta conversa de teste. Não cria missão ou recompensa.",
+            "next": ""
+          }
+        }
+      },
+      "collision": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Móveis e paredes da casa são sólidos. No exterior há árvores, pedras e corredores para testar colisões.",
+            "next": "1"
+          },
+          "1": {
+            "text": "Use F3 para ver volumes, rotas e o caminho seguido pela fila.",
+            "next": ""
+          }
+        }
+      },
+      "sign": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "VILA DE TESTES: há NPCs nesta casa e nas ruas. Use E para conversar, Enter para avançar e números para responder.",
+            "next": "1"
+          },
+          "1": {
+            "text": "O portão da vila leva ao mundo aberto. A mini dungeon fica fora da vila. Estados e recursos permanecem entre áreas.",
+            "next": ""
+          }
+        }
+      }
+    },
+    "entries": {
+      "from_lab": {
+        "position": [
+          360,
+          300
+        ],
+        "facing": [
+          0,
+          -1
+        ],
+        "arrival_transition_id": "house_exit"
+      }
+    },
+    "transitions": [
+      {
+        "id": "house_exit",
+        "label": "Sair da casa",
+        "position": [
+          360,
+          430
+        ],
+        "target_area_id": "lab_exterior",
+        "target_entry_id": "from_house",
+        "interaction_distance": 64
+      }
+    ],
+    "footer": "NPCs 1–3: E para conversar · saída ao sul retorna à vila",
+    "area_type": "interior",
+    "time_advances": false,
+    "lighting_profile": "fixed"
+  },
+  "test_dungeon": {
+    "id": "test_dungeon",
+    "label": "Dungeon · andar 1 / galerias e quinas",
+    "notice": "Dungeon de testes · contato com líder inicia batalha · escadas e objetos: E",
+    "world_size": [
+      2400,
+      1600
+    ],
+    "walkable_bounds": [
+      40,
+      40,
+      2320,
+      1520
+    ],
+    "spawn": [
+      220,
+      1280
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "interaction_distance": 64,
+    "background_color": "101b23",
+    "floor_color": "263b43",
+    "regions": [
+      {
+        "rect": [
+          120,
+          1180,
+          850,
+          300
+        ],
+        "label": "SAGUÃO · SAÍDA PARA O MUNDO",
+        "color": "31464c"
+      },
+      {
+        "rect": [
+          180,
+          730,
+          750,
+          390
+        ],
+        "label": "GALERIA ABERTA · M1",
+        "color": "344f54"
+      },
+      {
+        "rect": [
+          180,
+          180,
+          780,
+          330
+        ],
+        "label": "PAREDES E QUINAS · M2",
+        "color": "3b424f"
+      },
+      {
+        "rect": [
+          1390,
+          800,
+          740,
+          450
+        ],
+        "label": "CIRCUITO DE PATRULHA · M3",
+        "color": "304d4b"
+      },
+      {
+        "rect": [
+          1860,
+          160,
+          380,
+          400
+        ],
+        "label": "ESCADAS · ANDAR 2",
+        "color": "474637"
+      }
+    ],
+    "obstacles": [
+      {
+        "rect": [
+          40,
+          40,
+          2320,
+          32
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          40,
+          40,
+          32,
+          1520
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          2328,
+          40,
+          32,
+          1520
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          40,
+          1528,
+          2320,
+          32
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      }
+    ],
+    "wall_shapes": [
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1115.069,
+            37.504
+          ],
+          [
+            1204.931,
+            42.496
+          ],
+          [
+            1184.931,
+            402.496
+          ],
+          [
+            1095.069,
+            397.504
+          ]
+        ],
+        "rect": [
+          1095.069,
+          37.504,
+          109.86200000000008,
+          364.99199999999996
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1096.731,
+            412.362
+          ],
+          [
+            1183.269,
+            387.638
+          ],
+          [
+            1263.269,
+            667.638
+          ],
+          [
+            1176.731,
+            692.362
+          ]
+        ],
+        "rect": [
+          1096.731,
+          387.638,
+          166.538,
+          304.724
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1176.344,
+            669.086
+          ],
+          [
+            1263.656,
+            690.914
+          ],
+          [
+            1203.656,
+            930.914
+          ],
+          [
+            1116.344,
+            909.086
+          ]
+        ],
+        "rect": [
+          1116.344,
+          669.086,
+          147.3119999999999,
+          261.828
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1115.565,
+            1107.11
+          ],
+          [
+            1204.435,
+            1092.89
+          ],
+          [
+            1244.435,
+            1342.89
+          ],
+          [
+            1155.565,
+            1357.11
+          ]
+        ],
+        "rect": [
+          1115.565,
+          1092.89,
+          128.8699999999999,
+          264.2199999999998
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1155.874,
+            1341.175
+          ],
+          [
+            1244.126,
+            1358.825
+          ],
+          [
+            1204.126,
+            1558.825
+          ],
+          [
+            1115.874,
+            1541.175
+          ]
+        ],
+        "rect": [
+          1115.874,
+          1341.175,
+          128.25199999999995,
+          217.6500000000001
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            45.174,
+            602.225
+          ],
+          [
+            54.826,
+            517.775
+          ],
+          [
+            404.826,
+            557.775
+          ],
+          [
+            395.174,
+            642.225
+          ]
+        ],
+        "rect": [
+          45.174,
+          517.775,
+          359.65200000000004,
+          124.45000000000005
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            733.696,
+            602.03
+          ],
+          [
+            746.304,
+            517.97
+          ],
+          [
+            1146.304,
+            577.97
+          ],
+          [
+            1133.696,
+            662.03
+          ]
+        ],
+        "rect": [
+          733.696,
+          517.97,
+          412.60800000000006,
+          144.05999999999995
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            58.551,
+            1171.355
+          ],
+          [
+            41.449,
+            1108.645
+          ],
+          [
+            151.449,
+            1078.645
+          ],
+          [
+            168.551,
+            1141.355
+          ]
+        ],
+        "rect": [
+          41.449,
+          1078.645,
+          127.10199999999999,
+          92.71000000000004
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            598.128,
+            1192.446
+          ],
+          [
+            601.872,
+            1127.554
+          ],
+          [
+            1121.872,
+            1157.554
+          ],
+          [
+            1118.128,
+            1222.446
+          ]
+        ],
+        "rect": [
+          598.128,
+          1127.554,
+          523.744,
+          94.89199999999983
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            72,
+            72
+          ],
+          [
+            250,
+            72
+          ],
+          [
+            72,
+            250
+          ]
+        ],
+        "rect": [
+          72,
+          72,
+          178,
+          178
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            2328,
+            72
+          ],
+          [
+            2150,
+            72
+          ],
+          [
+            2328,
+            250
+          ]
+        ],
+        "rect": [
+          2150,
+          72,
+          178,
+          178
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            72,
+            500
+          ],
+          [
+            160,
+            550
+          ],
+          [
+            150,
+            690
+          ],
+          [
+            72,
+            750
+          ]
+        ],
+        "rect": [
+          72,
+          500,
+          88,
+          250
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            620,
+            355
+          ],
+          [
+            594,
+            401
+          ],
+          [
+            530,
+            420
+          ],
+          [
+            466,
+            401
+          ],
+          [
+            440,
+            355
+          ],
+          [
+            466,
+            309
+          ],
+          [
+            530,
+            290
+          ],
+          [
+            594,
+            309
+          ]
+        ],
+        "rect": [
+          440,
+          290,
+          180,
+          130
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            1775,
+            1000
+          ],
+          [
+            1756,
+            1035
+          ],
+          [
+            1710,
+            1050
+          ],
+          [
+            1664,
+            1035
+          ],
+          [
+            1645,
+            1000
+          ],
+          [
+            1664,
+            965
+          ],
+          [
+            1710,
+            950
+          ],
+          [
+            1756,
+            965
+          ]
+        ],
+        "rect": [
+          1645,
+          950,
+          130,
+          100
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            1680,
+            500
+          ],
+          [
+            1645,
+            557
+          ],
+          [
+            1560,
+            580
+          ],
+          [
+            1475,
+            557
+          ],
+          [
+            1440,
+            500
+          ],
+          [
+            1475,
+            443
+          ],
+          [
+            1560,
+            420
+          ],
+          [
+            1645,
+            443
+          ]
+        ],
+        "rect": [
+          1440,
+          420,
+          240,
+          160
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            2170,
+            1330
+          ],
+          [
+            2135,
+            1376
+          ],
+          [
+            2050,
+            1395
+          ],
+          [
+            1965,
+            1376
+          ],
+          [
+            1930,
+            1330
+          ],
+          [
+            1965,
+            1284
+          ],
+          [
+            2050,
+            1265
+          ],
+          [
+            2135,
+            1284
+          ]
+        ],
+        "rect": [
+          1930,
+          1265,
+          240,
+          130
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      }
+    ],
+    "encounters": [
+      {
+        "id": "test_map_enemy_01",
+        "position": [
+          340,
+          840
+        ],
+        "interaction_distance": 72,
+        "battle_preset_id": "exploration_seeded_open",
+        "label": "M1 · ritmos / voo",
+        "route": [
+          [
+            340,
+            840
+          ],
+          [
+            700,
+            840
+          ],
+          [
+            750,
+            1040
+          ],
+          [
+            340,
+            1040
+          ]
+        ],
+        "speed": 60
+      },
+      {
+        "id": "test_map_enemy_02",
+        "label": "M2 · ritmos · sem fuga",
+        "position": [
+          300,
+          240
+        ],
+        "battle_preset_id": "exploration_seeded_corners",
+        "interaction_distance": 72,
+        "route": [
+          [
+            300,
+            240
+          ],
+          [
+            760,
+            240
+          ],
+          [
+            800,
+            450
+          ],
+          [
+            300,
+            450
+          ]
+        ],
+        "speed": 52
+      },
+      {
+        "id": "test_map_enemy_03",
+        "label": "M3 · voo amplo",
+        "position": [
+          1450,
+          870
+        ],
+        "battle_preset_id": "exploration_seeded_sides",
+        "route": [
+          [
+            1450,
+            870
+          ],
+          [
+            1970,
+            870
+          ],
+          [
+            2020,
+            1140
+          ],
+          [
+            1450,
+            1140
+          ]
+        ],
+        "speed": 64,
+        "interaction_distance": 72
+      }
+    ],
+    "npcs": [],
+    "objects": [
+      {
+        "id": "door_01",
+        "label": "Portão da galeria",
+        "object_type": "door",
+        "position": [
+          1160,
+          1010
+        ],
+        "rect": [
+          1115,
+          920,
+          90,
+          180
+        ],
+        "visual_height": 32
+      },
+      {
+        "id": "lever_01",
+        "label": "Alavanca",
+        "object_type": "lever",
+        "position": [
+          1040,
+          1060
+        ],
+        "target_id": "door_01"
+      },
+      {
+        "id": "chest_01",
+        "label": "Baú de teste",
+        "object_type": "chest",
+        "position": [
+          1940,
+          650
+        ],
+        "dialogue_id": "chest",
+        "repeat_dialogue_id": "chest_repeat"
+      }
+    ],
+    "dialogues": {
+      "chest": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Baú aberto. O sprite mudou e o estado ficará registrado até Reiniciar teste.",
+            "next": "1"
+          },
+          "1": {
+            "text": "Nenhum item foi adicionado: não há inventário novo nesta etapa.",
+            "next": ""
+          }
+        }
+      },
+      "chest_repeat": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "O baú já está aberto nesta sessão. Não há recompensa repetida.",
+            "next": ""
+          }
+        }
+      },
+      "door_open": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Porta aberta. A passagem está livre; nenhum mapa foi carregado.",
+            "next": ""
+          }
+        }
+      },
+      "door_closed": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Porta fechada. A passagem voltou a ser sólida.",
+            "next": ""
+          }
+        }
+      },
+      "door_blocked": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Não é possível fechar: há um integrante do grupo na passagem. Afaste a fila e tente novamente.",
+            "next": ""
+          }
+        }
+      }
+    },
+    "entries": {
+      "from_exterior": {
+        "position": [
+          220,
+          1350
+        ],
+        "facing": [
+          0,
+          -1
+        ],
+        "arrival_transition_id": "dungeon_exit"
+      },
+      "from_upper": {
+        "position": [
+          2120,
+          420
+        ],
+        "facing": [
+          0,
+          1
+        ],
+        "arrival_transition_id": "stairs_up"
+      }
+    },
+    "transitions": [
+      {
+        "id": "dungeon_exit",
+        "label": "Sair da dungeon",
+        "position": [
+          220,
+          1470
+        ],
+        "target_area_id": "test_world",
+        "target_entry_id": "from_dungeon",
+        "interaction_distance": 64
+      },
+      {
+        "id": "stairs_up",
+        "label": "Subir · andar 2",
+        "position": [
+          2120,
+          290
+        ],
+        "target_area_id": "test_dungeon_upper",
+        "target_entry_id": "from_lower",
+        "interaction_distance": 64,
+        "presentation": "stairs_up"
+      }
+    ],
+    "footer": "Contato com líder: batalha · E: objetos e escadas · F3: rotas/territórios",
+    "area_type": "dungeon",
+    "time_advances": false,
+    "lighting_profile": "fixed",
+    "floor_paths": [
+      [
+        [
+          220,
+          1470
+        ],
+        [
+          220,
+          1280
+        ],
+        [
+          420,
+          1280
+        ],
+        [
+          420,
+          1110
+        ]
+      ],
+      [
+        [
+          900,
+          1060
+        ],
+        [
+          1030,
+          1060
+        ],
+        [
+          1080,
+          1010
+        ]
+      ],
+      [
+        [
+          1260,
+          1010
+        ],
+        [
+          1350,
+          1010
+        ],
+        [
+          1350,
+          650
+        ],
+        [
+          2120,
+          650
+        ],
+        [
+          2120,
+          290
+        ]
+      ]
+    ],
+    "encounter_rules": {
+      "automatic_contact": true,
+      "detection_radius": 180,
+      "chase_limit": 240,
+      "chase_speed": 144,
+      "speed_transition_seconds": 0.3
+    }
+  },
+  "test_world": {
+    "id": "test_world",
+    "label": "Mundo aberto / protótipo",
+    "notice": "Colinas e florestas bloqueiam passagem. Teste a rampa ao norte da vila para subir ao platô.",
+    "world_size": [
+      1920,
+      1280
+    ],
+    "walkable_bounds": [
+      24,
+      24,
+      1872,
+      1232
+    ],
+    "spawn": [
+      380,
+      1020
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "interaction_distance": 64,
+    "background_color": "162c30",
+    "floor_color": "405b42",
+    "regions": [],
+    "terrain": [
+      {
+        "kind": "forest",
+        "rect": [
+          100,
+          180,
+          450,
+          300
+        ],
+        "label": "FLORESTA"
+      },
+      {
+        "kind": "forest",
+        "rect": [
+          1140,
+          690,
+          450,
+          300
+        ],
+        "label": "BOSQUE"
+      },
+      {
+        "kind": "hill",
+        "rect": [
+          100,
+          500,
+          360,
+          140
+        ],
+        "label": "PLATÔ DE TESTE",
+        "elevation": 48,
+        "cliff_thickness": 8,
+        "ramp": {
+          "rect": [
+            340,
+            640,
+            96,
+            120
+          ]
+        }
+      },
+      {
+        "kind": "hill",
+        "rect": [
+          900,
+          570,
+          200,
+          180
+        ],
+        "label": "COLINA · SEM ACESSO",
+        "elevation": 56
+      },
+      {
+        "kind": "sand",
+        "rect": [
+          1640,
+          24,
+          40,
+          1056
+        ]
+      },
+      {
+        "kind": "sand",
+        "rect": [
+          1060,
+          1040,
+          620,
+          40
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          352,
+          914,
+          56,
+          134
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          352,
+          992,
+          476,
+          56
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          772,
+          452,
+          56,
+          596
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          772,
+          452,
+          796,
+          56
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          1512,
+          394,
+          56,
+          114
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          500,
+          760,
+          60,
+          260
+        ]
+      },
+      {
+        "kind": "path",
+        "rect": [
+          340,
+          760,
+          220,
+          40
+        ]
+      }
+    ],
+    "obstacles": [
+      {
+        "kind": "water",
+        "rect": [
+          1680,
+          24,
+          216,
+          1232
+        ],
+        "visual_height": 0,
+        "ground_only": true,
+        "label": "MAR"
+      },
+      {
+        "kind": "water",
+        "rect": [
+          1100,
+          1080,
+          580,
+          176
+        ],
+        "visual_height": 0,
+        "ground_only": true,
+        "label": ""
+      },
+      {
+        "kind": "mountain",
+        "rect": [
+          700,
+          180,
+          200,
+          100
+        ],
+        "visual_height": 110,
+        "label": "MONTANHAS"
+      },
+      {
+        "kind": "mountain",
+        "rect": [
+          920,
+          140,
+          220,
+          100
+        ],
+        "visual_height": 120,
+        "label": ""
+      },
+      {
+        "kind": "mountain",
+        "rect": [
+          1150,
+          190,
+          180,
+          100
+        ],
+        "visual_height": 100,
+        "label": ""
+      },
+      {
+        "kind": "town_marker",
+        "rect": [
+          260,
+          820,
+          240,
+          80
+        ],
+        "visual_height": 40,
+        "label": "VILA DE TESTES"
+      },
+      {
+        "kind": "dungeon_entrance",
+        "rect": [
+          1480,
+          260,
+          120,
+          120
+        ],
+        "visual_height": 48,
+        "label": "MINI DUNGEON"
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          170,
+          244,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          270,
+          224,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          370,
+          284,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          210,
+          384,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          410,
+          384,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          490,
+          214,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          1200,
+          744,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          1310,
+          784,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          1450,
+          724,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          1220,
+          904,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          1420,
+          924,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      },
+      {
+        "kind": "tree",
+        "rect": [
+          1540,
+          854,
+          20,
+          16
+        ],
+        "visual_height": 96,
+        "canopy_width": 96,
+        "label": ""
+      }
+    ],
+    "npcs": [],
+    "encounters": [],
+    "objects": [],
+    "dialogues": {},
+    "entries": {
+      "from_town": {
+        "position": [
+          380,
+          1020
+        ],
+        "facing": [
+          0,
+          1
+        ],
+        "arrival_transition_id": "enter_town"
+      },
+      "from_dungeon": {
+        "position": [
+          1540,
+          480
+        ],
+        "facing": [
+          1,
+          0
+        ],
+        "arrival_transition_id": "dungeon_entrance"
+      }
+    },
+    "transitions": [
+      {
+        "id": "enter_town",
+        "label": "Entrar na vila",
+        "position": [
+          380,
+          914
+        ],
+        "interaction_distance": 64,
+        "target_area_id": "lab_exterior",
+        "target_entry_id": "from_world"
+      },
+      {
+        "id": "dungeon_entrance",
+        "label": "Entrar na dungeon",
+        "position": [
+          1540,
+          394
+        ],
+        "interaction_distance": 64,
+        "target_area_id": "test_dungeon",
+        "target_entry_id": "from_exterior"
+      }
+    ],
+    "footer": "Colinas/florestas: sólidas · rampa ao norte da vila: ↑ subir / ↓ descer · F3: colisão e altura · E: entrar",
+    "area_type": "overworld",
+    "time_advances": true,
+    "lighting_profile": "cycle"
+  },
+  "secret_house": {
+    "id": "secret_house",
+    "label": "Segunda casa / O Segredo da Casa",
+    "notice": "Interior de teste; o relógio permanece pausado.",
+    "world_size": [
+      720,
+      480
+    ],
+    "walkable_bounds": [
+      24,
+      24,
+      672,
+      432
+    ],
+    "spawn": [
+      360,
+      300
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "interaction_distance": 64,
+    "regions": [
+      {
+        "rect": [
+          118,
+          78,
+          484,
+          344
+        ],
+        "label": "CASA DE TESTE / interior",
+        "color": "50483f"
+      }
+    ],
+    "obstacles": [
+      {
+        "rect": [
+          100,
+          60,
+          520,
+          18
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          100,
+          60,
+          18,
+          380
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          602,
+          60,
+          18,
+          380
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          100,
+          422,
+          220,
+          18
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          400,
+          422,
+          220,
+          18
+        ],
+        "kind": "wall",
+        "label": "",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          180,
+          150,
+          140,
+          70
+        ],
+        "kind": "wall",
+        "label": "MESA",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          480,
+          130,
+          100,
+          35
+        ],
+        "kind": "wall",
+        "label": "MÓVEL",
+        "visual_height": 28
+      }
+    ],
+    "encounters": [],
+    "npcs": [],
+    "objects": [],
+    "dialogues": {},
+    "entries": {
+      "from_town": {
+        "position": [
+          360,
+          300
+        ],
+        "facing": [
+          0,
+          -1
+        ],
+        "arrival_transition_id": "secret_house_exit"
+      }
+    },
+    "transitions": [
+      {
+        "id": "secret_house_exit",
+        "label": "Sair da segunda casa",
+        "position": [
+          360,
+          430
+        ],
+        "target_area_id": "lab_exterior",
+        "target_entry_id": "from_secret_house",
+        "interaction_distance": 64
+      }
+    ],
+    "footer": "Segunda casa · paredes e móveis provisórios · saída ao sul: E · tempo pausado",
+    "area_type": "interior",
+    "time_advances": false,
+    "lighting_profile": "fixed"
+  },
+  "test_dungeon_upper": {
+    "id": "test_dungeon_upper",
+    "label": "Dungeon · andar 2 / circuito de rochas",
+    "notice": "Dungeon de testes · contato com líder inicia batalha · escadas e objetos: E",
+    "world_size": [
+      2400,
+      1600
+    ],
+    "walkable_bounds": [
+      40,
+      40,
+      2320,
+      1520
+    ],
+    "spawn": [
+      220,
+      1280
+    ],
+    "move_speed": 180,
+    "leader_half_extent": 12,
+    "follower_gap": 34,
+    "interaction_distance": 64,
+    "background_color": "101b23",
+    "floor_color": "2e3947",
+    "regions": [
+      {
+        "rect": [
+          120,
+          1160,
+          760,
+          340
+        ],
+        "label": "ESCADAS · ANDAR 1",
+        "color": "434331"
+      },
+      {
+        "rect": [
+          170,
+          180,
+          800,
+          520
+        ],
+        "label": "CIRCUITO OESTE · M4",
+        "color": "3e4654"
+      },
+      {
+        "rect": [
+          1390,
+          180,
+          800,
+          610
+        ],
+        "label": "CAVERNA IRREGULAR · M5",
+        "color": "344958"
+      },
+      {
+        "rect": [
+          1400,
+          1030,
+          820,
+          420
+        ],
+        "label": "PATRULHA LONGA · M6",
+        "color": "344b4a"
+      }
+    ],
+    "obstacles": [
+      {
+        "rect": [
+          40,
+          40,
+          2320,
+          32
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          40,
+          40,
+          32,
+          1520
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          2328,
+          40,
+          32,
+          1520
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      },
+      {
+        "rect": [
+          40,
+          1528,
+          2320,
+          32
+        ],
+        "label": "Parede externa",
+        "visual_height": 28
+      }
+    ],
+    "wall_shapes": [
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1115.752,
+            51.806
+          ],
+          [
+            1204.248,
+            68.194
+          ],
+          [
+            1154.248,
+            338.194
+          ],
+          [
+            1065.752,
+            321.806
+          ]
+        ],
+        "rect": [
+          1065.752,
+          51.806,
+          138.4960000000001,
+          286.38800000000003
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1067.925,
+            345.959
+          ],
+          [
+            1152.075,
+            314.041
+          ],
+          [
+            1262.075,
+            604.041
+          ],
+          [
+            1177.925,
+            635.959
+          ]
+        ],
+        "rect": [
+          1067.925,
+          314.041,
+          194.1500000000001,
+          321.91799999999995
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1177.622,
+            604.865
+          ],
+          [
+            1262.378,
+            635.135
+          ],
+          [
+            1212.378,
+            775.135
+          ],
+          [
+            1127.622,
+            744.865
+          ]
+        ],
+        "rect": [
+          1127.622,
+          604.865,
+          134.75599999999986,
+          170.26999999999998
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1125.565,
+            1052.89
+          ],
+          [
+            1214.435,
+            1067.11
+          ],
+          [
+            1174.435,
+            1317.11
+          ],
+          [
+            1085.565,
+            1302.89
+          ]
+        ],
+        "rect": [
+          1085.565,
+          1052.89,
+          128.8699999999999,
+          264.2199999999998
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1087.865,
+            1325.801
+          ],
+          [
+            1172.135,
+            1294.199
+          ],
+          [
+            1262.135,
+            1534.199
+          ],
+          [
+            1177.865,
+            1565.801
+          ]
+        ],
+        "rect": [
+          1087.865,
+          1294.199,
+          174.26999999999998,
+          271.60199999999986
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            56.549,
+            904.867
+          ],
+          [
+            63.451,
+            815.133
+          ],
+          [
+            583.451,
+            855.133
+          ],
+          [
+            576.549,
+            944.867
+          ]
+        ],
+        "rect": [
+          56.549,
+          815.133,
+          526.902,
+          129.73399999999992
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            829.441,
+            893.744
+          ],
+          [
+            850.559,
+            806.256
+          ],
+          [
+            1140.559,
+            876.256
+          ],
+          [
+            1119.441,
+            963.744
+          ]
+        ],
+        "rect": [
+          829.441,
+          806.256,
+          311.11799999999994,
+          157.48800000000006
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1416.831,
+            934.856
+          ],
+          [
+            1423.169,
+            865.144
+          ],
+          [
+            1753.169,
+            895.144
+          ],
+          [
+            1746.831,
+            964.856
+          ]
+        ],
+        "rect": [
+          1416.831,
+          865.144,
+          336.3380000000002,
+          99.71199999999999
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1762.289,
+            962.772
+          ],
+          [
+            1737.711,
+            897.228
+          ],
+          [
+            1897.711,
+            837.228
+          ],
+          [
+            1922.289,
+            902.772
+          ]
+        ],
+        "rect": [
+          1737.711,
+          837.228,
+          184.57799999999997,
+          125.5440000000001
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            1905.027,
+            904.645
+          ],
+          [
+            1914.973,
+            835.355
+          ],
+          [
+            2332.973,
+            895.355
+          ],
+          [
+            2323.027,
+            964.645
+          ]
+        ],
+        "rect": [
+          1905.027,
+          835.355,
+          427.9459999999999,
+          129.28999999999996
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            72,
+            72
+          ],
+          [
+            350,
+            72
+          ],
+          [
+            72,
+            330
+          ]
+        ],
+        "rect": [
+          72,
+          72,
+          278,
+          258
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Rocha",
+        "points": [
+          [
+            2328,
+            72
+          ],
+          [
+            2060,
+            72
+          ],
+          [
+            2328,
+            340
+          ]
+        ],
+        "rect": [
+          2060,
+          72,
+          268,
+          268
+        ],
+        "visual_height": 28,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            630,
+            430
+          ],
+          [
+            601,
+            483
+          ],
+          [
+            530,
+            505
+          ],
+          [
+            459,
+            483
+          ],
+          [
+            430,
+            430
+          ],
+          [
+            459,
+            377
+          ],
+          [
+            530,
+            355
+          ],
+          [
+            601,
+            377
+          ]
+        ],
+        "rect": [
+          430,
+          355,
+          200,
+          150
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            1880,
+            500
+          ],
+          [
+            1848,
+            571
+          ],
+          [
+            1770,
+            600
+          ],
+          [
+            1692,
+            571
+          ],
+          [
+            1660,
+            500
+          ],
+          [
+            1692,
+            429
+          ],
+          [
+            1770,
+            400
+          ],
+          [
+            1848,
+            429
+          ]
+        ],
+        "rect": [
+          1660,
+          400,
+          220,
+          200
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            1935,
+            1240
+          ],
+          [
+            1910,
+            1279
+          ],
+          [
+            1850,
+            1295
+          ],
+          [
+            1790,
+            1279
+          ],
+          [
+            1765,
+            1240
+          ],
+          [
+            1790,
+            1201
+          ],
+          [
+            1850,
+            1185
+          ],
+          [
+            1910,
+            1201
+          ]
+        ],
+        "rect": [
+          1765,
+          1185,
+          170,
+          110
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            590,
+            1120
+          ],
+          [
+            564,
+            1159
+          ],
+          [
+            500,
+            1175
+          ],
+          [
+            436,
+            1159
+          ],
+          [
+            410,
+            1120
+          ],
+          [
+            436,
+            1081
+          ],
+          [
+            500,
+            1065
+          ],
+          [
+            564,
+            1081
+          ]
+        ],
+        "rect": [
+          410,
+          1065,
+          180,
+          110
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      },
+      {
+        "label": "Afloramento",
+        "points": [
+          [
+            2205,
+            1450
+          ],
+          [
+            2183,
+            1478
+          ],
+          [
+            2130,
+            1490
+          ],
+          [
+            2077,
+            1478
+          ],
+          [
+            2055,
+            1450
+          ],
+          [
+            2077,
+            1422
+          ],
+          [
+            2130,
+            1410
+          ],
+          [
+            2183,
+            1422
+          ]
+        ],
+        "rect": [
+          2055,
+          1410,
+          150,
+          80
+        ],
+        "visual_height": 36,
+        "color": "687b80"
+      }
+    ],
+    "encounters": [
+      {
+        "id": "test_map_enemy_04",
+        "label": "M4 · linha superior",
+        "position": [
+          300,
+          260
+        ],
+        "battle_preset_id": "exploration_seeded_fullscreen",
+        "interaction_distance": 72,
+        "route": [
+          [
+            300,
+            260
+          ],
+          [
+            750,
+            260
+          ],
+          [
+            850,
+            600
+          ],
+          [
+            300,
+            620
+          ]
+        ],
+        "speed": 58
+      },
+      {
+        "id": "test_map_enemy_05",
+        "label": "M5 · ritmos / voo",
+        "position": [
+          1440,
+          320
+        ],
+        "battle_preset_id": "exploration_seeded_open",
+        "route": [
+          [
+            1440,
+            320
+          ],
+          [
+            1900,
+            260
+          ],
+          [
+            2120,
+            500
+          ],
+          [
+            1940,
+            750
+          ],
+          [
+            1460,
+            700
+          ]
+        ],
+        "speed": 64,
+        "interaction_distance": 72
+      },
+      {
+        "id": "test_map_enemy_06",
+        "label": "M6 · voo amplo",
+        "position": [
+          1440,
+          1100
+        ],
+        "battle_preset_id": "exploration_seeded_sides",
+        "interaction_distance": 72,
+        "route": [
+          [
+            1440,
+            1100
+          ],
+          [
+            2010,
+            1100
+          ],
+          [
+            2180,
+            1310
+          ],
+          [
+            1570,
+            1430
+          ]
+        ],
+        "speed": 60
+      }
+    ],
+    "npcs": [],
+    "objects": [],
+    "dialogues": {
+      "chest": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Baú aberto. O sprite mudou e o estado ficará registrado até Reiniciar teste.",
+            "next": "1"
+          },
+          "1": {
+            "text": "Nenhum item foi adicionado: não há inventário novo nesta etapa.",
+            "next": ""
+          }
+        }
+      },
+      "chest_repeat": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "O baú já está aberto nesta sessão. Não há recompensa repetida.",
+            "next": ""
+          }
+        }
+      },
+      "door_open": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Porta aberta. A passagem está livre; nenhum mapa foi carregado.",
+            "next": ""
+          }
+        }
+      },
+      "door_closed": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Porta fechada. A passagem voltou a ser sólida.",
+            "next": ""
+          }
+        }
+      },
+      "door_blocked": {
+        "start": "0",
+        "nodes": {
+          "0": {
+            "text": "Não é possível fechar: há um integrante do grupo na passagem. Afaste a fila e tente novamente.",
+            "next": ""
+          }
+        }
+      }
+    },
+    "entries": {
+      "from_lower": {
+        "position": [
+          220,
+          1280
+        ],
+        "facing": [
+          0,
+          -1
+        ],
+        "arrival_transition_id": "stairs_down"
+      }
+    },
+    "transitions": [
+      {
+        "id": "stairs_down",
+        "label": "Descer · andar 1",
+        "position": [
+          220,
+          1410
+        ],
+        "target_area_id": "test_dungeon",
+        "target_entry_id": "from_upper",
+        "interaction_distance": 64,
+        "presentation": "stairs_down"
+      }
+    ],
+    "footer": "Contato com líder: batalha · E: objetos e escadas · F3: rotas/territórios",
+    "area_type": "dungeon",
+    "time_advances": false,
+    "lighting_profile": "fixed",
+    "floor_paths": [
+      [
+        [
+          220,
+          1410
+        ],
+        [
+          220,
+          1230
+        ],
+        [
+          720,
+          1230
+        ],
+        [
+          720,
+          780
+        ],
+        [
+          980,
+          780
+        ],
+        [
+          980,
+          950
+        ],
+        [
+          1300,
+          950
+        ]
+      ],
+      [
+        [
+          1300,
+          950
+        ],
+        [
+          1300,
+          500
+        ],
+        [
+          1400,
+          500
+        ]
+      ],
+      [
+        [
+          1300,
+          950
+        ],
+        [
+          1300,
+          1320
+        ],
+        [
+          1400,
+          1320
+        ]
+      ]
+    ],
+    "encounter_rules": {
+      "automatic_contact": true,
+      "detection_radius": 180,
+      "chase_limit": 240,
+      "chase_speed": 144,
+      "speed_transition_seconds": 0.3
+    }
+  }
+}

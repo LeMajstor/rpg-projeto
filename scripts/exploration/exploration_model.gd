@@ -5,6 +5,10 @@ const Route = preload("res://scripts/combat/route_motion.gd")
 const Catalog = preload("res://scripts/exploration/area_catalog.gd")
 const Terrain = preload("res://scripts/exploration/terrain_geometry.gd")
 const Rules = preload("res://scripts/exploration/area_rules.gd")
+const Contact = preload("res://scripts/exploration/encounter_contact.gd")
+const EncounterMotion = preload("res://scripts/exploration/encounter_motion.gd")
+const Walls = preload("res://scripts/exploration/wall_geometry.gd")
+const Perception = preload("res://scripts/exploration/encounter_perception.gd")
 
 var data: Dictionary
 var party_order: Array[String] = []
@@ -21,6 +25,70 @@ var arrival_transition_lock = ""
 var entities: Array[Dictionary] = []
 var obstacles: Array[Rect2] = []
 var bounds: Rect2
+var contact_id = ""
+var wall_polygons: Array[PackedVector2Array] = []
+var body_polygons: Array[PackedVector2Array] = []
+
+func automatic_encounters() -> bool:
+	return data.get("encounter_rules", {}).get("automatic_contact", false) and data.get("area_type", "") != "overworld"
+
+func contact_radius() -> float:
+	return float(data["leader_half_extent"]) * 2.0
+
+func contact_along(from: Vector2, to: Vector2) -> Dictionary:
+	if not automatic_encounters() or menu_open or dialogue_open or transitioning:
+		return {}
+	var first: Dictionary = {}
+	var earliest = INF
+	for entity in entities:
+		if entity["kind"] != "encounter" or not entity["present"] or not entity["interaction_available"] or entity["placement_pending"]:
+			continue
+		var t = Perception.static_fraction(entity,from,to) if Perception.stationary(entity) else Contact.fraction(from,to,entity["position"],contact_radius())
+		if Perception.stationary(entity) and is_finite(t) and not clear_sight(from.lerp(to,t),entity["position"]) and from!=to:
+			# Pode entrar visível no cone após contornar a borda de uma parede.
+			var steps=maxi(1,ceili(from.distance_to(to)/4.0))
+			var previous=0.0
+			t=INF
+			for index in range(1,steps+1):
+				var current=float(index)/steps
+				var point=from.lerp(to,current)
+				if Perception.in_static_area(entity,point) and clear_sight(point,entity["position"]):
+					var low=previous
+					var high=current
+					for refinement in range(12):
+						var middle=(low+high)*0.5
+						point=from.lerp(to,middle)
+						if Perception.in_static_area(entity,point) and clear_sight(point,entity["position"]):
+							high=middle
+						else:
+							low=middle
+						t=high
+					break
+				previous=current
+		if t < earliest and clear_sight(from.lerp(to, t), entity["position"]):
+			earliest = t
+			first = {"id": entity["id"], "fraction": t}
+	return first
+
+func clear_sight(from: Vector2, to: Vector2) -> bool:
+	for obstacle in obstacles:
+		if _blocks_sight(obstacle, from, to):
+			return false
+	for shape in wall_polygons:
+		if Walls.blocks(shape,from,to):
+			return false
+	return true
+
+func can_traverse(from: Vector2, to: Vector2) -> bool:
+	if not is_walkable(from) or not is_walkable(to):
+		return false
+	for obstacle in obstacles:
+		if _blocks_sight(obstacle.grow(float(data["leader_half_extent"])-0.0001),from,to):
+			return false
+	for shape in body_polygons:
+		if Walls.blocks(shape,from,to):
+			return false
+	return true
 
 func _init(definitions: Dictionary, member_ids: Array) -> void:
 	data = definitions
@@ -35,7 +103,10 @@ func _init(definitions: Dictionary, member_ids: Array) -> void:
 			entity["open"] = false
 			entity["active"] = false
 			entity["position"] = _point(definition["position"])
-			entity["route_state"] = Route.create(definition.get("route", [definition["position"]]), float(definition.get("speed", 0)))
+			var options: Dictionary={}
+			if definition.has("movement_behavior_data"):
+				options={"kind":definition["movement_behavior_data"]["kind"],"behavior":definition["movement_behavior_data"],"seed":definition["seed"],"presentation":definition["movement_behavior_data"].get("presentation",{})}
+			entity["route_state"] = Route.create(definition.get("route", [definition["position"]]), float(definition.get("speed", 0)),options)
 			entity["default_placement"] = {"position": definition["position"], "route": definition.get("route", [definition["position"]]), "speed": definition.get("speed", 0)}
 			entity["placement_key"] = "default"
 			entity["placement_pending"] = false
@@ -47,6 +118,14 @@ func _init(definitions: Dictionary, member_ids: Array) -> void:
 	var tail = leader_position - Vector2.RIGHT * float(data["follower_gap"]) * (party_order.size() - 1)
 	path.assign([tail, leader_position])
 	path_length = tail.distance_to(leader_position)
+
+func encounter_group(entity: Dictionary) -> String:
+	return str(entity.get("encounter_id",entity.get("id","")))
+
+func remove_encounter_group(id: String) -> void:
+	for entity in entities:
+		if entity["kind"]=="encounter" and encounter_group(entity)==id:
+			entity["present"]=false
 
 static func cardinal(direction: Vector2, preferred_axis: String = "x") -> Vector2:
 	if direction.x != 0 and (preferred_axis == "x" or direction.y == 0):
@@ -64,6 +143,10 @@ func move(direction: Vector2, delta: float, preferred_axis: String = "x") -> Vec
 		return Vector2.ZERO
 	facing = axis
 	var target = _move_with_collision(axis * float(data["move_speed"]) * delta)
+	var contact = contact_along(leader_position, target)
+	if not contact.is_empty():
+		target = leader_position.lerp(target, contact["fraction"])
+		contact_id = contact["id"]
 	var movement = target - leader_position
 	if movement.length_squared() < 0.000001:
 		return Vector2.ZERO
@@ -97,7 +180,7 @@ func _move_with_collision(offset: Vector2) -> Vector2:
 				result.y = minf(result.y, expanded.position.y)
 			elif offset.y < 0 and leader_position.y >= expanded.end.y:
 				result.y = maxf(result.y, expanded.end.y)
-	return result
+	return Walls.sweep(leader_position,result,body_polygons)
 
 func _record_position(position: Vector2) -> void:
 	var movement = position - path.back()
@@ -163,8 +246,24 @@ func entity_by_id(id: String) -> Dictionary:
 func advance(delta: float) -> void:
 	if menu_open or dialogue_open or transitioning or delta <= 0:
 		return
+	if automatic_encounters():
+		# Mesmo comportamento para deltas longos de teste, sem pular contato/quinas.
+		var remaining = delta
+		while remaining > 0.000001 and contact_id.is_empty():
+			var step = minf(remaining, 1.0 / 120.0)
+			_advance_entities(step)
+			remaining -= step
+	else:
+		_advance_entities(delta)
+
+func _advance_entities(delta: float) -> void:
 	for entity in entities:
 		if not entity["present"] or entity["placement_pending"] or entity["kind"] not in ["npc", "encounter"]:
+			continue
+		if entity["kind"] == "encounter" and automatic_encounters():
+			EncounterMotion.advance(self, entity, delta)
+			if not contact_id.is_empty():
+				return
 			continue
 		Route.advance(entity["route_state"], delta)
 		entity["position"] = Route.position_at(entity["route_state"], entity["position"])
@@ -186,6 +285,8 @@ func can_interact_with(entity: Dictionary) -> bool:
 		return false
 	if not entity.get("interaction_available", true):
 		return false
+	if entity["kind"] == "encounter" and automatic_encounters():
+		return false # Os encontros atuais iniciam por contato ou pelos sensores estáticos.
 	if entity["kind"] == "transition" and entity["id"] == arrival_transition_lock:
 		return false
 	if leader_position.distance_to(entity["position"]) > float(entity.get("interaction_distance", data.get("interaction_distance", 64))):
@@ -202,6 +303,9 @@ func can_interact_with(entity: Dictionary) -> bool:
 		if other != entity and (other.get("solid", false) or (other.get("object_type", "") == "door" and not other["open"])):
 			if _blocks_sight(_rect(other["rect"]), leader_position, entity["position"]):
 				return false
+	for shape in wall_polygons:
+		if Walls.blocks(shape,leader_position,entity["position"]):
+			return false
 	return true
 
 func prepare_arrival(entry_id: String, order: Array) -> Dictionary:
@@ -216,6 +320,9 @@ func prepare_arrival(entry_id: String, order: Array) -> Dictionary:
 	# Valida todo o trecho inicial, não apenas os slots: evita fila cruzando paredes.
 	if not is_walkable(position) or not is_walkable(tail):
 		return {}
+	for shape in body_polygons:
+		if Walls.blocks(shape,tail,position):
+			return {}
 	for obstacle in obstacles:
 		if _blocks_sight(obstacle.grow(float(data["leader_half_extent"])), tail, position):
 			return {}
@@ -260,12 +367,22 @@ func toggle_door(id: String) -> String:
 		for position in formation_positions():
 			if rect.has_point(position):
 				return "door_blocked"
+		if automatic_encounters():
+			for entity in entities:
+				if entity["kind"] == "encounter" and entity["present"] and rect.has_point(entity["position"]):
+					return "door_blocked"
 	door["open"] = not door["open"]
 	_rebuild_obstacles()
 	return "door_open" if door["open"] else "door_closed"
 
 func _rebuild_obstacles() -> void:
 	obstacles.clear()
+	wall_polygons.clear()
+	body_polygons.clear()
+	for definition in data.get("wall_shapes", []):
+		var shape = Walls.polygon(definition["points"])
+		wall_polygons.append(shape)
+		body_polygons.append(Walls.expanded(shape,float(data["leader_half_extent"])))
 	for obstacle in data["obstacles"]:
 		obstacles.append(_rect(obstacle["rect"]))
 	for feature in data.get("terrain", []):
@@ -317,6 +434,9 @@ func is_walkable(position: Vector2) -> bool:
 	for obstacle in obstacles:
 		var expanded = obstacle.grow(radius)
 		if position.x > expanded.position.x and position.x < expanded.end.x and position.y > expanded.position.y and position.y < expanded.end.y:
+			return false
+	for shape in body_polygons:
+		if Geometry2D.is_point_in_polygon(position,shape):
 			return false
 	return true
 

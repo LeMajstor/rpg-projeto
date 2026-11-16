@@ -72,9 +72,9 @@ func run() -> void:
 	for member in battle.party:
 		ready(battle, member["id"])
 		var before = rng_states(battle)
-		expect(not battle.submit("poison", "e1") and not battle.submit("precise", "e1"), "Sem aflição/técnica antiga")
+		expect(not battle.submit("precise", "e1"), "Técnica antiga não é transferida para as fichas")
 		if member["id"] != "p3":
-			expect(not battle.submit("magic_skill", "e1"), "Primeiros dois não lançam magia")
+			expect(not battle.submit("magic_skill", "e1") and not battle.submit("poison", "e1"), "Primeiros dois não lançam magia")
 		expect(not battle.submit("item", "p1", Vector2.ZERO, "hp"), "Itens antigos não recebem balanceamento implícito")
 		battle.cancel_selection()
 		expect(before == rng_states(battle), "Recusa/cancelamento não consomem RNG")

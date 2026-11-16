@@ -1,0 +1,15 @@
+{
+  "source": "D149: composição de teste compartilhada com o laboratório; movimentos não definem atributos",
+  "preset_ids": [
+    "exploration_seeded_open",
+    "exploration_seeded_corners",
+    "exploration_seeded_sides",
+    "exploration_seeded_fullscreen"
+  ],
+  "enemy_profiles_by_type": {
+    "heavy_seeded": "reference_monster_1",
+    "static_seeded": "reference_monster_1",
+    "agile_seeded": "reference_monster_2",
+    "flying_seeded": "reference_monster_2"
+  }
+}

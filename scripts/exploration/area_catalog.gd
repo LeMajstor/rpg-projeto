@@ -2,6 +2,8 @@ extends RefCounted
 ## Apenas carrega definições; estados de áreas pertencem à sessão.
 const Terrain = preload("res://scripts/exploration/terrain_geometry.gd")
 const Rules = preload("res://scripts/exploration/area_rules.gd")
+const Walls = preload("res://scripts/exploration/wall_geometry.gd")
+const Roster = preload("res://scripts/exploration/encounter_roster.gd")
 static func load_definitions() -> Dictionary:
 	var catalog = JSON.parse_string(FileAccess.get_file_as_string("res://data/areas.json"))
 	var definitions: Dictionary = {}
@@ -12,6 +14,9 @@ static func load_definitions() -> Dictionary:
 		if not FileAccess.file_exists(path):
 			continue
 		var data = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if data is Dictionary and data.get("encounters", []) is Array and not data.get("encounters", []).is_empty() and data.get("area_type", "") != "overworld":
+			data["encounter_rules"] = catalog.get("encounter_rules", {}).duplicate(true)
+			data=Roster.assemble(data)
 		if data is Dictionary and data.get("id", "") == id and valid_map(data):
 			definitions[id] = data
 	return definitions
@@ -25,6 +30,19 @@ static func numbers(value: Variant, count: int) -> bool:
 	return true
 
 static func valid_map(data: Dictionary) -> bool:
+	if data.has("encounter_rules"):
+		var encounter_rules = data["encounter_rules"]
+		if not encounter_rules is Dictionary or not encounter_rules.get("automatic_contact") is bool:
+			return false
+		for key in ["detection_radius", "chase_limit", "chase_speed"]:
+			if not numbers([encounter_rules.get(key)], 1) or float(encounter_rules[key]) <= 0:
+				return false
+		if encounter_rules.has("speed_transition_seconds") and (not numbers([encounter_rules["speed_transition_seconds"]],1) or float(encounter_rules["speed_transition_seconds"])<=0):
+			return false
+		if float(encounter_rules["chase_speed"]) >= float(data.get("move_speed", 0)):
+			return false
+		if data.get("area_type", "") == "overworld":
+			return false
 	if not data.get("area_type", "exploration") is String or str(data.get("area_type", "exploration")).is_empty():
 		return false
 	if not data.get("time_advances", false) is bool:
@@ -45,6 +63,11 @@ static func valid_map(data: Dictionary) -> bool:
 			return false
 	if not data.get("obstacles") is Array:
 		return false
+	if not data.get("wall_shapes", []) is Array:
+		return false
+	for shape in data.get("wall_shapes", []):
+		if not shape is Dictionary or not Walls.valid(shape.get("points")) or not numbers(shape.get("rect"),4) or not valid_visual(shape):
+			return false
 	if not data.get("terrain", []) is Array:
 		return false
 	for feature in data.get("terrain", []):
@@ -69,6 +92,22 @@ static func valid_map(data: Dictionary) -> bool:
 			if ids.has(entity["id"]) or entity["id"].is_empty():
 				return false
 			ids[entity["id"]] = true
+			if entity.has("exploration_behavior"):
+				var settings: Dictionary=entity["exploration_behavior"]
+				if entity.get("movement_profile","")=="static":
+					if not numbers(entity.get("vision_direction"),2) or Vector2(entity["vision_direction"][0],entity["vision_direction"][1]).length_squared()==0:
+						return false
+					for key in ["near_radius","cone_range","cone_degrees"]:
+						if not numbers([settings.get(key)],1) or float(settings[key])<=0:
+							return false
+					if float(settings["cone_degrees"])>180:
+						return false
+				else:
+					for key in ["chase_speed","chase_limit"]:
+						if not numbers([settings.get(key)],1) or float(settings[key])<=0:
+							return false
+					if float(settings["chase_speed"])>=float(data["move_speed"]):
+						return false
 			if not entity.get("route", []) is Array or not numbers([entity.get("speed", 0)], 1):
 				return false
 			for point in entity.get("route", []):

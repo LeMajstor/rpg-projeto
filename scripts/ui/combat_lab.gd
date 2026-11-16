@@ -166,7 +166,7 @@ func _build_ui() -> void:
 	preset_picker.visible = not encounter_mode
 	for preset in definitions["presets"]:
 		var legacy: bool = preset["id"] in definitions.get("legacy_preset_ids", [])
-		preset_picker.add_item(("Legado · " if legacy else "") + preset["name"])
+		preset_picker.add_item("Legado · " + str(preset["name"]).trim_prefix("Atual · ") if legacy else preset["name"])
 		if legacy:
 			preset_picker.set_item_tooltip(preset_picker.item_count - 1, "Referência histórica; os encontros atuais usam os novos ritmos.")
 	toolbar.add_child(preset_picker)
@@ -214,7 +214,7 @@ func _build_ui() -> void:
 	battle_speed_picker.select(model.battle_speed - 1)
 	battle_speed_picker.item_selected.connect(func(index): model.battle_speed = index + 1)
 	battle_settings.add_child(battle_speed_picker)
-	battle_settings.add_child(_label("Velocidade de carga do ATB · aliados e inimigos", 14, Color("9bb0c8")))
+	battle_settings.add_child(_label("Ritmo do ATB e Veneno · aliados e inimigos", 14, Color("9bb0c8")))
 	if not encounter_mode:
 		preparation_button = _add_button(battle_settings, "Preparar equipamentos V1 [E]", _open_preparation)
 	var controls = HBoxContainer.new()
@@ -450,8 +450,6 @@ func _clear_aim() -> void:
 func _set_menu(kind: String) -> void:
 	if model.selected_id.is_empty() or not model.action.is_empty():
 		return
-	if model.uses_damage_v1() and kind == "items":
-		return
 	_clear_aim()
 	menu_kind = kind
 	list_index = 0
@@ -461,7 +459,7 @@ func _choose_action(id: String, item: String = "") -> void:
 	if model.selected_id.is_empty() or not model.action.is_empty():
 		return
 	var actor = model.actor_by_id(model.selected_id)
-	if model.uses_damage_v1() and not item.is_empty():
+	if not item.is_empty() and not model.can_use_item(actor, item):
 		return
 	var skill: Dictionary = model.item_skill(item) if not item.is_empty() else model.skill_for(model.actor_by_id(model.selected_id), id)
 	if skill.is_empty() or actor["mp"] < skill.get("mp_cost", 0) or (not item.is_empty() and model.inventory.get(item, 0) <= 0):
@@ -562,8 +560,10 @@ func _refresh() -> void:
 	command_buttons[3].disabled = command_buttons[3].disabled or not model.preset.get("can_escape", true)
 	command_buttons[3].tooltip_text = "Fuga bloqueada neste preset" if not model.preset.get("can_escape", true) else "Consome a ação; tenta retirar todo o grupo"
 	command_buttons[1].disabled = command_buttons[1].disabled or selected.get("skills", []).is_empty()
-	command_buttons[2].disabled = command_buttons[2].disabled or model.uses_damage_v1()
-	command_buttons[2].tooltip_text = "Itens ainda não migrados para a V1" if model.uses_damage_v1() else ""
+	command_buttons[2].tooltip_text = "Usar item em um aliado vivo"
+	if selected.get("affliction", {}).get("id", "") in ["fear", "confusion"]:
+		command_buttons[2].disabled = true
+		command_buttons[2].tooltip_text = "A aflição impede usar itens"
 	for index in range(cards.size()):
 		cards[index]["panel"].visible = index < model.party.size()
 		if index >= model.party.size():
@@ -572,6 +572,8 @@ func _refresh() -> void:
 		var card = cards[index]
 		var ready = model.is_ready(actor)
 		var tag = "INCAPACITADO" if actor["hp"] == 0 else ("PRONTO" if ready else "carregando")
+		if actor["hp"] > 0 and not model.affliction_name(actor).is_empty():
+			tag = model.affliction_name(actor) if actor["affliction"]["id"] in ["fear", "confusion"] else model.affliction_name(actor) + " · " + tag
 		card["button"].text = "    [%d] %s · %s" % [index + 1, actor["short_name"], tag]
 		card["button"].disabled = model.outcome != "running" or not model.action.is_empty() or (not ready and aim_item.is_empty())
 		card["stats"].text = "HP %d/%d   MP %d/%d   INI %.0f\nATB %.0f%%" % [actor["hp"], actor["max_hp"], actor["mp"], actor["max_mp"], model.effective_ini(actor), actor["atb"] * 100]
@@ -606,7 +608,7 @@ func _refresh() -> void:
 func _target_status() -> Array:
 	var status: Array = []
 	for actor in model.actors():
-		status.append([actor["id"], actor["hp"] > 0, actor["mp"]])
+		status.append([actor["id"], actor["hp"] > 0, actor["mp"], actor.get("affliction", {}).get("id", "")])
 	return status
 
 func _rebuild_action_menu() -> void:
@@ -635,9 +637,9 @@ Confirme para escolher a ação.", 14))
 			button.disabled = busy or actor["mp"] < skill["mp_cost"]
 			list_buttons.append(button)
 	elif menu_kind == "items":
-		for id in definitions["items"]:
+		for id in model.available_item_ids():
 			var button = _game_button(action_menu, "%s ×%d" % [definitions["items"][id]["name"], model.inventory[id]], _choose_action.bind("item", id))
-			button.disabled = busy or model.inventory[id] <= 0 or model.target_candidates(actor, model.item_skill(id)).is_empty()
+			button.disabled = busy or not model.can_use_item(actor, id) or model.target_candidates(actor, model.item_skill(id)).is_empty()
 			list_buttons.append(button)
 	elif menu_kind == "target":
 		var skill = _aim_skill()

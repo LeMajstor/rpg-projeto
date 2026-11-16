@@ -72,6 +72,7 @@ func capture(name: String) -> void:
 
 func _run() -> void:
 	screen = load("res://scenes/exploration_test.tscn").instantiate()
+	screen.set_script(load("res://tests/fixtures/pre_expansion_screen.gd"))
 	root.add_child(screen)
 	await process_frame
 	screen.set_physics_process(false)
@@ -111,21 +112,14 @@ func _run() -> void:
 	finish_transition()
 	expect(screen.session.area_id == "test_dungeon" and screen.session.world.data["encounters"].size() == 6, "Mini dungeon conserva seis encontros")
 	place(Vector2(930, 190))
-	screen.session.battle.party[0]["hp"] = 89
-	screen.session.battle.party[0]["mp"] = 30
+	screen.session.battle.party[0]["hp"] = 29
+	screen.session.battle.party[0]["mp"] = 10
 	var shared = screen.session.battle
 	tap(KEY_E)
 	var lab = screen.combat_ui
-	expect(is_instance_valid(lab) and lab.model == shared and lab.model.preset["id"] == "exploration_seeded_fullscreen", "Batalha existente reutilizada com ritmos atuais e tela inteira")
+	expect(is_instance_valid(lab) and lab.model == shared and lab.model.preset["id"] == "exploration_seeded_fullscreen", "Batalha compartilhada com ritmos e repertório atuais")
 	lab.set_process(false)
-	for enemy in lab.model.enemies:
-		enemy["hp"] = 1
-		enemy["ini_modifier"] = -float(enemy["ini"])
-	lab.model.debug_ready_allies()
-	lab.model.select_actor("p1")
-	lab.model.submit("all")
-	for step in range(100):
-		lab.model.tick(1.0 / 120.0)
+	expect(preload("res://tests/fixtures/current_combat.gd").win_by_basics(lab.model), "Básicos atuais concluem batalha de retorno")
 	lab._refresh()
 	await process_frame
 	expect(screen.combat_ui == null and screen.session.area_id == "test_dungeon", "Vitória retorna ao interior da dungeon")
@@ -143,7 +137,7 @@ func _run() -> void:
 	expect(screen.session.world.leader_position.x == 1668, "Mar bloqueia o líder")
 	travel("enter_town")
 	expect(screen.session.area_id == "lab_exterior" and "Vila" in screen.area_label.text, "Interação permite entrar na vila novamente")
-	expect(screen.session.battle.party[0]["hp"] == 89 and screen.session.battle.party[0]["mp"] == 20, "Viagens não restauram HP/MP")
+	expect(screen.session.battle.party[0]["hp"] == 29 and screen.session.battle.party[0]["mp"] == 10, "Viagens não restauram HP/MP")
 	travel("house_entrance")
 	expect(screen.session.world.data["npcs"].size() == 3, "Casa continua com NPCs")
 	await capture("world-house-npcs")

@@ -11,7 +11,7 @@ var groups = 0
 
 func _initialize() -> void:
 	battle_data = JSON.parse_string(FileAccess.get_file_as_string("res://data/lab.json"))
-	definitions = Catalog.load_definitions()
+	definitions = preload("res://tests/fixtures/pre_expansion_catalog.gd").load_definitions()
 	call_deferred("_run")
 
 func expect(condition: bool, message: String) -> void:
@@ -151,7 +151,8 @@ func accessible(world, entity: Dictionary, cells: Dictionary) -> bool:
 		for y in range(center.y - 10, center.y + 11):
 			if cells.has(Vector2i(x, y)):
 				world.leader_position = origin + Vector2(x, y) * 8
-				if world.can_interact_with(entity) and world.interaction_candidate().get("id", "") == entity["id"]:
+				var reachable: bool = world.contact_along(world.leader_position, world.leader_position).get("id", "") == entity["id"] if entity["kind"] == "encounter" and world.automatic_encounters() else world.can_interact_with(entity) and world.interaction_candidate().get("id", "") == entity["id"]
+				if reachable:
 					world.leader_position = previous
 					return true
 	world.leader_position = previous
@@ -272,7 +273,7 @@ func _test_three_area_persistence() -> void:
 	var expected = dungeon.entity_by_id("test_map_enemy_03")["route_state"].duplicate(true)
 	Route.advance(expected, 0.25)
 	session.tick(0.25)
-	expect(dungeon.entity_by_id("test_map_enemy_03")["route_state"] == expected, "Rota retoma do progresso exato")
+	expect(dungeon.entity_by_id("test_map_enemy_03")["position"].is_equal_approx(Route.position_at(expected, Vector2.ZERO)), "Rota retoma do progresso preservado com tolerância numérica de subpassos")
 
 func _test_escape_and_reset() -> void:
 	var session = fresh()
@@ -288,7 +289,7 @@ func _test_escape_and_reset() -> void:
 	session.battle.submit("escape")
 	finish_action(session.battle)
 	expect(session.finish_encounter() and session.area_id == "test_dungeon", "Fuga retorna à dungeon")
-	expect(session.world.entity_by_id("test_map_enemy_01")["present"] and session.battle.party[0]["hp"] == 71, "Fuga mantém monstro e recursos")
+	expect(not session.world.entity_by_id("test_map_enemy_01")["present"] and session.battle.party[0]["hp"] == 71, "Fuga remove monstro e mantém recursos")
 	travel(session, "dungeon_exit")
 	travel(session, "house_entrance")
 	expect(session.battle.party[0]["hp"] == 71, "Visitar casa não cura")

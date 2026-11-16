@@ -74,6 +74,11 @@ func _draw() -> void:
 	var world_size = Vector2(world.data["world_size"][0], world.data["world_size"][1])
 	draw_rect(Rect2(_frame_origin, world_size * scale), Color(world.data.get("background_color", "142b30")))
 	draw_rect(Rect2(screen_point(world.bounds.position), world.bounds.size * scale), Color(world.data.get("floor_color", "203c3c")))
+	for path in world.data.get("floor_paths", []):
+		for index in range(1,path.size()):
+			var a = Vector2(path[index-1][0],path[index-1][1])
+			var b = Vector2(path[index][0],path[index][1])
+			draw_line(screen_point(a),screen_point(b),Color("b4aa77",0.3),5*scale)
 	for feature in world.data.get("terrain", []):
 		if feature["kind"] not in ["hill", "forest"]:
 			_draw_terrain(feature, scale)
@@ -113,6 +118,7 @@ func _draw() -> void:
 		match entry["kind"]:
 			"terrain": _draw_terrain(entry["definition"], scale)
 			"obstacle": _draw_obstacle(entry["definition"], scale)
+			"polygon_wall": _draw_polygon_wall(entry["definition"])
 			"entity":
 				var entity: Dictionary = entry["entity"]
 				var visual: Vector2 = world.visual_position(entity["position"])
@@ -155,9 +161,38 @@ func _draw() -> void:
 		var extent = float(world.data["leader_half_extent"])
 		draw_rect(Rect2(screen_point(world.leader_position - Vector2.ONE * extent), Vector2.ONE * extent * 2 * scale), Color("ffd984"), false, 1.5)
 		for entity in world.entities:
+			if entity["present"] and entity["kind"] == "encounter" and world.automatic_encounters():
+				var awareness: Dictionary = entity.get("awareness", {})
+				var rules=world.Perception.rules(world,entity)
+				if world.Perception.stationary(entity):
+					draw_arc(screen_point(entity["position"]),float(rules["near_radius"])*scale,0,TAU,40,Color("ffe0a0"),1.5)
+					var direction=Vector2(entity["vision_direction"][0],entity["vision_direction"][1]).angle()
+					var half=deg_to_rad(float(rules["cone_degrees"])*0.5)
+					var cone=PackedVector2Array([screen_point(entity["position"])])
+					for index in range(33):
+						cone.append(screen_point(entity["position"]+Vector2.from_angle(direction-half+2*half*index/32.0)*float(rules["cone_range"])))
+					draw_colored_polygon(cone,Color(1,0.8,0.4,0.12))
+					cone.append(cone[0])
+					draw_polyline(cone,Color("e8b575"),1.5)
+				else:
+					var patrol: Array=world.EncounterMotion.Territory.points(entity)
+					for index in range(patrol.size()):
+						var a: Vector2=patrol[index]
+						draw_arc(screen_point(a),float(rules["chase_limit"])*scale,0,TAU,32,Color("b3d99b",0.25),1)
+						if index == patrol.size()-1 and not entity["route_state"].get("closed",true):
+							continue
+						var b: Vector2=patrol[(index+1)%patrol.size()]
+						if a!=b:
+							var side=(b-a).orthogonal().normalized()*float(rules["chase_limit"])
+							for sign_value in [-1,1]:
+								draw_line(screen_point(a+side*sign_value),screen_point(b+side*sign_value),Color("b3d99b",0.25),1)
+					draw_arc(screen_point(entity["position"]),float(rules["detection_radius"])*scale,0,TAU,48,Color("e9af6e",0.5),1)
+				_label(entity["position"]+Vector2(25,5),{"patrol":"patrulha","chase":"persegue","return":"retorna","static":"estático"}.get(awareness.get("state","patrol"),""),Color("ffe3aa"),12)
+
 			var points: Array = entity["route_state"]["points"]
 			if entity["present"] and points.size() > 1:
-				for index in range(points.size()):
+				var edge_count=points.size() if entity["route_state"].get("closed",true) else points.size()-1
+				for index in range(edge_count):
 					draw_line(screen_point(points[index]), screen_point(points[(index + 1) % points.size()]), Color("8fc8d2"), 1.5)
 	# Instruções ficam na tela; não viajam com as coordenadas do mapa.
 	var hud_height = 44.0 if show_path else 25.0
@@ -281,17 +316,51 @@ func _draw_obstacle(obstacle: Dictionary, scale: float) -> void:
 	if not obstacle.get("label", "").is_empty() and rect.size.x > 80:
 		_label(rect.position + Vector2(8, minf(28, rect.size.y - 5) - height), obstacle["label"], Color("d6e0dc"), 12)
 
+func _draw_polygon_wall(definition: Dictionary) -> void:
+	var height = float(definition.get("visual_height",24))
+	# Inclui o chão, as faces e o topo elevado; o recorte não usa só a base sólida.
+	# Rejeitar antes de converter vértices evita reconstruir/triangular paredes fora da câmera.
+	var footprint = Depth.footprint(definition)
+	var visual_bounds = Rect2(footprint.position-Vector2(0,height), footprint.size+Vector2(0,height))
+	if not _visible_rect(visual_bounds.grow(2)):
+		return
+	var shape = session.world.Walls.polygon(definition["points"])
+	var top = PackedVector2Array()
+	for point in shape:
+		top.append(screen_point(point-Vector2(0,height)))
+	for index in range(shape.size()):
+		var a: Vector2 = shape[index]
+		var b: Vector2 = shape[(index+1)%shape.size()]
+		draw_colored_polygon(PackedVector2Array([screen_point(a),screen_point(b),screen_point(b-Vector2(0,height)),screen_point(a-Vector2(0,height))]),Color("485961"))
+	draw_colored_polygon(top,Color(definition.get("color","6c7d82")))
+	var outline = top.duplicate()
+	outline.append(top[0])
+	draw_polyline(outline,Color("94a7aa"),1.5)
+
 func _draw_entity(entity: Dictionary, scale: float, near: bool) -> void:
 	var position: Vector2 = session.world.visual_position(entity["position"])
 	var center = screen_point(position)
 	if entity["kind"] == "encounter":
+		center += session.world.Route.presentation_offset(entity["route_state"])*scale
+		if entity.get("movement_profile","")=="flying":
+			center-=Vector2(0,12)*scale
+			draw_line(center+Vector2(-30,-12)*scale,center+Vector2(30,-12)*scale,Color("e7d596"),3*scale)
 		center -= Vector2(0, 19) * scale
 		var vertices = PackedVector2Array([center + Vector2(0, -25) * scale, center + Vector2(23, 0) * scale,
 			center + Vector2(0, 19) * scale, center + Vector2(-23, 0) * scale])
-		draw_colored_polygon(vertices, Color("ef937f"))
+		draw_colored_polygon(vertices,Color(entity.get("color","ef937f")))
+		if entity.get("movement_profile","")=="static":
+			var direction=Vector2(entity["vision_direction"][0],entity["vision_direction"][1]).normalized()
+			draw_line(center,center+direction*24*scale,Color("ffe6a5"),3*scale)
 		draw_circle(center + Vector2(-7, -5) * scale, 3 * scale, Color("25323d"))
 		draw_circle(center + Vector2(7, -5) * scale, 3 * scale, Color("25323d"))
 	elif entity["kind"] == "transition":
+		if entity.get("presentation", "").begins_with("stairs_"):
+			for index in range(6):
+				var step = center+Vector2(-26,-index*7)*scale
+				draw_rect(Rect2(step,Vector2(52,7)*scale),Color("9ca9ac") if index%2==0 else Color("667c83"))
+			_label(position+Vector2(-20,-58),"↑ 2" if entity["presentation"]=="stairs_up" else "↓ 1",Color("ffe3a4"),15)
+			return
 		draw_rect(Rect2(center + Vector2(-23, -8) * scale, Vector2(46, 16) * scale), Color("426b72"))
 		draw_line(center + Vector2(0, 6) * scale, center + Vector2(0, -6) * scale, Color("d1f0e8"), 2)
 		draw_line(center + Vector2(0, -6) * scale, center + Vector2(-6, 0) * scale, Color("d1f0e8"), 2)

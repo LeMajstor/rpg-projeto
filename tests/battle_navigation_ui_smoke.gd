@@ -272,7 +272,7 @@ func _test_integrated_restart() -> void:
 		screen.session.world.path_length = 102
 		expect(screen.session.begin_transition(portal_id), "Percurso integrado até batalha")
 		screen.session.tick(screen.session.transition_duration)
-	var enemy: Dictionary = screen.session.world.entity_by_id("test_map_enemy_01")
+	var enemy: Dictionary = screen.session.world.entity_by_id("test_map_enemy_01_e1")
 	screen.session.world.leader_position = enemy["position"]
 	screen._try_encounter()
 	var combat = screen.combat_ui

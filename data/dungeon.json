@@ -1,456 +1,906 @@
 {
   "id": "test_dungeon",
-  "label": "Mini dungeon / combate e objetos",
-  "notice": "Mini dungeon provisória: seis encontros existentes, sem história ou progressão.",
+  "label": "Dungeon · andar 1 / galerias e passagens",
+  "notice": "Galerias de teste · três encontros / nove monstros · quinas, salas e caminhos alternativos",
   "world_size": [
-	1120,
-	760
+    2400,
+    1600
   ],
   "walkable_bounds": [
-	24,
-	24,
-	1072,
-	712
+    40,
+    40,
+    2320,
+    1520
   ],
   "spawn": [
-	160,
-	600
+    220,
+    1280
   ],
   "move_speed": 180,
   "leader_half_extent": 12,
   "follower_gap": 34,
   "interaction_distance": 64,
-  "background_color": "121b23",
-  "floor_color": "2d3942",
+  "background_color": "101b23",
+  "floor_color": "263b43",
   "regions": [
-	{
-	  "rect": [
-		82,
-		100,
-		320,
-		265
-	  ],
-	  "label": "SALA A / encontro M1",
-	  "color": "35454e"
-	},
-	{
-	  "rect": [
-		470,
-		100,
-		260,
-		130
-	  ],
-	  "label": "SALA B / M2 · sem fuga",
-	  "color": "42444d"
-	},
-	{
-	  "rect": [
-		790,
-		100,
-		230,
-		180
-	  ],
-	  "label": "SALA C / M4",
-	  "color": "39464a"
-	},
-	{
-	  "rect": [
-		470,
-		320,
-		260,
-		190
-	  ],
-	  "label": "PATRULHA / M3",
-	  "color": "34464c"
-	},
-	{
-	  "rect": [
-		470,
-		570,
-		260,
-		120
-	  ],
-	  "label": "ENCONTRO / M6",
-	  "color": "42444d"
-	},
-	{
-	  "rect": [
-		790,
-		550,
-		230,
-		140
-	  ],
-	  "label": "OBJETOS / baú",
-	  "color": "46443a"
-	}
+    {
+      "rect": [
+        120,
+        1180,
+        850,
+        300
+      ],
+      "label": "SAGUÃO · SAÍDA",
+      "color": "31464c"
+    },
+    {
+      "rect": [
+        180,
+        730,
+        630,
+        410
+      ],
+      "label": "SALAS CONECTADAS · ENCONTRO M1",
+      "color": "344f54"
+    },
+    {
+      "rect": [
+        170,
+        180,
+        640,
+        400
+      ],
+      "label": "GALERIAS EM L/T · ENCONTRO M2",
+      "color": "3b424f"
+    },
+    {
+      "rect": [
+        1370,
+        780,
+        880,
+        540
+      ],
+      "label": "PILARES E DESVIOS · ENCONTRO M3",
+      "color": "304d4b"
+    },
+    {
+      "rect": [
+        1860,
+        160,
+        380,
+        400
+      ],
+      "label": "ESCADAS · ANDAR 2",
+      "color": "474637"
+    }
   ],
   "obstacles": [
-	{
-	  "rect": [
-		48,
-		64,
-		1024,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		48,
-		64,
-		18,
-		648
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		1054,
-		64,
-		18,
-		648
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		48,
-		712,
-		80,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		192,
-		712,
-		880,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		430,
-		82,
-		18,
-		218
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		430,
-		378,
-		18,
-		334
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		760,
-		82,
-		18,
-		348
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		760,
-		510,
-		18,
-		202
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		66,
-		400,
-		210,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		350,
-		400,
-		80,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		448,
-		260,
-		220,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		778,
-		350,
-		122,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	},
-	{
-	  "rect": [
-		980,
-		350,
-		74,
-		18
-	  ],
-	  "kind": "wall",
-	  "label": "",
-	  "visual_height": 32
-	}
+    {
+      "rect": [
+        40,
+        40,
+        2320,
+        32
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        40,
+        40,
+        32,
+        1520
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        2328,
+        40,
+        32,
+        1520
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        40,
+        1528,
+        2320,
+        32
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1130,
+        72,
+        80,
+        848
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1130,
+        1100,
+        80,
+        428
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        860,
+        72,
+        50,
+        190
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        860,
+        460,
+        50,
+        260
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        860,
+        920,
+        50,
+        260
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        72,
+        640,
+        380,
+        35
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        620,
+        640,
+        240,
+        35
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        380,
+        880,
+        100,
+        50
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        440,
+        930,
+        40,
+        55
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        430,
+        320,
+        50,
+        120
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        580,
+        375,
+        100,
+        35
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1350,
+        700,
+        350,
+        45
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1900,
+        700,
+        428,
+        45
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1670,
+        950,
+        50,
+        150
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1720,
+        1010,
+        100,
+        40
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1430,
+        370,
+        180,
+        45
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1570,
+        415,
+        40,
+        100
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1960,
+        480,
+        180,
+        40
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1250,
+        1310,
+        450,
+        40
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1950,
+        1310,
+        378,
+        40
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        1560,
+        125,
+        40,
+        100
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        300,
+        1180,
+        260,
+        35
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    },
+    {
+      "rect": [
+        730,
+        1240,
+        180,
+        35
+      ],
+      "label": "Parede",
+      "visual_height": 28
+    }
+  ],
+  "wall_shapes": [
+    {
+      "label": "Rocha",
+      "points": [
+        [
+          72,
+          72
+        ],
+        [
+          230,
+          72
+        ],
+        [
+          72,
+          230
+        ]
+      ],
+      "rect": [
+        72,
+        72,
+        158,
+        158
+      ],
+      "visual_height": 28,
+      "color": "687b80"
+    },
+    {
+      "label": "Rocha",
+      "points": [
+        [
+          2328,
+          72
+        ],
+        [
+          2180,
+          72
+        ],
+        [
+          2328,
+          220
+        ]
+      ],
+      "rect": [
+        2180,
+        72,
+        148,
+        148
+      ],
+      "visual_height": 28,
+      "color": "687b80"
+    },
+    {
+      "label": "Rocha",
+      "points": [
+        [
+          1450,
+          200
+        ],
+        [
+          1432,
+          239
+        ],
+        [
+          1390,
+          255
+        ],
+        [
+          1348,
+          239
+        ],
+        [
+          1330,
+          200
+        ],
+        [
+          1348,
+          161
+        ],
+        [
+          1390,
+          145
+        ],
+        [
+          1432,
+          161
+        ]
+      ],
+      "rect": [
+        1330,
+        145,
+        120,
+        110
+      ],
+      "visual_height": 36,
+      "color": "687b80"
+    },
+    {
+      "label": "Rocha",
+      "points": [
+        [
+          2185,
+          1430
+        ],
+        [
+          2172,
+          1455
+        ],
+        [
+          2140,
+          1465
+        ],
+        [
+          2108,
+          1455
+        ],
+        [
+          2095,
+          1430
+        ],
+        [
+          2108,
+          1405
+        ],
+        [
+          2140,
+          1395
+        ],
+        [
+          2172,
+          1405
+        ]
+      ],
+      "rect": [
+        2095,
+        1395,
+        90,
+        70
+      ],
+      "visual_height": 36,
+      "color": "687b80"
+    }
   ],
   "encounters": [
-	{
-	  "id": "test_map_enemy_01",
-	  "position": [
-		200,
-		260
-	  ],
-	  "interaction_distance": 72,
-	  "battle_preset_id": "exploration_seeded_open",
-	  "label": "M1 · ritmos / voo"
-	},
-	{
-	  "id": "test_map_enemy_02",
-	  "label": "M2 · ritmos · sem fuga",
-	  "position": [
-		560,
-		190
-	  ],
-	  "battle_preset_id": "exploration_seeded_corners",
-	  "interaction_distance": 72
-	},
-	{
-	  "id": "test_map_enemy_03",
-	  "label": "M3 · voo amplo",
-	  "position": [
-		530,
-		420
-	  ],
-	  "battle_preset_id": "exploration_seeded_sides",
-	  "route": [
-		[
-		  530,
-		  420
-		],
-		[
-		  650,
-		  420
-		],
-		[
-		  650,
-		  480
-		],
-		[
-		  530,
-		  480
-		]
-	  ],
-	  "speed": 40,
-	  "interaction_distance": 72
-	},
-	{
-	  "id": "test_map_enemy_04",
-	  "label": "M4 · tela inteira",
-	  "position": [
-		930,
-		190
-	  ],
-	  "battle_preset_id": "exploration_seeded_fullscreen",
-	  "interaction_distance": 72
-	},
-	{
-	  "id": "test_map_enemy_05",
-	  "label": "M5 · ritmos / voo",
-	  "position": [
-		850,
-		530
-	  ],
-	  "battle_preset_id": "exploration_seeded_open",
-	  "route": [
-		[
-		  850,
-		  530
-		],
-		[
-		  1000,
-		  530
-		]
-	  ],
-	  "speed": 48,
-	  "interaction_distance": 72
-	},
-	{
-	  "id": "test_map_enemy_06",
-	  "label": "M6 · voo amplo",
-	  "position": [
-		560,
-		650
-	  ],
-	  "battle_preset_id": "exploration_seeded_sides",
-	  "interaction_distance": 72
-	}
+    {
+      "id": "test_map_enemy_01",
+      "position": [
+        260,
+        800
+      ],
+      "battle_preset_id": "exploration_seeded_open",
+      "label": "M1 · ritmos / voo",
+      "members": {
+        "e1": {
+          "position": [
+            260,
+            800
+          ],
+          "route": [
+            [
+              260,
+              800
+            ],
+            [
+              600,
+              800
+            ],
+            [
+              600,
+              1030
+            ],
+            [
+              260,
+              1030
+            ]
+          ]
+        },
+        "e2": {
+          "position": [
+            720,
+            900
+          ],
+          "route": [
+            [
+              720,
+              900
+            ],
+            [
+              750,
+              1060
+            ],
+            [
+              680,
+              1120
+            ],
+            [
+              680,
+              960
+            ],
+            [
+              760,
+              820
+            ]
+          ]
+        },
+        "e3": {
+          "position": [
+            230,
+            1100
+          ],
+          "vision_direction": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "id": "test_map_enemy_02",
+      "label": "M2 · ritmos · sem fuga",
+      "position": [
+        250,
+        240
+      ],
+      "battle_preset_id": "exploration_seeded_corners",
+      "members": {
+        "e1": {
+          "position": [
+            250,
+            240
+          ],
+          "route": [
+            [
+              250,
+              240
+            ],
+            [
+              700,
+              240
+            ],
+            [
+              700,
+              520
+            ],
+            [
+              250,
+              520
+            ]
+          ]
+        },
+        "e2": {
+          "position": [
+            350,
+            500
+          ],
+          "route": [
+            [
+              350,
+              500
+            ],
+            [
+              350,
+              350
+            ],
+            [
+              300,
+              350
+            ],
+            [
+              300,
+              500
+            ]
+          ]
+        },
+        "e3": {
+          "position": [
+            760,
+            300
+          ],
+          "vision_direction": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "id": "test_map_enemy_03",
+      "label": "M3 · voo amplo",
+      "position": [
+        1450,
+        850
+      ],
+      "battle_preset_id": "exploration_seeded_sides",
+      "members": {
+        "e1": {
+          "position": [
+            1450,
+            850
+          ],
+          "route": [
+            [
+              1450,
+              850
+            ],
+            [
+              1960,
+              850
+            ],
+            [
+              1960,
+              1180
+            ],
+            [
+              1450,
+              1180
+            ]
+          ]
+        },
+        "e2": {
+          "position": [
+            2070,
+            1020
+          ],
+          "route": [
+            [
+              2070,
+              1020
+            ],
+            [
+              2160,
+              890
+            ],
+            [
+              2220,
+              1080
+            ],
+            [
+              2100,
+              1250
+            ],
+            [
+              2000,
+              1130
+            ]
+          ]
+        },
+        "e3": {
+          "position": [
+            1550,
+            1260
+          ],
+          "vision_direction": [
+            0,
+            -1
+          ]
+        }
+      }
+    }
   ],
   "npcs": [],
   "objects": [
-	{
-	  "id": "chest_01",
-	  "label": "Baú",
-	  "object_type": "chest",
-	  "position": [
-		930,
-		650
-	  ],
-	  "dialogue_id": "chest",
-	  "repeat_dialogue_id": "chest_repeat"
-	},
-	{
-	  "id": "door_01",
-	  "label": "Porta",
-	  "object_type": "door",
-	  "position": [
-		439,
-		339
-	  ],
-	  "rect": [
-		430,
-		300,
-		18,
-		78
-	  ],
-	  "visual_height": 32
-	},
-	{
-	  "id": "lever_01",
-	  "label": "Alavanca",
-	  "object_type": "lever",
-	  "position": [
-		360,
-		340
-	  ],
-	  "target_id": "door_01"
-	}
+    {
+      "id": "door_01",
+      "label": "Portão da galeria",
+      "object_type": "door",
+      "position": [
+        1170,
+        1010
+      ],
+      "rect": [
+        1130,
+        920,
+        80,
+        180
+      ],
+      "visual_height": 32
+    },
+    {
+      "id": "lever_01",
+      "label": "Alavanca",
+      "object_type": "lever",
+      "position": [
+        1040,
+        1060
+      ],
+      "target_id": "door_01"
+    },
+    {
+      "id": "chest_01",
+      "label": "Baú de teste",
+      "object_type": "chest",
+      "position": [
+        1940,
+        650
+      ],
+      "dialogue_id": "chest",
+      "repeat_dialogue_id": "chest_repeat"
+    }
   ],
   "dialogues": {
-	"chest": {
-	  "start": "0",
-	  "nodes": {
-		"0": {
-		  "text": "Baú aberto. O sprite mudou e o estado ficará registrado até Reiniciar teste.",
-		  "next": "1"
-		},
-		"1": {
-		  "text": "Nenhum item foi adicionado: não há inventário novo nesta etapa.",
-		  "next": ""
-		}
-	  }
-	},
-	"chest_repeat": {
-	  "start": "0",
-	  "nodes": {
-		"0": {
-		  "text": "O baú já está aberto nesta sessão. Não há recompensa repetida.",
-		  "next": ""
-		}
-	  }
-	},
-	"door_open": {
-	  "start": "0",
-	  "nodes": {
-		"0": {
-		  "text": "Porta aberta. A passagem está livre; nenhum mapa foi carregado.",
-		  "next": ""
-		}
-	  }
-	},
-	"door_closed": {
-	  "start": "0",
-	  "nodes": {
-		"0": {
-		  "text": "Porta fechada. A passagem voltou a ser sólida.",
-		  "next": ""
-		}
-	  }
-	},
-	"door_blocked": {
-	  "start": "0",
-	  "nodes": {
-		"0": {
-		  "text": "Não é possível fechar: há um integrante do grupo na passagem. Afaste a fila e tente novamente.",
-		  "next": ""
-		}
-	  }
-	}
+    "chest": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Baú aberto. O sprite mudou e o estado ficará registrado até Reiniciar teste.",
+          "next": "1"
+        },
+        "1": {
+          "text": "Nenhum item foi adicionado: não há inventário novo nesta etapa.",
+          "next": ""
+        }
+      }
+    },
+    "chest_repeat": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "O baú já está aberto nesta sessão. Não há recompensa repetida.",
+          "next": ""
+        }
+      }
+    },
+    "door_open": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Porta aberta. A passagem está livre; nenhum mapa foi carregado.",
+          "next": ""
+        }
+      }
+    },
+    "door_closed": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Porta fechada. A passagem voltou a ser sólida.",
+          "next": ""
+        }
+      }
+    },
+    "door_blocked": {
+      "start": "0",
+      "nodes": {
+        "0": {
+          "text": "Não é possível fechar: há um integrante do grupo na passagem. Afaste a fila e tente novamente.",
+          "next": ""
+        }
+      }
+    }
   },
   "entries": {
-	"from_exterior": {
-	  "position": [
-		160,
-		600
-	  ],
-	  "facing": [
-		0,
-		-1
-	  ],
-	  "arrival_transition_id": "dungeon_exit"
-	}
+    "from_exterior": {
+      "position": [
+        220,
+        1350
+      ],
+      "facing": [
+        0,
+        -1
+      ],
+      "arrival_transition_id": "dungeon_exit"
+    },
+    "from_upper": {
+      "position": [
+        2120,
+        420
+      ],
+      "facing": [
+        0,
+        1
+      ],
+      "arrival_transition_id": "stairs_up"
+    }
   },
   "transitions": [
-	{
-	  "id": "dungeon_exit",
-	  "label": "Sair da dungeon",
-	  "position": [
-		160,
-		720
-	  ],
-	  "target_area_id": "test_world",
-	  "target_entry_id": "from_dungeon",
-	  "interaction_distance": 64
-	}
+    {
+      "id": "dungeon_exit",
+      "label": "Sair da dungeon",
+      "position": [
+        220,
+        1470
+      ],
+      "target_area_id": "test_world",
+      "target_entry_id": "from_dungeon",
+      "interaction_distance": 64
+    },
+    {
+      "id": "stairs_up",
+      "label": "Subir · andar 2",
+      "position": [
+        2120,
+        290
+      ],
+      "target_area_id": "test_dungeon_upper",
+      "target_entry_id": "from_lower",
+      "interaction_distance": 64,
+      "presentation": "stairs_up"
+    }
   ],
-  "footer": "E: interagir · alavanca abre passagem · saída no sudoeste retorna ao mundo aberto",
+  "footer": "Móveis: contato · Estáticos: círculo/cone · E: objetos e escadas · F3: áreas/rotas",
   "area_type": "dungeon",
   "time_advances": false,
-  "lighting_profile": "fixed"
+  "lighting_profile": "fixed",
+  "floor_paths": [
+    [
+      [
+        220,
+        1470
+      ],
+      [
+        220,
+        1280
+      ],
+      [
+        1000,
+        1280
+      ],
+      [
+        1000,
+        1060
+      ],
+      [
+        1040,
+        1060
+      ]
+    ],
+    [
+      [
+        1220,
+        1010
+      ],
+      [
+        1300,
+        1010
+      ],
+      [
+        1300,
+        600
+      ],
+      [
+        1800,
+        600
+      ],
+      [
+        1800,
+        400
+      ],
+      [
+        2120,
+        400
+      ],
+      [
+        2120,
+        290
+      ]
+    ]
+  ]
 }

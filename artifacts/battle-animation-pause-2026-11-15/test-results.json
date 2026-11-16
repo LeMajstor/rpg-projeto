@@ -1,0 +1,398 @@
+{
+  "suites": 65,
+  "checks": 350102,
+  "failures": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "suite": "area_tests.gd",
+      "exit_code": 0,
+      "checks": 146,
+      "failures": 0
+    },
+    {
+      "suite": "area_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 39,
+      "failures": 0
+    },
+    {
+      "suite": "battle_animation_pause_tests.gd",
+      "exit_code": 0,
+      "checks": 150,
+      "failures": 0
+    },
+    {
+      "suite": "battle_damage_v1_tests.gd",
+      "exit_code": 0,
+      "checks": 217,
+      "failures": 0
+    },
+    {
+      "suite": "battle_damage_v1_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 21,
+      "failures": 0
+    },
+    {
+      "suite": "battle_navigation_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "suite": "battle_speed_tests.gd",
+      "exit_code": 0,
+      "checks": 111,
+      "failures": 0
+    },
+    {
+      "suite": "battle_speed_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "suite": "camera_tests.gd",
+      "exit_code": 0,
+      "checks": 110,
+      "failures": 0
+    },
+    {
+      "suite": "camera_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 50,
+      "failures": 0
+    },
+    {
+      "suite": "centered_area_tests.gd",
+      "exit_code": 0,
+      "checks": 74,
+      "failures": 0
+    },
+    {
+      "suite": "damage_affliction_tests.gd",
+      "exit_code": 0,
+      "checks": 4142,
+      "failures": 0
+    },
+    {
+      "suite": "damage_affliction_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 32,
+      "failures": 0
+    },
+    {
+      "suite": "damage_ally_02_tests.gd",
+      "exit_code": 0,
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "suite": "damage_ally_02_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "suite": "damage_defm_tests.gd",
+      "exit_code": 0,
+      "checks": 1165,
+      "failures": 0
+    },
+    {
+      "suite": "damage_distance_tests.gd",
+      "exit_code": 0,
+      "checks": 73,
+      "failures": 0
+    },
+    {
+      "suite": "damage_distance_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 22,
+      "failures": 0
+    },
+    {
+      "suite": "damage_enemy_02_tests.gd",
+      "exit_code": 0,
+      "checks": 51,
+      "failures": 0
+    },
+    {
+      "suite": "damage_enemy_02_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 17,
+      "failures": 0
+    },
+    {
+      "suite": "damage_enemy_ranges_tests.gd",
+      "exit_code": 0,
+      "checks": 1208,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_exclusivity_tests.gd",
+      "exit_code": 0,
+      "checks": 73,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_exclusivity_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 15,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_scales_tests.gd",
+      "exit_code": 0,
+      "checks": 512,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_scales_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "suite": "damage_equipment_tests.gd",
+      "exit_code": 0,
+      "checks": 66,
+      "failures": 0
+    },
+    {
+      "suite": "damage_evasion_tests.gd",
+      "exit_code": 0,
+      "checks": 4093,
+      "failures": 0
+    },
+    {
+      "suite": "damage_export_tests.gd",
+      "exit_code": 0,
+      "checks": 2280,
+      "failures": 0
+    },
+    {
+      "suite": "damage_lab_tests.gd",
+      "exit_code": 0,
+      "checks": 3217,
+      "failures": 0
+    },
+    {
+      "suite": "damage_lab_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 120,
+      "failures": 0
+    },
+    {
+      "suite": "damage_mage_tests.gd",
+      "exit_code": 0,
+      "checks": 17300,
+      "failures": 0
+    },
+    {
+      "suite": "damage_mage_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 18,
+      "failures": 0
+    },
+    {
+      "suite": "damage_presets_tests.gd",
+      "exit_code": 0,
+      "checks": 92,
+      "failures": 0
+    },
+    {
+      "suite": "damage_presets_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 53,
+      "failures": 0
+    },
+    {
+      "suite": "damage_v1_reference_tests.gd",
+      "exit_code": 0,
+      "checks": 1020,
+      "failures": 0
+    },
+    {
+      "suite": "damage_v1_reference_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 11,
+      "failures": 0
+    },
+    {
+      "suite": "day_lighting_tests.gd",
+      "exit_code": 0,
+      "checks": 2894,
+      "failures": 0
+    },
+    {
+      "suite": "depth_tests.gd",
+      "exit_code": 0,
+      "checks": 264,
+      "failures": 0
+    },
+    {
+      "suite": "depth_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 23,
+      "failures": 0
+    },
+    {
+      "suite": "exploration_rhythm_tests.gd",
+      "exit_code": 0,
+      "checks": 2124,
+      "failures": 0
+    },
+    {
+      "suite": "exploration_tests.gd",
+      "exit_code": 0,
+      "checks": 3338,
+      "failures": 0
+    },
+    {
+      "suite": "exploration_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "suite": "fullscreen_tests.gd",
+      "exit_code": 0,
+      "checks": 620,
+      "failures": 0
+    },
+    {
+      "suite": "fullscreen_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 26,
+      "failures": 0
+    },
+    {
+      "suite": "interaction_tests.gd",
+      "exit_code": 0,
+      "checks": 3597,
+      "failures": 0
+    },
+    {
+      "suite": "interaction_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 36,
+      "failures": 0
+    },
+    {
+      "suite": "internal_areas_tests.gd",
+      "exit_code": 0,
+      "checks": 6370,
+      "failures": 0
+    },
+    {
+      "suite": "internal_areas_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "suite": "motion_tests.gd",
+      "exit_code": 0,
+      "checks": 1944,
+      "failures": 0
+    },
+    {
+      "suite": "motion_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "suite": "rhythm_tests.gd",
+      "exit_code": 0,
+      "checks": 56409,
+      "failures": 0
+    },
+    {
+      "suite": "rhythm_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 26,
+      "failures": 0
+    },
+    {
+      "suite": "run_tests.gd",
+      "exit_code": 0,
+      "checks": 212248,
+      "failures": 0
+    },
+    {
+      "suite": "seeded_behavior_tests.gd",
+      "exit_code": 0,
+      "checks": 14860,
+      "failures": 0
+    },
+    {
+      "suite": "seeded_behavior_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 34,
+      "failures": 0
+    },
+    {
+      "suite": "terrain_tests.gd",
+      "exit_code": 0,
+      "checks": 2814,
+      "failures": 0
+    },
+    {
+      "suite": "terrain_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 84,
+      "failures": 0
+    },
+    {
+      "suite": "town_events_tests.gd",
+      "exit_code": 0,
+      "checks": 214,
+      "failures": 0
+    },
+    {
+      "suite": "town_events_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 72,
+      "failures": 0
+    },
+    {
+      "suite": "ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 32,
+      "failures": 0
+    },
+    {
+      "suite": "world_clock_tests.gd",
+      "exit_code": 0,
+      "checks": 1478,
+      "failures": 0
+    },
+    {
+      "suite": "world_clock_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "suite": "world_map_tests.gd",
+      "exit_code": 0,
+      "checks": 3638,
+      "failures": 0
+    },
+    {
+      "suite": "world_map_ui_smoke.gd",
+      "exit_code": 0,
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "suite": "world_time_tests.gd",
+      "exit_code": 0,
+      "checks": 70,
+      "failures": 0
+    }
+  ]
+}

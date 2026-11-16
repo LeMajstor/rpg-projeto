@@ -1,0 +1,34 @@
+[
+	{
+		"area": "test_dungeon",
+		"location": "(220.0, 1350.0)",
+		"samples": 600,
+		"step_max_usec": 1224,
+		"step_median_usec": 346,
+		"step_p95_usec": 373
+	},
+	{
+		"area": "test_dungeon",
+		"location": "(560.0, 660.0)",
+		"samples": 600,
+		"step_max_usec": 572,
+		"step_median_usec": 342,
+		"step_p95_usec": 373
+	},
+	{
+		"area": "test_dungeon_upper",
+		"location": "(220.0, 1350.0)",
+		"samples": 600,
+		"step_max_usec": 1411,
+		"step_median_usec": 349,
+		"step_p95_usec": 389
+	},
+	{
+		"area": "test_dungeon_upper",
+		"location": "(1620.0, 570.0)",
+		"samples": 600,
+		"step_max_usec": 663,
+		"step_median_usec": 364,
+		"step_p95_usec": 454
+	}
+]

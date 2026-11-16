@@ -1,0 +1,90 @@
+[
+	{
+		"area": "test_dungeon",
+		"debug": false,
+		"draw_calls": 213.0,
+		"draw_median_usec": 700,
+		"draw_p95_usec": 875,
+		"frame_median_usec": 4662,
+		"frame_p95_usec": 6856,
+		"location": "(220.0, 1350.0)",
+		"primitives": 4488.0
+	},
+	{
+		"area": "test_dungeon",
+		"debug": true,
+		"draw_calls": 326.0,
+		"draw_median_usec": 1014,
+		"draw_p95_usec": 1175,
+		"frame_median_usec": 6062,
+		"frame_p95_usec": 9330,
+		"location": "(220.0, 1350.0)",
+		"primitives": 7916.0
+	},
+	{
+		"area": "test_dungeon",
+		"debug": false,
+		"draw_calls": 213.0,
+		"draw_median_usec": 733,
+		"draw_p95_usec": 874,
+		"frame_median_usec": 5082,
+		"frame_p95_usec": 8165,
+		"location": "(560.0, 660.0)",
+		"primitives": 4488.0
+	},
+	{
+		"area": "test_dungeon",
+		"debug": true,
+		"draw_calls": 326.0,
+		"draw_median_usec": 1041,
+		"draw_p95_usec": 1493,
+		"frame_median_usec": 6782,
+		"frame_p95_usec": 9397,
+		"location": "(560.0, 660.0)",
+		"primitives": 7912.0
+	},
+	{
+		"area": "test_dungeon_upper",
+		"debug": false,
+		"draw_calls": 317.0,
+		"draw_median_usec": 1262,
+		"draw_p95_usec": 1486,
+		"frame_median_usec": 7722,
+		"frame_p95_usec": 10739,
+		"location": "(220.0, 1350.0)",
+		"primitives": 4448.0
+	},
+	{
+		"area": "test_dungeon_upper",
+		"debug": true,
+		"draw_calls": 400.0,
+		"draw_median_usec": 1670,
+		"draw_p95_usec": 2161,
+		"frame_median_usec": 7124,
+		"frame_p95_usec": 9265,
+		"location": "(220.0, 1350.0)",
+		"primitives": 7456.0
+	},
+	{
+		"area": "test_dungeon_upper",
+		"debug": false,
+		"draw_calls": 315.0,
+		"draw_median_usec": 1590,
+		"draw_p95_usec": 1799,
+		"frame_median_usec": 8122,
+		"frame_p95_usec": 8690,
+		"location": "(1620.0, 570.0)",
+		"primitives": 4418.0
+	},
+	{
+		"area": "test_dungeon_upper",
+		"debug": true,
+		"draw_calls": 398.0,
+		"draw_median_usec": 1590,
+		"draw_p95_usec": 1929,
+		"frame_median_usec": 6686,
+		"frame_p95_usec": 8964,
+		"location": "(1620.0, 570.0)",
+		"primitives": 7426.0
+	}
+]

@@ -96,10 +96,10 @@ func _run() -> void:
 	await capture("depth-house-interior")
 	travel("house_exit")
 	travel("dungeon_entrance")
-	expect(screen.session.world.entities.size() == 10, "Dungeon mantém encontros e objetos")
+	expect(screen.session.world.entities.size() == 14, "Primeiro andar mantém nove monstros, três objetos e dois acessos")
 	await capture("depth-dungeon")
 	expect(is_equal_approx(screen.map_view._scale_factor(), scale), "Profundidade não altera escala da câmera")
-	place(Vector2(333, 340))
+	place(Vector2(1040, 1060))
 	screen._try_encounter()
 	expect(screen.session.dialogue.opened and screen.session.world.entity_by_id("door_01")["open"], "Alavanca e colisão dinâmica continuam funcionando")
 	while screen.session.dialogue.opened:

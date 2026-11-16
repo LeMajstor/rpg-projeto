@@ -19,6 +19,16 @@ static func create(length: float, closed: bool, speed: float, config: Dictionary
 	_sample(state)
 	return state
 
+static func relocate(state: Dictionary, distance: float) -> void:
+	# Retomada no mapa: novo trecho, mesmo perfil e fluxo de aleatoriedade.
+	if state["length"]<=EPS or state["speed"]<=EPS:
+		return
+	state["distance"]=fposmod(distance,state["length"]) if state["closed"] else clampf(distance,0,state["length"])
+	state["phase_index"]=0
+	state["phase_elapsed"]=0.0
+	_plan(state)
+	_sample(state)
+
 static func valid_config(config: Dictionary) -> bool:
 	for key in ["speed_scale", "travel_seconds", "pause_seconds", "initial_pause"]:
 		var bounds = config.get(key)

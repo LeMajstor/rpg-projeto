@@ -1,0 +1,71 @@
+{
+  "decision": "D158",
+  "date": "2026-11-15",
+  "engine": "Godot 4.7.2 Standard",
+  "floors": 2,
+  "encounters": 6,
+  "map_representatives": 18,
+  "counts_by_profile": {
+    "heavy": 4,
+    "agile": 3,
+    "flying": 4,
+    "static": 7
+  },
+  "headless": {
+    "suites": 75,
+    "checks": 353185,
+    "failures": 0,
+    "all_passed": true
+  },
+  "graphics": {
+    "renderer": "Compatibility / Apple M3 Pro",
+    "suite": "exploration_pursuit_ui_smoke.gd",
+    "checks": 37,
+    "failures": 0,
+    "captures": 9,
+    "visually_inspected": true
+  },
+  "targeted_final": {
+    "suite": "individual_enemies_tests.gd",
+    "checks": 285,
+    "failures": 0
+  },
+  "sha256": {
+    "data/areas.json": "e959ac011f9df8311ad3080dd10f4cceb5d8f75fa781ec58629bc07cce3cdd29",
+    "data/battle_damage_v1.json": "bda7297353d05dd3a3189cf0f0c531fe7ea2881f925ef43e364a0a0ce56dc6f4",
+    "data/damage_lab.json": "643f65aaaa8b324ce443165abde301686417f012159b624a6c4eb2e2ce685a98",
+    "data/damage_reference_profiles.json": "45835cbfeb73219aeea26a57fc0469d47e846fa0a964b2fa28f2aaa3d41dbaee",
+    "data/dungeon.json": "886c768286b7d23fde8aab0222cd02beb4594547f222286ab2752c118a966441",
+    "data/dungeon_upper.json": "f03d09c4441d21dd724ba48ca18ace9d13ea52300213dee9214512e9f0c4f628",
+    "data/exploration_combat.json": "84180320b824e152e7e08ff349b29b247e94c3edee48600d569c5e518333abf7",
+    "data/exploration_enemy_behaviors.json": "9466b03de7c279613f8856b9b0eac6f5565bd9a67b72a5c6eb60ff36d8d2251c",
+    "data/lab.json": "ed4e6e6083908ae55cc5847819e538ae557e365fdf545a79c380de6f3aa8992d",
+    "docs/INIMIGOS_INDIVIDUAIS.md": "3437dff4aa9af5482907321a21948bfe6416efa221d173984684dd506540fd0f",
+    "scripts/combat/damage_v1_bridge.gd": "5ebb06a953a4c74c6d7d03d3ccc9e6a2b2026a01b760495f4b0decde35a569f8",
+    "scripts/combat/route_behavior.gd": "9aa40f116a372de72ae77acf137319f0ceac366e0c2722c776184567977ef246",
+    "scripts/combat/route_motion.gd": "404c2ff4cbb5ea7dfe6f11a44e7971d54a75edc9b853ae65edd73931c4cc26a3",
+    "scripts/exploration/area_catalog.gd": "9c03f9fde6b22a950c9bf3a1a3b3e7827888894b66b1d3f2ec3e3cbbf13634fb",
+    "scripts/exploration/area_rules.gd": "74cd7ee0ab0fc9f3e36990eccca39eac830ae5e17ac8881b4e21eb2536a3993b",
+    "scripts/exploration/clock_debug.gd": "8ed3cba2a8be5b94624dfc132644ef76ad04b75374d870578752b42a8c817e4b",
+    "scripts/exploration/day_lighting.gd": "362f25bd36fe445ad3079047088c529647983a7fd6c64fabba5d1fa427b58c17",
+    "scripts/exploration/dialogue_model.gd": "da4de386895614c07fc9b66c768ef2eb1b68a674cae6376a97256fe99214b961",
+    "scripts/exploration/encounter_contact.gd": "807cb8e78ae103530b50c7db54dab4145de5d11d725470a597bcedecbb4e9285",
+    "scripts/exploration/encounter_motion.gd": "06bc2a9a49a8f08981b1ab4d6bf3379a15c2e92ec2ba8bc6187bf6cc2fa7d7ed",
+    "scripts/exploration/encounter_perception.gd": "4ff273333aa35e4fcbbd1538071e5ff49c2e705f033ac78f883243a93776ddd3",
+    "scripts/exploration/encounter_roster.gd": "936cc56cef19fba5fc5c6260eb182d7bbd9a1fff3ed65800d144903fc266ff43",
+    "scripts/exploration/exploration_camera.gd": "10b80daae0737cec68f04d3454f7cd86c380e103f58fa00ea3f6b82927cdd7f0",
+    "scripts/exploration/exploration_depth.gd": "d9eaf56713d4b5185d9e0134d6720839b2fc2749184c2ba55be8fae761b231a4",
+    "scripts/exploration/exploration_model.gd": "a701351e83e9e1e2880897fffd2d0ff6cd238decd7a50a93586e049d0ba3ea1b",
+    "scripts/exploration/exploration_session.gd": "bc299443e9b9570d6ce9ca158b74773232fde370cc2425a4ae9d39988be89a7e",
+    "scripts/exploration/exploration_test.gd": "8b756b74b9ec7f65ea287dfdd037c5d790391b5e89333212139bb7fd3231dc5a",
+    "scripts/exploration/exploration_view.gd": "4b0e7210ec3b78d3cb39d2befbca93a01157a026041b64822e5950eb3a949af4",
+    "scripts/exploration/patrol_territory.gd": "74cf8fde64a2c4adb262d15e74bc7002ecf34b8225679a0f7825f6a69aeed755",
+    "scripts/exploration/terrain_geometry.gd": "709e0f3c614470a1daa334ed1a2c16d4af88fed86ca4b108465c9c2191609d9e",
+    "scripts/exploration/wall_geometry.gd": "15610187aba995a4ddc868970e00ca98f197b8167fdc496d5c9e90e0621aa377",
+    "scripts/exploration/world_clock.gd": "d0a4ffd4d8875f5eb44fc359cf6fab00c14025f08a0f755ffa19d9a41f26ffb3",
+    "tests/exploration_pursuit_ui_smoke.gd": "cb2f934a8ce22499978f88afce6aa02f1ac0f0096dbf19d4c201664c138bd5ad",
+    "tests/fixtures/areas_before_individual_enemies.json": "ffe1680ec505cea490996a078ee835f8fbfa38cdf01210b59998be149f589a0f",
+    "tests/fixtures/pre_individual_catalog.gd": "f99dc1cf1c886774a87a505b4cf19f4785bc0d2197bbbef7a9fb29c5baf086e0",
+    "tests/individual_enemies_tests.gd": "a6f1c7d139996dfc846e1c05417dfa0f830b8e2a11ce86dcb32026e3812c40ba"
+  }
+}

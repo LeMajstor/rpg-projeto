@@ -62,6 +62,7 @@ func capture(name: String) -> void:
 
 func _run() -> void:
 	screen = load("res://scenes/exploration_test.tscn").instantiate()
+	screen.set_script(load("res://tests/fixtures/pre_expansion_screen.gd"))
 	root.add_child(screen)
 	await process_frame
 	screen.set_physics_process(false)
@@ -80,11 +81,11 @@ func _run() -> void:
 	expect(board.camera_center().y > 240, "Dungeon acompanha chegada na parte inferior")
 	expect(not board.get_rect().has_point(board.screen_point(Vector2(560, 64))), "Dungeon deixou de ser encolhida para mostrar todas as salas")
 	await capture("camera-dungeon-entry")
-	place(Vector2(560, 400))
+	place(Vector2(560, 450))
 	expect(board.screen_point(screen.session.world.leader_position).is_equal_approx(board.size * 0.5), "Líder centralizado fora dos limites de borda")
 	tap(KEY_TAB)
-	screen.leader_buttons[3].pressed.emit()
-	expect(screen.session.world.party_order[0] == "p4", "Líder muda pelo menu")
+	screen.leader_buttons[2].pressed.emit()
+	expect(screen.session.world.party_order[0] == "p3", "Líder muda pelo menu")
 	var center: Vector2 = board.camera_center()
 	key(KEY_S)
 	screen._physics_process(0.1)
@@ -119,14 +120,7 @@ func _run() -> void:
 	var lab = screen.combat_ui
 	expect(is_instance_valid(lab) and not screen.map_ui.visible, "Combate continua em tela separada")
 	lab.set_process(false)
-	for enemy in lab.model.enemies:
-		enemy["hp"] = 1
-		enemy["ini_modifier"] = -float(enemy["ini"])
-	lab.model.debug_ready_allies()
-	lab.model.select_actor("p1")
-	lab.model.submit("all")
-	for step in range(100):
-		lab.model.tick(1.0 / 120.0)
+	expect(preload("res://tests/fixtures/current_combat.gd").win_by_basics(lab.model), "Básicos atuais concluem batalha de retorno")
 	lab._refresh()
 	await process_frame
 	expect(screen.map_ui.visible and screen.combat_ui == null and board.camera_center() == center, "Retorno do combate preserva enquadramento e área")

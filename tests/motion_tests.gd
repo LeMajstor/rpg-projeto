@@ -130,7 +130,7 @@ func _test_moving_melee_target() -> void:
 		return
 	var visual: Vector2 = actor["logical_position"] + actor["visual_offset"]
 	expect(absf(visual.distance_to(target["logical_position"]) - float(data["settings"]["melee_stop_distance"])) < 0.01, "Contato considera posição atual do alvo móvel")
-	expect(target["logical_position"] != target_start, "Alvo continua voando durante aproximação")
+	expect(target["logical_position"] == target_start, "D132 congela também a rota do alvo durante aproximação")
 	expect(actor["visual_offset"].length() > 100, "Sprite realmente percorre a distância até o inimigo")
 	expect(target["hp"] == health - actor["attack"] - data["skills"]["precise"]["power"], "Efeito aplicado uma única vez ao chegar")
 	expect(model.action["impact_points"].size() == 1, "Efeito visual usa o alvo atingido")

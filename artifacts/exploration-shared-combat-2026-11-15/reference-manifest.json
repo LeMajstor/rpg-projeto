@@ -1,0 +1,37 @@
+{
+  "decision": "D149",
+  "date": "2026-11-15",
+  "sources": {
+    "data/lab.json": "ed4e6e6083908ae55cc5847819e538ae557e365fdf545a79c380de6f3aa8992d",
+    "data/dungeon.json": "25fda928336c8a3ab0459ca576332f8a9f8117d19b4f293ffc248321725ae775",
+    "data/damage_reference_profiles.json": "45835cbfeb73219aeea26a57fc0469d47e846fa0a964b2fa28f2aaa3d41dbaee",
+    "data/damage_lab.json": "643f65aaaa8b324ce443165abde301686417f012159b624a6c4eb2e2ce685a98",
+    "data/battle_damage_v1.json": "bda7297353d05dd3a3189cf0f0c531fe7ea2881f925ef43e364a0a0ce56dc6f4",
+    "data/exploration_combat.json": "84180320b824e152e7e08ff349b29b247e94c3edee48600d569c5e518333abf7",
+    "scripts/combat/damage_v1_bridge.gd": "5ebb06a953a4c74c6d7d03d3ccc9e6a2b2026a01b760495f4b0decde35a569f8",
+    "scripts/combat/battle_model.gd": "05f09d5b03979edd8af8b0a8446efd983a427142b3b014aef12c52fd86e166e1",
+    "scripts/combat/affliction_rules.gd": "3a826893eaf67987496f501e7e844b1435dc1812773efcdc4301871067dff876",
+    "scripts/damage/combat_reference.gd": "25b264f720a366c4f2336cc0855350006018e53e62842b655b3067a22db608b5",
+    "scripts/damage/damage_equipment.gd": "de54fefa0a94e2728d35d9d2f1210fc42205755b95d2294a8d0b7ec668bf1a31",
+    "scripts/damage/damage_calculator.gd": "c2276ed6151f5376b6a7e7dbc202efb2ba629a14d68132c6733b69bdbfc6dceb",
+    "scripts/exploration/exploration_test.gd": "06a90e36d54cc930820aca9ffddac7c392d23fb79c89ba7d96a3392be999d5a3",
+    "scripts/exploration/exploration_session.gd": "9aea999a3e0becea7b88a0a7d92c7c89d41bd7941dbcc4c03d9bce0453b76186",
+    "scripts/ui/combat_lab.gd": "7252932c4ce0b4ad5cfdf72692471077dacb2f0bf9ff2ab80b295626b3c35558",
+    "tests/exploration_combat_parity_tests.gd": "43e4bde6a09ebab5ae1085ebe0655fb71407177902b882e9d784928f35c984c0",
+    "tests/exploration_combat_parity_ui_smoke.gd": "67b2840f8e92f9d6a38f5ee1309e0113cf899e816c0b1e2351269f2e435b0e62",
+    "tests/fixtures/current_combat.gd": "84f35e909058436f8a5bd8b4f0e4c02bafd3bc9eb89f291ece7194c0cd278345"
+  },
+  "graphics": {
+    "suite": "exploration_combat_parity_ui_smoke.gd",
+    "checks": 26,
+    "failures": 0,
+    "renderer": "Compatibility",
+    "captures_inspected": [
+      "visual/exploration-poison.png",
+      "visual/exploration-remedy-target.png",
+      "visual/exploration-return.png",
+      "visual/exploration-shared-party.png"
+    ]
+  },
+  "note": "Fixture gráfica controla sorteios de aplicação e INI inimiga; dados de referência não são rebalanceados."
+}

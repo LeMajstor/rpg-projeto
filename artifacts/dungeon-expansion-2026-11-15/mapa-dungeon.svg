@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2480" height="1850" viewBox="0 0 2480 1850"><rect width="2480" height="1850" fill="#101b23"/><g font-family="Arial,sans-serif" fill="#dfebe8">
+<text x="40" y="50" font-size="32">Dungeon de testes · dois andares · mapa de orientação</text>
+<text x="40" y="86" font-size="20">Rotas em laranja · rochas e paredes em cinza · escadas em verde · porta/alavanca/baú em dourado</text>
+<g transform="translate(40,155) scale(0.48)">
+<text x="0" y="-40" font-size="44">Dungeon · andar 1 / galerias e quinas</text><rect width="2400" height="1600" fill="#263b43"/>
+<rect x="120" y="1180" width="850" height="300" fill="#31464c"/><text x="132" y="1225" font-size="27">SAGUÃO · SAÍDA PARA O MUNDO</text>
+<rect x="180" y="730" width="750" height="390" fill="#344f54"/><text x="192" y="775" font-size="27">GALERIA ABERTA · M1</text>
+<rect x="180" y="180" width="780" height="330" fill="#3b424f"/><text x="192" y="225" font-size="27">PAREDES E QUINAS · M2</text>
+<rect x="1390" y="800" width="740" height="450" fill="#304d4b"/><text x="1402" y="845" font-size="27">CIRCUITO DE PATRULHA · M3</text>
+<rect x="1860" y="160" width="380" height="400" fill="#474637"/><text x="1872" y="205" font-size="27">ESCADAS · ANDAR 2</text>
+<polyline points="220,1470 220,1280 420,1280 420,1110" fill="none" stroke="#b4aa77" stroke-width="8" opacity="0.7"/>
+<polyline points="900,1060 1030,1060 1080,1010" fill="none" stroke="#b4aa77" stroke-width="8" opacity="0.7"/>
+<polyline points="1260,1010 1350,1010 1350,650 2120,650 2120,290" fill="none" stroke="#b4aa77" stroke-width="8" opacity="0.7"/>
+<rect x="40" y="40" width="2320" height="32" fill="#6c7d82"/>
+<rect x="40" y="40" width="32" height="1520" fill="#6c7d82"/>
+<rect x="2328" y="40" width="32" height="1520" fill="#6c7d82"/>
+<rect x="40" y="1528" width="2320" height="32" fill="#6c7d82"/>
+<polygon points="1115.069,37.504 1204.931,42.496 1184.931,402.496 1095.069,397.504" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1096.731,412.362 1183.269,387.638 1263.269,667.638 1176.731,692.362" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1176.344,669.086 1263.656,690.914 1203.656,930.914 1116.344,909.086" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1115.565,1107.11 1204.435,1092.89 1244.435,1342.89 1155.565,1357.11" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1155.874,1341.175 1244.126,1358.825 1204.126,1558.825 1115.874,1541.175" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="45.174,602.225 54.826,517.775 404.826,557.775 395.174,642.225" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="733.696,602.03 746.304,517.97 1146.304,577.97 1133.696,662.03" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="58.551,1171.355 41.449,1108.645 151.449,1078.645 168.551,1141.355" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="598.128,1192.446 601.872,1127.554 1121.872,1157.554 1118.128,1222.446" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="72,72 250,72 72,250" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="2328,72 2150,72 2328,250" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="72,500 160,550 150,690 72,750" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="620,355 594,401 530,420 466,401 440,355 466,309 530,290 594,309" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1775,1000 1756,1035 1710,1050 1664,1035 1645,1000 1664,965 1710,950 1756,965" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1680,500 1645,557 1560,580 1475,557 1440,500 1475,443 1560,420 1645,443" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="2170,1330 2135,1376 2050,1395 1965,1376 1930,1330 1965,1284 2050,1265 2135,1284" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polyline points="340,840 700,840 750,1040 340,1040 340,840" fill="none" stroke="#e4a86a" stroke-width="7"/>
+<circle cx="340" cy="840" r="18" fill="#ef937f"/><text x="365" y="826" font-size="36">M1</text>
+<polyline points="300,240 760,240 800,450 300,450 300,240" fill="none" stroke="#e4a86a" stroke-width="7"/>
+<circle cx="300" cy="240" r="18" fill="#ef937f"/><text x="325" y="226" font-size="36">M2</text>
+<polyline points="1450,870 1970,870 2020,1140 1450,1140 1450,870" fill="none" stroke="#e4a86a" stroke-width="7"/>
+<circle cx="1450" cy="870" r="18" fill="#ef937f"/><text x="1475" y="856" font-size="36">M3</text>
+<rect x="195" y="1445" width="50" height="50" fill="#80c4a0"/><text x="255" y="1470" font-size="29">Sair da dungeon</text>
+<rect x="2095" y="265" width="50" height="50" fill="#80c4a0"/><text x="2155" y="290" font-size="29">Subir · andar 2</text>
+<circle cx="1160" cy="1010" r="17" fill="#e9cf84"/><text x="1185" y="1045" font-size="25">Portão da galeria</text>
+<circle cx="1040" cy="1060" r="17" fill="#e9cf84"/><text x="1065" y="1095" font-size="25">Alavanca</text>
+<circle cx="1940" cy="650" r="17" fill="#e9cf84"/><text x="1965" y="685" font-size="25">Baú de teste</text>
+</g>
+<g transform="translate(1260,155) scale(0.48)">
+<text x="0" y="-40" font-size="44">Dungeon · andar 2 / circuito de rochas</text><rect width="2400" height="1600" fill="#2e3947"/>
+<rect x="120" y="1160" width="760" height="340" fill="#434331"/><text x="132" y="1205" font-size="27">ESCADAS · ANDAR 1</text>
+<rect x="170" y="180" width="800" height="520" fill="#3e4654"/><text x="182" y="225" font-size="27">CIRCUITO OESTE · M4</text>
+<rect x="1390" y="180" width="800" height="610" fill="#344958"/><text x="1402" y="225" font-size="27">CAVERNA IRREGULAR · M5</text>
+<rect x="1400" y="1030" width="820" height="420" fill="#344b4a"/><text x="1412" y="1075" font-size="27">PATRULHA LONGA · M6</text>
+<polyline points="220,1410 220,1230 720,1230 720,780 980,780 980,950 1300,950" fill="none" stroke="#b4aa77" stroke-width="8" opacity="0.7"/>
+<polyline points="1300,950 1300,500 1400,500" fill="none" stroke="#b4aa77" stroke-width="8" opacity="0.7"/>
+<polyline points="1300,950 1300,1320 1400,1320" fill="none" stroke="#b4aa77" stroke-width="8" opacity="0.7"/>
+<rect x="40" y="40" width="2320" height="32" fill="#6c7d82"/>
+<rect x="40" y="40" width="32" height="1520" fill="#6c7d82"/>
+<rect x="2328" y="40" width="32" height="1520" fill="#6c7d82"/>
+<rect x="40" y="1528" width="2320" height="32" fill="#6c7d82"/>
+<polygon points="1115.752,51.806 1204.248,68.194 1154.248,338.194 1065.752,321.806" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1067.925,345.959 1152.075,314.041 1262.075,604.041 1177.925,635.959" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1177.622,604.865 1262.378,635.135 1212.378,775.135 1127.622,744.865" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1125.565,1052.89 1214.435,1067.11 1174.435,1317.11 1085.565,1302.89" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1087.865,1325.801 1172.135,1294.199 1262.135,1534.199 1177.865,1565.801" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="56.549,904.867 63.451,815.133 583.451,855.133 576.549,944.867" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="829.441,893.744 850.559,806.256 1140.559,876.256 1119.441,963.744" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1416.831,934.856 1423.169,865.144 1753.169,895.144 1746.831,964.856" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1762.289,962.772 1737.711,897.228 1897.711,837.228 1922.289,902.772" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1905.027,904.645 1914.973,835.355 2332.973,895.355 2323.027,964.645" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="72,72 350,72 72,330" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="2328,72 2060,72 2328,340" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="630,430 601,483 530,505 459,483 430,430 459,377 530,355 601,377" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1880,500 1848,571 1770,600 1692,571 1660,500 1692,429 1770,400 1848,429" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="1935,1240 1910,1279 1850,1295 1790,1279 1765,1240 1790,1201 1850,1185 1910,1201" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="590,1120 564,1159 500,1175 436,1159 410,1120 436,1081 500,1065 564,1081" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polygon points="2205,1450 2183,1478 2130,1490 2077,1478 2055,1450 2077,1422 2130,1410 2183,1422" fill="#6c7d82" stroke="#94a7aa" stroke-width="2"/>
+<polyline points="300,260 750,260 850,600 300,620 300,260" fill="none" stroke="#e4a86a" stroke-width="7"/>
+<circle cx="300" cy="260" r="18" fill="#ef937f"/><text x="325" y="246" font-size="36">M4</text>
+<polyline points="1440,320 1900,260 2120,500 1940,750 1460,700 1440,320" fill="none" stroke="#e4a86a" stroke-width="7"/>
+<circle cx="1440" cy="320" r="18" fill="#ef937f"/><text x="1465" y="306" font-size="36">M5</text>
+<polyline points="1440,1100 2010,1100 2180,1310 1570,1430 1440,1100" fill="none" stroke="#e4a86a" stroke-width="7"/>
+<circle cx="1440" cy="1100" r="18" fill="#ef937f"/><text x="1465" y="1086" font-size="36">M6</text>
+<rect x="195" y="1385" width="50" height="50" fill="#80c4a0"/><text x="255" y="1410" font-size="29">Descer · andar 1</text>
+</g>
+<text x="40" y="1040" font-size="28">Como chegar ao andar 2</text>
+<text x="40" y="1085" font-size="23">1. Entre pela saída sul do andar 1 e siga ao norte pelo saguão.</text>
+<text x="40" y="1128" font-size="23">2. Acione a alavanca na passagem central para abrir o portão.</text>
+<text x="40" y="1171" font-size="23">3. Na galeria leste, siga ao norte até as escadas e pressione E.</text>
+<text x="40" y="1250" font-size="28">Perseguição territorial</text>
+<text x="40" y="1295" font-size="23">Detecção: 180 unidades, com paredes bloqueando a visão. Território: faixa fixa de 240 unidades em torno da rota laranja.</text>
+<text x="40" y="1338" font-size="23">Ao perder visão, o inimigo retoma o trecho acessível mais próximo. Novas detecções não deslocam seu território.</text>
+<text x="40" y="1381" font-size="23">Contato só com o líder inicia batalha. Fuga bem-sucedida remove o encontro da sessão. M2 continua sem fuga em batalha.</text>
+<text x="40" y="1470" font-size="20" fill="#a8bfbd">Mapa externo de orientação; a câmera do jogo mantém a escala anterior e acompanha o líder.</text>
+</g></svg>

@@ -1,0 +1,60 @@
+{
+  "decision": "D157",
+  "date": "2026-11-15",
+  "configuration": {
+    "floors": [
+      "test_dungeon",
+      "test_dungeon_upper"
+    ],
+    "size_per_floor": [
+      2400,
+      1600
+    ],
+    "encounters_per_floor": 3,
+    "detection_radius": 180,
+    "territory_distance_from_original_route": 240,
+    "chase_speed": 144,
+    "leader_speed": 180,
+    "speed_transition_seconds": 0.3
+  },
+  "sources": {
+    "data/areas.json": "e959ac011f9df8311ad3080dd10f4cceb5d8f75fa781ec58629bc07cce3cdd29",
+    "data/dungeon.json": "1c0aa8d00f2b0b8ce370c8a8f405a742c56c0bed2dcb87521bd559d29990ad66",
+    "data/dungeon_upper.json": "d1543a4a212070f21b5eb3f4f0d961936b566716630263a5823c6c6ea2a528e4",
+    "data/damage_reference_profiles.json": "45835cbfeb73219aeea26a57fc0469d47e846fa0a964b2fa28f2aaa3d41dbaee",
+    "data/damage_lab.json": "643f65aaaa8b324ce443165abde301686417f012159b624a6c4eb2e2ce685a98",
+    "data/battle_damage_v1.json": "bda7297353d05dd3a3189cf0f0c531fe7ea2881f925ef43e364a0a0ce56dc6f4",
+    "scripts/exploration/area_catalog.gd": "67214278a6355b8d0fdb599f2a3684b6082d4d5cd47c69c186683d0218a02401",
+    "scripts/exploration/exploration_model.gd": "da4ef78f685b717b3ab9a43ca7f83edb69035168e0c37bb89a827dc48f01591c",
+    "scripts/exploration/exploration_session.gd": "091ec4fdad2df6e750206a355c3fc5452ad309f3c9619c738c3712d589bcbc8d",
+    "scripts/exploration/exploration_test.gd": "382a4d37a0f873b7e06426b94af91b46663c5563a7c26d0e492afac528691402",
+    "scripts/exploration/exploration_view.gd": "7ce5d6ebc5d42c008d432c614b6d4280fa576282b0706d67ce0bd227b8f9a90b",
+    "scripts/exploration/exploration_depth.gd": "d9eaf56713d4b5185d9e0134d6720839b2fc2749184c2ba55be8fae761b231a4",
+    "scripts/exploration/patrol_territory.gd": "1b75f5ac809cb4f27a29eb8bb1cb0b1baaaad69712be51f2e8b59587fd0c66f2",
+    "scripts/exploration/encounter_motion.gd": "051b6b5f8777f2297cec5d3e961573c7044fa8b63f962c4b4f9dd46e9350e883",
+    "scripts/exploration/wall_geometry.gd": "15610187aba995a4ddc868970e00ca98f197b8167fdc496d5c9e90e0621aa377",
+    "scripts/combat/battle_model.gd": "05f09d5b03979edd8af8b0a8446efd983a427142b3b014aef12c52fd86e166e1",
+    "scripts/combat/damage_v1_bridge.gd": "5ebb06a953a4c74c6d7d03d3ccc9e6a2b2026a01b760495f4b0decde35a569f8",
+    "tests/dungeon_expansion_tests.gd": "97a38223246940bf2dd64c21559f3cbb2af0935252a3452eed4be87eb408bcca",
+    "tests/exploration_pursuit_tests.gd": "b35e8858039f966bd7efca4cc20a8fbdf43fb8c7baa139fa18938191fd8c463a",
+    "tests/exploration_pursuit_ui_smoke.gd": "e404d76f79c4e09708c94c64598fbe642602daa42fe415d815f3c65c32fd6aea"
+  },
+  "graphics": {
+    "suite": "exploration_pursuit_ui_smoke.gd",
+    "renderer": "Compatibility",
+    "checks": 35,
+    "failures": 0,
+    "captures_inspected": [
+      "visual/dungeon-lower-entry.png",
+      "visual/dungeon-lower-irregular-walls.png",
+      "visual/dungeon-lower-pursuit.png",
+      "visual/dungeon-natural-return.png",
+      "visual/dungeon-patrol-territory.png",
+      "visual/dungeon-upper-after-escape.png",
+      "visual/dungeon-upper-battle.png",
+      "visual/dungeon-upper-entry.png",
+      "visual/dungeon-upper-rock-circuit.png"
+    ]
+  },
+  "fixture_note": "Coordenadas históricas somente em tests/fixtures; catálogo jogável usa os dois mapas atuais."
+}

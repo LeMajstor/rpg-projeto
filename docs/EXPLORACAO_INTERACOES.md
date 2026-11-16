@@ -30,6 +30,8 @@ O laboratório independente permanece em `Executar laboratorio.command`, ou `god
 
 Durante o diálogo, movimento, menu da equipe, patrulhas e outras interações ficam bloqueados. Esc não descarta a conversa; avance até encerrá-la. O mapa também pausa durante menu e combate. Não há encontros automáticos ao encerrar uma conversa ou retornar da luta.
 
+**Atualização D155 — implementada em 15/11/2026:** inimigos detectam o líder atual a180 unidades, com paredes bloqueando a percepção, perseguem a144 unidades/s e iniciam batalha ao encostar somente no líder, sem E. Desistem fora do raio/sem visão e retomam a patrulha. Fuga bem-sucedida remove o encontro da sessão. O roteiro e os controles antigos desta entrega original abaixo são históricos. Funcionamento e teste atuais em [PERSEGUICAO_EXPLORACAO.md](PERSEGUICAO_EXPLORACAO.md).
+
 ## Regiões e roteiro manual
 
 | Região no mesmo mapa | Como testar | Resultado esperado |

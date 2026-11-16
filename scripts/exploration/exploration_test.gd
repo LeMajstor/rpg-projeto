@@ -4,6 +4,7 @@ const MapView = preload("res://scripts/exploration/exploration_view.gd")
 const Catalog = preload("res://scripts/exploration/area_catalog.gd")
 const CombatScene = preload("res://scenes/combat_lab.tscn")
 const ClockDebug = preload("res://scripts/exploration/clock_debug.gd")
+const CombatData = preload("res://scripts/combat/damage_v1_bridge.gd")
 
 var session
 var map_ui: Control
@@ -43,6 +44,7 @@ func _ready() -> void:
 
 func _new_session() -> void:
 	var battle_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/lab.json"))
+	battle_data = CombatData.exploration_definitions(battle_data)
 	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/areas.json"))
 	var definitions = Catalog.load_definitions()
 	var initial_id: String = catalog["initial_area_id"]
@@ -75,7 +77,7 @@ func _build_ui() -> void:
 	column.add_theme_constant_override("separation", 12)
 	margin.add_child(column)
 	column.add_child(_label("EXPLORAÇÃO / LABORATÓRIO AMPLIADO", 27, Color("e7f0ed")))
-	column.add_child(_label("Casa e vila: NPCs · mundo aberto: florestas, colinas e mar · dungeon: 6 encontros · gráficos provisórios", 15, Color("99bdb7")))
+	column.add_child(_label("Casa e vila: NPCs · mundo aberto sem monstros · dungeon: 2 andares / 18 monstros / 6 encontros · gráficos provisórios", 15, Color("99bdb7")))
 	area_label = _label("", 15, Color("efd49b"))
 	column.add_child(area_label)
 	var toolbar = HBoxContainer.new()
@@ -140,7 +142,7 @@ func _build_ui() -> void:
 	menu_column.add_theme_constant_override("separation", 10)
 	menu_panel.add_child(menu_column)
 	menu_column.add_child(_label("LÍDER DE EXPLORAÇÃO", 22, Color("f0dfb4")))
-	menu_column.add_child(_label("Os quatro continuam ativos. O mapa pausa neste menu.", 14))
+	menu_column.add_child(_label("Todos os integrantes continuam ativos. O mapa pausa neste menu.", 14))
 	for member in session.battle.party:
 		leader_buttons.append(_button(menu_column, member["short_name"], _choose_leader.bind(member["id"])))
 	var battle_settings = HBoxContainer.new()
@@ -156,7 +158,7 @@ func _build_ui() -> void:
 		battle_speed_picker.add_item(str(level) + suffix)
 	battle_speed_picker.item_selected.connect(func(index): session.battle.battle_speed = index + 1)
 	battle_settings.add_child(battle_speed_picker)
-	menu_column.add_child(_label("1 mais lento · 8 mais rápido · afeta somente o ATB", 14))
+	menu_column.add_child(_label("1 mais lento · 8 mais rápido · ritmo do ATB e Veneno", 14))
 	_button(menu_column, "Fechar [Tab / Esc]", _toggle_menu)
 	if OS.is_debug_build():
 		clock_panel = ClockDebug.new()
@@ -239,8 +241,16 @@ func _physics_process(delta: float) -> void:
 		float(_held(KEY_S, KEY_DOWN)) - float(_held(KEY_W, KEY_UP)))
 	if _clock_field_focused():
 		direction = Vector2.ZERO
-	session.move(direction, delta, preferred_axis)
-	session.tick(delta)
+	var remaining = delta
+	while remaining > 0.000001:
+		var step = minf(remaining, 1.0 / 120.0) if session.world.automatic_encounters() else remaining
+		session.move(direction, step, preferred_axis)
+		session.tick(step)
+		remaining -= step
+		if session.state not in ["exploration", "transition"]:
+			break
+	if session.state == "battle":
+		_show_combat()
 	_refresh_map()
 
 func _held(first: Key, second: Key) -> bool:
@@ -265,6 +275,11 @@ func _try_encounter() -> void:
 	var result: String = session.interact()
 	if result != "battle":
 		_refresh_map()
+		return
+	_show_combat()
+
+func _show_combat() -> void:
+	if is_instance_valid(combat_ui) or session.state != "battle":
 		return
 	map_ui.hide()
 	combat_ui = CombatScene.instantiate()

@@ -1,0 +1,9 @@
+{
+  "source": "D158: movimento por participante; patrulha reutiliza o perfil da batalha",
+  "profiles": {
+    "heavy": {"chase_speed": 108, "chase_limit": 180},
+    "agile": {"chase_speed": 144, "chase_limit": 240},
+    "flying": {"chase_speed": 162, "chase_limit": 320},
+    "static": {"chase_speed": 0, "chase_limit": 0, "near_radius": 60, "cone_range": 180, "cone_degrees": 90}
+  }
+}

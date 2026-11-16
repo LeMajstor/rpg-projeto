@@ -2,13 +2,15 @@
 
 **Confirmado em 26/10/2026 (D50, atualizado por D51):** configuração de 1 a 8, com **1 mais lento e 8 mais rápido**, conforme esclarecimento do usuário. **Padrão 4** (corrigido pelo usuário, mantendo a reescala). A escala anterior foi deslocada uma posição acima: antigo 3 → novo 4, antigo 4 → novo 5 etc. O nível **6 reproduz os tempos originais anteriores ao Battle Speed**. A escolha afeta aliados e inimigos igualmente, preservando diferenças de INI.
 
+**D129 — direção confirmada em 10/11/2026, implementada no laboratório por D148:** ticks de Veneno acompanharão proporcionalmente o multiplicador de carga do ATB. Velocidades maiores aproximam os ticks em tempo real e menores os espaçam, mantendo 5% do HP máximo por tick. Isso amplia a regra anterior de afetar somente ATB para incluir Veneno; não amplia o efeito a rotas, animações, exploração ou dia/noite. Active mantém contagem/ticks no menu, Wait pausa e retoma o intervalo restante (D128). Não depende de INI individual ou de a vítima agir. **D130 confirma Battle Speed 4 como referência dos 5 segundos reais permitidos**, com o slider de simulação de teste em 1×. D148 integra o relógio de Veneno ao mesmo multiplicador no laboratório atual. D149 leva o mesmo relógio/regras aos encontros da exploração.
+
 ## Uso e comportamento
 
 - Na exploração: abrir **Menu / equipe [Tab]** e escolher **Battle Speed**. O mapa permanece pausado no menu.
 - No laboratório ou combate integrado: **Tab/Start** abre opções, cima/baixo escolhe Battle Speed e esquerda/direita ajusta. O seletor de teste continua disponível, separado do slider **Simulação (teste)**.
 - Alteração vale para a carga seguinte, inclusive durante a batalha: não zera a barra parcial, não remove prontidão e não altera INI, HP/MP ou ações já iniciadas.
 - A escolha acompanha a sessão entre áreas, entrada/retorno de combate e reencontros. Novo teste/Próxima luta no laboratório preservam o nível escolhido. **Reiniciar teste** da exploração cria uma sessão nova no padrão 4; reabrir o jogo também. Não há persistência em disco nesta entrega.
-- Somente o incremento do ATB recebe o multiplicador. Movimento, pausas/sorteios das rotas, animações, duração/impacto das ações, exploração e relógio de dia/noite não são acelerados ou desacelerados por Battle Speed.
+- **D148:** o incremento do ATB e o relógio de Veneno recebem o multiplicador, com normalização do Veneno no nível 4. Movimento, pausas/sorteios das rotas, animações, duração/impacto das ações, exploração e relógio de dia/noite não são acelerados ou desacelerados por Battle Speed.
 - Wait, pausa manual, saturação em 100%, ausência de carga durante a própria ação e atendimento de múltiplos prontos mantêm as regras existentes. O slider de depuração continua escalando toda a simulação; manter em 1× para comparar níveis.
 
 ## Parâmetros experimentais em dados
@@ -39,6 +41,23 @@ Fórmula experimental: incremento = `INI efetiva × 0,018 × multiplicador × se
 | Estático | 5 | 11,11 s | 18,52 s |
 
 Não existe sorteio do nível ou da INI. O modelo limita a escolha a 1..8; fixtures antigas sem a configuração mantêm multiplicador 1 para regressão histórica.
+
+## Intervalo do Veneno — D129/D130, implementado em D148
+
+O intervalo segue `5 × multiplicador_ATB(4) / multiplicador_ATB(nível)` segundos reais permitidos. Usar a razão entre multiplicadores preserva a referência no nível 4 mesmo se a escala experimental mudar. Pela configuração atual:
+
+| Battle Speed | Intervalo entre ticks |
+| --- | --- |
+| 1 | 24 s |
+| 2 | 12 s |
+| 3 | 7,5 s |
+| **4 — referência** | **5 s** |
+| 5 | 3,75 s |
+| 6 | 3 s |
+| 7 | 2,4 s |
+| 8 | 2 s |
+
+Cada tick mantém 5% do HP máximo. Os tempos consideram simulação de teste em 1× e apenas o tempo permitido pelo modo: Active continua durante seleção no menu; Wait congela contagem e retoma o intervalo restante. D132 confirma congelamento do tempo de batalha durante toda execução de ação. D148 integra Veneno: ATB, rotas e seu relógio pausam juntos durante apresentação. Pausa manual congela a contagem. A proporção é relativa ao tempo permitido de carga de ATB, excluindo animações/pausas. Tick arredonda ao inteiro mais próximo, empate 0,5 para cima, mínimo 1 HP. Remédio D147 e integração temporal D148 estão funcionais no laboratório e, por D149, na exploração; magias de cura e recursos de reviver continuam futuros.
 
 ## Verificação
 

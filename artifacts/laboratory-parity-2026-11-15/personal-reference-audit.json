@@ -1,0 +1,27 @@
+{
+  "matching": true,
+  "read_only": true,
+  "records": 5,
+  "results": [
+    {
+      "differences": [],
+      "reference": "reference_ally_1"
+    },
+    {
+      "differences": [],
+      "reference": "reference_ally_2"
+    },
+    {
+      "differences": [],
+      "reference": "reference_ally_3"
+    },
+    {
+      "differences": [],
+      "reference": "reference_monster_1"
+    },
+    {
+      "differences": [],
+      "reference": "reference_monster_2"
+    }
+  ]
+}

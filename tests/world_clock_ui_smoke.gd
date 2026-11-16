@@ -56,6 +56,7 @@ func capture(name: String) -> void:
 
 func _run() -> void:
 	screen = load("res://scenes/exploration_test.tscn").instantiate()
+	screen.set_script(load("res://tests/fixtures/pre_expansion_screen.gd"))
 	root.add_child(screen)
 	await process_frame
 	screen.set_physics_process(false)
@@ -153,14 +154,7 @@ func _run() -> void:
 	var lab = screen.combat_ui
 	expect(is_instance_valid(lab) and not screen.map_ui.visible, "Combate existente acessível")
 	lab.set_process(false)
-	for enemy in lab.model.enemies:
-		enemy["hp"] = 1
-		enemy["ini_modifier"] = -float(enemy["ini"])
-	lab.model.debug_ready_allies()
-	lab.model.select_actor("p1")
-	lab.model.submit("all")
-	for index in range(120):
-		lab.model.tick(1.0 / 120)
+	expect(preload("res://tests/fixtures/current_combat.gd").win_by_basics(lab.model), "Básicos atuais concluem batalha de retorno")
 	lab._refresh()
 	await process_frame
 	expect(screen.combat_ui == null and screen.session.clock == clock and clock.time_text() == "22:00", "Vitória real retorna mantendo relógio")

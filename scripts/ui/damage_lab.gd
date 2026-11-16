@@ -13,6 +13,7 @@ var model
 var preset_library
 var preset_storage_path = PresetLibrary.DEFAULT_PATH
 var preset_pickers: Dictionary = {}
+var reference_pickers: Dictionary = {}
 var preset_load_buttons: Dictionary = {}
 var preset_save_buttons: Dictionary = {}
 var preset_update_buttons: Dictionary = {}
@@ -123,7 +124,7 @@ func _build_ui() -> void:
 	root.add_theme_constant_override("separation", 10)
 	margin.add_child(root)
 	root.add_child(_label("LABORATÓRIO / DANOS E AFLIÇÕES", 26, Color("e5eef8")))
-	root.add_child(_label("Referência V1 · parâmetros editáveis para teste · independente do combate da exploração", 14, Color("a6bdd3")))
+	root.add_child(_label("Referências compartilhadas com o laboratório de combate · parâmetros editáveis para teste", 14, Color("a6bdd3")))
 	var toolbar = HBoxContainer.new()
 	toolbar.add_theme_constant_override("separation", 8)
 	root.add_child(toolbar)
@@ -161,6 +162,18 @@ func _build_ui() -> void:
 	editor_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	body.add_child(editor_scroll)
 	editor_scroll.add_child(editor)
+	var references_row = HBoxContainer.new()
+	references_row.add_theme_constant_override("separation", 10)
+	editor.add_child(references_row)
+	for side in ["ally", "enemy"]:
+		var box = _panel(references_row, "REFERÊNCIA · " + ("ALIADO" if side == "ally" else "MONSTRO"))
+		var labels = ["Escolher referência aprovada…"]
+		for entry in Model.Reference.entries(side):
+			labels.append(entry["name"])
+		reference_pickers[side] = _select(box, labels, _choose_reference.bind(side))
+		reference_pickers[side].fit_to_longest_item = false
+		reference_pickers[side].clip_text = true
+		reference_pickers[side].size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var presets_row = HBoxContainer.new()
 	presets_row.add_theme_constant_override("separation", 10)
 	editor.add_child(presets_row)
@@ -573,6 +586,12 @@ func _rebuild_preset_lists() -> void:
 func _refresh_preset_controls() -> void:
 	for side in ["ally", "enemy"]:
 		var selected: Dictionary = model.selected_presets.get(side, {})
+		var shared = selected.get("source", "") == "shared_reference"
+		var references = Model.Reference.entries(side)
+		reference_pickers[side].select(0)
+		for index in range(references.size()):
+			if references[index]["id"] == selected.get("id", ""):
+				reference_pickers[side].select(index + 1)
 		var picker: OptionButton = preset_pickers[side]
 		picker.select(0)
 		for index in range(1, picker.item_count):
@@ -581,14 +600,29 @@ func _refresh_preset_controls() -> void:
 		picker.tooltip_text = selected.get("name", "A ficha atual pode ser salva como preset.")
 		var modified: bool = model.preset_modified(side)
 		preset_status[side].text = "Salvo" + (" · alterado" if modified else "") if not selected.is_empty() else "Ficha atual / manual"
+		if shared:
+			preset_status[side].text = "Referência compartilhada" + (" · experimento alterado" if modified else "")
 		preset_update_buttons[side].disabled = busy or not modified or not preset_library.is_custom(selected.get("id", "")) or not preset_library.load_error.is_empty()
-		preset_load_buttons[side].disabled = busy or selected.is_empty() or not preset_library.load_error.is_empty()
+		preset_load_buttons[side].disabled = busy or shared or selected.is_empty() or not preset_library.load_error.is_empty()
 		preset_delete_buttons[side].disabled = busy or not preset_library.is_custom(selected.get("id", "")) or not preset_library.load_error.is_empty()
 		preset_save_buttons[side].disabled = busy or not preset_library.load_error.is_empty()
 		preset_save_buttons[side].tooltip_text = preset_library.load_error
 
 func _reload_preset(side: String) -> void:
 	_choose_preset(preset_pickers[side].selected, side)
+
+func _choose_reference(index: int, side: String) -> void:
+	if syncing or busy or index == 0:
+		return
+	_commit_edit()
+	var entry: Dictionary = Model.Reference.entries(side)[index - 1]
+	var error: String = model.apply_reference(entry["id"])
+	if not error.is_empty():
+		notice.text = error
+		return
+	_sync_controls()
+	_preview()
+	notice.text = "Referência compartilhada carregada: " + entry["name"]
 
 func _choose_preset(index: int, side: String) -> void:
 	if syncing or busy:

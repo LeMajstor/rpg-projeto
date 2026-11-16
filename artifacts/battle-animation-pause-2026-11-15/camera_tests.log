@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+PASS _test_scale_reference
+PASS _test_tracking_and_limits
+PASS _test_projection
+PASS _test_views_same_distance
+PASS _test_model_untouched
+CÂMERA: 5 grupos, 110 verificações, 0 falhas

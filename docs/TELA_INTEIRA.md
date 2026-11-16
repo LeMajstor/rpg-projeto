@@ -71,7 +71,7 @@ Centro visual = metade da área lógica de apresentação de 920×440. O tamanho
 - A rota do participante fica congelada em todas as fases, inclusive ao executar sem deslocamento. Coordenada lógica e estado completo da rota são comparados ao snapshot antes de concluir; Δvisual termina exatamente em zero.
 - `battlefield.gd` mostra um pulso/clareamento provisório no campo e os pontos realmente atingidos, sem participar da lógica do efeito. Não há animação artística definitiva.
 - O preset D pode configurar `actions` por entrada inimiga para exercitar a mesma Onda sem mudar as listas dos tipos ou os presets anteriores. Não altera os perfis de alvo ou o algoritmo de seleção.
-- Wait/Active, pausa manual, velocidade, ATB e retorno ao mapa mantêm as regras anteriores. Uma animação já iniciada ainda pode concluir ao mudar Active → Wait; pausa manual congela também a apresentação.
+- **D132 (15/11/2026):** a execução de tela inteira congela ATB e todas as rotas até o retorno; apresentação/efeito continuam, sem alterar snapshots, duração ou escolha individual de centro. Wait/Active mantêm suas regras de seleção; pausa manual, velocidade e retorno ao mapa continuam existentes. Uma animação já iniciada ainda pode concluir ao mudar Active → Wait; pausa manual congela também a apresentação.
 
 ## Arquivos
 

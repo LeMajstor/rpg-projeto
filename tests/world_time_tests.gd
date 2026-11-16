@@ -57,7 +57,7 @@ func _test_classification() -> void:
 	expect(not Catalog.valid_map(bad), "Variante aponta a diálogo existente")
 
 func _test_current_areas_policy() -> void:
-	expect(definitions.size() == 5, "Catálogo atual de cinco áreas")
+	expect(definitions.size() == 6, "Catálogo atual de seis áreas")
 	for id in definitions:
 		var session = Session.new(battle_data, definitions[id], definitions)
 		var now: float = session.clock.minutes_of_day()
@@ -125,7 +125,7 @@ func _test_rest_and_battle() -> void:
 	expect(session.battle.party == resources, "API temporal não inventa cura, pagamento ou reanimação")
 	travel(session, "town_exit")
 	travel(session, "dungeon_entrance")
-	place(session, session.world.entity_by_id("test_map_enemy_01")["position"])
+	place(session, session.world.entity_by_id("test_map_enemy_01_e1")["position"])
 	var clock = session.clock
 	clock.set_time(23, 0)
 	expect(session.begin_encounter(), "Combate real inicia")

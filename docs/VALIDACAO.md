@@ -1,5 +1,136 @@
 # Validação da entrega
 
+## Correção de desempenho no segundo andar — 15/11/2026
+
+Paredes poligonais completamente fora da câmera deixam de ser reconstruídas/desenhadas. O recorte inclui faces e topo elevado, conservando a oclusão. Perfis, rotas, detecção e regras de combate permanecem iguais; todos os monstros continuam simulados fora da câmera.
+
+**12 suítes headless, 9.011 verificações, zero falhas.** `render_performance.gd`: **91 verificações gráficas, zero falhas**, incluindo 19 comparações exatas de pixels contra desenho sem descarte, os dois pisos, dois tamanhos, F3 e topo elevado na borda. Verifica também estado dos atores/fila intacto e uma consulta de câmera por desenho.
+
+Medições locais na CPU do desenho do piso2: **1,262 →0,906 ms** na escada e **1,590 →0,856 ms** na galeria (reduções de 28,2% e 46,2%). Chamadas de desenho 317 → 145 e 315 → 160. Godot 4.7.2 / Compatibility / Apple M3 Pro; não são garantia universal de FPS. Sonda de simulação não indicou diferença relevante entre os pisos. Método, comandos, métricas brutas e logs em [relatório de desempenho](../artifacts/dungeon-performance-2026-11-15/README.md).
+
+## Inimigos individuais e sensores estáticos — D158, 15/11/2026
+
+**75 suítes headless aprovadas,353.185 verificações, zero falhas.** Executor, resultados por suíte e logs em `artifacts/individual-enemies-2026-11-15/`. Nova suíte `individual_enemies_tests.gd`: 285 verificações de elenco/perfis compartilhados, rotas sem sólidos, acesso aos dois pisos, detecção independente, território e retomada, reprodução por semente, estáticos imóveis com círculo/cone bloqueados por paredes, seguidores ignorados e remoção conjunta por encontro.
+
+Cena principal em `exploration_pursuit_ui_smoke.gd`: 28 verificações headless / 37 gráficas Compatibility, zero falhas, nove capturas dos dois pisos, perseguição individual, sensores, combate do grupo completo, fuga falha/sucesso, vitória e recursos/estados preservados. A última conferência visual inclui rótulos curtos por grupo/participante e território coerente com rotas terrestres abertas.
+
+Suítes D157 e perseguição histórica usam `pre_individual_catalog.gd` / `areas_before_individual_enemies.json`, com lógica atual; as285 verificações novas e a UI cobrem o catálogo jogável D158. Fixtures nunca são carregadas pelo jogo. Testes de navegação/tempo/profundidade foram ajustados aos IDs individuais e à quantidade real de atores, sem enfraquecer seus objetivos.
+
+```sh
+godot --headless --path . --script res://tests/individual_enemies_tests.gd
+godot --headless --path . --script res://tests/exploration_pursuit_ui_smoke.gd
+python3 artifacts/individual-enemies-2026-11-15/run_regressions.py
+```
+
+Regras, parâmetros de teste e limites em [INIMIGOS_INDIVIDUAIS.md](INIMIGOS_INDIVIDUAIS.md). Relatórios abaixo preservam etapas anteriores.
+
+## Dungeon em dois andares e território de patrulha — D157, 15/11/2026
+
+**74 suítes headless aprovadas, 352.829 verificações, zero falhas.** Resultado por suíte, executor e logs em `artifacts/dungeon-expansion-2026-11-15/`. Relatórios D155/D156 preservados como histórico, incluindo seus comportamentos anteriores de limite/retorno.
+
+Nova suíte `dungeon_expansion_tests.gd`: **752 verificações**. Audita áreas atuais e acesso geométrico dos dois pisos, alavanca antes de abrir o portão, escadas/objetos/encontros após abertura, rotas completas sem sólidos, entradas para quatro, colisão e percepção em paredes inclinadas e dados inválidos; território fixo ao redor da rota original após detecções repetidas, retomada de um trecho próximo diferente da origem e perda de visão; transições reais entre pisos com estados/KO/HP/MP/estoque/relógio conservados, área inativa pausada, fuga no piso2 e reinício; compara fichas/repertórios/equipamentos e restrição de fuga dos seis encontros atuais contra o laboratório.
+
+`exploration_pursuit_tests.gd`: **77 verificações** revisadas às regras atuais de aceleração, território e retomada. `exploration_pursuit_ui_smoke.gd`: **26 verificações headless / 35 gráficas Compatibility**, zero falhas. Exercita a cena principal com o catálogo atual, subida/descida E/fade, perseguição/pausa/transição de velocidade, retorno natural, combate por contato no segundo piso, fuga e preservação de recursos/estados. Nove capturas em `visual/`; mapa de orientação em `mapa-dungeon.svg`. Apresentação permanece provisória e a naturalidade deve ser avaliada pelo usuário jogando.
+
+Regressões que dependiam das coordenadas anteriores usam explicitamente `pre_expansion_catalog.gd` / `pre_expansion_screen.gd` e a fotografia `areas_before_dungeon_expansion.json`, com código atual. O catálogo jogável nunca usa essas fixtures. Suítes de tempo, eventos, relevo e profundidade também verificam as seis áreas atuais. Não inclui progressão, fuga por nível ou navegação por grade; busca em malha é somente auditoria de acesso nos testes.
+
+```sh
+godot --headless --path . --script res://tests/dungeon_expansion_tests.gd
+godot --headless --path . --script res://tests/exploration_pursuit_tests.gd
+godot --headless --path . --script res://tests/exploration_pursuit_ui_smoke.gd
+```
+
+Detalhes e limites em [DUNGEON_DOIS_ANDARES.md](DUNGEON_DOIS_ANDARES.md).
+
+## Limite fixo de perseguição — D156, 15/11/2026
+
+**73 suítes headless aprovadas, 352.388 verificações, zero falhas.** Resultado por suíte, executor e logs em `artifacts/exploration-chase-limit-2026-11-15/`. Matemática, regras de combate e referências compartilhadas permanecem preservadas pela bateria de regressão.
+
+`exploration_pursuit_tests.gd`: **385 verificações**, incluindo limite fixo120 com líder visível/dentro de180 durante toda a perseguição, parada na borda, passos fracionários/diagonal sem ultrapassagem, âncora em ponto parcial de patrulha móvel, pausa e retorno com rota exata. Validação de configuração recusa limite inválido. Interface: **24 verificações headless / 29 gráficas Compatibility**, sem falhas; cinco capturas finais inspecionadas em `visual/`, incluindo desistência por limite fixo com líder ainda visível. F3 diferencia círculo fixo120 e percepção móvel180.
+
+Os relatórios D155 abaixo são históricos. Mesmo comando das suítes de perseguição; detalhes em [PERSEGUICAO_EXPLORACAO.md](PERSEGUICAO_EXPLORACAO.md).
+
+## Perseguição e contato automático — D155, 15/11/2026
+
+**73 suítes headless aprovadas, 352.113 verificações, zero falhas.** Bateria completa executada após os ajustes finais de colisão/retorno/porta. Executor, logs e resultados por suíte em `artifacts/exploration-pursuit-2026-11-15/test-results.json`. Não substitui os relatórios históricos de D148/D149.
+
+Nova suíte `exploration_pursuit_tests.gd`: **112 verificações** de detecção180/181, paredes/portas e perda de visão, velocidade144 versus líder180, escape em caminho livre, pausa/menu/diálogo/transição, líder atual, seguidores, contato varrido/sem E, perseguidor alcançando líder parado, contato através de parede recusado, ordem de empate, batalha única, retorno pela trilha e retomada exata de rota, porta fechada bloqueando retorno e corpo, fuga falha/sucesso, recursos/KO/estoque e persistência entre visitas/reinício. Validação de dados recusa parâmetros inválidos e velocidade que impeça escapar.
+
+`exploration_pursuit_ui_smoke.gd`: **22 verificações headless / 26 gráficas Compatibility**, zero falhas. Exercita a cena principal e transições reais, troca de líder, perseguição, pausa, retorno, contato automático abrindo uma única cena com o modelo compartilhado, fuga por comando e remoção do encontro, recursos preservados e reinício. Quatro capturas finais inspecionadas em `visual/`: raio/perseguição, retorno visível à patrulha, combate por contato e mapa após fuga. Marcas de F3 são depuração, ocultas normalmente.
+
+Regressões existentes adaptadas às regras novas de contato/remoção após fuga; câmera usa um ponto fora do contato de M3 para testar enquadramento, e acessibilidade verifica contato para monstros e E para objetos/NPCs. Rotas subdivididas são comparadas com tolerância de posição quando apropriado, mantendo testes novos de snapshot exato para saída/retorno da patrulha. A suíte completa inclui paridade entre calculadora, laboratório de combate e os seis encontros da exploração.
+
+```sh
+godot --headless --path . --script res://tests/exploration_pursuit_tests.gd
+godot --headless --path . --script res://tests/exploration_pursuit_ui_smoke.gd
+```
+
+Roteiro manual, limites e escopo futuro em [PERSEGUICAO_EXPLORACAO.md](PERSEGUICAO_EXPLORACAO.md). Não declara avaliação humana de gameplay concluída nem implementação da fuga por diferença de nível.
+
+## Combate compartilhado na exploração — D149, 15/11/2026
+
+**71 suítes headless aprovadas, 351.952 verificações, zero falhas.** Resultado por suíte, executor e logs em `artifacts/exploration-shared-combat-2026-11-15/test-results.json`. Relatórios das etapas anteriores preservados.
+
+`exploration_combat_parity_tests.gd`: **838 verificações** nos seis encontros do catálogo real. Compara fichas, equipamentos, repertórios e resultados exatos de básicos/magia/quatro aflições com o laboratório usando a mesma semente; verifica substituição dos dados legados sem mutação da entrada; posições/rotas/perfis, fuga, três integrantes na fila/batalha, Veneno e Remédio reais, débito/impacto, persistência de HP/MP/KO/estoque, liderança/trilha/entidades, horário/flags, vitória/fuga/derrota e reinício.
+
+`exploration_combat_parity_ui_smoke.gd`: **22 verificações headless**, **26 gráficas Compatibility**, zero falhas. Exercita a cena principal, menu de liderança, transições vila→mundo→dungeon, instância compartilhada, três cards e cinco habilidades do Mago, Veneno por comando, estado nos cards, pausa manual, Remédio pelo menu, fuga/retorno automático, reencontro e reinício. Quatro capturas inspecionadas em `visual/`: equipe/menu, aflições, alvo do Remédio e retorno à dungeon com gasto de MP preservado. A inspeção não substitui avaliação humana de ritmo/balanceamento.
+
+Regressões de retorno nas interfaces de mundo/interiores/câmera agora executam básicos atuais em fixture determinística (alvos com 1 HP e sem EVA), sem conceder técnicas antigas aos aliados. Regressões históricas continuam usando seus dados próprios.
+
+```sh
+godot --headless --path . --script res://tests/exploration_combat_parity_tests.gd
+godot --headless --path . --script res://tests/exploration_combat_parity_ui_smoke.gd
+```
+
+## Paridade dos laboratórios e integração das aflições — D148, 15/11/2026
+
+**69 suítes headless aprovadas, 351.126 verificações, zero falhas.** Bateria completa executada após as alterações finais de repertório/estado. Resultado final por suíte em `artifacts/laboratory-parity-2026-11-15/test-results.json`; executor e logs na mesma pasta. Relatórios anteriores preservados.
+
+Nova suíte `battle_affliction_tests.gd`: **913 verificações**. Compara as cinco fichas e treze atributos por fonte compartilhada; seis armas e seis vestimentas por família; aplicação/resistência/esquiva das quatro aflições em cinco sementes contra amostras da calculadora; estado temporal seguindo o resultado; oito velocidades de Veneno, primeiro tick, Wait, animação de 5 segundos, mudança de Battle Speed, mínimo/arredondamento e KO; Lentidão natural/bônus/carga e saturação de EVA; cura real; exclusividade/custos; Medo, origem, INT atual, recuperação física/mágica, crítico, esquiva, KO, desempate/único sobrevivente; Confusão com fogo amigo reproduzível e limpeza no fim das batalhas. Reviver é exercitado com ação fixture, sem inventar um recurso jogável.
+
+`laboratory_parity_ui_smoke.gd`: **15 verificações headless** e **19 gráficas Compatibility**, incluindo quatro capturas: habilidades/mira, aplicação real por comando, card/status, pausa manual, cura pelo Remédio e referências compartilhadas no laboratório de danos, sem gravar a biblioteca pessoal. A suíte gráfica anterior de batalha passou com **24 verificações**, incluindo outras três capturas de prontidão, impacto mágico e preparação com INT/VIG. As sete capturas em `visual/` foram inspecionadas; layout legível e controles disponíveis.
+
+Conferência adicional, somente leitura, da biblioteca pessoal atual: **5 registros correspondentes**, zero diferenças nos treze atributos efetivos e nas contribuições de crítico, conforme `personal-reference-audit.json`. O runtime não depende do arquivo pessoal; usa a referência aprovada centralizada. Manifesto de fontes e capturas em `reference-manifest.json`.
+
+```sh
+godot --headless --path . --script res://tests/battle_affliction_tests.gd
+godot --headless --path . --script res://tests/laboratory_parity_ui_smoke.gd
+```
+
+**Limites:** valida a harmonização técnica e efeitos no laboratório. Avaliação humana de ritmo/balanceamento continua com o diretor criativo. Recurso de reviver, magias de cura, buffs, progressão e aflições de grupo continuam futuros. O combate da exploração ainda usa seu catálogo anterior, como solicitado para a próxima etapa; as regressões confirmam seu funcionamento nesta transição. Não declara paridade dos três ambientes concluída antes dessa migração.
+
+## Remédio de teste — D147, 15/11/2026
+
+**67 suítes headless aprovadas, 350.198 verificações, zero falhas.** Inclui combate/UI V1 e anteriores, pausa D132, danos, exploração e seus consumíveis. Evidências por suíte em `artifacts/remedy-v1-2026-11-15/test-results.json`, logs e executor `run_regressions.py`; relatórios anteriores preservados.
+
+Novas suítes: `remedy_v1_tests.gd` (**77 verificações**) e `remedy_v1_ui_smoke.gd` (**19**). Verificam estoque inicial de 3 restrito à V1, cancelamento sem custo, débito único na confirmação, remoção no impacto dos quatro estados de aflição injetados como fixtures, sem HP/MP/RNG/atributos alterados, autocura de Veneno/Lentidão, bloqueio de uso sob Medo/Confusão, aliado vivo/incluindo usuário, rejeição de inimigo/incapacitado, consumo em alvo limpo, estoque esgotado, continuação sem reposição, Novo teste/F5 restaurando 3 e preservação do catálogo anterior. UI exercita teclado, lista única, nome/quantidade, mira, cancelamento, aplicação e bloqueios. A suíte anterior da UI V1 foi atualizada para esperar Itens habilitado somente com o novo Remédio.
+
+Reprodução:
+
+```sh
+godot --headless --path . --script res://tests/remedy_v1_tests.gd
+godot --headless --path . --script res://tests/remedy_v1_ui_smoke.gd
+```
+
+**Limite:** o campo único `affliction` é uma base de estado para a integração futura; a cura limpa esse estado, sem aplicar aflições, ticks, modificadores ou comandos automáticos ainda inexistentes. Os testes não afirmam gameplay completo de aflições nem cura de seus efeitos temporais. Não foi feita nova inspeção gráfica; navegação/controles foram verificados pelo smoke headless.
+
+## Pausa global durante ações — D132, 15/11/2026
+
+**65 suítes headless aprovadas, 350.102 verificações, zero falhas.** Inclui modelo/interface de combate, danos V1, legados, rotas por semente, áreas de efeito, exploração e pausa manual da interface. Resultados por suíte em `artifacts/battle-animation-pause-2026-11-15/test-results.json`, com logs separados; resultados históricos de D126 preservados.
+
+Nova suíte `battle_animation_pause_tests.gd`: **150 verificações**. Exercita ações de 5 segundos em Wait/Active, aliado/inimigo, melee, magia e tela inteira nos cenários por semente, movimento legado e V1. Confirma apresentação/impacto ativos com ATB, posição lógica, rota completa/RNG e `simulation_time` congelados; retorno exato e retomada de um passo sem recuperar tempo pausado; aliado pronto conserva sua carga; inimigo pronto aguarda o retorno; seleção continua distinta em Wait/Active. Testes anteriores de melee/área foram atualizados para a regra aprovada: o alvo móvel também congela durante execução; raio no impacto e ausência de fogo amigo preservados. A suíte existente `motion_ui_smoke.gd` confirma pausa manual sem avanço de rota/apresentação e a intervenção explícita de Passo de depuração.
+
+Reprodução direta dos testes da mudança:
+
+```sh
+godot --headless --path . --script res://tests/battle_animation_pause_tests.gd
+godot --headless --path . --script res://tests/motion_tests.gd
+godot --headless --path . --script res://tests/centered_area_tests.gd
+godot --headless --path . --script res://tests/motion_ui_smoke.gd
+```
+
+**Limite:** Veneno ainda não integrado ao combate. Arredondamento (inteiro mais próximo, empate 0,5 para cima, mínimo 1 HP), contagem congelada em pausa manual/animações e demais regras D127–D132 estão documentados; esta bateria não testa ticks ainda inexistentes nem cria magias/itens de cura/reviver. A duração de 5 segundos é fixture de teste, sem modificar a duração de apresentação nos dados jogáveis. Não houve avaliação gráfica nova nem avaliação humana de ritmo.
+
 ## Primeira integração ao laboratório de batalha — D126, 01/11/2026
 
 **64 suítes headless aprovadas,300.192 verificações, zero falhas**, incluindo o laboratório de danos, combate anterior, movimentos por semente, exploração e interfaces. As duas suítes novas verificam217 condições no modelo e21 na interface. Teste gráfico Compatibility:24 verificações, três capturas inspecionadas. Resultado por suíte em `artifacts/battle-damage-v1/test-results.json`; capturas em `artifacts/battle-damage-v1/visual/`.
@@ -148,7 +279,7 @@ Método, resultados por semente, condições congeladas, amostras primárias, sc
 
 ## INT/VIG e magias puras de aflição — D110, 28/10/2026
 
-Implementação autorizada após D99–D109. Executada com Godot4.7.2 Standard/macOS. **18 suítes headless aprovadas**, zero falhas nas execuções finais; resultados e logs em `artifacts/damage-lab-afflictions/`.
+Implementação autorizada após D99–D109. Executada com Godot 4.7.2 Standard/macOS. **18 suítes headless aprovadas**, zero falhas nas execuções finais; resultados e logs em `artifacts/damage-lab-afflictions/`.
 
 | Verificação | Resultado |
 | --- | --- |
@@ -177,7 +308,7 @@ Conclusão: especializações das proteções funcionam, com #1 ainda mais resis
 
 ## ATQ D/DEF D e proteções com duas defesas — D94
 
-Executada em **28/10/2026**, Godot4.7.2/macOS. **Dezesseis suítes headless aprovadas**, zero falhas nas execuções finais:
+Executada em **28/10/2026**, Godot 4.7.2/macOS. **Dezesseis suítes headless aprovadas**, zero falhas nas execuções finais:
 
 | Suíte | Verificações |
 | --- | ---: |
@@ -268,7 +399,7 @@ Médias observadas **15,674 contra13,841**, vantagem de **13,24%** para #1; teó
 
 ## Atualização dos presets — D88
 
-Executada em **27/10/2026**, Godot4.7.2/macOS. Primeiro ensaio em cópia temporária, depois atualização real por `damage_presets.gd.update`, ambos concluídos com **zero falhas** na execução final. Biblioteca reaberta e comparada integralmente com o estado anterior: somente ATQ próprio20→23 e revisão1→2 do Aliado #1; Aliado #2 e Monstro #1 e todos os demais campos preservados. Backup anterior em `/private/tmp/rpg-presets-before-attack23-54345.json`.
+Executada em **27/10/2026**, Godot 4.7.2/macOS. Primeiro ensaio em cópia temporária, depois atualização real por `damage_presets.gd.update`, ambos concluídos com **zero falhas** na execução final. Biblioteca reaberta e comparada integralmente com o estado anterior: somente ATQ próprio20→23 e revisão1→2 do Aliado #1; Aliado #2 e Monstro #1 e todos os demais campos preservados. Backup anterior em `/private/tmp/rpg-presets-before-attack23-54345.json`.
 
 A calculadora validou os presets recarregados, ATQ efetivo33/30 e extremos normais13–16/12–14 e críticos27–33/19–23 contra Monstro #1 (DEF40). Executados **1000 ataques com cada aliado** após recarga, sem erro. Logs `preset-preview.log` e `preset-aplicado.log` em `artifacts/balanceamento-aliados-2026-10-27/`. Média esperada14,36% maior para #1 vem do cálculo teórico previamente conferido, e não da promessa de porcentagem exata em todo lote. Nenhum código de jogo ou fórmula foi alterado nesta atualização.
 

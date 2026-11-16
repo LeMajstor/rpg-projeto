@@ -75,10 +75,10 @@ func _test_moving_center() -> void:
 		battle.tick(STEP)
 		expect(battle.action["center"] == central["logical_position"], "Centro acompanha posição lógica em cada tick até impacto")
 		guard += 1
-	expect(guard < 120 and central["logical_position"].x > 490, "Alvo se deslocou antes do impacto")
+	expect(guard < 120 and central["logical_position"] == Vector2(400, 200), "D132 congela a rota do centro durante a apresentação")
 	expect(central["hp"] < before[4], "Centro móvel é atingido")
-	expect(battle.enemies[1]["hp"] == before[5], "Inimigo que saiu do raio não recebe dano")
-	expect(battle.enemies[2]["hp"] < before[6], "Inimigo que entrou no raio recebe dano")
+	expect(battle.enemies[1]["hp"] < before[5], "Inimigo dentro do raio preservado recebe dano")
+	expect(battle.enemies[2]["hp"] == before[6], "Inimigo fora do raio preservado não recebe dano")
 	for index in range(4):
 		expect(battle.party[index]["hp"] == before[index], "Aliados nunca recebem dano da área amiga")
 	expect(battle.party[0]["logical_position"] == origin, "Área não altera posição lógica do executor")

@@ -140,6 +140,8 @@ func _draw_actor(actor: Dictionary, scale: float) -> void:
 	else:
 		draw_line(point - Vector2(10, 10) * scale, point + Vector2(10, 10) * scale, Color("d4d9e0"), 2)
 	var label = actor.get("short_name", actor["name"])
+	if not model.affliction_name(actor).is_empty():
+		label += " / " + model.affliction_name(actor)
 	if actor["side"] == "enemy" and actor["route_state"]["kind"] == "air":
 		label += " / VOO"
 	var label_width = font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, maxi(10, int(15 * scale))).x / scale

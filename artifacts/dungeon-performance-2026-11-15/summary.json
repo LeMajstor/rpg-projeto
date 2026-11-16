@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-15",
+  "scope": "Correção técnica de renderização D158; sem mudança de regras, dados ou simulação",
+  "engine": "Godot 4.7.2 / Compatibility / Apple M3 Pro",
+  "regression": {
+    "suites": 12,
+    "checks": 9011,
+    "all_passed": true
+  },
+  "render_verification": {
+    "suite": "render_performance.gd",
+    "checks": 91,
+    "failures": 0,
+    "pixel_comparisons": 19,
+    "result": "Pixels idênticos à vista sem descarte; inclui F3, dois tamanhos e topo elevado fora da base da câmera"
+  },
+  "measurements": [
+    {
+      "area": "test_dungeon",
+      "location": "(220.0, 1350.0)",
+      "debug": false,
+      "cpu_draw_before_usec": 700,
+      "cpu_draw_after_usec": 618,
+      "cpu_reduction_percent": 11.7,
+      "draw_calls_before": 213.0,
+      "draw_calls_after": 183.0
+    },
+    {
+      "area": "test_dungeon",
+      "location": "(220.0, 1350.0)",
+      "debug": true,
+      "cpu_draw_before_usec": 1014,
+      "cpu_draw_after_usec": 832,
+      "cpu_reduction_percent": 17.9,
+      "draw_calls_before": 326.0,
+      "draw_calls_after": 296.0
+    },
+    {
+      "area": "test_dungeon",
+      "location": "(560.0, 660.0)",
+      "debug": false,
+      "cpu_draw_before_usec": 733,
+      "cpu_draw_after_usec": 545,
+      "cpu_reduction_percent": 25.6,
+      "draw_calls_before": 213.0,
+      "draw_calls_after": 183.0
+    },
+    {
+      "area": "test_dungeon",
+      "location": "(560.0, 660.0)",
+      "debug": true,
+      "cpu_draw_before_usec": 1041,
+      "cpu_draw_after_usec": 837,
+      "cpu_reduction_percent": 19.6,
+      "draw_calls_before": 326.0,
+      "draw_calls_after": 296.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "location": "(220.0, 1350.0)",
+      "debug": false,
+      "cpu_draw_before_usec": 1262,
+      "cpu_draw_after_usec": 906,
+      "cpu_reduction_percent": 28.2,
+      "draw_calls_before": 317.0,
+      "draw_calls_after": 145.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "location": "(220.0, 1350.0)",
+      "debug": true,
+      "cpu_draw_before_usec": 1670,
+      "cpu_draw_after_usec": 1126,
+      "cpu_reduction_percent": 32.6,
+      "draw_calls_before": 400.0,
+      "draw_calls_after": 228.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "location": "(1620.0, 570.0)",
+      "debug": false,
+      "cpu_draw_before_usec": 1590,
+      "cpu_draw_after_usec": 856,
+      "cpu_reduction_percent": 46.2,
+      "draw_calls_before": 315.0,
+      "draw_calls_after": 160.0
+    },
+    {
+      "area": "test_dungeon_upper",
+      "location": "(1620.0, 570.0)",
+      "debug": true,
+      "cpu_draw_before_usec": 1590,
+      "cpu_draw_after_usec": 1159,
+      "cpu_reduction_percent": 27.1,
+      "draw_calls_before": 398.0,
+      "draw_calls_after": 243.0
+    }
+  ],
+  "timing_note": "CPU do callback de desenho, mediana de80 amostras após20 de aquecimento; render_probe usa force_draw para medir mesmo em segundo plano. Não é garantia de FPS nem medição normalizada do tempo total por quadro. Model probe não indicou diferença relevante entre pisos.",
+  "sha256": {
+    "scripts/exploration/exploration_view.gd": "8a79b1811ac54412bec5122d68703f86d432d1f2101f49ac05fd5445707ef544",
+    "tests/render_performance.gd": "f094f9dec4f562f04e6ac95687a4ad71ad082c17783a79e356f92a1b631ff8c6",
+    "tests/fixtures/unculled_exploration_view.gd": "471ae1c9c6db127db54ca2286a228135a02fbb488fd226a0ff89ab310cf175d4",
+    "tests/fixtures/profile_exploration_view.gd": "7db7c44ea24db0aa571ef97ed13296bcf6a460a8b1173fbfec9dd0c11f4f7722",
+    "data/dungeon.json": "886c768286b7d23fde8aab0222cd02beb4594547f222286ab2752c118a966441",
+    "data/dungeon_upper.json": "f03d09c4441d21dd724ba48ca18ace9d13ea52300213dee9214512e9f0c4f628"
+  }
+}

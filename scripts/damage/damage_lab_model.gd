@@ -3,6 +3,7 @@ const ActionPolicy = preload("res://scripts/damage/damage_action_policy.gd")
 const Calculator = preload("res://scripts/damage/damage_calculator.gd")
 const Equipment = preload("res://scripts/damage/damage_equipment.gd")
 const Presets = preload("res://scripts/damage/damage_presets.gd")
+const Reference = preload("res://scripts/damage/combat_reference.gd")
 var data: Dictionary
 var attacker: Dictionary
 var target: Dictionary
@@ -36,6 +37,10 @@ func definition(collection: String, id: String) -> Dictionary:
 		if entry["id"] == id:
 			return Equipment.upgraded_actor(entry) if collection == "profiles" else entry.duplicate(true)
 	return {}
+
+func apply_reference(id: String) -> String:
+	var entry = Reference.entry(id)
+	return "Referência inexistente." if entry.is_empty() else apply_preset(entry)
 
 func reset_case() -> void:
 	selected_presets.clear()

@@ -47,7 +47,7 @@ func _run() -> void:
 	expect(lab.model.preset["id"] == "lab_damage_v1" and lab.preset_picker.selected == 15, "Laboratório inicia na nova versão")
 	expect(lab.preset_picker.item_count == 16, "V1, cinco opções de movimento e dez anteriores")
 	for index in range(15):
-		expect(lab.preset_picker.get_item_text(index).begins_with("Legado · ") == (index < 10), "Todas as opções anteriores marcadas como legadas")
+		expect(lab.preset_picker.get_item_text(index).begins_with("Legado · ") == (index < 15), "D148 identifica todas as demonstrações anteriores como históricas no laboratório")
 	start()
 	lab.debug_button.button_pressed = true
 	lab._refresh()
@@ -126,7 +126,7 @@ func _run() -> void:
 	for index in range(11, 15):
 		start(index)
 		lab.pause_button.button_pressed = true
-		expect(lab.model.preset["id"] not in lab.definitions["legacy_preset_ids"], "Seletor abre formação atual")
+		expect(lab.model.preset["id"] in lab.definitions["legacy_preset_ids"], "Seletor preserva acesso à demonstração histórica de formação")
 		await capture("seeded-formation-%d" % index)
 	lab.debug_window.hide()
 	lab.queue_free()

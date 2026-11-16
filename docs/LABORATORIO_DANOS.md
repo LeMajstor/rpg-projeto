@@ -6,6 +6,8 @@
 
 **Status em 26/10/2026 (D60): implementado para experimentar e ajustar durante os testes**, conforme autorização do usuário. Cena independente `scenes/damage_lab.tscn`, aberta por `Executar laboratorio de danos.command`. O combate da exploração e o laboratório de combate continuam com seus cálculos anteriores. Fórmula, fichas e números abaixo são **experimentais**, sem confirmação de balanceamento definitivo.
 
+**D148 — 15/11/2026:** seletores **Referência · Aliado / Monstro** carregam as cinco fichas aprovadas da mesma fonte usada no laboratório de combate. Equipamentos, ações, custos e matemática são compartilhados; biblioteca pessoal/experimentos/históricos preservados. A execução temporal das quatro aflições está integrada na batalha, sem transformar a calculadora de lotes em simulação temporal. Migração da exploração na próxima etapa. Ver [PARIDADE_LABORATORIOS.md](PARIDADE_LABORATORIOS.md).
+
 ## Confirmado
 
 - Atributos D54 e siglas D57: HP, MP, INI, ATQ F, DEF F, MAG, DEF M e CRI; EVA D74/D75 com direção de crescimento revisada em D95. ATQ D/DEF D implementados por D94; INT/VIG por D100/D110, em1..999 para ambos os lados. Crescimento por nível de INT/VIG é desenho futuro, sem progressão automática no laboratório.

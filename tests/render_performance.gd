@@ -1,5 +1,7 @@
 extends SceneTree
 const ProfileView = preload("res://tests/fixtures/profile_exploration_view.gd")
+const UnculledView = preload("res://tests/fixtures/unculled_exploration_view.gd")
+const World = preload("res://scripts/exploration/exploration_model.gd")
 var checks = 0
 var failures = 0
 var report_path = ""
@@ -23,7 +25,7 @@ func measure(screen, label: String) -> void:
 	for index in range(16):
 		screen.map_view.queue_redraw()
 		await process_frame
-		await RenderingServer.frame_post_draw
+		RenderingServer.force_draw()
 		samples.append(screen.map_view.draw_usec)
 		camera_counts.append(screen.map_view.last_camera_queries)
 	samples.sort()
@@ -76,6 +78,7 @@ func _run() -> void:
 	view.camera_reference_size *= 0.9
 	view.size += Vector2(20, 10)
 	expect(view.world_point(view.screen_point(point)).is_equal_approx(point), "Mudança de escala/tamanho invalida transformação fora do desenho")
+	await verify_dungeon_render(screen)
 	if not report_path.is_empty():
 		var file = FileAccess.open(report_path, FileAccess.WRITE)
 		file.store_string(JSON.stringify(report, "\t") + "\n")
@@ -83,3 +86,70 @@ func _run() -> void:
 	await process_frame
 	print("RENDER: %d verificações, %d falhas" % [checks, failures])
 	quit(0 if failures == 0 else 1)
+
+func render_target(view, session, dimensions: Vector2i) -> SubViewport:
+	var target = SubViewport.new()
+	target.size = dimensions
+	target.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	root.add_child(target)
+	view.session = session
+	target.add_child(view)
+	view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	return target
+
+func compare_views(screen, dimensions: Vector2i, label: String, debug: bool = false) -> void:
+	var actual_view = ProfileView.new()
+	var reference_view = UnculledView.new()
+	actual_view.show_path = debug
+	reference_view.show_path = debug
+	var actual = render_target(actual_view, screen.session, dimensions)
+	var reference = render_target(reference_view, screen.session, dimensions)
+	var world = screen.session.world
+	var entities: Array = world.entities.duplicate(true)
+	var path: Array = world.path.duplicate()
+	for frame in range(3):
+		actual_view.queue_redraw()
+		reference_view.queue_redraw()
+		await process_frame
+		RenderingServer.force_draw()
+	var actual_image = actual.get_texture().get_image()
+	var reference_image = reference.get_texture().get_image()
+	expect(not actual_image.is_empty() and actual_image.get_pixelv(dimensions/2).a > 0, "Renderização real preenchida: " + label)
+	expect(actual_image.get_data() == reference_image.get_data(), "Pixels idênticos ao desenho sem descarte: " + label)
+	expect(world.entities == entities and world.path == path, "Renderização não muda monstros, rotas ou fila: " + label)
+	expect(actual_view.last_camera_queries == 1, "Uma consulta de câmera mesmo com paredes irregulares: " + label)
+	if label == "test_dungeon_upper/escada" and not debug:
+		var actual_calls = actual.get_render_info(Viewport.RENDER_INFO_TYPE_CANVAS, Viewport.RENDER_INFO_DRAW_CALLS_IN_FRAME)
+		var reference_calls = reference.get_render_info(Viewport.RENDER_INFO_TYPE_CANVAS, Viewport.RENDER_INFO_DRAW_CALLS_IN_FRAME)
+		expect(actual_calls < reference_calls, "Escada superior desenha menos comandos com os mesmos pixels")
+		print(JSON.stringify({"area":label,"view_size":str(dimensions),"culled_draw_calls":actual_calls,"unculled_draw_calls":reference_calls}))
+	actual.queue_free()
+	reference.queue_free()
+	await process_frame
+
+func verify_dungeon_render(screen) -> void:
+	screen.set_physics_process(false)
+	# Mesma sessão congelada nas duas vistas: apenas o descarte visual muda.
+	for id in ["test_dungeon", "test_dungeon_upper"]:
+		var world = World.new(screen.session.area_definitions[id], ["p1","p2","p3"])
+		screen.session.world = world
+		screen.session.area_id = id
+		var locations = [Vector2(220,1350),Vector2(560,660),Vector2(1170,1010),Vector2(2120,420)] if id == "test_dungeon" else [Vector2(220,1350),Vector2(1620,570),Vector2(1320,1290),Vector2(2100,1380)]
+		for dimensions in [Vector2i(720,480),Vector2i(1392,594)]:
+			for index in range(locations.size()):
+				world.leader_position = locations[index]
+				world.path.assign([locations[index]-Vector2(102,0),locations[index]])
+				world.path_length = 102
+				await compare_views(screen,dimensions,id+("/escada" if index==0 else "/ponto"+str(index)))
+		world.leader_position = locations[1]
+		await compare_views(screen,Vector2i(1392,594),id+"/F3",true)
+	# A base está fora da câmera, mas o topo alto ainda invade a borda inferior.
+	var definition: Dictionary = screen.session.area_definitions["test_dungeon_upper"].duplicate(true)
+	definition["obstacles"] = []
+	definition["encounters"] = []
+	definition["objects"] = []
+	definition["transitions"] = []
+	definition["wall_shapes"] = [{"rect":[500,1160,200,100],"points":[[500,1160],[700,1160],[650,1260],[540,1250]],"visual_height":180}]
+	screen.session.world = World.new(definition,["p1","p2","p3"])
+	screen.session.world.leader_position = Vector2(600,900)
+	await compare_views(screen,Vector2i(720,480),"topo alto na borda")

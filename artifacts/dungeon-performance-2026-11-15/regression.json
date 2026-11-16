@@ -1,0 +1,91 @@
+{
+  "suites": 12,
+  "checks": 9011,
+  "all_passed": true,
+  "results": [
+    {
+      "suite": "individual_enemies_tests",
+      "exit_code": 0,
+      "checks": 285,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "dungeon_expansion_tests",
+      "exit_code": 0,
+      "checks": 752,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "exploration_pursuit_tests",
+      "exit_code": 0,
+      "checks": 77,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "camera_tests",
+      "exit_code": 0,
+      "checks": 110,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "depth_tests",
+      "exit_code": 0,
+      "checks": 323,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "camera_ui_smoke",
+      "exit_code": 0,
+      "checks": 51,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "depth_ui_smoke",
+      "exit_code": 0,
+      "checks": 22,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "exploration_pursuit_ui_smoke",
+      "exit_code": 0,
+      "checks": 28,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "world_map_tests",
+      "exit_code": 0,
+      "checks": 3638,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "world_time_tests",
+      "exit_code": 0,
+      "checks": 72,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "terrain_tests",
+      "exit_code": 0,
+      "checks": 2814,
+      "failures": 0,
+      "script_errors": false
+    },
+    {
+      "suite": "exploration_combat_parity_tests",
+      "exit_code": 0,
+      "checks": 839,
+      "failures": 0,
+      "script_errors": false
+    }
+  ]
+}

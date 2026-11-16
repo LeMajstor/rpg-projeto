@@ -21,6 +21,8 @@ static func draw_order(world) -> Array[Dictionary]:
 		if definition.get("ground_only", false):
 			continue
 		result.append({"kind": "obstacle", "definition": definition, "depth": base_y(definition), "sequence": result.size()})
+	for definition in world.data.get("wall_shapes", []):
+		result.append({"kind":"polygon_wall","definition":definition,"depth":base_y(definition),"sequence":result.size()})
 	for entity in world.entities:
 		if not entity["present"] or entity["kind"] == "transition":
 			continue

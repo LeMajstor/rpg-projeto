@@ -11,7 +11,7 @@ var definitions: Dictionary
 var battle_data: Dictionary
 
 func _initialize() -> void:
-	definitions = Catalog.load_definitions()
+	definitions = preload("res://tests/fixtures/pre_expansion_catalog.gd").load_definitions()
 	battle_data = JSON.parse_string(FileAccess.get_file_as_string("res://data/lab.json"))
 	call_deferred("_run")
 

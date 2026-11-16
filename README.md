@@ -1,24 +1,26 @@
 # RPG — Protótipo v0.2: exploração e combate
 
-Protótipo jogável em **Godot + GDScript**, com cinco áreas conectadas por E e fade:
+Protótipo jogável em **Godot + GDScript**, com seis áreas conectadas por E e fade:
 
-**Duas casas ⇄ Vila de testes ⇄ Mundo aberto ⇄ Mini dungeon**
+**Duas casas ⇄ Vila de testes ⇄ Mundo aberto ⇄ Dungeon · andar1 ⇄ andar2**
 
 - **Vila/cidade de testes:** antigo mapa externo, agora com ruas, praça, dois NPCs, duas casas e portão para sair ao mundo.
 - **Casa original:** três NPCs, diálogos com respostas, móveis sólidos, placa e saída para a vila.
 - **Segunda casa:** interior separado, móveis sólidos e saída; pedra e evento noturno na rua próxima.
 - **Mundo aberto:** florestas, árvores, montanhas, colinas, caminhos, costa e mar provisórios. Interações para entrar na vila e na dungeon. Sem monstros comuns.
-- **Mini dungeon:** os seis encontros com os ritmos atuais de batalha, salas, corredores, baú, porta e alavanca; sua saída retorna ao mundo aberto.
+- **Dungeon de testes:** dois andares de2400×1600 conectados por escadas com E/fade, galerias com quinas no piso1 e cavernas irregulares no piso2. **18 monstros individuais nos seis encontros** (nove por piso), com rotas definidas por participante. Primeiro andar mantém baú/porta/alavanca e saída ao mundo. [Mapa e roteiro](docs/DUNGEON_DOIS_ANDARES.md).
 
-Os mesmos cinco NPCs estão distribuídos na casa e na vila. Quatro personagens seguem o líder, trocado pelo menu. HP/MP, objetos e encontros vencidos persistem entre áreas; patrulhas inativas pausam. **Reiniciar teste** restaura tudo. Gráficos simples, sem história, missões ou progressão.
+Os mesmos cinco NPCs estão distribuídos na casa e na vila. Os três aliados aprovados seguem o líder, trocado pelo menu (limite do sistema: até quatro). HP/MP, objetos e encontros vencidos persistem entre áreas; patrulhas inativas pausam. **Reiniciar teste** restaura tudo. Gráficos simples, sem história, missões ou progressão.
 
 A **câmera acompanha o líder** e mantém a mesma escala da casa em todas as áreas. Dungeon e exterior deixam de ser reduzidos para mostrar o mapa inteiro; o enquadramento acompanha o grupo e respeita as bordas. HUD e diálogos ficam fixos.
 
 O cenário agora tem **profundidade visual**: árvores, casas e paredes encobrem quem passa atrás; quem passa à frente aparece sobre elas. A colisão usa a base no chão, separada da copa e da altura desenhada. Em F3, vermelho mostra os sólidos e azul marca a base de profundidade.
 
-O **laboratório de combate continua separado**, iniciando em **V1 · danos e equipamentos**: três aliados contra Monstros #1/#2, fórmula e equipamentos compartilhados com a referência do laboratório de danos. Básicos físicos e magia ofensiva do mago, HP/MP acumulados, Wait/Active e movimentos por semente. **E / Preparar equipamentos V1** permite escolher os seis estágios de cada família antes de reiniciar. Aflições ficam para a segunda parte. Os quinze cenários anteriores e a exploração permanecem disponíveis. [Roteiro da integração](docs/BATALHA_DANOS_V1.md).
+O **laboratório de combate continua separado**, iniciando em **V1 · danos e equipamentos**: três aliados contra Monstros #1/#2, fórmula e equipamentos compartilhados com a referência do laboratório de danos. Básicos físicos e magia ofensiva do mago, HP/MP acumulados, Wait/Active e movimentos por semente. **E / Preparar equipamentos V1** permite escolher os seis estágios de cada família antes de reiniciar. **Veneno, Lentidão, Confusão e Medo agora funcionam no combate**, com Remédio e dados compartilhados com a calculadora. As quinze demonstrações anteriores aparecem como **Legado**; os seis encontros da exploração agora usam as mesmas fichas, equipamentos, ações e regras, inclusive aflições e Remédio. [Migração da exploração](docs/COMBATE_EXPLORACAO_COMPARTILHADO.md). [Roteiro da integração](docs/BATALHA_DANOS_V1.md).
 
-**Battle Speed:** menu da exploração [Tab] e seletor no combate/laboratório, de **1 (mais lento) a 8 (mais rápido)**. Padrão **4**; escala deslocada uma posição acima (antigo 3 → novo 4, antigo 4 → novo 5 etc.). Nível **6** reproduz os tempos originais anteriores ao Battle Speed. Ajusta somente a carga do ATB dos dois lados. Tempos e parâmetros experimentais em [BATTLE_SPEED.md](docs/BATTLE_SPEED.md).
+**Manutenção dos três ambientes (D150):** mudanças aprovadas em dados/regras compartilhados devem atualizar todos os consumidores aplicáveis na mesma entrega, com testes de paridade e documentação. Experimentos locais e cenários Legado continuam identificados. [Regra permanente e fontes](docs/PARIDADE_LABORATORIOS.md).
+
+**Battle Speed:** menu da exploração [Tab] e seletor no combate/laboratório, de **1 (mais lento) a 8 (mais rápido)**. Padrão **4**; escala deslocada uma posição acima (antigo 3 → novo 4, antigo 4 → novo 5 etc.). Nível **6** reproduz os tempos originais anteriores ao Battle Speed. Ajusta a carga do ATB dos dois lados e, proporcionalmente, o intervalo do Veneno. Tempos e parâmetros experimentais em [BATTLE_SPEED.md](docs/BATTLE_SPEED.md).
 
 ## Executar
 
@@ -26,7 +28,7 @@ Validado com **Godot 4.7.2 Standard**, sem .NET ou plugins externos.
 
 1. **Exploração:** abra `Executar exploracao.command` no macOS, ou importe `project.godot` no Godot e pressione **F5**.
 2. **Laboratório independente:** abra `Executar laboratorio.command`, ou abra `scenes/combat_lab.tscn` no editor e pressione **F6**.
-3. **Laboratório de danos:** abra `Executar laboratorio de danos.command`, ou abra `scenes/damage_lab.tscn` no editor e pressione **F6**. Fichas e fórmula proporcional experimentais, separados do combate da exploração.
+3. **Laboratório de danos:** abra `Executar laboratorio de danos.command`, ou abra `scenes/damage_lab.tscn` no editor e pressione **F6**. Calculadora com referências, equipamentos e fórmula compartilhados com o combate; experiências locais continuam separadas dos dados aprovados.
 
 Os lançadores procuram uma instalação local, a variável opcional `GODOT_BIN` e, por último, a cópia temporária usada nesta validação. Essa cópia pode ser removida pelo sistema; instalar o Godot mantém o acesso independente dela.
 
@@ -43,24 +45,24 @@ godot --path . --scene res://scenes/damage_lab.tscn
 | Controle | Ação |
 | --- | --- |
 | WASD / setas | Andar sem diagonais; eixo mais recente tem prioridade. |
-| Tab / Esc / Equipe | Menu de liderança; escolha um dos quatro integrantes. |
-| E / botão contextual | Interagir com NPC, objeto, monstro ou entrada/saída mais próxima ao alcance. |
+| Tab / Esc / Equipe | Menu de liderança; escolha um integrante ativo. |
+| E / botão contextual | Interagir com NPC, objeto ou entrada/saída mais próxima ao alcance; móveis iniciam por contato com o líder; estáticos usam círculo/cone de visão. |
 | E / Enter / Espaço / Avançar | Avançar ou encerrar falas. |
 | 1 / 2 ou clique | Escolher resposta no diálogo do NPC 2. |
-| F3 | Ver trilha, sólidos, rotas, alturas e painel de depuração do relógio. |
+| F3 | Ver trilha, sólidos, rotas, territórios, círculo/cone dos estáticos, alturas e relógio. |
 | Reiniciar teste | Restaurar explicitamente todas as áreas e os recursos iniciais. |
 
 O jogo inicia na **vila**. A casa fica ao norte; o **portão a nordeste** usa E para sair ao mundo aberto. Ande à direita pela faixa inicial e depois suba pelo lado direito dos blocos. NPCs 4 e 5 estão nas ruas; NPCs 1–3 permanecem na casa. NPC 2 oferece duas respostas.
 
 No **mundo aberto**, a interação **Entrar na vila** permite voltar. Para a dungeon, siga o caminho para leste, depois norte e novamente leste até a entrada de pedra. Use E para entrar. Mar, montanhas, colinas e massas florestais bloqueiam passagem. Um platô ao norte do marcador da vila tem **rampa**: contorne a vila pelo leste e siga o desvio à esquerda. **W/↑ sobe; S/↓ desce**, com altura gradual para cada integrante. Caminhos continuam livres; não há encontros no mundo. Detalhes em [RELEVO_E_FLORESTAS.md](docs/RELEVO_E_FLORESTAS.md).
 
-Na **dungeon**, acione a alavanca junto da porta e atravesse para as outras salas. E perto de um monstro inicia combate; **M2 continua impedindo fuga**. Vitória remove só aquele encontro, fuga o mantém. Ao sair, você retorna ao mundo aberto. A casa não recupera HP/MP.
+Na **dungeon**, cada monstro corresponde a um participante da batalha e detecta o líder individualmente. Pesados, ágeis e voadores usam os perfis comuns, com velocidades e territórios próprios; paredes quebram a visão e a perseguição. Estáticos permanecem parados: entrar no círculo de60 unidades ou cone frontal de180 unidades/90° inicia a batalha, desde que não haja parede bloqueando. Contato com qualquer móvel também inicia o grupo completo de três inimigos. Seguidores não disparam encontros. Ao desistir, o móvel retoma um trecho acessível próximo da rota fixa. **M2 continua impedindo fuga em batalha**; vitória/fuga bem-sucedida remove os três representantes daquele grupo. Use a alavanca na porta central e E nas escadas para visitar os dois pisos. Ao sair, retorna ao mundo; a casa não recupera HP/MP. [Regras e roteiro atual](docs/INIMIGOS_INDIVIDUAIS.md).
 
 Roteiro e arquivos atuais em [VILA_E_MUNDO.md](docs/VILA_E_MUNDO.md). Câmera, profundidade e transições conservam os controles existentes.
 
 ## Relógio e dia/noite
 
-As quatro áreas compartilham o horário, inicialmente **10:00**. **O tempo corre automaticamente somente no mapa-múndi** (mundo aberto fora da vila), sem ativar nenhuma opção. Um ciclo completo de 24 horas dura **2 minutos reais**. Vila, casa e dungeon mantêm o relógio pausado; viagens preservam o horário. Vila/mundo exibem luz cíclica; casa/dungeon usam luz fixa.
+As seis áreas compartilham o horário, inicialmente **10:00**. **O tempo corre automaticamente somente no mapa-múndi** (mundo aberto fora da vila), sem ativar nenhuma opção. Um ciclo completo de 24 horas dura **2 minutos reais**. Vila, casa e dungeon mantêm o relógio pausado; viagens preservam o horário. Vila/mundo exibem luz cíclica; casa/dungeon usam luz fixa.
 
 Abra **F3** para consultar horário/período e testar eventos **+180 min / 08:00** e **descanso → 07:00**. A antiga prévia automática foi removida. Clique nos campos para editar; confirmar/Enter libera o foco. Tab mantém o menu da equipe fora da edição. O descanso de teste só muda a hora.
 
@@ -76,13 +78,13 @@ Configuração, arquivos e regras reutilizáveis em [EVENTOS_DIA_NOITE.md](docs/
 
 ## Controles do combate
 
-Espere as barras carregarem e use **setas/direcional** para mover a mão pelos cards **PRONTOS**. Confirme para passar aos comandos à direita e depois ao alvo em campo. O card do executor fica destacado; mouse não seleciona ações ou alvos. Na **V1**, somente o mago possui **Habilidades → Magia ofensiva básica** (7 MP). Use **F3** para observar a simulação e deixar aliados prontos imediatamente. Círculo, tela inteira e consumíveis antigos continuam nos cenários anteriores; **Atual · cantos / sem fuga** mantém o bloqueio para testar essa regra.
+Espere as barras carregarem e use **setas/direcional** para mover a mão pelos cards **PRONTOS**. Confirme para passar aos comandos à direita e depois ao alvo em campo. O card do executor fica destacado; mouse não seleciona ações ou alvos. Na **V1**, o mago possui **Habilidades → Magia ofensiva básica** (7 MP) e **Veneno/Lentidão/Confusão/Medo** (4 MP). Monstro #1 também usa aflições neste teste; Monstro #2 continua somente à distância. Use **F3** para observar a simulação e deixar aliados prontos imediatamente. Círculo, tela inteira e consumíveis antigos continuam nos cenários anteriores; **Legado · cantos / sem fuga** mantém o bloqueio para regressão; na exploração atual, M2 continua sem fuga.
 
-O movimento por semente permanece em **todos os seis encontros da exploração** e na V1. A demonstração **Atual · comportamento por semente** continua no seletor: terrestres sorteiam continuar ou inverter no mesmo caminho, freando e pausando antes de voltar; voadores também param para pairar; quantidade/duração de pausas variam pela semente. Inimigos mantêm atenção em um aliado e olham para o alvo durante o ataque. As outras quatro opções **Atual · …** têm formações diferentes, incluindo cantos, lados opostos e linha superior. Controles, tabela e dados em [COMBATE_SEMENTE.md](docs/COMBATE_SEMENTE.md).
+O movimento por semente permanece em **todos os seis encontros da exploração** e na V1. A demonstração histórica **Legado · comportamento por semente** continua no seletor: terrestres sorteiam continuar ou inverter no mesmo caminho, freando e pausando antes de voltar; voadores também param para pairar; quantidade/duração de pausas variam pela semente. Inimigos mantêm atenção em um aliado e olham para o alvo durante o ataque. Os encontros atuais conservam formações diferentes, incluindo cantos, lados opostos e linha superior, com os mesmos dados/regras da V1. Controles, tabela e dados em [COMBATE_SEMENTE.md](docs/COMBATE_SEMENTE.md).
 
-As **dez opções anteriores** aparecem como **Legado**, incluindo F e as primeiras formações da dungeon. Nenhum encontro jogável as utiliza. Em **Active**, com **Pausa desligada**, observe o comportamento; F3 mostra semente, foco visual, fases, pausas e sorteios. Para comparar variações, mude **Semente** (por exemplo, 421 ou 733) e clique **Novo teste**. A mesma configuração/semente/comandos reproduz a simulação. O movimento dos monstros no mapa antes da batalha permanece igual.
+As **quinze demonstrações anteriores** aparecem como **Legado** no laboratório independente, incluindo F e as primeiras formações da dungeon. Nenhum encontro jogável as utiliza. Em **Active**, com **Pausa desligada**, observe o comportamento; F3 mostra semente, foco visual, fases, pausas e sorteios. Para comparar variações, mude **Semente** (por exemplo, 421 ou 733) e clique **Novo teste**. A mesma configuração/semente/comandos reproduz a simulação. No mapa, a perseguição/contato segue D157; os movimentos dentro da batalha permanecem separados.
 
-Para testar habilidades de tela inteira com movimento atual, selecione **Atual · linha superior** e use **Habilidades → Onda**. Em F3, a linha **Centro** permite escolher qualquer participante e usar o padrão ou forçar centro/imobilidade. E1 móvel vai ao centro, E2 estático fica, E3 estático possui exceção habilitada. Efeito e alvos são independentes do deslocamento. Roteiro em [TELA_INTEIRA.md](docs/TELA_INTEIRA.md).
+Para testar habilidades de tela inteira com movimento atual, selecione **Legado · linha superior** e use **Habilidades → Onda**. Em F3, a linha **Centro** permite escolher qualquer participante e usar o padrão ou forçar centro/imobilidade. E1 móvel vai ao centro, E2 estático fica, E3 estático possui exceção habilitada. Efeito e alvos são independentes do deslocamento. Roteiro em [TELA_INTEIRA.md](docs/TELA_INTEIRA.md).
 
 | Controle | Ação |
 | --- | --- |
@@ -96,11 +98,15 @@ Para testar habilidades de tela inteira com movimento atual, selecione **Atual �
 | Velocidade / Passo | Entre 0,25× e 4× ou avançar 1/60 s. O passo respeita Wait. |
 | F5 na janela do jogo | Novo teste: restaurar recursos e reiniciar o preset escolhido. |
 
-Áreas exigem selecionar um alvo central: o círculo acompanha sua posição até o impacto e afeta somente o lado válido, **sem fogo amigo**. Veja [Interface de batalha](docs/INTERFACE_BATALHA.md).
+Nas demonstrações legadas, áreas exigem selecionar um alvo central: o círculo acompanha sua posição até o impacto e afeta somente o lado válido, **sem fogo amigo**. Veja [Interface de batalha](docs/INTERFACE_BATALHA.md).
 
 No **laboratório separado**, após vitória/fuga, **confirmar** ou **Próxima luta · manter HP/MP** inicia o preset escolhido sem restaurar recursos/estoque. **Novo teste/F5** restaura o laboratório; mudar o menu de preset só tem efeito ao iniciar uma luta. No **encontro da exploração**, o retorno é automático e esses controles de reinício ficam desativados. Nenhuma transição recupera recursos automaticamente.
 
+**Remédio de teste na V1:** selecione um aliado pronto → **Itens [I]** → **Remédio de teste** → aliado vivo. São **3 unidades por Novo teste/F5**; Próxima luta conserva o estoque. Não recupera HP/MP nem revive; usar em alvo sem aflição também consome. O item remove a aflição ativa no impacto. Veneno/Lentidão permitem autocura; Medo/Confusão exigem ajuda de outro aliado. As quatro aflições são jogáveis no laboratório e nos seis encontros da exploração. **Reiniciar teste** na exploração também repõe três Remédios; viajar ou iniciar outra luta conserva o estoque restante.
+
 ## Laboratório de danos
+
+Os seletores **Referência · Aliado / Monstro** carregam as mesmas cinco fichas aprovadas do laboratório de combate. A biblioteca pessoal e os experimentos manuais continuam disponíveis. Levantamento e paridade em [PARIDADE_LABORATORIOS.md](docs/PARIDADE_LABORATORIOS.md).
 
 Escolha atacante/alvo, arma e ação; ajuste atributos, potência, defesas, variação e críticos. Para informar um valor exato, clique no número ou selecione o campo e comece a digitar; Enter, Tab ou mudar o foco confirmam. Decimais aceitam ponto ou vírgula. **F6/F7/F8/F9** executam **1×/10×/100×/1000×**. À direita, consulte **Resumo**, **Amostras** e **Condições**, com dano calculado e HP removido separados. Cada amostra restaura os recursos iniciais para comparação. **R** reinicia os sorteios da semente atual; **F5** restaura o caso. Tab/setas/Enter ou direcional/botão sul permitem operar sem mouse; ombros do controle percorrem campos. O painel de edição rola ao receber foco. Parâmetros são locais e experimentais; equipamentos/buffs reais e integração ao combate ficam para depois.
 
@@ -156,6 +162,11 @@ godot --headless --path . --script res://tests/damage_presets_ui_smoke.gd
 godot --headless --path . --script res://tests/damage_export_tests.gd
 godot --headless --path . --script res://tests/damage_lab_ui_smoke.gd
 godot --headless --path . --script res://tests/exploration_tests.gd
+godot --headless --path . --script res://tests/exploration_combat_parity_tests.gd
+godot --headless --path . --script res://tests/exploration_pursuit_tests.gd
+godot --headless --path . --script res://tests/dungeon_expansion_tests.gd
+godot --headless --path . --script res://tests/exploration_pursuit_ui_smoke.gd
+godot --headless --path . --script res://tests/exploration_combat_parity_ui_smoke.gd
 godot --headless --path . --script res://tests/exploration_ui_smoke.gd
 godot --headless --path . --script res://tests/motion_tests.gd
 godot --headless --path . --script res://tests/motion_ui_smoke.gd
@@ -188,7 +199,7 @@ godot --headless --path . --script res://tests/town_events_tests.gd
 godot --headless --path . --script res://tests/town_events_ui_smoke.gd
 ```
 
-As suítes validam laboratório, exploração/integração, curvas/melee, tela inteira, interações, transições e a distribuição atual das cinco áreas. As regressões de layouts anteriores usam fixtures exclusivas de teste; as suítes `internal_areas` e `world_map` usam os mapas reais do catálogo. Encerram com código diferente de zero se uma verificação falhar. Resultados em [VALIDACAO.md](docs/VALIDACAO.md). Validação em macOS; outras plataformas não foram verificadas.
+As suítes validam laboratório, exploração/integração, curvas/melee, tela inteira, interações, transições e a distribuição atual das seis áreas. As regressões de layouts anteriores usam fixtures exclusivas de teste; as regressões de coordenadas anteriores usam fixtures; `dungeon_expansion_tests.gd` e a interface de perseguição verificam os dois pisos atuais, enquanto testes de tempo/eventos/relevo/profundidade também leem o catálogo vigente. Encerram com código diferente de zero se uma verificação falhar. Resultados em [VALIDACAO.md](docs/VALIDACAO.md). Validação em macOS; outras plataformas não foram verificadas.
 
 História, missões, cidades completas, habilidades especiais de exploração, níveis, técnicas conjuntas e salvamento da aventura ficam fora desta versão.
 

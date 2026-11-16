@@ -1,5 +1,7 @@
 # Rotas suaves e aproximação melee — laboratório
 
+**Atualização D132 (15/11/2026):** qualquer ação agora congela ATB e rotas de todos os participantes, da aproximação ao retorno; alvo móvel também permanece no ponto de confirmação durante a apresentação. O efeito da ação acontece no impacto, e as rotas retomam do estado completo preservado. Active mantém movimento durante seleção, Wait pausa; pausa manual congela também a apresentação. Isso substitui a descrição anterior de alvo continuar voando durante aproximação.
+
 ## Requisitos confirmados
 
 O usuário autorizou melhorar a movimentação programada, permitir curvas/percursos amplos, diferenciar possibilidades terrestres/voadoras/estáticas e implementar aproximação temporária corpo a corpo. Deve haver chegada, representação provisória, efeito e retorno, preservando posição lógica e progresso exato da rota. ATB, perfis, laboratório e presets existentes devem continuar funcionando. Não há animação artística definitiva nem navegação aleatória.

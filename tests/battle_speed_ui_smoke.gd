@@ -54,6 +54,7 @@ func _run() -> void:
 	lab.queue_free()
 	await process_frame
 	var screen = load("res://scenes/exploration_test.tscn").instantiate()
+	screen.set_script(load("res://tests/fixtures/pre_expansion_screen.gd"))
 	root.add_child(screen)
 	await process_frame
 	screen.set_physics_process(false)
@@ -90,7 +91,9 @@ func _run() -> void:
 		combat.model.outcome = "escaped"
 		screen._on_battle_finished("escaped")
 		expect(screen.session.state == "exploration" and screen.battle_speed_picker.selected == 2, "Retorno sincroniza menu com escolha feita no combate")
-		expect(screen.session.begin_encounter("test_map_enemy_01") and screen.session.battle.battle_speed == 3, "Reencontro preserva velocidade escolhida")
+		var next_encounter: Dictionary = screen.session.world.entity_by_id("test_map_enemy_03")
+		screen.session.world.leader_position = next_encounter["position"]
+		expect(screen.session.begin_encounter("test_map_enemy_03") and screen.session.battle.battle_speed == 3, "Próximo encontro preserva velocidade escolhida")
 	screen._restart()
 	expect(screen.session.battle.battle_speed == 4 and screen.battle_speed_picker.selected == 3, "Reinício global cria sessão no padrão 4")
 	screen.queue_free()

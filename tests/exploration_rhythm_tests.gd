@@ -1,6 +1,7 @@
 extends SceneTree
 const Catalog = preload("res://scripts/exploration/area_catalog.gd")
 const Session = preload("res://scripts/exploration/exploration_session.gd")
+const Bridge = preload("res://scripts/combat/damage_v1_bridge.gd")
 const Route = preload("res://scripts/combat/route_motion.gd")
 const STEP = 1.0 / 120.0
 var data: Dictionary
@@ -15,7 +16,7 @@ var new_ids = ["exploration_seeded_open", "exploration_seeded_corners", "explora
 func _initialize() -> void:
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://data/lab.json"))
 	original = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/pre_rhythm_combat.json"))
-	definitions = Catalog.load_definitions()
+	definitions = preload("res://tests/fixtures/pre_expansion_catalog.gd").load_definitions()
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--visual-captures="):
 			capture_directory = arg.trim_prefix("--visual-captures=")
@@ -46,7 +47,7 @@ func travel(session, id: String) -> void:
 	expect(session.state == "exploration", "Transição termina: " + id)
 
 func fresh():
-	var session = Session.new(data.duplicate(true), definitions["lab_exterior"], definitions)
+	var session = Session.new(Bridge.exploration_definitions(data), definitions["lab_exterior"], definitions)
 	travel(session, "town_exit")
 	travel(session, "dungeon_entrance")
 	session.world.toggle_door("door_01")
@@ -108,7 +109,7 @@ func _test_ui_defaults() -> void:
 	expect(lab.definitions["presets"][lab.preset_picker.selected]["id"] == "lab_damage_v1", "Seletor corresponde à batalha inicial")
 	for index in range(data["presets"].size()):
 		var id: String = data["presets"][index]["id"]
-		expect(lab.preset_picker.get_item_text(index).begins_with("Legado · ") == (id in data["legacy_preset_ids"]), "Modelos anteriores identificados como legados")
+		expect(lab.preset_picker.get_item_text(index).begins_with("Legado · ") == (id in lab.definitions["legacy_preset_ids"]), "Laboratório identifica seus históricos; catálogo da exploração segue separado até a migração")
 	lab.queue_free()
 	await process_frame
 
@@ -120,8 +121,8 @@ func _test_encounter(definition: Dictionary) -> void:
 	var formation = session.world.formation_positions()
 	var map_position: Vector2 = entity["position"]
 	var map_route: Dictionary = entity["route_state"].duplicate(true)
-	session.battle.party[0]["hp"] = 91
-	session.battle.party[0]["mp"] = 30
+	session.battle.party[0]["hp"] = 31
+	session.battle.party[0]["mp"] = 10
 	var shared = session.battle
 	expect(session.interact() == "battle" and session.battle == shared, "Encontro usa o combate compartilhado: " + definition["id"])
 	expect(shared.preset["id"] == definition["battle_preset_id"], "Preset correto sem substituição aleatória")
@@ -129,7 +130,7 @@ func _test_encounter(definition: Dictionary) -> void:
 	for enemy in shared.enemies:
 		initial.append(enemy["logical_position"])
 		var entry: Dictionary = shared.preset["enemies"][initial.size() - 1]
-		expect(enemy["ini"] == data["enemy_types"][entry["type"]]["ini"], "Encontro carrega INI atual da ficha do tipo")
+		expect(enemy["ini"] == shared.data["enemy_types"][entry["type"]]["ini"], "Encontro carrega INI atual da ficha do tipo")
 		var state: Dictionary = enemy["route_state"]
 		if state["speed"] > 0:
 			expect(state.has("behavior") and not state["behavior"]["phases"].is_empty(), "Todo inimigo móvel possui o ritmo atual")
@@ -185,6 +186,8 @@ func _test_encounter(definition: Dictionary) -> void:
 	lab.queue_free()
 	await process_frame
 	expect(entity["position"] == map_position and entity["route_state"] == map_route, "Movimento no mapa permanece pausado e inalterado durante a batalha")
+	for member in shared.party:
+		shared._remove_affliction(member)
 	# Fuga mantém o encontro e recursos; M2 continua bloqueando sem consumir ação.
 	for enemy in shared.enemies:
 		enemy["ini_modifier"] = -float(enemy["ini"])
@@ -197,25 +200,28 @@ func _test_encounter(definition: Dictionary) -> void:
 	if shared.preset["can_escape"]:
 		expect(shared.submit("escape"), "Fuga disponível preservada")
 		finish(shared)
-		expect(session.finish_encounter() and entity["present"], "Fuga retorna à dungeon mantendo encontro")
-		for index in range(4):
+		expect(session.finish_encounter() and not entity["present"], "Fuga retorna à dungeon e remove encontro")
+		for index in range(shared.party.size()):
 			expect([shared.party[index]["hp"], shared.party[index]["mp"]] == resources[index], "HP/MP persistem na fuga")
 		expect(session.world.party_order == order and session.world.formation_positions() == formation, "Retorno preserva liderança, fila e coordenadas do mapa")
-		expect(session.begin_encounter(entity["id"]), "Reencontro possível após fuga")
+		expect(not session.begin_encounter(entity["id"]), "Encontro removido não pode reiniciar")
+		# Sessão nova reproduz formação para testar a vitória de forma independente.
+		session = fresh()
+		entity = session.world.entity_by_id(definition["id"])
+		place(session, entity["position"])
+		expect(session.begin_encounter(entity["id"]), "Nova sessão restaura encontro")
+		shared = session.battle
 		for index in range(shared.enemies.size()):
 			expect(shared.enemies[index]["logical_position"] == initial[index], "Reencontro reproduz formação inicial")
 	else:
 		expect(not shared.submit("escape") and shared.party[0]["atb"] == 1.0, "M2 bloqueia fuga sem consumir ação")
 		shared.cancel_selection()
-	# Vitória real continua removendo apenas este encontro e mantendo recursos.
-	for enemy in shared.enemies:
-		enemy["hp"] = 1
-		enemy["ini_modifier"] = -float(enemy["ini"])
+	# Vitória por básicos atuais, sem conceder as ondas históricas aos aliados.
+	shared.cancel_selection()
+	for member in shared.party:
+		shared._remove_affliction(member) # Isola retorno da aflição sorteada no teste anterior.
 	var hp_before: int = shared.party[0]["hp"]
 	var mp_before: int = shared.party[0]["mp"]
-	shared.debug_ready_allies()
-	shared.select_actor("p1")
-	expect(shared.submit("all"), "Onda existente continua válida")
-	finish(shared)
-	expect(shared.outcome == "victory" and session.finish_encounter() and not entity["present"], "Vitória retorna e remove somente o encontro vencido")
-	expect(shared.party[0]["hp"] == hp_before and shared.party[0]["mp"] == mp_before - 10, "HP/MP persistem na vitória")
+	expect(preload("res://tests/fixtures/current_combat.gd").win_by_basics(shared), "Básicos atuais concluem a vitória")
+	expect(session.finish_encounter() and not entity["present"], "Vitória retorna e remove somente o encontro vencido")
+	expect(shared.party[0]["hp"] == hp_before and shared.party[0]["mp"] == mp_before, "HP/MP persistem na vitória sem custo de básicos")

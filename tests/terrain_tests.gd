@@ -127,7 +127,7 @@ func _test_pause_and_leader() -> void:
 	expect(map.formation_positions() == positions, "Fade pausa rampa")
 
 func _test_validation() -> void:
-	expect(definitions.size() == 5, "Todos os mapas permanecem válidos")
+	expect(definitions.size() == 6, "Todos os mapas permanecem válidos")
 	for mutation in [{"elevation": -1}, {"elevation": "alto"}, {"cliff_thickness": 0},
 		{"ramp": {"rect": [340, 650, 96, 120]}}, {"ramp": {"rect": [340, 640, 30, 120]}},
 		{"ramp": {"rect": [450, 640, 96, 120]}}, {"ramp": {"rect": [340, 640, 96, -1]}},

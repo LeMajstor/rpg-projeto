@@ -15,6 +15,7 @@ var clock # Uma instância por partida/sessão, nunca uma por área ou batalha.
 var story_flags: Dictionary = {} # Compartilhadas entre áreas até o reinício explícito da sessão.
 var _conditions_dirty = true
 var active_encounter_id = ""
+var active_encounter_group_id = ""
 var active_encounter_area_id = ""
 var area_id = ""
 var area_definitions: Dictionary = {}
@@ -72,7 +73,7 @@ func tick(delta: float) -> void:
 			if not _commit_transition():
 				return
 			transition_alpha = 1.0 # Quadro da troca totalmente coberto, mesmo cruzando a metade.
-		if progress >= 1:
+		if progress >= 1.0 - 0.000000001:
 			world.transitioning = false
 			transition.clear()
 			transition_alpha = 0
@@ -81,6 +82,7 @@ func tick(delta: float) -> void:
 	elif state == "exploration":
 		_flush_conditions()
 		world.advance(delta)
+		_try_contact_encounter()
 		if can_advance_world_time():
 			clock.advance_natural(delta)
 
@@ -145,12 +147,15 @@ func _commit_transition() -> bool:
 	dialogue = Dialogue.new(world.data.get("dialogues", {}))
 	_conditions_dirty = not world.apply_conditions(clock.period(), story_flags)
 	transition["committed"] = true
-	notice = "%s · WASD / setas: andar · E: interagir" % world.data.get("label", area_id)
+	notice = "%s · WASD / setas: andar · %s" % [world.data.get("label", area_id), "Batalha: contato ou visão dos estáticos · E: objetos/saídas" if world.automatic_encounters() else "E: interagir"]
 	return true
 
 func interact() -> String:
 	if state != "exploration":
 		return ""
+	_try_contact_encounter()
+	if state == "battle":
+		return "battle"
 	interaction_error = ""
 	_flush_conditions()
 	var entity = world.interaction_candidate()
@@ -212,11 +217,34 @@ func move(direction: Vector2, delta: float, preferred_axis: String = "x") -> Vec
 	_flush_conditions()
 	if movement != Vector2.ZERO:
 		interaction_error = ""
+	_try_contact_encounter()
 	return movement
 
+func _try_contact_encounter() -> void:
+	if state != "exploration" or not world.automatic_encounters() or world.menu_open or world.dialogue_open or world.transitioning:
+		return
+	var candidate: Dictionary = world.contact_along(world.leader_position, world.leader_position)
+	var id: String = world.contact_id if not world.contact_id.is_empty() else str(candidate.get("id", ""))
+	world.contact_id = ""
+	if not id.is_empty():
+		begin_encounter(id)
+
 func begin_encounter(id: String = "") -> bool:
-	var encounter = world.interaction_candidate() if id.is_empty() else world.entity_by_id(id)
-	if state != "exploration" or encounter.get("kind", "") != "encounter" or not world.can_interact_with(encounter):
+	var encounter: Dictionary
+	if id.is_empty() and world.automatic_encounters():
+		var contact: Dictionary = world.contact_along(world.leader_position, world.leader_position)
+		encounter = world.entity_by_id(contact.get("id", ""))
+	else:
+		encounter = world.interaction_candidate() if id.is_empty() else world.entity_by_id(id)
+	if state != "exploration" or encounter.get("kind", "") != "encounter":
+		return false
+	if world.automatic_encounters():
+		var in_range: bool=world.Perception.in_static_area(encounter,world.leader_position) if world.Perception.stationary(encounter) else world.leader_position.distance_to(encounter["position"])<=world.contact_radius()+0.0001
+		if world.menu_open or world.dialogue_open or world.transitioning or not encounter["present"] or not encounter["interaction_available"] \
+			or not in_range \
+			or not world.clear_sight(world.leader_position, encounter["position"]):
+			return false
+	elif not world.can_interact_with(encounter):
 		return false
 	var preset_id: String = encounter["battle_preset_id"]
 	var index = -1
@@ -232,6 +260,7 @@ func begin_encounter(id: String = "") -> bool:
 		return false
 	world.moving = false
 	active_encounter_id = encounter["id"]
+	active_encounter_group_id = world.encounter_group(encounter)
 	active_encounter_area_id = area_id
 	state = "battle"
 	return true
@@ -241,10 +270,14 @@ func finish_encounter() -> bool:
 		return false
 	match battle.outcome:
 		"victory":
-			world.entity_by_id(active_encounter_id)["present"] = false
+			world.remove_encounter_group(active_encounter_group_id)
 			notice = "Vitória. Retorno ao mesmo lugar; HP e MP preservados."
 		"escaped":
-			notice = "Fuga concluída. HP/MP preservados; E permite desafiar o inimigo novamente."
+			if world.automatic_encounters():
+				world.remove_encounter_group(active_encounter_group_id)
+				notice = "Fuga concluída. Encontro removido do mapa; HP/MP e estoque preservados."
+			else:
+				notice = "Fuga concluída. HP/MP preservados; E permite desafiar o inimigo novamente."
 		"defeat":
 			state = "defeat"
 			notice = "Game Over. Reinicie explicitamente o teste."
@@ -254,5 +287,6 @@ func finish_encounter() -> bool:
 	state = "exploration"
 	_flush_conditions()
 	active_encounter_id = ""
+	active_encounter_group_id = ""
 	active_encounter_area_id = ""
 	return true

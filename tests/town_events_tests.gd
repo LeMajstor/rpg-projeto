@@ -59,7 +59,7 @@ func _run() -> void:
 	quit(0 if failures == 0 else 1)
 
 func _test_authoring() -> void:
-	expect(definitions.size() == 5, "Duas casas e as três áreas anteriores")
+	expect(definitions.size() == 6, "Duas casas, vila, mundo e dois andares de dungeon")
 	var ids = {}
 	for id in definitions:
 		expect(Catalog.valid_map(definitions[id]), "Definição válida: " + id)

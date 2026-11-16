@@ -1,5 +1,9 @@
 # Versão 0.2 — exploração integrada
 
+**D157 — mapa atual:** dungeon substituída por dois andares ampliados, conectados por escadas E/fade, com seis encontros, paredes irregulares e patrulhas territoriais. As coordenadas/mapas originais abaixo permanecem históricos. Detalhes e testes em `DUNGEON_DOIS_ANDARES.md`.
+
+**Atualização D149 — 15/11/2026:** o fluxo jogável atual usa os três aliados aprovados do laboratório de combate e seus mesmos dados/regras, inclusive aflições e Remédio. Os quatro integrantes descritos na entrega original abaixo são históricos; o limite de até quatro continua. Novos detalhes e validação em [COMBATE_EXPLORACAO_COMPARTILHADO.md](COMBATE_EXPLORACAO_COMPARTILHADO.md).
+
 Este documento registra a entrega original da v0.2 e sua arquitetura. A ampliação atual do mesmo mapa, os controles de diálogo e os seis encontros estão em [EXPLORACAO_INTERACOES.md](EXPLORACAO_INTERACOES.md). Dimensões, sólidos e encontro único descritos abaixo são o estado anterior; movimento, fila e integração continuam preservados.
 
 ## Requisitos confirmados pelo usuário

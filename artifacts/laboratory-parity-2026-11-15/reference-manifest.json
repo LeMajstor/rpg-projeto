@@ -1,0 +1,32 @@
+{
+  "decision": "D148",
+  "date": "2026-11-15",
+  "scope": "damage and combat laboratories; exploration migration deferred",
+  "files": {
+    "data/damage_reference_profiles.json": "45835cbfeb73219aeea26a57fc0469d47e846fa0a964b2fa28f2aaa3d41dbaee",
+    "data/damage_lab.json": "643f65aaaa8b324ce443165abde301686417f012159b624a6c4eb2e2ce685a98",
+    "data/battle_damage_v1.json": "bda7297353d05dd3a3189cf0f0c531fe7ea2881f925ef43e364a0a0ce56dc6f4",
+    "data/lab.json": "ed4e6e6083908ae55cc5847819e538ae557e365fdf545a79c380de6f3aa8992d",
+    "scripts/combat/battle_model.gd": "05f09d5b03979edd8af8b0a8446efd983a427142b3b014aef12c52fd86e166e1",
+    "scripts/combat/damage_v1_bridge.gd": "dc70f6db6903e237327ca4e71c6c906ef5ee67d370ac2669991955d8780f5bb2",
+    "scripts/combat/affliction_rules.gd": "3a826893eaf67987496f501e7e844b1435dc1812773efcdc4301871067dff876",
+    "scripts/damage/combat_reference.gd": "25b264f720a366c4f2336cc0855350006018e53e62842b655b3067a22db608b5",
+    "scripts/damage/damage_calculator.gd": "c2276ed6151f5376b6a7e7dbc202efb2ba629a14d68132c6733b69bdbfc6dceb",
+    "scripts/damage/damage_equipment.gd": "de54fefa0a94e2728d35d9d2f1210fc42205755b95d2294a8d0b7ec668bf1a31"
+  },
+  "visuals": {
+    "artifacts/laboratory-parity-2026-11-15/visual/combat-afflictions.png": "8dc41b5e291d05b16d0a5265de92029a8b55f97e0225ded6155be6022d03ee63",
+    "artifacts/laboratory-parity-2026-11-15/visual/combat-after-cure.png": "48ecdc3b6de8e0149f0293fa1186f40e4e74a0746b07e3cbc263c191a2d0202b",
+    "artifacts/laboratory-parity-2026-11-15/visual/remedy-target.png": "f742d5845f99ed54a4c82f13852d50bd037bfba2ca160113e66c9db8c5ece226",
+    "artifacts/laboratory-parity-2026-11-15/visual/shared-damage-references.png": "ea6fa704bdbe466272c71244f3dc5e002b973617de772dccd884f351bdc8768f",
+    "artifacts/laboratory-parity-2026-11-15/visual/v1-equipment.png": "8e46cdfafc370985c7d223d6965bcdd1aee29b19fdffc4415885870197d6b0a5",
+    "artifacts/laboratory-parity-2026-11-15/visual/v1-magic-impact.png": "da30db4cb22b92efe6650110859172939bd229f0631220575ab2d14139c0096b",
+    "artifacts/laboratory-parity-2026-11-15/visual/v1-ready.png": "29a89557f2781f0b600100b5dedc46d5179ff4a1fc15b4718064f3ba7f24420b"
+  },
+  "verification": {
+    "suites": 69,
+    "checks": 351126,
+    "failures": 0,
+    "graphics_checks": 43
+  }
+}

@@ -1,8 +1,10 @@
 # Laboratório de combate — escopo e teste manual
 
+**D148 — 15/11/2026:** cenário atual harmonizado com o laboratório de danos: cinco referências centralizadas, equipamentos/ações/cálculos comuns, quatro aflições e Remédio funcionais. As quinze demonstrações anteriores estão marcadas como Legado. D149 posteriormente conclui a migração do combate da exploração; ver `COMBATE_EXPLORACAO_COMPARTILHADO.md`. Levantamento e verificação em [PARIDADE_LABORATORIOS.md](PARIDADE_LABORATORIOS.md).
+
 **Modelo vigente (D126):** o laboratório independente abre em **V1 · danos e equipamentos**: três aliados contra Monstros #1/#2, básicos físicos e magia ofensiva do mago. **E** abre preparação de equipamentos com seis estágios por família; alterações entram no Novo teste, com atributos naturais/efetivos visíveis. Fórmula compartilhada com o laboratório de danos; aflições ficam para a segunda parte. Roteiro em [BATALHA_DANOS_V1.md](BATALHA_DANOS_V1.md).
 
-Os quinze cenários anteriores continuam disponíveis. Os seis encontros da exploração preservam o combate anterior por semente, com quatro aliados e formações variadas. Controles, configuração e testes desse movimento em [COMBATE_SEMENTE.md](COMBATE_SEMENTE.md). As demonstrações de habilidades/itens abaixo se referem aos cenários anteriores.
+Os quinze cenários anteriores continuam disponíveis. Por D149, os seis encontros da exploração usam as mesmas referências/regras atuais, com os três aliados aprovados e suas formações/rotas preservadas. Controles, configuração e testes desse movimento em [COMBATE_SEMENTE.md](COMBATE_SEMENTE.md). As demonstrações de habilidades/itens abaixo se referem aos cenários anteriores.
 
 **Autorizado pelo usuário em 23/10/2026.** Prioridade: funcionamento das mecânicas, com gráficos provisórios. Sem exploração, missões, níveis ou técnicas conjuntas. Godot + GDScript confirmados; fichas/números experimentais.
 

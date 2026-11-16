@@ -62,6 +62,7 @@ func capture(name: String) -> void:
 
 func _run() -> void:
 	screen = load("res://scenes/exploration_test.tscn").instantiate()
+	screen.set_script(load("res://tests/fixtures/pre_expansion_screen.gd"))
 	root.add_child(screen)
 	await process_frame
 	screen.set_physics_process(false)
@@ -85,7 +86,7 @@ func _run() -> void:
 	expect(screen.session.area_id == "test_dungeon" and "dungeon" in screen.area_label.text, "Troca para mini dungeon")
 	expect(screen.session.world.entities.size() == 10, "Seis monstros, três objetos e saída visíveis na dungeon")
 	for point in screen.session.world.formation_positions():
-		expect(screen.session.world.is_walkable(point), "Quatro integrantes chegam em trecho livre")
+		expect(screen.session.world.is_walkable(point), "Integrantes chegam em trecho livre")
 	await capture("interiors-dungeon")
 	# Percurso até a alavanca pela passagem estreita.
 	for segment in [[KEY_D, 150.0], [KEY_W, 260.0], [KEY_D, 23.0]]:
@@ -104,26 +105,19 @@ func _run() -> void:
 	await capture("interiors-dungeon-open")
 	# Batalha real no novo mapa, sem reimplementação.
 	place(Vector2(930, 190))
-	screen.session.battle.party[0]["hp"] = 97
-	screen.session.battle.party[0]["mp"] = 30
+	screen.session.battle.party[0]["hp"] = 27
+	screen.session.battle.party[0]["mp"] = 10
 	var shared = screen.session.battle
 	tap(KEY_E)
 	var lab = screen.combat_ui
-	expect(is_instance_valid(lab) and lab.model == shared and lab.model.preset["id"] == "exploration_seeded_fullscreen", "M4 usa tela inteira com os ritmos atuais no combate existente")
+	expect(is_instance_valid(lab) and lab.model == shared and lab.model.preset["id"] == "exploration_seeded_fullscreen", "M4 conserva a formação superior com repertório e regras atuais")
 	lab.set_process(false)
-	for enemy in lab.model.enemies:
-		enemy["hp"] = 1
-		enemy["ini_modifier"] = -float(enemy["ini"])
-	lab.model.debug_ready_allies()
-	lab.model.select_actor("p1")
-	lab.model.submit("all")
-	for step in range(100):
-		lab.model.tick(1.0 / 120.0)
+	expect(preload("res://tests/fixtures/current_combat.gd").win_by_basics(lab.model), "Básicos atuais concluem batalha de retorno")
 	lab._refresh()
 	await process_frame
 	expect(screen.combat_ui == null and screen.map_ui.visible and screen.session.area_id == "test_dungeon", "Vitória retorna à dungeon")
 	expect(not screen.session.world.entity_by_id("test_map_enemy_04")["present"] and screen.session.world.entity_by_id("test_map_enemy_01")["present"], "Somente o monstro vencido desaparece")
-	expect(screen.session.battle.party[0]["hp"] == 97 and screen.session.battle.party[0]["mp"] == 20, "HP/MP preservados após combate")
+	expect(screen.session.battle.party[0]["hp"] == 27 and screen.session.battle.party[0]["mp"] == 10, "HP/MP preservados após combate")
 	travel("dungeon_exit")
 	expect(screen.session.area_id == "test_world" and screen.session.world.entities.size() == 2, "Saída da dungeon retorna ao mundo sem monstros")
 	travel("house_entrance")
@@ -146,7 +140,7 @@ func _run() -> void:
 	travel("house_exit")
 	travel("dungeon_entrance")
 	expect(not screen.session.world.entity_by_id("test_map_enemy_04")["present"] and screen.session.world.entity_by_id("door_01")["open"], "Revisita conserva vitória e porta")
-	expect(screen.session.battle.party[0]["hp"] == 97 and screen.session.battle.party[0]["mp"] == 20, "Passar pela casa não recupera recursos")
+	expect(screen.session.battle.party[0]["hp"] == 27 and screen.session.battle.party[0]["mp"] == 10, "Passar pela casa não recupera recursos")
 	screen._restart()
 	expect(screen.session.area_id == "lab_exterior" and screen.session.area_worlds.size() == 1, "Reinício começa no exterior")
 	travel("dungeon_entrance")
